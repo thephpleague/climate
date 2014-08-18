@@ -100,7 +100,7 @@ You can apply more than one format to an output, but only one foreground and one
 
 ## Tags
 
-You can also just apply a color/background color/format to just one piece of an output:
+You can also just apply a color/background color/format to part of an output:
 
 ```php
 $this->blue('Please <bold><light_red>remember</light_red></bold> to restart the server.');
@@ -112,4 +112,148 @@ To use a background color tag, simply prepend the color with `background_`:
 
 ```php
 $this->blue('Please <bold><background_light_red>remember</background_light_red></bold> to restart the server.');
+```
+
+## Tables
+
+The `table` method can receive any of the following:
+
++ Array of arrays
++ Array of objects
++ Array of associative arrays
+
+### Array of Arrays
+
+```php
+$climate->table([
+    [
+      'Walter White',
+      'Father',
+      'Teacher',
+    ],
+    [
+      'Skyler White',
+      'Mother',
+      'Accountant',
+    ],
+    [
+      'Walter White Jr.',
+      'Son',
+      'Student',
+    ],
+]);
+```
+
+```
+------------------------------------------
+| Walter White     | Father | Teacher    |
+------------------------------------------
+| Skyler White     | Mother | Accountant |
+------------------------------------------
+| Walter White Jr. | Son    | Student    |
+------------------------------------------
+```
+### Array of (Associative Arrays | Objects)
+
+```php
+$climate->table([
+    [
+  		'name'       => 'Walter White',
+  		'role'       => 'Father',
+  		'profession' => 'Teacher',
+    ],
+    [
+  		'name'       => 'Skyler White',
+  		'role'       => 'Mother',
+  		'profession' => 'Accountant',
+    ],
+    [
+  		'name'       => 'Walter White Jr.',
+  		'role'       => 'Son',
+  		'profession' => 'Student',
+    ],
+]);
+```
+
+```
+------------------------------------------
+| name             | role   | profession |
+------------------------------------------
+------------------------------------------
+| Walter White     | Father | Teacher    |
+------------------------------------------
+| Skyler White     | Mother | Accountant |
+------------------------------------------
+| Walter White Jr. | Son    | Student    |
+------------------------------------------
+```
+
+As with other methods, you can style a table as well. So all of the following works:
+
+
+```php
+$climate->redTable([
+    [
+      'name'       => 'Walter White',
+      'role'       => 'Father',
+      'profession' => 'Teacher',
+    ],
+    [
+      'name'       => 'Skyler White',
+      'role'       => 'Mother',
+      'profession' => 'Accountant',
+    ],
+]);
+
+$climate->red()->table([
+    [
+      'name'       => 'Walter White',
+      'role'       => 'Father',
+      'profession' => 'Teacher',
+    ],
+    [
+      'name'       => 'Skyler White',
+      'role'       => 'Mother',
+      'profession' => 'Accountant',
+    ],
+]);
+
+$climate->table([
+    [
+      'name'       => 'Walter White',
+      'role'       => '<light_blue>Father</light_blue>',
+      'profession' => 'Teacher',
+    ],
+    [
+      'name'       => 'Skyler White',
+      'role'       => 'Mother',
+      'profession' => '<red>Accountant</red>',
+    ],
+]);
+```
+
+## Borders
+
+If you want to insert a border to break up output, simply use the `border` method. By default, `border` outputs a dashed border with 100 characters in it
+
+```php
+$climate->border();
+// ----------------------------------------------------------------------------------------------------
+
+```
+
+The `border` method takes two arguments:
+
++ Character(s) to be repeated
++ Length of the border
+
+```php
+$climate->border('*');
+// ****************************************************************************************************
+
+$climate->border('-*-');
+//-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--
+
+$climate->border('-*-', 50);
+//-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
 ```
