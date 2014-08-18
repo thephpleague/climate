@@ -256,3 +256,63 @@ $climate->border('-*-');
 $climate->border('-*-', 50);
 // -*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
 ```
+
+As with the other methods, feel free to style the border:
+
+```php
+$climate->red()->border();
+
+$climate->redBorder();
+
+$climate->bold()->backgroundBlue()->border();
+```
+
+## JSON
+
+The `json` method outputs some pretty-printed JSON to the terminal:
+
+```php
+$climate->json([
+  'name' => 'Gary',
+  'age'  => 52,
+  'job'  => 'Engineer',
+]);
+```
+
+```
+{
+    "name": "Gary",
+    "age": 52,
+    "job": "Engineer"
+}
+```
+
+As with the other method, you can style this output as well:
+
+```php
+$climate->redJson([
+  'name' => 'Gary',
+  'age'  => 52,
+  'job'  => 'Engineer',
+]);
+
+$climate->red()->json([
+  'name' => 'Gary',
+  'age'  => 52,
+  'job'  => '<blink>Engineer</blink>',
+]);
+
+$climate->underline()->json([
+  'name' => 'Gary',
+  'age'  => 52,
+  'job'  => 'Engineer',
+]);
+```
+
+## Breaks
+
+The `br` method does exactly that, inserts a line break:
+
+```php
+$climate->br();
+```
