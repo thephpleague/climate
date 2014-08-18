@@ -2,6 +2,7 @@
 
 namespace JoeTannenbaum\CLImate;
 
+
 class CLImate {
 
     /**
