@@ -477,6 +477,9 @@ class Style {
         {
             $search["<{$tag}>"]  = $this->start( $color );
             $search["</{$tag}>"] = $this->end();
+
+            // Also replace JSONified end tags
+            $search["<\\/{$tag}>"] = $this->end();
         }
 
         $this->tag_search  = array_keys( $search );
