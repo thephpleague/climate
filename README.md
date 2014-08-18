@@ -316,3 +316,9 @@ The `br` method does exactly that, inserts a line break:
 ```php
 $climate->br();
 ```
+
+The `br` method is chainable, so you can do this:
+
+```php
+$climate->br()->out('I have moved down a line.');
+```
