@@ -83,11 +83,9 @@ class Table implements TerminalObject {
     {
         foreach ( $this->data as $key => $columns )
         {
-            $this->rows[] = $this->border;
             $this->rows[] = $this->buildRow( $columns );
+            $this->rows[] = $this->border;
         }
-
-        $this->rows[] = $this->border;
 
         return $this->rows;
     }
@@ -128,8 +126,12 @@ class Table implements TerminalObject {
     	{
 	        $this->rows[] = $this->border;
 	        $this->rows[] = $this->buildRow( $header_row );
-	        $this->rows[] = $this->border;
-    	}
+            $this->rows[] = ( new Border )->char('=')->length( $this->table_width )->result();
+        }
+        else
+        {
+            $this->rows[] = $this->border;
+        }
     }
 
     /**
