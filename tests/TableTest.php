@@ -99,8 +99,7 @@ class TableTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m-------------------------------------\e[0m\n";
         $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
+        $should_be .= "\e[m=====================================\e[0m\n";
         $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
@@ -128,8 +127,7 @@ class TableTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m-------------------------------------\e[0m\n";
         $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
+        $should_be .= "\e[m=====================================\e[0m\n";
         $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
