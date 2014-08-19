@@ -88,7 +88,7 @@ $climate->bold()->out('Bold and beautiful.');
 $climate->underline()->out('I have a line beneath me.');
 ```
 
-## Combinations
+## Style Combinations
 
 You can chain any of the above to get what you want:
 
@@ -114,13 +114,57 @@ To use a background color tag, simply prepend the color with `background_`:
 $this->blue('Please <bold><background_light_red>remember</background_light_red></bold> to restart the server.');
 ```
 
+## Custom Colors
+
+You can add your own custom colors:
+
+```php
+$climate->style->addColor('lilac', 38);
+```
+
+Once you've added the color, you can use it like any of the other colors:
+
+```php
+$climate->lilac('What a pretty color.');
+$climate->lilacBackground('This background is a pretty color.');
+$climate->out('Just this <lilac>word</lilac> is a pretty color.');
+```
+
+## Commands
+
+Commands are simply pre-defined colors for specific output:
+
+```php
+$climate->error('Ruh roh.');
+$climate->comment('Just so you know.');
+$climate->whisper('Not so important, just a heads up.');
+$climate->shout('This. This is important.');
+$climate->info('Nothing fancy here. Just some info.');
+```
+
+## Custom Commands
+
+You can add your own command, just make sure that the color is defined already.
+
+```php
+$climate->stye->addCommandColor('rage', 'dark_red');
+$climate->rage('SOMETHING IS MESSED UP.');
+```
+
+You can also override any command;
+
+```php
+$climate->stye->addCommandColor('error', 'light_blue');
+$climate->error('Whelp. That did not turn out so well.');
+```
+
 ## Tables
 
 The `table` method can receive any of the following:
 
 + Array of arrays
-+ Array of objects
 + Array of associative arrays
++ Array of objects
 
 ### Array of Arrays
 
