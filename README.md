@@ -22,6 +22,7 @@ The `out` method simply receives a string that will output on a new line.
 
 ```php
 $climate = new JoeTannenbaum\CLImate\CLImate;
+
 $climate->out('This prints to the terminal.');
 $climate->out('This prints to the terminal.')->out('This will be on a new line');
 ```
@@ -117,8 +118,8 @@ You can apply more than one format to an output, but only one foreground and one
 You can also just apply a color/background color/format to part of an output:
 
 ```php
-$this->blue('Please <light_red>remember</light_red> to restart the server.');
-$this->out('Remember to use your <blink><yellow>blinker</yellow></blink> when turning.');
+$climate->blue('Please <light_red>remember</light_red> to restart the server.');
+$climate->out('Remember to use your <blink><yellow>blinker</yellow></blink> when turning.');
 ```
 
 You can use any of the color or formatting keywords (snake cased) as tags.
@@ -126,7 +127,7 @@ You can use any of the color or formatting keywords (snake cased) as tags.
 To use a background color tag, simply prepend the color with `background_`:
 
 ```php
-$this->blue('Please <bold><background_light_red>remember</background_light_red></bold> to restart the server.');
+$climate->blue('Please <bold><background_light_red>remember</background_light_red></bold> to restart the server.');
 ```
 
 ## Custom Colors
