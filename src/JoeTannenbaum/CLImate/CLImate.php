@@ -30,6 +30,8 @@ class CLImate {
         echo $this->applyStyle( $str ) . "\n";
 
         $this->style->reset();
+
+        return $this;
     }
 
     /**
