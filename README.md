@@ -114,7 +114,8 @@ You can apply more than one format to an output, but only one foreground and one
 You can also just apply a color/background color/format to part of an output:
 
 ```php
-$this->blue('Please <bold><light_red>remember</light_red></bold> to restart the server.');
+$this->blue('Please <light_red>remember</light_red> to restart the server.');
+$this->out('Remember to use your <blink><yellow>blinker</yellow></blink> when turning.');
 ```
 
 You can use any of the color or formatting keywords (snake cased) as tags.
@@ -137,8 +138,9 @@ Once you've added the color, you can use it like any of the other colors:
 
 ```php
 $climate->lilac('What a pretty color.');
-$climate->lilacBackground('This background is a pretty color.');
+$climate->backgroundLilac('This background is a pretty color.');
 $climate->out('Just this <lilac>word</lilac> is a pretty color.');
+$climate->out('Just this <background_lilac>word</background_lilac> is a pretty color.');
 ```
 
 ## Commands
@@ -158,14 +160,14 @@ $climate->info('Nothing fancy here. Just some info.');
 You can add your own command, just make sure that the color is defined already.
 
 ```php
-$climate->stye->addCommandColor('rage', 'dark_red');
+$climate->style->addCommandColor('rage', 'cyan');
 $climate->rage('SOMETHING IS MESSED UP.');
 ```
 
 You can also override any command;
 
 ```php
-$climate->stye->addCommandColor('error', 'light_blue');
+$climate->style->addCommandColor('error', 'light_blue');
 $climate->error('Whelp. That did not turn out so well.');
 ```
 
@@ -372,7 +374,7 @@ The `br` method does exactly that, inserts a line break:
 $climate->br();
 ```
 
-The `br` method is chainable, so you can do this:
+For ease of use, the `br` method is chainable:
 
 ```php
 $climate->br()->out('I have moved down a line.');
