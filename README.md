@@ -2,7 +2,9 @@
 
 [![Build Status](https://travis-ci.org/joetannenbaum/climate.svg?branch=master)](https://travis-ci.org/joetannenbaum/climate)
 
-Running PHP from the command line? CLImate is your new best bud. CLImate outputs colored text, special formats, and more.
+Running PHP from the command line? CLImate is your new best bud.
+
+CLImate outputs colored text, special formats, and more.
 
 ## Installation
 
