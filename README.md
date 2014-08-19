@@ -18,9 +18,12 @@ Using composer:
 
 ## Basic Usage
 
+The `out` method simply receives a string that will output on a new line.
+
 ```php
 $climate = new CLImate;
 $climate->out('This prints to the terminal.');
+$climate->out('This prints to the terminal.')->out('This will be on a new line');
 ```
 
 And you can do that. But that's not very fun.
