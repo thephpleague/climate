@@ -61,6 +61,20 @@ class StyleTest extends PHPUnit_Framework_TestCase
     {
         ob_start();
 
+        $this->cli->backgroundRed('This would go out to the console.');
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[41mThis would go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_use_a_background_color_method_chained()
+    {
+        ob_start();
+
         $this->cli->backgroundRed()->out('This would go out to the console.');
         $result = ob_get_contents();
 

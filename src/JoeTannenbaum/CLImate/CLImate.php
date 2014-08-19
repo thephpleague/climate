@@ -142,8 +142,6 @@ class CLImate {
     {
         $possible_methods = [
             'background',
-            'foreground',
-            'format',
             'table',
             'border',
             'json',
@@ -175,6 +173,11 @@ class CLImate {
                 $style = str_replace( $prefix, '', $name );
 
                 $this->style->$method( $style );
+
+                if ( $output )
+                {
+                    return $this->out( $output );
+                }
 
                 return $this;
             }
@@ -224,18 +227,16 @@ class CLImate {
         // The first argument is the string we want to echo out
         $output = reset( $arguments );
 
-        $found = $this->checkForSimpleMethods( $name );
+        $found  = $this->checkForSimpleMethods( $name );
 
         if ( $found )
         {
-            if ( !$output )
-            {
-                return $this;
-            }
-            else
+            if ( $output )
             {
                 return $this->out( $output );
             }
+
+            return $this;
         }
 
         return $this->checkForAdvancedMethods( $name, $output );
