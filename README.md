@@ -21,7 +21,7 @@ Using composer:
 The `out` method simply receives a string that will output on a new line.
 
 ```php
-$climate = new CLImate;
+$climate = new JoeTannenbaum\CLImate\CLImate;
 $climate->out('This prints to the terminal.');
 $climate->out('This prints to the terminal.')->out('This will be on a new line');
 ```
