@@ -386,3 +386,30 @@ For ease of use, the `br` method is chainable:
 ```php
 $climate->br()->out('I have moved down a line.');
 ```
+## Laravel Users
+
+Use Laravel? Treat time. Add these lines to your `app/config/app.php`:
+
+```php
+'providers' => [
+  '...',
+  'JoeTannenbaum\CLImate\CLImateServiceProvider'
+];
+```
+
+```php
+'aliases' => [
+  '...',
+  'CLImate' => 'JoeTannenbaum\CLImate\Facade\CLImate'
+];
+```
+
+You can now any of the above methods via Laravel's facades:
+
+```php
+CLImate::error('Ruh roh.');
+CLImate::comment('Just so you know.');
+CLImate::whisper('Not so important, just a heads up.');
+CLImate::shout('This. This is important.');
+CLImate::info('Nothing fancy here. Just some info.');
+```
