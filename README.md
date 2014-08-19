@@ -11,7 +11,7 @@ Using composer:
 ```
 {
     "require": {
-        "joetannenbaum/climate": "~1.0"
+        "joetannenbaum/climate": "0.1.*"
     }
 }
 ```
