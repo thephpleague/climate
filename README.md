@@ -62,7 +62,7 @@ $climate->lightGreen()->out('It\'s not easy being (light) green.');
 
 ## Backgrounds
 
-To to apply a color as a background, simply prepend the method with `background`:
+To to apply a color as a background, simply prepend the color method with `background`:
 
 ```php
 $climate->backgroundRed()->out('Whoa now this text is red.');
@@ -84,8 +84,19 @@ You have several formatting options:
 To apply a format:
 
 ```php
+$climate->bold('Bold and beautiful.');
+$climate->underline('I have a line beneath me.');
+
 $climate->bold()->out('Bold and beautiful.');
 $climate->underline()->out('I have a line beneath me.');
+```
+
+You can apply multiple formats by chaining them:
+
+
+```php
+$climate->bold()->underline()->out('Bold (and underlined) and beautiful.');
+$climate->blink()->dim('Dim. But noticeable.');
 ```
 
 ## Style Combinations
