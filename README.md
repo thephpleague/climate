@@ -142,7 +142,7 @@ Once you've added the color, you can use it like any of the other colors:
 
 ```php
 $climate->lilac('What a pretty color.');
-$climate->backgroundLilac('This background is a pretty color.');
+$climate->backgroundLilac()->out('This background is a pretty color.');
 $climate->out('Just this <lilac>word</lilac> is a pretty color.');
 $climate->out('Just this <background_lilac>word</background_lilac> is a pretty color.');
 ```
