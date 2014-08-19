@@ -84,8 +84,6 @@ class JSONTest extends PHPUnit_Framework_TestCase
 
         ob_end_clean();
 
-        file_put_contents('wat', $result);
-
         $should_be = json_encode( (object) [
                     'cell1' => 'Cell 1',
                     'cell2' => 'Cell 2',
