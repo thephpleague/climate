@@ -39,6 +39,24 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
+    public function it_resets_itself_after_styled_output()
+    {
+        ob_start();
+
+        $this->cli->red('This would go out to the console.');
+        $this->cli->out('This is plain.');
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\e[31mThis would go out to the console.\e[0m\n";
+        $should_be .= "\e[mThis is plain.\e[0m\n";
+
+        $this->assertEquals( $should_be, $result );
+    }
+
+    /** @test */
+
     public function it_can_use_a_background_color_method()
     {
         ob_start();
