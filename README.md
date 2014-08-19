@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/joetannenbaum/climate.svg?branch=master)](https://travis-ci.org/joetannenbaum/climate)
 
-Running PHP from the command line? CLImate allows you to output colored text, specially formatted text, and more.
+Running PHP from the command line? CLImate is your new best bud. CLImate outputs colored text, special formats, and more.
 
 ## Installation
 
@@ -18,7 +18,7 @@ Using composer:
 
 ## Basic Usage
 
-The `out` method simply receives a string that will output on a new line.
+The `out` method simply receives a string that will output on a new line:
 
 ```php
 $climate = new JoeTannenbaum\CLImate\CLImate;
