@@ -67,6 +67,20 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
+    public function it_can_apply_multiple_formats()
+    {
+        ob_start();
+
+        $this->cli->underline()->blink('This would go out to the console.');
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[4;5mThis would go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
     public function it_can_chain_a_color_method()
     {
         ob_start();
@@ -151,6 +165,20 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
+    public function it_can_parse_nested_tags()
+    {
+        ob_start();
+
+        $this->cli->out('This <red><blink>would</blink></red> go out to the console.');
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[mThis \e[31m\e[5mwould\e[0m\e[m\e[0m\e[m go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
     public function it_can_parse_tags_and_return_to_current_style()
     {
         ob_start();
@@ -161,6 +189,115 @@ class StyleTest extends PHPUnit_Framework_TestCase
         ob_end_clean();
 
         $this->assertEquals( "\e[31mThis \e[5mwould\e[0m\e[31m go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_add_a_color_and_use_it()
+    {
+        ob_start();
+
+        $this->cli->style->addColor( 'new_custom_color', 900 );
+
+        $this->cli->newCustomColor('This is the new color.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[900mThis is the new color.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_add_a_color_and_use_it_as_a_tag()
+    {
+        ob_start();
+
+        $this->cli->style->addColor( 'new_custom_color', 900 );
+
+        $this->cli->out('This <new_custom_color>is</new_custom_color> the new color.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[mThis \e[900mis\e[0m\e[m the new color.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_add_a_color_and_use_it_as_a_background()
+    {
+        ob_start();
+
+        $this->cli->style->addColor( 'new_custom_color', 900 );
+
+        $this->cli->backgroundNewCustomColor()->out('This is the new color.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[910mThis is the new color.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_use_a_color_command()
+    {
+        ob_start();
+
+        $this->cli->error('This would go out to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[91mThis would go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_chain_a_color_command()
+    {
+        ob_start();
+
+        $this->cli->error()->out('This would go out to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[91mThis would go out to the console.\e[0m\n", $result );
+    }
+
+    /** @test */
+
+    public function it_can_use_add_a_color_command()
+    {
+        ob_start();
+
+        $this->cli->style->addCommandColor( 'holler', 'light_blue' );
+
+        $this->cli->holler('This would go out to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertEquals( "\e[94mThis would go out to the console.\e[0m\n", $result );
+    }
+
+    /**
+     * @test
+     * @expectedException        Exception
+     * @expectedExceptionMessage The color 'not_a_color' for command 'holler' is not defined.
+     */
+
+    public function it_errors_when_command_color_is_not_defined()
+    {
+        $this->cli->style->addCommandColor( 'holler', 'not_a_color' );
     }
 
 }

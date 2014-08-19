@@ -54,6 +54,20 @@ class Style {
     ];
 
     /**
+     * Commands that correspond to a color in the $colors property
+     *
+     * @var array
+     */
+
+    public $command_colors = [
+        'info'    => 'green',
+        'comment' => 'yellow',
+        'whisper' => 'light_gray',
+        'shout'   => 'red',
+        'error'   => 'light_red',
+    ];
+
+    /**
      * An array of the tags that should be searched for
      *
      * @var array
@@ -69,20 +83,6 @@ class Style {
      */
 
     public $tag_replace = [];
-
-	/**
-	 * Commands that correspond to a color in the $colors property
-	 *
-	 * @var array
-	 */
-
-	public $command_colors = [
-		'info'    => 'green',
-		'comment' => 'yellow',
-		'whisper' => 'light_gray',
-		'shout'   => 'red',
-		'error'   => 'light_red',
-	];
 
     public function __construct()
     {
@@ -158,6 +158,8 @@ class Style {
     public function addColor( $color, $code )
     {
     	$this->colors[ $color ] = $code;
+
+        $this->buildTags();
     }
 
     /**
@@ -172,6 +174,8 @@ class Style {
         if ( array_key_exists( $color, $this->colors ) )
         {
             $this->command_colors[ $command ] = $color;
+
+            $this->buildTags();
         }
         else
         {

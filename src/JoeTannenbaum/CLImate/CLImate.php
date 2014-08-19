@@ -11,7 +11,7 @@ class CLImate {
      * @var JoeTannenbaum\CLImate\Style
      */
 
-    protected $style;
+    public $style;
 
     public function __construct()
     {
