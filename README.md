@@ -8,7 +8,7 @@ CLImate outputs colored text, special formats, and more.
 
 ## Installation
 
-Using composer:
+Using [composer](https://packagist.org/packages/joetannenbaum/climate):
 
 ```
 {
