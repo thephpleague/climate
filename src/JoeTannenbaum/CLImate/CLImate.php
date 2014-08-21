@@ -35,77 +35,6 @@ class CLImate {
     }
 
     /**
-     * Output a line break to the terminal
-     *
-     * @return JoeTannenbaum\CLImate\Terminal
-     */
-
-    public function br()
-    {
-        $this->out('');
-
-        return $this;
-    }
-
-    /**
-     * Output a border
-     *
-     * @param string $char
-     * @param string $color
-     * @param integer $length
-     */
-
-    public function border( $char = '-', $length = NULL )
-    {
-        $border = new Border;
-
-        if ( strlen( $char ) )
-        {
-            $border->char( $char );
-        }
-
-        if ( $length )
-        {
-            $border->length( $length );
-        }
-
-        $this->out( $border->result() );
-    }
-
-    /**
-     * Output a table
-     *
-     * @param array $data
-     */
-
-    public function table( $data )
-    {
-        $table = new Table( $data, $this->style->tag_search );
-
-        $this->style->persistant();
-
-        foreach ( $table->result() as $row )
-        {
-            $this->out( $row );
-        }
-
-        $this->style->resetPersistant();
-    }
-
-    /**
-     * JSONify a mixed input to the terminal
-     *
-     * @param mixed $data
-     */
-
-    public function json( $data )
-    {
-        $json = new JSON( $data );
-
-        $this->out( $json->result() );
-    }
-
-    /**
      * Wrap the string in the current style
      *
      * @param string $str
@@ -145,6 +74,7 @@ class CLImate {
             'table',
             'border',
             'json',
+            'flank',
         ];
 
         foreach ( $possible_methods as $method )
@@ -211,6 +141,37 @@ class CLImate {
         return FALSE;
     }
 
+    protected function checkForTerminalObject( $name, $arguments )
+    {
+        $object_class = 'JoeTannenbaum\\CLImate\\TerminalObject\\' . ucwords( $name );
+
+        if ( class_exists( $object_class ) )
+        {
+            $reflect     = new \ReflectionClass( $object_class );
+            $obj         = $reflect->newInstanceArgs( $arguments );
+
+            $results = $obj->result();
+
+            if ( !is_array( $results ) )
+            {
+                $results = [ $results ];
+            }
+
+            $this->style->persistant();
+
+            foreach ( $results as $result )
+            {
+                $this->out( $result );
+            }
+
+            $this->style->resetPersistant();
+
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
     /**
      * Magic method for anything called that doesn't exist
      *
@@ -236,6 +197,13 @@ class CLImate {
                 return $this->out( $output );
             }
 
+            return $this;
+        }
+
+        $found = $this->checkForTerminalObject( $name, $arguments );
+
+        if ( $found )
+        {
             return $this;
         }
 

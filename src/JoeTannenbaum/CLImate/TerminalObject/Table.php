@@ -1,8 +1,10 @@
 <?php
 
-namespace JoeTannenbaum\CLImate;
+namespace JoeTannenbaum\CLImate\TerminalObject;
 
-class Table implements TerminalObject {
+use JoeTannenbaum\CLImate\Style;
+
+class Table extends BaseTerminalObject {
 
     /**
      * The data for the table, an array of (arrays|objects)
@@ -61,10 +63,10 @@ class Table implements TerminalObject {
 
     protected $rows           = [];
 
-	public function __construct( Array $data, Array $ignore_tags )
+	public function __construct( Array $data )
 	{
 		$this->data          = $data;
-		$this->ignore_tags   = $ignore_tags;
+		$this->ignore_tags   = ( new Style )->tag_search;
 
         $this->column_widths = $this->getColumnWidths();
         $this->table_width   = $this->getWidth();

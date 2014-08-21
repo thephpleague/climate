@@ -1,8 +1,8 @@
 <?php
 
-namespace JoeTannenbaum\CLImate;
+namespace JoeTannenbaum\CLImate\TerminalObject;
 
-class JSON implements TerminalObject {
+class Json extends BaseTerminalObject {
 
 	/**
 	 * The data to conver to JSON

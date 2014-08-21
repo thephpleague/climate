@@ -1,8 +1,8 @@
 <?php
 
-namespace JoeTannenbaum\CLImate;
+namespace JoeTannenbaum\CLImate\TerminalObject;
 
-class Border implements TerminalObject {
+class Border extends BaseTerminalObject {
 
 	/**
 	 * The character to repeat for the border
@@ -19,6 +19,19 @@ class Border implements TerminalObject {
 	 */
 
 	protected $length = 100;
+
+	public function __construct( $char = NULL, $length = NULL )
+	{
+		if ( $char )
+		{
+			$this->char( $char );
+		}
+
+		if ( $length )
+		{
+			$this->length( $length );
+		}
+	}
 
 	/**
 	 * Set the character to repeat for the border
