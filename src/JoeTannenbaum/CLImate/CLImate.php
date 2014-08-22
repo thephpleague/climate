@@ -59,112 +59,71 @@ class CLImate {
     }
 
     /**
-     * Based on the $name parameter, checks for combinations of various methods
-     * that might exist in either this class or Style
+     * Get the full path for a terminal object class
      *
      * @param string $name
-     * @param mixed $output
-     * @return mixed JoeTannenbaum\CLImate\Terminal
+     * @return string
      */
 
-    protected function checkForAdvancedMethods( $name, $output )
+    protected function getFullTerminalObjectClass( $name )
     {
-        $possible_methods = [
-            'background',
-            'table',
-            'border',
-            'json',
-            'flank',
-        ];
-
-        foreach ( $possible_methods as $method )
-        {
-            // Method was a postfix (e.g. redTable)
-            $postfix = '_' . $method;
-
-            // Method was a prefix (e.g. backgroundRed)
-            $prefix  = $method . '_';
-
-            if ( strstr( $name, $postfix ) !== FALSE )
-            {
-                // Get rid of the method bit
-                $style = str_replace( $postfix, '', $name );
-
-                // Get the style based on the method name
-                $this->style->foreground( $style );
-
-                $this->$method( $output );
-
-                return $this;
-            }
-            elseif ( strstr( $name, $prefix ) !== FALSE )
-            {
-                // Get rid of the method bit
-                $style = str_replace( $prefix, '', $name );
-
-                $this->style->$method( $style );
-
-                if ( $output )
-                {
-                    return $this->out( $output );
-                }
-
-                return $this;
-            }
-        }
+        return 'JoeTannenbaum\\CLImate\\TerminalObject\\' . ucwords( $name );
     }
 
     /**
-     * Checks for simple methods that exist in Style,
-     * returns TRUE if they exist and are applied
+     * Execute a terminal object using given arguments
      *
      * @param string $name
+     * @param mixed $arguments
+     */
+
+    protected function executeTerminalObject( $name, $arguments )
+    {
+        $reflect     = new \ReflectionClass( $this->getFullTerminalObjectClass( $name ) );
+        $obj         = $reflect->newInstanceArgs( $arguments );
+
+        $results = $obj->result();
+
+        if ( !is_array( $results ) )
+        {
+            $results = [ $results ];
+        }
+
+        $this->style->persistant();
+
+        foreach ( $results as $result )
+        {
+            $this->out( $result );
+        }
+
+        $this->style->resetPersistant();
+    }
+
+    /**
+     * Route a method to its appropriate class and execute it
+     *
+     * @param string $method
      * @return boolean
      */
 
-    protected function checkForSimpleMethods( $name )
+    protected function routeMethod( $method )
     {
-        foreach ( [ 'foreground', 'formatting' ] as $method )
+        // Manual check, if it starts with the background string, it's a background method
+        if ( substr( $method, 0, strlen('background_' ) ) == 'background_' )
         {
-            $style_method = 'get' . ucwords( $method );
+            $this->style->background( str_replace( 'background_', '', $method ) );
 
-            $value = $this->style->$style_method( $name );
-
-            if ( $value )
-            {
-                $this->style->$method( $name );
-
-                return TRUE;
-            }
+            return TRUE;
         }
-
-        return FALSE;
-    }
-
-    protected function checkForTerminalObject( $name, $arguments )
-    {
-        $object_class = 'JoeTannenbaum\\CLImate\\TerminalObject\\' . ucwords( $name );
-
-        if ( class_exists( $object_class ) )
+        else if ( $this->style->getForeground( $method ) )
         {
-            $reflect     = new \ReflectionClass( $object_class );
-            $obj         = $reflect->newInstanceArgs( $arguments );
+            $this->style->foreground( $method );
 
-            $results = $obj->result();
-
-            if ( !is_array( $results ) )
-            {
-                $results = [ $results ];
-            }
-
-            $this->style->persistant();
-
-            foreach ( $results as $result )
-            {
-                $this->out( $result );
-            }
-
-            $this->style->resetPersistant();
+            return TRUE;
+        }
+        else if ( $this->style->getFormatting( $method ) )
+        {
+            $this->style->formatting( $method );
 
             return TRUE;
         }
@@ -173,40 +132,136 @@ class CLImate {
     }
 
     /**
+     * Check if we have valid output
+     *
+     * @param mixed $output
+     * @return boolean
+     */
+
+    protected function hasOutput( $output )
+    {
+        if ( is_string( $output ) || is_numeric( $output ) )
+        {
+            if ( strlen( $output ) )
+            {
+                return TRUE;
+            }
+
+        } else if ( !empty( $output ) )
+        {
+            return TRUE;
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Search for the method within the string
+     * and route it if we find one
+     *
+     * @param string $method
+     * @param string $name
+     * @return string
+     */
+
+    protected function searchForMethod( $method, $name )
+    {
+        // If the name starts with this method string...
+        if ( substr( $name, 0, strlen( $method ) ) == $method )
+        {
+            // ...remove the method name from the beginning of the string...
+            $name = substr( $name, strlen( $method ) );
+
+            // ...and trim off any of those underscores hanging around
+            $name = ltrim( $name, '_' );
+
+            $this->routeMethod( $method );
+        }
+
+        return $name;
+    }
+
+    /**
      * Magic method for anything called that doesn't exist
      *
+     * Looking for methods such as:
+     *
+     * - red
+     * - redTable
+     * - backgroundRed
+     * - backgroundRedTable
+     * - blink
+     * - blinkTable
      *
      * @param string $name
      * @param array $arguments
      */
 
-	public function __call( $name, $arguments )
+	public function __call( $requested_method, $arguments )
 	{
         // Convert to snake case
-        $name   = strtolower( preg_replace( '/(.)([A-Z])/', '$1_$2', $name ) );
+        $name   = strtolower( preg_replace( '/(.)([A-Z])/', '$1_$2', $requested_method ) );
 
-        // The first argument is the string we want to echo out
+        // The first argument is the string|array|object we want to echo out
         $output = reset( $arguments );
 
-        $found  = $this->checkForSimpleMethods( $name );
+        // Get all of the possible style attributes
+        $method_search = array_keys( $this->style->getMergedAttributes() );
 
-        if ( $found )
+        // A flag to see if we are still finding valid methods
+        // We need this flag because of terminal objects
+        // and failing gracefully when a whack method is passed in
+        $found_method = TRUE;
+
+        // While we still have a name left and we keep finding methods,
+        // loop through the possibilities
+        while ( strlen( $name ) > 0 && $found_method )
         {
-            if ( $output )
+            // We haven't found a method in the current loop yet
+            $current_loop_found = FALSE;
+
+            // Loop through the possible methods
+            foreach ( $method_search as $method )
             {
-                return $this->out( $output );
+                // See if we found a valid method
+                $new_name = $this->searchForMethod( $method, $name );
+
+                // If we haven't found one in the loop yet and the name changed,
+                // guess what: we found a valid method
+                if ( !$current_loop_found && $new_name != $name )
+                {
+                    $current_loop_found = TRUE;
+                }
+
+                // Reset name to the new name
+                $name = $new_name;
             }
 
-            return $this;
+            // Set the found method flag just in case we don't have any more valid methods
+            $found_method = $current_loop_found;
         }
 
-        $found = $this->checkForTerminalObject( $name, $arguments );
-
-        if ( $found )
+        // If we have fulfilled all of the requested methods and we have output, output it
+        if ( !strlen( $name ) && $this->hasOutput( $output ) )
         {
-            return $this;
+            return $this->out( $output );
         }
 
-        return $this->checkForAdvancedMethods( $name, $output );
+        // If we still have something left, let's see if it's a terminal object
+        if ( strlen( $name ) )
+        {
+            // If it is, let's execute it
+            if ( class_exists( $this->getFullTerminalObjectClass( $name ) ) )
+            {
+                $this->executeTerminalObject( $name, $arguments );
+            }
+            else
+            {
+                // If we can't find it at this point, let's fail gracefully
+                return $this->out( $output );
+            }
+        }
+
+        return $this;
     }
 }

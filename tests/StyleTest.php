@@ -11,21 +11,7 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_echo_out_a_string()
-    {
-        ob_start();
-
-        $this->cli->out('This would go out to the console.');
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $this->assertEquals( "\e[mThis would go out to the console.\e[0m\n", $result );
-    }
-
-    /** @test */
-
-    public function it_can_use_color_method()
+    public function it_can_use_a_background_color_and_foreground_color_methodcolor_method()
     {
         ob_start();
 
@@ -113,7 +99,7 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_chain_a_color_method()
+    public function it_can_chain_a_foreground_color_method()
     {
         ob_start();
 
@@ -127,7 +113,7 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_use_a_background_color_and_color_method()
+    public function it_can_use_a_background_color_and_foreground_color_method()
     {
         ob_start();
 
@@ -141,7 +127,7 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_use_a_background_color_and_color_and_format_method()
+    public function it_can_use_a_background_color_and_foreground_color_and_format_method()
     {
         ob_start();
 
@@ -155,7 +141,7 @@ class StyleTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_parse_color_tags()
+    public function it_can_parse_foreground_color_tags()
     {
         ob_start();
 

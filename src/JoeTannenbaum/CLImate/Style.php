@@ -516,7 +516,7 @@ class Style {
      * @return arrays
      */
 
-    protected function getMergedAttributes()
+    public function getMergedAttributes()
     {
     	$styles = $this->colors;
 

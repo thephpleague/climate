@@ -44,22 +44,4 @@ class BrTest extends PHPUnit_Framework_TestCase
         $this->assertEquals( $should_be, $result );
     }
 
-    /** @test */
-
-    public function out_is_chainable()
-    {
-        ob_start();
-
-        $this->cli->out('This is a line further down.')->out('This is a line further down.');
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[mThis is a line further down.\e[0m\n";
-        $should_be .= "\e[mThis is a line further down.\e[0m\n";
-
-        $this->assertEquals( $should_be, $result );
-    }
-
 }

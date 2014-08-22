@@ -78,7 +78,7 @@ class BorderTest extends PHPUnit_Framework_TestCase
 
     /** @test */
 
-    public function it_can_output_a_border_with_an_odd_length_character()
+    public function it_can_output_a_border_with_an_odd_length_character_and_still_be_the_correct_length()
     {
         ob_start();
 
@@ -91,98 +91,6 @@ class BorderTest extends PHPUnit_Framework_TestCase
         $should_be = "-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*";
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
-
-        $this->assertEquals( $should_be, $result );
-    }
-
-    /** @test */
-
-    public function it_can_output_a_colored_border_via_a_chained_method()
-    {
-        ob_start();
-
-        $this->cli->red()->border();
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-
-        $should_be = "\e[31m" . $should_be . "\e[0m\n";
-
-        $this->assertEquals( $should_be, $result );
-    }
-
-    /** @test */
-
-    public function it_can_output_a_colored_border_via_a_method()
-    {
-        ob_start();
-
-        $this->cli->redBorder();
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-
-        $should_be = "\e[31m" . $should_be . "\e[0m\n";
-
-        $this->assertEquals( $should_be, $result );
-    }
-
-    /** @test */
-
-    public function it_can_output_a_background_colored_border_via_a_chained_method()
-    {
-        ob_start();
-
-        $this->cli->backgroundRed()->border();
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-
-        $should_be = "\e[41m" . $should_be . "\e[0m\n";
-
-        $this->assertEquals( $should_be, $result );
-    }
-
-    /** @test */
-
-    public function it_can_output_a_formatted_border_via_a_chained_method()
-    {
-        ob_start();
-
-        $this->cli->blink()->border();
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-        $should_be .= "--------------------";
-
-        $should_be = "\e[5m" . $should_be . "\e[0m\n";
 
         $this->assertEquals( $should_be, $result );
     }
