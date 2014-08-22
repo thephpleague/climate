@@ -4,7 +4,25 @@
 
 Running PHP from the command line? CLImate is your new best bud.
 
-CLImate outputs colored text, special formats, and more.
+CLImate allows you to easily output colored text, special formats, and more.
+
+## Table of Contents
+
++ [Installation](#installation)
++ [Basic Usage](#basic-usage)
++ [Colors](#colors)
++ [Backgrounds](#backgrounds)
++ [Style Combinations](#style-combinations)
++ [Tags](#tags)
++ [Custom Colors](#custom-colors)
++ [Commands](#commands)
++ [Custom Commands](#custom-commands)
++ [Tables](#tables)
++ [Borders](#borders)
++ [JSON](#json)
++ [Flanking](#flanking)
++ [Breaks](#breaks)
++ [Laravel Users](#laravel-users)
 
 ## Installation
 
@@ -382,9 +400,9 @@ $climate->underline()->json([
 ]);
 ```
 
-## Flank
+## Flanking
 
-`flank` allows you to bring a little more attention to a line:
+The `flank` method allows you to bring a little more attention to a line:
 
 ```php
 $climate->flank('Look at me. Now.');
