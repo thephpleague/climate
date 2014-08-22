@@ -114,6 +114,15 @@ You can chain any of the above to get what you want:
 $climate->backgroundBlue()->green()->blink()->out('This may be a little hard to read.');
 ```
 
+Feeling wild? Just throw them all into one method:
+
+```php
+$climate->backgroundBlueGreenBlink('This may be a little hard to read.');
+$climate->backgroundBlueGreenBlinkJson([
+    'this' => 'is some colorful json output'
+]);
+```
+
 You can apply more than one format to an output, but only one foreground and one background color. Unless you use...
 
 ## Tags
@@ -371,6 +380,37 @@ $climate->underline()->json([
   'age'  => 52,
   'job'  => 'Engineer',
 ]);
+```
+
+## Flank
+
+`flank` allows you to bring a little more attention to a line:
+
+```php
+$climate->flank('Look at me. Now.');
+/// ### Look at me. Now. ###
+```
+
+You can specify the flanking characters:
+
+
+```php
+$climate->flank('Look at me. Now.', '!');
+/// !!! Look at me. Now. !!!
+```
+
+And how many flanking characters there should be:
+
+```php
+$climate->flank('Look at me. Now.', '!', 5);
+/// !!!!! Look at me. Now. !!!!!
+```
+
+As with the other method, you can style this output as well:
+
+```php
+$climate->blink()->flank('Look at me. Now.');
+$climate->blinkFlank('Look at me. Now.');
 ```
 
 ## Breaks

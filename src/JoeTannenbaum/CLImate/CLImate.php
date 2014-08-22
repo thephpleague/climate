@@ -79,8 +79,8 @@ class CLImate {
 
     protected function executeTerminalObject( $name, $arguments )
     {
-        $reflect     = new \ReflectionClass( $this->getFullTerminalObjectClass( $name ) );
-        $obj         = $reflect->newInstanceArgs( $arguments );
+        $reflect = new \ReflectionClass( $this->getFullTerminalObjectClass( $name ) );
+        $obj     = $reflect->newInstanceArgs( $arguments );
 
         $results = $obj->result();
 

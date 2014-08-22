@@ -420,6 +420,34 @@ class Style {
     }
 
     /**
+     * Get a full list of the style options with their corresponding codes
+     *
+     * @return arrays
+     */
+
+    public function getMergedAttributes()
+    {
+        $styles = $this->colors;
+
+        foreach ( $this->command_colors as $command => $color )
+        {
+            $styles[ $command ] = $this->getForeground( $color );
+        }
+
+        foreach ( $this->colors as $color => $code )
+        {
+            $styles[ 'background_' . $color ] = $code + 10;
+        }
+
+        foreach ( $this->formatting as $format => $code )
+        {
+            $styles[ $format ] = $code;
+        }
+
+        return $styles;
+    }
+
+    /**
      * Set default styles for each of the properties
      *
      * @return type
@@ -508,34 +536,6 @@ class Style {
         $style     = array_filter( array_merge( $formats, $colors ) );
 
         return implode( ';', $style );
-    }
-
-    /**
-     * Get a full list of the style options with their corresponding codes
-     *
-     * @return arrays
-     */
-
-    public function getMergedAttributes()
-    {
-    	$styles = $this->colors;
-
-    	foreach ( $this->command_colors as $command => $color )
-    	{
-    		$styles[ $command ] = $this->getForeground( $color );
-    	}
-
-        foreach ( $this->colors as $color => $code )
-        {
-            $styles[ 'background_' . $color ] = $code + 10;
-        }
-
-        foreach ( $this->formatting as $format => $code )
-        {
-            $styles[ $format ] = $code;
-        }
-
-    	return $styles;
     }
 
 }
