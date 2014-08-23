@@ -1,6 +1,8 @@
 {
     "name": "joetannenbaum/climate",
-    "description": "",
+    "description": "PHP's best friend for the terminal. CLImate allows you to easily output colored text, special formats, and more.",
+    "keywords": ["cli","php", "terminal", "command", "colors"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Joe Tannenbaum",

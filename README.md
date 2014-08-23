@@ -41,6 +41,8 @@ Using [composer](https://packagist.org/packages/joetannenbaum/climate):
 The `out` method simply receives a string that will output on a new line:
 
 ```php
+require_once('vendor/autoload.php');
+
 $climate = new JoeTannenbaum\CLImate\CLImate;
 
 $climate->out('This prints to the terminal.');
