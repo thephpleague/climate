@@ -20,6 +20,7 @@ CLImate allows you to easily output colored text, special formats, and more.
 + [Tables](#tables)
 + [Borders](#borders)
 + [JSON](#json)
++ [Dump](#dump)
 + [Flanking](#flanking)
 + [Breaks](#breaks)
 + [Laravel Users](#laravel-users)
@@ -402,6 +403,48 @@ $climate->underline()->json([
 ]);
 ```
 
+## Dump
+
+The `dump` method allows you to `var_dump` variables out to the terminal:
+
+```php
+$climate->dump([
+  'This',
+  'That',
+  'Other Thing',
+]);
+```
+
+Which results in:
+
+```
+array(3) {
+  [0]=>
+  string(4) "This"
+  [1]=>
+  string(4) "That"
+  [2]=>
+  string(11) "Other Thing"
+}
+```
+
+But why not make it look cool:
+
+```php
+$climate->errorDump([
+  'This',
+  'That',
+  'Other Thing',
+]);
+
+$climate->blinkDump([
+  'This',
+  'That',
+  'Other Thing',
+]);
+```
+
+
 ## Flanking
 
 The `flank` method allows you to bring a little more attention to a line:
@@ -446,6 +489,7 @@ For ease of use, the `br` method is chainable:
 ```php
 $climate->br()->out('I have moved down a line.');
 ```
+
 ## Laravel Users
 
 Use Laravel? Treat time. Add these lines to your `app/config/app.php`:

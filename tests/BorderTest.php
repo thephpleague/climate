@@ -29,7 +29,7 @@ class BorderTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -52,7 +52,7 @@ class BorderTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -73,7 +73,7 @@ class BorderTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -92,7 +92,7 @@ class BorderTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
 }

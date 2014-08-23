@@ -23,7 +23,7 @@ class BrTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -41,7 +41,7 @@ class BrTest extends PHPUnit_Framework_TestCase
         $should_be = "\e[m\e[0m\n";
         $should_be .= "\e[mThis is a line further down.\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
 }

@@ -1,4 +1,4 @@
-<?php
+would<?php
 
 class CLImateTest extends PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class CLImateTest extends PHPUnit_Framework_TestCase
 
         ob_end_clean();
 
-        $this->assertEquals( "\e[mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame( "\e[mThis would go out to the console.\e[0m\n", $result );
     }
 
     /** @test */
@@ -38,7 +38,7 @@ class CLImateTest extends PHPUnit_Framework_TestCase
         $should_be = "\e[mThis is a line.\e[0m\n";
         $should_be .= "\e[mThis is another line.\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
 }

@@ -32,7 +32,7 @@ class TableTest extends PHPUnit_Framework_TestCase
         $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -60,7 +60,7 @@ class TableTest extends PHPUnit_Framework_TestCase
         $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -88,7 +88,7 @@ class TableTest extends PHPUnit_Framework_TestCase
         $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
 }

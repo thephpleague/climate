@@ -23,7 +23,7 @@ class FlankTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m### Flank me! ###\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -40,7 +40,7 @@ class FlankTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m--- Flank me! ---\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -57,7 +57,7 @@ class FlankTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m##### Flank me! #####\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
     /** @test */
@@ -74,7 +74,7 @@ class FlankTest extends PHPUnit_Framework_TestCase
 
         $should_be = "\e[m----- Flank me! -----\e[0m\n";
 
-        $this->assertEquals( $should_be, $result );
+        $this->assertSame( $should_be, $result );
     }
 
 }
