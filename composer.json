@@ -14,8 +14,8 @@
         "illuminate/support": "4.2.*"
     },
     "autoload": {
-        "psr-0": {
-            "JoeTannenbaum\\CLImate": "src/"
+        "psr-4": {
+            "JoeTannenbaum\\CLImate\\": "src/"
         }
     },
     "minimum-stability": "stable"
