@@ -22,7 +22,6 @@ class CLImate {
 	 * Prints the string to the console
 	 *
 	 * @param string $str
-	 * @param string $color
 	 */
 
     public function out( $str )
