@@ -368,8 +368,7 @@ $climate->bold()->backgroundBlue()->border();
 Easily add a progress bar to your output:
 
 ```php
-$climate->progress()->total(100);
-
+$progress = $climate->progress()->total(100);
 
 for ( $i = 0; $i <= 100; $i++ )
 {
