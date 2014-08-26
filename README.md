@@ -20,6 +20,7 @@ CLImate allows you to easily output colored text, special formats, and more.
 + [Custom Commands](#custom-commands)
 + [Tables](#tables)
 + [Borders](#borders)
++ [Progress Bar](#progress-bar)
 + [JSON](#json)
 + [Dump](#dump)
 + [Flanking](#flanking)
@@ -360,6 +361,37 @@ $climate->red()->border();
 $climate->redBorder();
 
 $climate->bold()->backgroundBlue()->border();
+```
+
+## Progress Bar
+
+Easily add a progress bar to your output:
+
+```php
+$climate->progress()->total(100);
+
+
+for ( $i = 0; $i <= 100; $i++ )
+{
+  $progress->current( $i );
+  usleep(80000);
+}
+```
+Which will result in:
+
+![Progress Bar](docs/images/progress.gif)
+
+You can also shorthand it a bit if you'd like:
+
+```php
+$climate->progress(100);
+```
+
+As with everything else, style it however you like:
+
+```php
+$climate->redProgress(100);
+$climate->redBoldProgress(100);
 ```
 
 ## JSON
