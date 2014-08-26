@@ -70,6 +70,18 @@ class CLImate {
     }
 
     /**
+     * Get the full path for a dynamic terminal object class
+     *
+     * @param string $name
+     * @return string
+     */
+
+    protected function getFullDynamicTerminalObjectClass( $name )
+    {
+        return 'JoeTannenbaum\\CLImate\\TerminalObject\\Dynamic\\' . ucwords( $name );
+    }
+
+    /**
      * Execute a terminal object using given arguments
      *
      * @param string $name
@@ -88,14 +100,31 @@ class CLImate {
             $results = [ $results ];
         }
 
-        $this->style->persistant();
+        $this->style->persistent();
 
         foreach ( $results as $result )
         {
             $this->out( $result );
         }
 
-        $this->style->resetPersistant();
+        $this->style->resetPersistent();
+    }
+
+    /**
+     * Execute a dynamic terminal object using given arguments
+     *
+     * @param string $name
+     * @param mixed $arguments
+     */
+
+    protected function executeDynamicTerminalObject( $name, $arguments )
+    {
+        $reflect = new \ReflectionClass( $this->getFullDynamicTerminalObjectClass( $name ) );
+        $obj     = $reflect->newInstanceArgs( $arguments );
+
+        $obj->cli( $this );
+
+        return $obj;
     }
 
     /**
@@ -253,6 +282,10 @@ class CLImate {
             if ( class_exists( $this->getFullTerminalObjectClass( $name ) ) )
             {
                 $this->executeTerminalObject( $name, $arguments );
+            }
+            else if ( class_exists( $this->getFullDynamicTerminalObjectClass( $name ) ) )
+            {
+                return $this->executeDynamicTerminalObject( $name, $arguments );
             }
             else
             {

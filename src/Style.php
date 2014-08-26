@@ -187,16 +187,16 @@ class Style {
      * Set the current foreground color, optionally persisting it
      *
      * @param string $color
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function foreground( $color, $persistant = FALSE )
+    public function foreground( $color, $persistent = FALSE )
     {
         $this->current['foreground']['code'] = $this->getForeground( $color );
 
-        if ( $persistant )
+        if ( $persistent )
         {
-            $this->setPersistant('foreground');
+            $this->setPersistent('foreground');
         }
     }
 
@@ -204,16 +204,16 @@ class Style {
      * Set the current background color, optionally persisting it
      *
      * @param string $color
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function background( $color, $persistant = FALSE )
+    public function background( $color, $persistent = FALSE )
     {
         $this->current['background']['code'] = $this->getBackground( $color );
 
-        if ( $persistant )
+        if ( $persistent )
         {
-            $this->setPersistant('background');
+            $this->setPersistent('background');
         }
     }
 
@@ -221,47 +221,47 @@ class Style {
      * Set the current formatting, optionally persisting it
      *
      * @param string $format
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function formatting( $format, $persistant = FALSE )
+    public function formatting( $format, $persistent = FALSE )
     {
         $this->current['formatting']['code'][] = $this->getFormatting( $format );
 
-        if ( $persistant )
+        if ( $persistent )
         {
-            $this->setPersistant('formatting');
+            $this->setPersistent('formatting');
         }
     }
 
     /**
-     * Set the style property to be persistant
+     * Set the style property to be persistent
      *
      * @param string $type
      */
 
-    public function setPersistant( $type )
+    public function setPersistent( $type )
     {
-        $this->current[ $type ]['persistant'] = TRUE;
+        $this->current[ $type ]['persistent'] = TRUE;
     }
 
     /**
      * Set all of the current properties to be consistent
      */
 
-    public function persistant()
+    public function persistent()
     {
         foreach ( $this->current as $type => $props )
         {
-            $this->setPersistant( $type );
+            $this->setPersistent( $type );
         }
     }
 
     /**
-     * Reset all persistant properties
+     * Reset all persistent properties
      */
 
-    public function resetPersistant()
+    public function resetPersistent()
     {
         $this->setDefaultStyles();
     }
@@ -269,46 +269,46 @@ class Style {
     /**
      * Reset current background
      *
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function resetBackground( $persistant = FALSE )
+    public function resetBackground( $persistent = FALSE )
     {
-        $this->resetProperty( 'background', $persistant );
+        $this->resetProperty( 'background', $persistent );
     }
 
     /**
      * Reset current foreground
      *
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function resetForeground( $persistant = FALSE )
+    public function resetForeground( $persistent = FALSE )
     {
-        $this->resetProperty( 'foreground', $persistant );
+        $this->resetProperty( 'foreground', $persistent );
     }
 
     /**
      * Reset current formatting
      *
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    public function resetFormatting( $persistant = FALSE )
+    public function resetFormatting( $persistent = FALSE )
     {
-        $this->resetProperty( 'formatting', $persistant );
+        $this->resetProperty( 'formatting', $persistent );
     }
 
     /**
      * Reset a given property back to its original values
      *
      * @param string $property
-     * @param boolean $persistant
+     * @param boolean $persistent
      */
 
-    protected function resetProperty( $property, $persistant )
+    protected function resetProperty( $property, $persistent )
     {
-        if ( !$this->current[ $property ]['persistant'] || $persistant )
+        if ( !$this->current[ $property ]['persistent'] || $persistent )
         {
             $this->current[ $property ]['code'] = $this->getDefaultCode( $property );
         }
@@ -461,7 +461,7 @@ class Style {
         {
             $this->current[ $option ] = [
                 'code'       => $this->getDefaultCode( $option ),
-                'persistant' => FALSE,
+                'persistent' => FALSE,
             ];
         }
     }
