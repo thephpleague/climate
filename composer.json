@@ -13,6 +13,9 @@
         "php": ">=5.4.0",
         "illuminate/support": "4.2.*"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.1.*"
+    },
     "autoload": {
         "psr-4": {
             "JoeTannenbaum\\CLImate\\": "src/"
