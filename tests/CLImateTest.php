@@ -1,4 +1,4 @@
-would<?php
+<?php
 
 class CLImateTest extends PHPUnit_Framework_TestCase
 {
