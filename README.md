@@ -1,4 +1,4 @@
-# CLImate
+<p align="center"><img src="http://joe.codes/images/climate/CLImate_Blink.gif" width="500" alt="CLImate" /></p>
 
 [![Build Status](https://travis-ci.org/joetannenbaum/climate.svg?branch=master)](https://travis-ci.org/joetannenbaum/climate)
 
@@ -25,6 +25,7 @@ CLImate allows you to easily output colored text, special formats, and more.
 + [Flanking](#flanking)
 + [Breaks](#breaks)
 + [Laravel Users](#laravel-users)
++ [Credits](#credits)
 
 ## Installation
 
@@ -377,7 +378,7 @@ for ( $i = 0; $i <= 100; $i++ )
 ```
 Which will result in:
 
-![Progress Bar](docs/images/progress.gif)
+![Progress Bar](http://joe.codes/images/climate/progress.gif)
 
 You can also shorthand it a bit if you'd like:
 
@@ -548,3 +549,7 @@ CLImate::whisper('Not so important, just a heads up.');
 CLImate::shout('This. This is important.');
 CLImate::info('Nothing fancy here. Just some info.');
 ```
+
+## Credits
+
+Much love to [Damian Makki](https://dribbble.com/damianmakki) for the logo.
