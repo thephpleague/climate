@@ -1,0 +1,17 @@
+<blue>     ( )</blue>
+<blue>      H</blue>
+<blue>      H</blue>
+<blue>     _H_</blue>
+<blue>  .-'-.-'-.</blue>
+<blue> /         \</blue>
+<blue>|           |</blue>
+<blue>|   .-------'._</blue>
+<blue>|  / <white>/  '.' '.</white> <blue>\</blue>
+<blue>|  \ <white>\</white> <black><blink>@</blink>   <blink>@</blink></black> <white>/</white> <blue>/</blue>
+<blue>|   '---------'</blue>
+<blue>|    _______|</blue>
+<blue>|  .'<black>-+-+-+</black><blue>|</blue>
+<blue>|  '.<black>-+-+-+</black><blue>|</blue>
+<blue>|    """""" |</blue>
+<blue>'-.__   __.-'</blue>
+<blue>     """</blue>
