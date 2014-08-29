@@ -2,6 +2,56 @@
 
 namespace JoeTannenbaum\CLImate;
 
+/**
+ * @method mixed black()
+ * @method mixed red()
+ * @method mixed green()
+ * @method mixed yellow()
+ * @method mixed blue()
+ * @method mixed magenta()
+ * @method mixed cyan()
+ * @method mixed lightGray()
+ * @method mixed darkGray()
+ * @method mixed lightRed()
+ * @method mixed lightGreen()
+ * @method mixed lightYellow()
+ * @method mixed lightBlue()
+ * @method mixed lightMagenta()
+ * @method mixed lightCyan()
+ * @method mixed white()
+ *
+ * @method mixed backgroundBlack()
+ * @method mixed backgroundRed()
+ * @method mixed backgroundGreen()
+ * @method mixed backgroundYellow()
+ * @method mixed backgroundBlue()
+ * @method mixed backgroundMagenta()
+ * @method mixed backgroundCyan()
+ * @method mixed backgroundLightGray()
+ * @method mixed backgroundDarkGray()
+ * @method mixed backgroundLightRed()
+ * @method mixed backgroundLightGreen()
+ * @method mixed backgroundLightYellow()
+ * @method mixed backgroundLightBlue()
+ * @method mixed backgroundLightMagenta()
+ * @method mixed backgroundLightCyan()
+ * @method mixed backgroundWhite()
+ *
+ * @method mixed bold()
+ * @method mixed dim()
+ * @method mixed underline()
+ * @method mixed blink()
+ * @method mixed invert()
+ * @method mixed hidden()
+ *
+ * @method mixed table( array $data )
+ * @method mixed json( mixed $var )
+ * @method mixed br()
+ * @method mixed draw( string $art )
+ * @method mixed border( string $char, integer $length )
+ * @method mixed dump( mixed $var )
+ * @method mixed flank( string $output )
+ */
 
 class CLImate {
 
@@ -275,17 +325,11 @@ class CLImate {
     /**
      * Magic method for anything called that doesn't exist
      *
-     * Looking for methods such as:
-     *
-     * - red
-     * - redTable
-     * - backgroundRed
-     * - backgroundRedTable
-     * - blink
-     * - blinkTable
-     *
      * @param string $name
      * @param array $arguments
+     *
+     * List of many of the possible method being called here
+     * documented at the top of this class.
      */
 
 	public function __call( $requested_method, $arguments )
