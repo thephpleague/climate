@@ -601,7 +601,7 @@ $climate->boldDraw('mug');
 
 You can keep using the `addArt` method to add as many directories as you'd like.
 
-And, if you've got some time on your hands, you can style your art using the style tags, as in the case of 'fancy-bender':
+Bonus: If you've got some time on your hands, you can style your art using the style tags, as in the case of 'fancy-bender':
 
 ```asciidoc
 <blue>     ( )</blue>
