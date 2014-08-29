@@ -24,6 +24,7 @@ CLImate allows you to easily output colored text, special formats, and more.
 + [Dump](#dump)
 + [Flanking](#flanking)
 + [Breaks](#breaks)
++ [Draw](#draw)
 + [Laravel Users](#laravel-users)
 + [Credits](#credits)
 
@@ -521,6 +522,110 @@ For ease of use, the `br` method is chainable:
 ```php
 $climate->br()->out('I have moved down a line.');
 ```
+
+## Draw
+
+This would all feel a bit incomplete without ASCII art, obviously. So here we go.
+
+There are a few pre-defined choices:
+
++ passed
++ failed
++ bender
++ fancy-bender
++ 404
+
+To draw one of them:
+
+```php
+$climate->draw('bender');
+```
+
+would result in:
+
+```php
+     ( )
+      H
+      H
+     _H_
+  .-'-.-'-.
+ /         \
+|           |
+|   .-------'._
+|  / /  '.' '. \
+|  \ \ @   @ / /
+|   '---------'
+|    _______|
+|  .'-+-+-+|
+|  '.-+-+-+|
+|    """""" |
+'-.__   __.-'
+     """
+```
+
+And of course, as with all of the methods, you may style it however you want:
+
+```php
+$climate->blue()->draw('bender');
+$climate->backgroundRedDraw('bender');
+$climate->blinkDraw('bender');
+```
+
+But not everyone's art taste is the same. So you can add your own art by just telling CLImate the directory in which it is located.
+
+For example, let's say you this was your art collection:
+
+```
+/home
+  /important
+    /art
+      dog.txt
+      cat.txt
+      rabbit.txt
+      mug.txt
+```
+
+Just let CLImate know where it is via the full path:
+
+```php
+$climate->addArt('/home/important/art');
+```
+
+and now you can use anything in that directory:
+
+```php
+$climate->draw('dog');
+$climate->red()->draw('cat');
+$climate->boldDraw('mug');
+```
+
+You can keep using the `addArt` method to add as many directories as you'd like.
+
+And, if you've got some time on your hands, you can style your art using the style tags, as in the case of 'fancy-bender':
+
+```
+<blue>     ( )</blue>
+<blue>      H</blue>
+<blue>      H</blue>
+<blue>     _H_</blue>
+<blue>  .-'-.-'-.</blue>
+<blue> /         \</blue>
+<blue>|           |</blue>
+<blue>|   .-------'._</blue>
+<blue>|  /</blue> <white>/  '.' '.</white> <blue>\</blue>
+<blue>|  \</blue> <white>\</white> <black><blink>@</blink>   <blink>@</blink></black> <white>/</white> <blue>/</blue>
+<blue>|   '---------'</blue>
+<blue>|    _______|</blue>
+<blue>|  .'</blue><black>-+-+-+</black><blue>|</blue>
+<blue>|  '.</blue><black>-+-+-+</black><blue>|</blue>
+<blue>|    """""" |</blue>
+<blue>'-.__   __.-'</blue>
+<blue>     """</blue>
+```
+
+resulting in:
+
+![Fancy Bender](http://joe.codes/images/climate/fancy-bender.gif)
 
 ## Laravel Users
 
