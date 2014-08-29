@@ -19,7 +19,7 @@ gulp.task("tests", function ()
 
 gulp.task("watch", function()
 {
-	gulp.watch([ "./src/JoeTannenbaum/CLImate/**/*.php", "./tests/**/*"], [ "tests" ]);
+	gulp.watch([ "./src/**/*.php", "./tests/**/*"], [ "tests" ]);
 })
 
 gulp.task("default", [ "tests", "watch" ]);
