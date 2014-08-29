@@ -8,10 +8,18 @@ class CLImate {
     /**
      * An instance of the style class
      *
-     * @var JoeTannenbaum\CLImate\Style
+     * @var JoeTannenbaum\CLImate\Style $style
      */
 
     public $style;
+
+    /**
+     * A collection of JoeTannenbaum\CLImate\TerminalObject\Settings objects
+     *
+     * @var array $setting
+     */
+
+    protected $settings = [];
 
     public function __construct()
     {
@@ -82,6 +90,52 @@ class CLImate {
     }
 
     /**
+     * Get the short name for the requested settings class
+     *
+     * @param string $name
+     * @return string
+     */
+
+    protected function getSettingsClass( $name )
+    {
+        return ucwords( str_replace( 'add_', '', $name ) );
+    }
+
+    /**
+     * Get the full path for a settings class
+     *
+     * @param string $name
+     * @return string
+     */
+
+    protected function getFullSettingsClass( $name )
+    {
+        $name = $this->getSettingsClass( $name );
+
+        return 'JoeTannenbaum\\CLImate\\TerminalObject\\Settings\\' . $name;
+    }
+
+    /**
+     * Add the Settings object into the array
+     *
+     * @param string $name
+     * @param array $arguments
+     */
+
+    protected function addSetting( $name, $arguments )
+    {
+        $name = $this->getSettingsClass( $name );
+
+        if ( !array_key_exists( $name, $this->settings ) )
+        {
+            $settings_class = '\\' . $this->getFullSettingsClass( $name );
+            $this->settings[ $name ] = new $settings_class;
+        }
+
+        $this->settings[ $name ]->add( reset( $arguments ) );
+    }
+
+    /**
      * Execute a terminal object using given arguments
      *
      * @param string $name
@@ -92,6 +146,15 @@ class CLImate {
     {
         $reflect = new \ReflectionClass( $this->getFullTerminalObjectClass( $name ) );
         $obj     = $reflect->newInstanceArgs( $arguments );
+
+        // If the object needs any settings, import them
+        foreach ( $obj->settings() as $setting )
+        {
+            if ( array_key_exists( $setting, $this->settings ) )
+            {
+                $obj->importSetting( $this->settings[ $setting ] );
+            }
+        }
 
         $results = $obj->result();
 
@@ -286,6 +349,10 @@ class CLImate {
             else if ( class_exists( $this->getFullDynamicTerminalObjectClass( $name ) ) )
             {
                 return $this->executeDynamicTerminalObject( $name, $arguments );
+            }
+            else if ( class_exists( $this->getFullSettingsClass( $name ) ) )
+            {
+                $this->addSetting( $name, $arguments );
             }
             else
             {
