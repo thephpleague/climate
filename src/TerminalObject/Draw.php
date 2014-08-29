@@ -73,7 +73,7 @@ class Draw extends BaseTerminalObject {
 	{
 		// Add any additional directories to the top of the array
 		// so that the user can override art
-		array_unshift( $this->art_dirs, $dir );
+		array_unshift( $this->art_dirs, rtrim( $dir, '/' ) );
 
 		// Keep the array clean
 		$this->art_dirs = array_unique( $this->art_dirs );
