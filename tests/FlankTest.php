@@ -1,13 +1,9 @@
 <?php
 
-class FlankTest extends PHPUnit_Framework_TestCase
-{
-    public $cli;
+require_once 'TestBase.php';
 
-    public function setUp()
-    {
-        $this->cli = new JoeTannenbaum\CLImate\CLImate;
-    }
+class FlankTest extends TestBase
+{
 
     /** @test */
 

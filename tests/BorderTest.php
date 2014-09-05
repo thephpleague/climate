@@ -1,14 +1,9 @@
 <?php
 
-class BorderTest extends PHPUnit_Framework_TestCase
+require_once 'TestBase.php';
+
+class BorderTest extends TestBase
 {
-    public $cli;
-
-    public function setUp()
-    {
-        $this->cli = new JoeTannenbaum\CLImate\CLImate;
-    }
-
     /** @test */
 
     public function it_can_output_a_basic_border()

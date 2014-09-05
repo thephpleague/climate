@@ -47,7 +47,7 @@ The `out` method simply receives a string that will output on a new line:
 ```php
 require_once('vendor/autoload.php');
 
-$climate = new JoeTannenbaum\CLImate\CLImate;
+$climate = new CLImate\CLImate;
 
 $climate->out('This prints to the terminal.');
 $climate->out('This prints to the terminal.')->out('This will be on a new line');
@@ -634,14 +634,14 @@ Use Laravel? Treat time. Add these lines to your `app/config/app.php`:
 ```php
 'providers' => [
   '...',
-  'JoeTannenbaum\CLImate\CLImateServiceProvider'
+  'CLImate\CLImateServiceProvider'
 ];
 ```
 
 ```php
 'aliases' => [
   '...',
-  'CLImate' => 'JoeTannenbaum\CLImate\Facade\CLImate'
+  'CLImate' => 'CLImate\Facade\CLImate'
 ];
 ```
 

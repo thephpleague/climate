@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate\TerminalObject;
+namespace CLImate\TerminalObject;
 
 class Draw extends BaseTerminalObject {
 

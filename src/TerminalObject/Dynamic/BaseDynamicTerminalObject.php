@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate\TerminalObject\Dynamic;
+namespace CLImate\TerminalObject\Dynamic;
 
 abstract class BaseDynamicTerminalObject {
 
@@ -11,7 +11,7 @@ abstract class BaseDynamicTerminalObject {
 
     }
 
-    public function cli( \JoeTannenbaum\CLImate\CLImate $cli )
+    public function cli( \CLImate\CLImate $cli )
     {
     	$this->cli = $cli;
 

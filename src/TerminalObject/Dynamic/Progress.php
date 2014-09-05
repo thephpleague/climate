@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate\TerminalObject\Dynamic;
+namespace CLImate\TerminalObject\Dynamic;
 
 class Progress extends BaseDynamicTerminalObject {
 

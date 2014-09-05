@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate\TerminalObject;
+namespace CLImate\TerminalObject;
 
 class Flank extends BaseTerminalObject {
 
@@ -47,7 +47,7 @@ class Flank extends BaseTerminalObject {
 	 * Set the character(s) to repeat on either side
 	 *
 	 * @param string $char
-	 * @return JoeTannenbaum\CLImate\TerminalObject\Flank
+	 * @return CLImate\TerminalObject\Flank
 	 */
 
 	public function char( $char )
@@ -61,7 +61,7 @@ class Flank extends BaseTerminalObject {
 	 * Set the repeat of the flank character(s)
 	 *
 	 * @param integer $repeat
-	 * @return JoeTannenbaum\CLImate\TerminalObject\Flank
+	 * @return CLImate\TerminalObject\Flank
 	 */
 
 	public function repeat( $repeat )

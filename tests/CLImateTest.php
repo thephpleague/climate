@@ -1,13 +1,9 @@
 <?php
 
-class CLImateTest extends PHPUnit_Framework_TestCase
-{
-    public $cli;
+require_once 'TestBase.php';
 
-    public function setUp()
-    {
-        $this->cli = new JoeTannenbaum\CLImate\CLImate;
-    }
+class CLImateTest extends TestBase
+{
 
     /** @test */
 

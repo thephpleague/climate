@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate;
+namespace CLImate;
 
 class Style {
 

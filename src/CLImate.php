@@ -1,6 +1,6 @@
 <?php
 
-namespace JoeTannenbaum\CLImate;
+namespace CLImate;
 
 /**
  * @method mixed black()
@@ -58,13 +58,13 @@ class CLImate {
     /**
      * An instance of the style class
      *
-     * @var JoeTannenbaum\CLImate\Style $style
+     * @var CLImate\Style $style
      */
 
     public $style;
 
     /**
-     * A collection of JoeTannenbaum\CLImate\TerminalObject\Settings objects
+     * A collection of CLImate\TerminalObject\Settings objects
      *
      * @var array $setting
      */
@@ -124,7 +124,7 @@ class CLImate {
 
     protected function getFullTerminalObjectClass( $name )
     {
-        return 'JoeTannenbaum\\CLImate\\TerminalObject\\' . ucwords( $name );
+        return '\\CLImate\\TerminalObject\\' . ucwords( $name );
     }
 
     /**
@@ -136,7 +136,7 @@ class CLImate {
 
     protected function getFullDynamicTerminalObjectClass( $name )
     {
-        return 'JoeTannenbaum\\CLImate\\TerminalObject\\Dynamic\\' . ucwords( $name );
+        return '\\CLImate\\TerminalObject\\Dynamic\\' . ucwords( $name );
     }
 
     /**
@@ -162,7 +162,7 @@ class CLImate {
     {
         $name = $this->getSettingsClass( $name );
 
-        return 'JoeTannenbaum\\CLImate\\TerminalObject\\Settings\\' . $name;
+        return '\\CLImate\\TerminalObject\\Settings\\' . $name;
     }
 
     /**
@@ -178,7 +178,7 @@ class CLImate {
 
         if ( !array_key_exists( $name, $this->settings ) )
         {
-            $settings_class = '\\' . $this->getFullSettingsClass( $name );
+            $settings_class = $this->getFullSettingsClass( $name );
             $this->settings[ $name ] = new $settings_class;
         }
 

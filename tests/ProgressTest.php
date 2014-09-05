@@ -1,13 +1,9 @@
 <?php
 
-class ProgressTest extends PHPUnit_Framework_TestCase
-{
-    public $cli;
+require_once 'TestBase.php';
 
-    public function setUp()
-    {
-        $this->cli = new JoeTannenbaum\CLImate\CLImate;
-    }
+class ProgressTest extends TestBase
+{
 
     private function repeat( $length )
     {

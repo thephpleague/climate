@@ -1,8 +1,8 @@
 <?php
 
-namespace JoeTannenbaum\CLImate\TerminalObject;
+namespace CLImate\TerminalObject;
 
-use JoeTannenbaum\CLImate\Style;
+use CLImate\Style;
 
 class Table extends BaseTerminalObject {
 
