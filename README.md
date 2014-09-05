@@ -1,6 +1,7 @@
 <p align="center"><img src="http://joe.codes/images/climate/CLImate_Blink.gif" width="500" alt="CLImate" /></p>
 
 [![Build Status](https://travis-ci.org/joetannenbaum/climate.svg?branch=master)](https://travis-ci.org/joetannenbaum/climate)
+[![Coverage Status](https://img.shields.io/coveralls/joetannenbaum/climate.svg)](https://coveralls.io/r/joetannenbaum/climate?branch=master)
 
 Running PHP from the command line? CLImate is your new best bud.
 
