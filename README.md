@@ -36,7 +36,7 @@ Using [composer](https://packagist.org/packages/joetannenbaum/climate):
 ```
 {
     "require": {
-        "joetannenbaum/climate": "0.1.*"
+        "joetannenbaum/climate": "0.2.*"
     }
 }
 ```
@@ -630,31 +630,7 @@ resulting in:
 
 ## Laravel Users
 
-Use Laravel? Treat time. Add these lines to your `app/config/app.php`:
-
-```php
-'providers' => [
-  '...',
-  'CLImate\CLImateServiceProvider'
-];
-```
-
-```php
-'aliases' => [
-  '...',
-  'CLImate' => 'CLImate\Facade\CLImate'
-];
-```
-
-You can now any of the above methods via Laravel's facades:
-
-```php
-CLImate::error('Ruh roh.');
-CLImate::comment('Just so you know.');
-CLImate::whisper('Not so important, just a heads up.');
-CLImate::shout('This. This is important.');
-CLImate::info('Nothing fancy here. Just some info.');
-```
+Grab [CLImate for Laravel](https://github.com/joetannenbaum/climate-laravel) to sprinkle a little sugar on top.
 
 ## Credits
 
