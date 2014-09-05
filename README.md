@@ -26,7 +26,6 @@ CLImate allows you to easily output colored text, special formats, and more.
 + [Flanking](#flanking)
 + [Breaks](#breaks)
 + [Draw](#draw)
-+ [Laravel Users](#laravel-users)
 + [Credits](#credits)
 
 ## Installation
@@ -627,10 +626,6 @@ Bonus: If you've got some time on your hands, you can style your art using the s
 resulting in:
 
 ![Fancy Bender](http://joe.codes/images/climate/fancy-bender.gif)
-
-## Laravel Users
-
-Grab [CLImate for Laravel](https://github.com/joetannenbaum/climate-laravel) to sprinkle a little sugar on top.
 
 ## Credits
 
