@@ -2,7 +2,7 @@
 
 namespace CLImate\TerminalObject;
 
-abstract class BaseTerminalObject implements TerminalObject
+abstract class BaseTerminalObject implements TerminalObjectInterface
 {
     protected $settings = [];
 

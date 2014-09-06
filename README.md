@@ -200,14 +200,14 @@ $climate->info('Nothing fancy here. Just some info.');
 You can add your own command, just make sure that the color is defined already.
 
 ```php
-$climate->style->addCommandColor('rage', 'cyan');
+$climate->style->addCommand('rage', 'cyan');
 $climate->rage('SOMETHING IS MESSED UP.');
 ```
 
 You can also override any command;
 
 ```php
-$climate->style->addCommandColor('error', 'light_blue');
+$climate->style->addCommand('error', 'light_blue');
 $climate->error('Whelp. That did not turn out so well.');
 ```
 

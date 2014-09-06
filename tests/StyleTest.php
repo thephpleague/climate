@@ -292,7 +292,7 @@ class StyleTest extends TestBase
     {
         ob_start();
 
-        $this->cli->style->addCommandColor('holler', 'light_blue');
+        $this->cli->style->addCommand('holler', 'light_blue');
 
         $this->cli->holler('This would go out to the console.');
 
@@ -301,17 +301,6 @@ class StyleTest extends TestBase
         ob_end_clean();
 
         $this->assertSame("\e[94mThis would go out to the console.\e[0m\n", $result);
-    }
-
-    /**
-     * @test
-     * @expectedException        Exception
-     * @expectedExceptionMessage The color 'not_a_color' for command 'holler' is not defined.
-     */
-
-    public function it_errors_when_command_color_is_not_defined()
-    {
-        $this->cli->style->addCommandColor('holler', 'not_a_color');
     }
 
 }

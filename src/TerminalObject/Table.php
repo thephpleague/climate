@@ -2,7 +2,7 @@
 
 namespace CLImate\TerminalObject;
 
-use CLImate\Style;
+use CLImate\Decorator\Style;
 
 class Table extends BaseTerminalObject
 {

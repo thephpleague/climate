@@ -2,7 +2,7 @@
 
 namespace CLImate\TerminalObject;
 
-interface TerminalObject
+interface TerminalObjectInterface
 {
     public function result();
 

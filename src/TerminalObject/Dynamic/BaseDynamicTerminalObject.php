@@ -15,7 +15,7 @@ abstract class BaseDynamicTerminalObject
     {
         $this->cli = $cli;
 
-        $this->cli->style->persistent();
+        $this->cli->style->persist();
     }
 
 }

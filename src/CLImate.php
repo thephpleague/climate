@@ -44,6 +44,12 @@ namespace CLImate;
  * @method mixed invert()
  * @method mixed hidden()
  *
+ * @method mixed info()
+ * @method mixed comment()
+ * @method mixed whisper()
+ * @method mixed shout()
+ * @method mixed error()
+ *
  * @method mixed table( array $data )
  * @method mixed json( mixed $var )
  * @method mixed br()
@@ -73,7 +79,7 @@ class CLImate
 
     public function __construct()
     {
-        $this->style = new Style();
+        $this->style = new Decorator\Style;
     }
 
     /**
@@ -209,13 +215,13 @@ class CLImate
             $results = [$results];
         }
 
-        $this->style->persistent();
+        $this->style->persist();
 
         foreach ($results as $result) {
             $this->out($result);
         }
 
-        $this->style->resetPersistent();
+        $this->style->reset(true);
     }
 
     /**
@@ -244,22 +250,7 @@ class CLImate
 
     protected function routeMethod($method)
     {
-        // Manual check, if it starts with the background string, it's a background method
-        if (substr($method, 0, strlen('background_')) == 'background_') {
-            $this->style->background(str_replace('background_', '', $method));
-
-            return true;
-        } elseif ($this->style->getForeground($method)) {
-            $this->style->foreground($method);
-
-            return true;
-        } elseif ($this->style->getFormatting($method)) {
-            $this->style->formatting($method);
-
-            return true;
-        }
-
-        return false;
+        return $this->style->set($method);
     }
 
     /**
@@ -327,7 +318,7 @@ class CLImate
         $output = reset($arguments);
 
         // Get all of the possible style attributes
-        $method_search = array_keys($this->style->getMergedAttributes());
+        $method_search = array_keys($this->style->all());
 
         // A flag to see if we are still finding valid methods
         // We need this flag because of terminal objects
