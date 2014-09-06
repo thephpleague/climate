@@ -7,10 +7,10 @@ gulp.task("tests", function ()
 {
 	gulp.src("./tests/CLImateTest.php")
     .pipe( run("clear") )
-		.pipe( phpunit("phpunit"), {
-			debug: true,
+		.pipe( phpunit("phpunit", {
+			debug: false,
 			notify: true
-		})
+		}))
     .on("error", function() {
     	run("notify-send 'Tests Failed' 'Got some problems dude.'").exec();
     })
