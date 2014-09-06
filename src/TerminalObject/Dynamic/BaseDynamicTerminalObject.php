@@ -2,20 +2,20 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
-abstract class BaseDynamicTerminalObject {
+abstract class BaseDynamicTerminalObject
+{
+    protected $cli;
 
-	protected $cli;
-
-	public function __construct()
-	{
+    public function __construct()
+    {
 
     }
 
-    public function cli( \CLImate\CLImate $cli )
+    public function cli(\CLImate\CLImate $cli)
     {
-    	$this->cli = $cli;
+        $this->cli = $cli;
 
-    	$this->cli->style->persistent();
+        $this->cli->style->persistent();
     }
 
 }

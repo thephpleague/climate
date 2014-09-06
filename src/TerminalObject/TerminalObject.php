@@ -2,12 +2,12 @@
 
 namespace CLImate\TerminalObject;
 
-interface TerminalObject {
+interface TerminalObject
+{
+    public function result();
 
-	public function result();
+    public function settings();
 
-	public function settings();
-
-	public function importSetting( $setting );
+    public function importSetting( $setting );
 
 }

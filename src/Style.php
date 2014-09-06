@@ -2,8 +2,8 @@
 
 namespace CLImate;
 
-class Style {
-
+class Style
+{
     /**
      * An array of the current styles applied
      *
@@ -12,13 +12,13 @@ class Style {
 
     protected $current = [];
 
-	/**
+    /**
 	 * The available colors
 	 *
 	 * @var array
 	 */
 
-	protected $colors = [
+    protected $colors = [
         'default'       => 39,
         'black'         => 30,
         'red'           => 31,
@@ -36,7 +36,7 @@ class Style {
         'light_magenta' => 95,
         'light_cyan'    => 96,
         'white'         => 97,
-	];
+    ];
 
     /**
      * The available formatting options
@@ -93,11 +93,11 @@ class Style {
     /**
      * Get the string that begins the style
      *
-     * @param string $color
+     * @param  string $color
      * @return string
      */
 
-    public function start( $style = NULL )
+    public function start($style = null)
     {
         $style = $style ?: $this->currentStyleCode();
 
@@ -134,18 +134,16 @@ class Style {
 
     public function tagReplace()
     {
-        $start_code = $this->start( $this->currentStyleCode() );
+        $start_code = $this->start($this->currentStyleCode());
 
-        return array_map( function ( $item ) use ( $start_code )
-        {
+        return array_map(function ($item) use ($start_code) {
             // We have to re-start the parent style after each tag is replaced
-            if ( $item == $this->end() )
-            {
+            if ($item == $this->end()) {
                 return $item . $start_code;
             }
 
             return $item;
-        }, $this->tag_replace );
+        }, $this->tag_replace);
     }
 
     /**
@@ -155,9 +153,9 @@ class Style {
      * @param string $code
      */
 
-    public function addColor( $color, $code )
+    public function addColor($color, $code)
     {
-    	$this->colors[ $color ] = $code;
+        $this->colors[$color] = $code;
 
         $this->buildTags();
     }
@@ -169,16 +167,13 @@ class Style {
      * @param string $color
      */
 
-    public function addCommandColor( $command, $color )
+    public function addCommandColor($command, $color)
     {
-        if ( array_key_exists( $color, $this->colors ) )
-        {
-            $this->command_colors[ $command ] = $color;
+        if (array_key_exists($color, $this->colors)) {
+            $this->command_colors[$command] = $color;
 
             $this->buildTags();
-        }
-        else
-        {
+        } else {
             throw new \Exception("The color '{$color}' for command '{$command}' is not defined.");
         }
     }
@@ -186,16 +181,15 @@ class Style {
     /**
      * Set the current foreground color, optionally persisting it
      *
-     * @param string $color
+     * @param string  $color
      * @param boolean $persistent
      */
 
-    public function foreground( $color, $persistent = FALSE )
+    public function foreground($color, $persistent = false)
     {
-        $this->current['foreground']['code'] = $this->getForeground( $color );
+        $this->current['foreground']['code'] = $this->getForeground($color);
 
-        if ( $persistent )
-        {
+        if ($persistent) {
             $this->setPersistent('foreground');
         }
     }
@@ -203,16 +197,15 @@ class Style {
     /**
      * Set the current background color, optionally persisting it
      *
-     * @param string $color
+     * @param string  $color
      * @param boolean $persistent
      */
 
-    public function background( $color, $persistent = FALSE )
+    public function background($color, $persistent = false)
     {
-        $this->current['background']['code'] = $this->getBackground( $color );
+        $this->current['background']['code'] = $this->getBackground($color);
 
-        if ( $persistent )
-        {
+        if ($persistent) {
             $this->setPersistent('background');
         }
     }
@@ -220,16 +213,15 @@ class Style {
     /**
      * Set the current formatting, optionally persisting it
      *
-     * @param string $format
+     * @param string  $format
      * @param boolean $persistent
      */
 
-    public function formatting( $format, $persistent = FALSE )
+    public function formatting($format, $persistent = false)
     {
-        $this->current['formatting']['code'][] = $this->getFormatting( $format );
+        $this->current['formatting']['code'][] = $this->getFormatting($format);
 
-        if ( $persistent )
-        {
+        if ($persistent) {
             $this->setPersistent('formatting');
         }
     }
@@ -240,9 +232,9 @@ class Style {
      * @param string $type
      */
 
-    public function setPersistent( $type )
+    public function setPersistent($type)
     {
-        $this->current[ $type ]['persistent'] = TRUE;
+        $this->current[$type]['persistent'] = true;
     }
 
     /**
@@ -251,9 +243,8 @@ class Style {
 
     public function persistent()
     {
-        foreach ( $this->current as $type => $props )
-        {
-            $this->setPersistent( $type );
+        foreach ($this->current as $type => $props) {
+            $this->setPersistent($type);
         }
     }
 
@@ -272,9 +263,9 @@ class Style {
      * @param boolean $persistent
      */
 
-    public function resetBackground( $persistent = FALSE )
+    public function resetBackground($persistent = false)
     {
-        $this->resetProperty( 'background', $persistent );
+        $this->resetProperty('background', $persistent);
     }
 
     /**
@@ -283,9 +274,9 @@ class Style {
      * @param boolean $persistent
      */
 
-    public function resetForeground( $persistent = FALSE )
+    public function resetForeground($persistent = false)
     {
-        $this->resetProperty( 'foreground', $persistent );
+        $this->resetProperty('foreground', $persistent);
     }
 
     /**
@@ -294,116 +285,107 @@ class Style {
      * @param boolean $persistent
      */
 
-    public function resetFormatting( $persistent = FALSE )
+    public function resetFormatting($persistent = false)
     {
-        $this->resetProperty( 'formatting', $persistent );
+        $this->resetProperty('formatting', $persistent);
     }
 
     /**
      * Reset a given property back to its original values
      *
-     * @param string $property
+     * @param string  $property
      * @param boolean $persistent
      */
 
-    protected function resetProperty( $property, $persistent )
+    protected function resetProperty($property, $persistent)
     {
-        if ( !$this->current[ $property ]['persistent'] || $persistent )
-        {
-            $this->current[ $property ]['code'] = $this->getDefaultCode( $property );
+        if (!$this->current[$property]['persistent'] || $persistent) {
+            $this->current[$property]['code'] = $this->getDefaultCode($property);
         }
     }
 
     /**
      * Get the code for the foreground color
      *
-     * @param string $color
+     * @param  string $color
      * @return string
      */
 
-    public function getForeground( $color )
+    public function getForeground($color)
     {
         // If we already have the code, just return that
-        if ( is_numeric( $color ) )
-        {
+        if (is_numeric($color)) {
             return $color;
         }
 
         // If it's a commmand color, do this function recursively with the color
-        if ( $this->getCommandColor( $color ) )
-        {
-            return $this->getForeground( $this->getCommandColor( $color ) );
+        if ($this->getCommandColor($color)) {
+            return $this->getForeground($this->getCommandColor($color));
         }
 
-        if ( array_key_exists( $color, $this->colors ) )
-        {
-            return $this->colors[ $color ];
+        if (array_key_exists($color, $this->colors)) {
+            return $this->colors[$color];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
      * Get the code for the background color
      *
-     * @param string $color
+     * @param  string $color
      * @return string
      */
 
-    public function getBackground( $color )
+    public function getBackground($color)
     {
         // If we already have the code, just return that
-        if ( is_numeric( $color ) )
-        {
+        if (is_numeric($color)) {
             return $color;
         }
 
-        if ( array_key_exists( $color, $this->colors ) )
-        {
-            return $this->colors[ $color ] + 10;
+        if (array_key_exists($color, $this->colors)) {
+            return $this->colors[$color] + 10;
         }
 
-        return NULL;
+        return null;
     }
 
     /**
      * Get the code for the format
      *
-     * @param string $format
+     * @param  string $format
      * @return string
      */
 
-    public function getFormatting( $format )
+    public function getFormatting($format)
     {
         // If we already have the code, just return that
-        if ( is_numeric( $format ) )
-        {
+        if (is_numeric($format)) {
             return $format;
         }
 
-        if ( array_key_exists( $format, $this->formatting ) )
-        {
-            return $this->formatting[ $format ];
+        if (array_key_exists($format, $this->formatting)) {
+            return $this->formatting[$format];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
      * Get the color that corresponds to the command
      *
-     * @param string $command
+     * @param  string $command
      * @return string
      */
 
-    public function getCommandColor( $command )
+    public function getCommandColor($command)
     {
-        if ( array_key_exists( $command, $this->command_colors ) )
-        {
-            return $this->command_colors[ $command ];
+        if (array_key_exists($command, $this->command_colors)) {
+            return $this->command_colors[$command];
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -412,9 +394,8 @@ class Style {
 
     public function reset()
     {
-        foreach ( $this->current as $type => $prop )
-        {
-            $method = 'reset' . ucwords( $type );
+        foreach ($this->current as $type => $prop) {
+            $method = 'reset' . ucwords($type);
             $this->$method();
         }
     }
@@ -429,19 +410,16 @@ class Style {
     {
         $styles = $this->colors;
 
-        foreach ( $this->command_colors as $command => $color )
-        {
-            $styles[ $command ] = $this->getForeground( $color );
+        foreach ($this->command_colors as $command => $color) {
+            $styles[$command] = $this->getForeground($color);
         }
 
-        foreach ( $this->colors as $color => $code )
-        {
-            $styles[ 'background_' . $color ] = $code + 10;
+        foreach ($this->colors as $color => $code) {
+            $styles['background_' . $color] = $code + 10;
         }
 
-        foreach ( $this->formatting as $format => $code )
-        {
-            $styles[ $format ] = $code;
+        foreach ($this->formatting as $format => $code) {
+            $styles[$format] = $code;
         }
 
         return $styles;
@@ -455,13 +433,12 @@ class Style {
 
     protected function setDefaultStyles()
     {
-        $current_options = [ 'foreground', 'background', 'formatting' ];
+        $current_options = ['foreground', 'background', 'formatting'];
 
-        foreach ( $current_options as $option )
-        {
+        foreach ($current_options as $option) {
             $this->current[ $option ] = [
                 'code'       => $this->getDefaultCode( $option ),
-                'persistent' => FALSE,
+                'persistent' => false,
             ];
         }
     }
@@ -469,20 +446,19 @@ class Style {
     /**
      * Get the default code for the given property
      *
-     * @param string $property
+     * @param  string $property
      * @return mixed
      */
 
-    protected function getDefaultCode( $property )
+    protected function getDefaultCode($property)
     {
-        $default_code_method = 'default' . ucwords( $property ) . 'Code';
+        $default_code_method = 'default' . ucwords($property) . 'Code';
 
-        if ( method_exists( $this, $default_code_method ) )
-        {
+        if (method_exists($this, $default_code_method)) {
             return $this->$default_code_method();
         }
 
-        return NULL;
+        return null;
     }
 
     /**
@@ -505,17 +481,16 @@ class Style {
         $tags   = $this->getMergedAttributes();
         $search = [];
 
-        foreach ( $tags as $tag => $color )
-        {
-            $search["<{$tag}>"]  = $this->start( $color );
+        foreach ($tags as $tag => $color) {
+            $search["<{$tag}>"]  = $this->start($color);
             $search["</{$tag}>"] = $this->end();
 
             // Also replace JSONified end tags
             $search["<\\/{$tag}>"] = $this->end();
         }
 
-        $this->tag_search  = array_keys( $search );
-        $this->tag_replace = array_values( $search );
+        $this->tag_search  = array_keys($search);
+        $this->tag_replace = array_values($search);
     }
 
     /**
@@ -533,9 +508,9 @@ class Style {
                         $this->current['background']['code'],
                     ];
 
-        $style     = array_filter( array_merge( $formats, $colors ) );
+        $style     = array_filter(array_merge($formats, $colors));
 
-        return implode( ';', $style );
+        return implode(';', $style);
     }
 
 }

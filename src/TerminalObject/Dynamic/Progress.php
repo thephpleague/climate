@@ -2,61 +2,58 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
-class Progress extends BaseDynamicTerminalObject {
+class Progress extends BaseDynamicTerminalObject
+{
+    protected $total           = 0;
 
-	protected $total           = 0;
+    protected $full_bar_length = 100;
 
-	protected $full_bar_length = 100;
+    public function __construct($total = null)
+    {
+        if ($total) {
+            $this->total($total);
+        }
+    }
 
-	public function __construct( $total = NULL )
-	{
-		if ( $total )
-		{
-			$this->total( $total );
-		}
-	}
+    public function result()
+    {
+    }
 
-	public function result()
-	{
-	}
+    public function output()
+    {
+        return false;
+    }
 
-	public function output()
-	{
-		return FALSE;
-	}
+    public function total($total)
+    {
+        echo "\n";
 
-	public function total( $total )
-	{
-		echo "\n";
+        $this->total = $total;
 
-		$this->total = $total;
+        return $this;
+    }
 
-		return $this;
-	}
+    public function current($current)
+    {
+        if ($this->total == 0) {
+            // Avoid dividing by 0
+            throw new \Exception('The progress total must be greater than zero.');
+        }
 
-	public function current( $current )
-	{
-		if ( $this->total == 0 )
-		{
-			// Avoid dividing by 0
-			throw new \Exception('The progress total must be greater than zero.');
-		}
+        if ($current > $this->total) {
+            throw new \Exception('The current is greater than the total.');
+        }
 
-		if ( $current > $this->total )
-		{
-			throw new \Exception('The current is greater than the total.');
-		}
+        $percentage = $current / $this->total;
 
-		$percentage = $current / $this->total;
+        $bar_length = round($this->full_bar_length * $percentage);
 
-		$bar_length = round( $this->full_bar_length * $percentage );
+        $percentage *= 100;
 
-		$percentage *= 100;
+        $percentage = round($percentage);
 
-		$percentage = round( $percentage );
+        $bar_str    = str_repeat('=', $bar_length);
 
-		$bar_str    = str_repeat('=', $bar_length);
-
-		$this->cli->out( "\e[1A\r\e[K{$bar_str}> {$percentage}%" );
-	}
+        $this->cli->out("\e[1A\r\e[K{$bar_str}> {$percentage}%");
+    }
 }

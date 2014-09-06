@@ -2,30 +2,29 @@
 
 namespace CLImate\TerminalObject;
 
-abstract class BaseTerminalObject implements TerminalObject {
+abstract class BaseTerminalObject implements TerminalObject
+{
+    protected $settings = [];
 
-	protected $settings = [];
-
-	public function __construct()
-	{
+    public function __construct()
+    {
 
     }
 
     public function settings()
     {
-    	return [];
+        return [];
     }
 
-    public function importSetting( $setting )
+    public function importSetting($setting)
     {
-		$short_name = basename( str_replace( '\\', '/', get_class( $setting ) ) );
+        $short_name = basename(str_replace('\\', '/', get_class($setting)));
 
-		$method = 'importSetting' . $short_name;
+        $method = 'importSetting' . $short_name;
 
-		if ( method_exists( $this, $method ) )
-		{
-			$this->$method( $setting );
-		}
+        if (method_exists($this, $method)) {
+            $this->$method($setting);
+        }
 
     }
 

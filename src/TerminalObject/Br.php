@@ -2,16 +2,16 @@
 
 namespace CLImate\TerminalObject;
 
-class Br extends BaseTerminalObject {
-
-	/**
+class Br extends BaseTerminalObject
+{
+    /**
 	 * Return an empty string
 	 *
 	 * @return string
 	 */
 
-	public function result()
-	{
-		return '';
-	}
+    public function result()
+    {
+        return '';
+    }
 }

@@ -4,15 +4,15 @@ namespace CLImate\TerminalObject;
 
 use CLImate\Style;
 
-class Table extends BaseTerminalObject {
-
+class Table extends BaseTerminalObject
+{
     /**
      * The data for the table, an array of (arrays|objects)
      *
      * @var array $data
      */
 
-	protected $data           = [];
+    protected $data           = [];
 
     /**
      * An array of the widths of each column in the table
@@ -20,7 +20,7 @@ class Table extends BaseTerminalObject {
      * @var array $column_widths
      */
 
-	protected $column_widths  = [];
+    protected $column_widths  = [];
 
     /**
      * The width of the table
@@ -28,7 +28,7 @@ class Table extends BaseTerminalObject {
      * @var integer $table_width
      */
 
-	protected $table_width    = 0;
+    protected $table_width    = 0;
 
     /**
      * Tags the should not be ultimately considered
@@ -37,7 +37,7 @@ class Table extends BaseTerminalObject {
      * @var array $ignore_tags
      */
 
-	protected $ignore_tags    = [];
+    protected $ignore_tags    = [];
 
     /**
      * The divider between table cells
@@ -45,7 +45,7 @@ class Table extends BaseTerminalObject {
      * @var string $column_divider
      */
 
-	protected $column_divider = ' | ';
+    protected $column_divider = ' | ';
 
     /**
      * The border to divide each row of the table
@@ -63,17 +63,17 @@ class Table extends BaseTerminalObject {
 
     protected $rows           = [];
 
-	public function __construct( Array $data )
-	{
-		$this->data          = $data;
-		$this->ignore_tags   = ( new Style )->tag_search;
+    public function __construct(array $data)
+    {
+        $this->data          = $data;
+        $this->ignore_tags   = (new Style())->tag_search;
 
         $this->column_widths = $this->getColumnWidths();
         $this->table_width   = $this->getWidth();
         $this->border        = $this->getBorder();
 
-		$this->buildHeaderRow();
-	}
+        $this->buildHeaderRow();
+    }
 
     /**
      * Return the built rows
@@ -83,9 +83,8 @@ class Table extends BaseTerminalObject {
 
     public function result()
     {
-        foreach ( $this->data as $key => $columns )
-        {
-            $this->rows[] = $this->buildRow( $columns );
+        foreach ($this->data as $key => $columns) {
+            $this->rows[] = $this->buildRow($columns);
             $this->rows[] = $this->border;
         }
 
@@ -98,13 +97,13 @@ class Table extends BaseTerminalObject {
      * @return integer
      */
 
-	protected function getWidth()
-	{
-		$first_row = reset( $this->data );
-		$first_row = $this->buildRow( $first_row );
+    protected function getWidth()
+    {
+        $first_row = reset($this->data);
+        $first_row = $this->buildRow($first_row);
 
-		return $this->lengthWithoutTags( $first_row );
-	}
+        return $this->lengthWithoutTags($first_row);
+    }
 
     /**
      * Get the border for each row based on the table width
@@ -112,7 +111,7 @@ class Table extends BaseTerminalObject {
 
     protected function getBorder()
     {
-        return ( new Border() )->length( $this->table_width )->result();
+        return (new Border())->length($this->table_width)->result();
     }
 
     /**
@@ -122,16 +121,13 @@ class Table extends BaseTerminalObject {
 
     protected function buildHeaderRow()
     {
-    	$header_row = $this->getHeaderRow();
+        $header_row = $this->getHeaderRow();
 
-    	if ( $header_row )
-    	{
-	        $this->rows[] = $this->border;
-	        $this->rows[] = $this->buildRow( $header_row );
-            $this->rows[] = ( new Border )->char('=')->length( $this->table_width )->result();
-        }
-        else
-        {
+        if ($header_row) {
+            $this->rows[] = $this->border;
+            $this->rows[] = $this->buildRow($header_row);
+            $this->rows[] = (new Border())->char('=')->length($this->table_width)->result();
+        } else {
             $this->rows[] = $this->border;
         }
     }
@@ -139,122 +135,116 @@ class Table extends BaseTerminalObject {
     /**
      * Get table row
      *
-     * @param mixed $columns
-     * @param array $widths
+     * @param  mixed  $columns
+     * @param  array  $widths
      * @return string
      */
 
-    protected function buildRow( $columns )
+    protected function buildRow($columns)
     {
         $row = [];
 
-        foreach ( $columns as $key => $column )
-        {
-			$row[] = $this->buildCell( $key, $column );
+        foreach ($columns as $key => $column) {
+            $row[] = $this->buildCell($key, $column);
         }
 
-        $row = implode( $this->column_divider, $row );
+        $row = implode($this->column_divider, $row);
 
-        return trim( $this->column_divider . $row . $this->column_divider );
+        return trim($this->column_divider . $row . $this->column_divider);
     }
 
     /**
      * Build the string for this particular table cell
      *
-     * @param mixed $key
-     * @param string $column
+     * @param  mixed  $key
+     * @param  string $column
      * @return string
      */
 
-    protected function buildCell( $key, $column )
+    protected function buildCell($key, $column)
     {
-        $padding = $this->column_widths[ $key ] - $this->lengthWithoutTags( $column );
+        $padding = $this->column_widths[$key] - $this->lengthWithoutTags($column);
 
-        return  $column . str_repeat( ' ', $padding );
+        return  $column . str_repeat(' ', $padding);
     }
 
     /**
      * Get the header row for the table if it's an associative array or object
      *
-     * @param array $rows
+     * @param  array $rows
      * @return mixed
      */
 
     protected function getHeaderRow()
     {
-        $first_item = reset( $this->data );
+        $first_item = reset($this->data);
 
-        if ( is_object( $first_item ) )
-        {
-            $first_item = get_object_vars( $first_item );
+        if (is_object($first_item)) {
+            $first_item = get_object_vars($first_item);
         }
 
-        $keys       = array_keys( $first_item );
-        $first_key  = reset( $keys );
+        $keys       = array_keys($first_item);
+        $first_key  = reset($keys);
 
-        if ( !is_int( $first_key ) )
-        {
+        if (!is_int($first_key)) {
             // We have an associative array (probably), let's have a header row
-            return array_combine( $keys, $keys );
+            return array_combine($keys, $keys);
         }
 
-        return FALSE;
+        return false;
     }
 
     /**
      * Determine the length of the string without any tags
      *
-     * @param string $str
+     * @param  string  $str
      * @return integer
      */
 
-    protected function lengthWithoutTags( $str )
+    protected function lengthWithoutTags($str)
     {
-        return strlen( $this->withoutTags( $str ) );
+        return strlen($this->withoutTags($str));
     }
 
     /**
      * Get the string without the tags that are to be ignored
      *
-     * @param string $str
+     * @param  string $str
      * @return string
      */
 
-    protected function withoutTags( $str )
+    protected function withoutTags($str)
     {
-    	return str_replace( $this->ignore_tags, '', $str );
+        return str_replace($this->ignore_tags, '', $str);
     }
 
     /**
      * Determine the width of each column
      *
-     * @param array $rows
+     * @param  array $rows
      * @return array
      */
 
     protected function getColumnWidths()
     {
         // Fill an array with the same count with zeros
-        $first_row = reset( $this->data );
+        $first_row = reset($this->data);
 
-        if ( is_object( $first_row ) )
-        {
-            $first_row = get_object_vars( $first_row );
+        if (is_object($first_row)) {
+            $first_row = get_object_vars($first_row);
         }
 
-        $zeros = array_fill( 0, count( $first_row ), 0 );
-        $keys  = array_keys( $first_row );
+        $zeros = array_fill(0, count($first_row), 0);
+        $keys  = array_keys($first_row);
 
         // Create an array with the columns as keys and values of zero
-        $column_widths = array_combine( $keys, $zeros );
+        $column_widths = array_combine($keys, $zeros);
 
-        foreach ( $this->data as $columns )
-        {
-            foreach ( $columns as $key => $column )
-            {
-                $column_widths[ $key ] = max(
-                                                $this->determineCellWidth( $key, $column ),
-                                                $column_widths[ $key ]
+        foreach ($this->data as $columns) {
+            foreach ($columns as $key => $column) {
+                $column_widths[$key] = max(
+                                                $this->determineCellWidth($key, $column),
+                                                $column_widths[$key]
                                             );
             }
         }
@@ -265,18 +255,18 @@ class Table extends BaseTerminalObject {
     /**
      * Determine the width of the columns without tags
      *
-     * @param mixed $key
+     * @param mixed  $key
      * @param string $column
      */
 
-    protected function determineCellWidth( $key, $column )
+    protected function determineCellWidth($key, $column)
     {
-        $column_length = $this->lengthWithoutTags( $column );
+        $column_length = $this->lengthWithoutTags($column);
 
         // In case it's an array of objects or an associative
         // array, check the key length
-        $key_length    = $this->lengthWithoutTags( $key );
+        $key_length    = $this->lengthWithoutTags($key);
 
-        return max( $column_length, $key_length );
+        return max($column_length, $key_length);
     }
 }
