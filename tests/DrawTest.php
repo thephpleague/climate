@@ -35,7 +35,7 @@ class DrawTest extends TestBase
         $should_be .= "\e[m'-.__   __.-'\e[0m\n";
         $should_be .= "\e[m     \"\"\"\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -57,7 +57,7 @@ class DrawTest extends TestBase
         $should_be .= "\e[m    | | | |_| |  | |\e[0m\n";
         $should_be .= "\e[m    |_|  \___/   |_|\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -66,7 +66,7 @@ class DrawTest extends TestBase
     {
         ob_start();
 
-        $this->cli->addArt( __DIR__ . '/art' );
+        $this->cli->addArt(__DIR__ . '/art');
 
         $this->cli->draw('works');
 
@@ -81,7 +81,7 @@ class DrawTest extends TestBase
         $should_be .= "\e[m    \  /\  / | |__| | | \ \| . \ ____) |\e[0m\n";
         $should_be .= "\e[m     \/  \/   \____/|_|  \_\_|\_\_____/\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -90,7 +90,7 @@ class DrawTest extends TestBase
     {
         ob_start();
 
-        $this->cli->addArt( __DIR__ . '/art/' );
+        $this->cli->addArt(__DIR__ . '/art/');
 
         $this->cli->draw('works');
 
@@ -105,7 +105,7 @@ class DrawTest extends TestBase
         $should_be .= "\e[m    \  /\  / | |__| | | \ \| . \ ____) |\e[0m\n";
         $should_be .= "\e[m     \/  \/   \____/|_|  \_\_|\_\_____/\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -114,7 +114,7 @@ class DrawTest extends TestBase
     {
         ob_start();
 
-        $this->cli->addArt( __DIR__ . '/art' )->draw('works');
+        $this->cli->addArt(__DIR__ . '/art')->draw('works');
 
         $result = ob_get_contents();
 
@@ -127,7 +127,7 @@ class DrawTest extends TestBase
         $should_be .= "\e[m    \  /\  / | |__| | | \ \| . \ ____) |\e[0m\n";
         $should_be .= "\e[m     \/  \/   \____/|_|  \_\_|\_\_____/\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

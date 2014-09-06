@@ -5,9 +5,9 @@ require_once 'TestBase.php';
 class ProgressTest extends TestBase
 {
 
-    private function repeat( $length )
+    private function repeat($length)
     {
-        return str_repeat( '=', $length );
+        return str_repeat('=', $length);
     }
 
     /** @test */
@@ -18,9 +18,8 @@ class ProgressTest extends TestBase
 
         $progress = $this->cli->progress()->total(10);
 
-        for ( $i = 0; $i <= 10; $i++ )
-        {
-            $progress->current( $i );
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i);
         }
 
         $result = ob_get_contents();
@@ -40,7 +39,7 @@ class ProgressTest extends TestBase
         $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(90)}> 90%\e[0m\n";
         $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(100)}> 100%\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -51,11 +50,9 @@ class ProgressTest extends TestBase
 
         $progress = $this->cli->progress(10);
 
-        for ( $i = 0; $i <= 10; $i++ )
-        {
-            $progress->current( $i );
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i);
         }
-
 
         $result = ob_get_contents();
 
@@ -74,7 +71,7 @@ class ProgressTest extends TestBase
         $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(90)}> 90%\e[0m\n";
         $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(100)}> 100%\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -85,9 +82,8 @@ class ProgressTest extends TestBase
 
         $progress = $this->cli->redProgress(10);
 
-        for ( $i = 0; $i <= 10; $i++ )
-        {
-            $progress->current( $i );
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i);
         }
 
         $result = ob_get_contents();
@@ -107,7 +103,7 @@ class ProgressTest extends TestBase
         $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(90)}> 90%\e[0m\n";
         $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(100)}> 100%\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /**
@@ -120,9 +116,8 @@ class ProgressTest extends TestBase
     {
         $progress = $this->cli->progress();
 
-        for ( $i = 0; $i <= 10; $i++ )
-        {
-            $progress->current( $i );
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i);
         }
     }
 
@@ -136,9 +131,8 @@ class ProgressTest extends TestBase
     {
         $progress = $this->cli->progress( 1 );
 
-        for ( $i = 2; $i <= 10; $i++ )
-        {
-            $progress->current( $i );
+        for ($i = 2; $i <= 10; $i++) {
+            $progress->current($i);
         }
     }
 

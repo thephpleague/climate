@@ -19,7 +19,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[mHey there.\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -36,7 +36,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[31m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -53,7 +53,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[41m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -70,7 +70,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[31m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -87,7 +87,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[41m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -104,7 +104,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[5m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -121,7 +121,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[5m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -138,7 +138,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[5;4m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -155,7 +155,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[31;41m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test **/
@@ -172,7 +172,7 @@ class TerminalObjectTest extends TestBase
 
         $should_be = "\e[5;31;41m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

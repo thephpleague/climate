@@ -11,7 +11,7 @@ class JSONTest extends TestBase
     {
         ob_start();
 
-        $this->cli->json( (object) [
+        $this->cli->json((object) [
                     'cell1' => 'Cell 1',
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
@@ -22,7 +22,7 @@ class JSONTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = json_encode( (object) [
+        $should_be = json_encode((object) [
                     'cell1' => 'Cell 1',
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
@@ -31,7 +31,7 @@ class JSONTest extends TestBase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /**
@@ -44,7 +44,7 @@ class JSONTest extends TestBase
     {
         ob_start();
 
-        $this->cli->json( (object) [
+        $this->cli->json((object) [
                     'cell1' => 'Cell 1',
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
@@ -55,18 +55,18 @@ class JSONTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = json_encode( (object) [
+        $should_be = json_encode((object) [
                     'cell1' => 'Cell 1',
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
                     'cell4' => 'Cell 4',
                 ], JSON_PRETTY_PRINT );
 
-        $should_be = str_replace( 'Cell 4', "\e[5mCell 4\e[0m\e[m", $should_be );
+        $should_be = str_replace('Cell 4', "\e[5mCell 4\e[0m\e[m", $should_be);
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

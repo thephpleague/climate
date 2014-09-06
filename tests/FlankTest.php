@@ -19,7 +19,7 @@ class FlankTest extends TestBase
 
         $should_be = "\e[m### Flank me! ###\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -36,7 +36,7 @@ class FlankTest extends TestBase
 
         $should_be = "\e[m--- Flank me! ---\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -45,7 +45,7 @@ class FlankTest extends TestBase
     {
         ob_start();
 
-        $this->cli->flank('Flank me!', NULL, 5);
+        $this->cli->flank('Flank me!', null, 5);
 
         $result = ob_get_contents();
 
@@ -53,7 +53,7 @@ class FlankTest extends TestBase
 
         $should_be = "\e[m##### Flank me! #####\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -70,7 +70,7 @@ class FlankTest extends TestBase
 
         $should_be = "\e[m----- Flank me! -----\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

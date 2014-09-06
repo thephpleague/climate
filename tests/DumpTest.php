@@ -22,9 +22,9 @@ class DumpTest extends TestBase
         $should_be[] = 'string(10) "This thing"';
         $should_be[] = '';
 
-        $should_be = "\e[m" . implode( "\n", $should_be ) . "\e[0m\n";
+        $should_be = "\e[m" . implode("\n", $should_be) . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

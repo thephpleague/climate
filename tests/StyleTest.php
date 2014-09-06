@@ -16,7 +16,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[31mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[31mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class StyleTest extends TestBase
         $should_be = "\e[31mThis would go out to the console.\e[0m\n";
         $should_be .= "\e[mThis is plain.\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[41mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[41mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -62,7 +62,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[41mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[41mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -76,7 +76,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[5mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[5mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -90,7 +90,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[4;5mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[4;5mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -104,7 +104,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[31mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[31mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -118,7 +118,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[31;41mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[31;41mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -132,7 +132,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[5;31;41mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[5;31;41mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -146,7 +146,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis \e[31mwould\e[0m\e[m go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[mThis \e[31mwould\e[0m\e[m go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -160,7 +160,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis \e[41mwould\e[0m\e[m go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[mThis \e[41mwould\e[0m\e[m go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -174,7 +174,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis \e[5mwould\e[0m\e[m go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[mThis \e[5mwould\e[0m\e[m go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -188,7 +188,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis \e[31m\e[5mwould\e[0m\e[m\e[0m\e[m go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[mThis \e[31m\e[5mwould\e[0m\e[m\e[0m\e[m go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -202,7 +202,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[31mThis \e[5mwould\e[0m\e[31m go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[31mThis \e[5mwould\e[0m\e[31m go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -219,7 +219,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[900mThis is the new color.\e[0m\n", $result );
+        $this->assertSame("\e[900mThis is the new color.\e[0m\n", $result);
     }
 
     /** @test */
@@ -236,7 +236,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis \e[900mis\e[0m\e[m the new color.\e[0m\n", $result );
+        $this->assertSame("\e[mThis \e[900mis\e[0m\e[m the new color.\e[0m\n", $result);
     }
 
     /** @test */
@@ -253,7 +253,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[910mThis is the new color.\e[0m\n", $result );
+        $this->assertSame("\e[910mThis is the new color.\e[0m\n", $result);
     }
 
     /** @test */
@@ -268,7 +268,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[91mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[91mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -283,7 +283,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[91mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[91mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -292,7 +292,7 @@ class StyleTest extends TestBase
     {
         ob_start();
 
-        $this->cli->style->addCommandColor( 'holler', 'light_blue' );
+        $this->cli->style->addCommandColor('holler', 'light_blue');
 
         $this->cli->holler('This would go out to the console.');
 
@@ -300,7 +300,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[94mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[94mThis would go out to the console.\e[0m\n", $result);
     }
 
     /**
@@ -311,7 +311,7 @@ class StyleTest extends TestBase
 
     public function it_errors_when_command_color_is_not_defined()
     {
-        $this->cli->style->addCommandColor( 'holler', 'not_a_color' );
+        $this->cli->style->addCommandColor('holler', 'not_a_color');
     }
 
 }

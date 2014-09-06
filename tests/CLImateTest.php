@@ -16,7 +16,7 @@ class CLImateTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame( "\e[mThis would go out to the console.\e[0m\n", $result );
+        $this->assertSame("\e[mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -34,7 +34,7 @@ class CLImateTest extends TestBase
         $should_be = "\e[mThis is a line.\e[0m\n";
         $should_be .= "\e[mThis is another line.\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }

@@ -24,7 +24,7 @@ class BorderTest extends TestBase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -33,7 +33,7 @@ class BorderTest extends TestBase
     {
         ob_start();
 
-        $this->cli->border( '@' );
+        $this->cli->border('@');
 
         $result = ob_get_contents();
 
@@ -47,7 +47,7 @@ class BorderTest extends TestBase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -56,7 +56,7 @@ class BorderTest extends TestBase
     {
         ob_start();
 
-        $this->cli->border( '-', 60 );
+        $this->cli->border('-', 60);
 
         $result = ob_get_contents();
 
@@ -68,7 +68,7 @@ class BorderTest extends TestBase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
     /** @test */
@@ -77,7 +77,7 @@ class BorderTest extends TestBase
     {
         ob_start();
 
-        $this->cli->border( '-*-', 50 );
+        $this->cli->border('-*-', 50);
 
         $result = ob_get_contents();
 
@@ -87,7 +87,7 @@ class BorderTest extends TestBase
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 
-        $this->assertSame( $should_be, $result );
+        $this->assertSame($should_be, $result);
     }
 
 }
