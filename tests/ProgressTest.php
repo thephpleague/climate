@@ -156,6 +156,41 @@ class ProgressTest extends TestBase
         $this->assertSame($should_be, $result);
     }
 
+    /** @test */
+
+    public function it_can_output_a_styled_progress_bar_and_resets_the_style()
+    {
+        ob_start();
+
+        $progress = $this->cli->redProgress(10);
+
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i);
+        }
+
+        $this->cli->out('and back to normal');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(0)} 0%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(10)} 10%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(30)} 30%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(60)} 60%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(70)} 70%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(80)} 80%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(90)} 90%\e[0m\n";
+        $should_be .= "\e[31m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m\n";
+        $should_be .= "\e[mand back to normal\e[0m\n";
+
+        $this->assertSame($should_be, $result);
+    }
+
     /**
      * @test
      * @expectedException        Exception

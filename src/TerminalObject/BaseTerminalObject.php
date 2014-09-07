@@ -2,8 +2,13 @@
 
 namespace CLImate\TerminalObject;
 
+use CLImate\Decorator\Parser;
+
 abstract class BaseTerminalObject implements TerminalObjectInterface
 {
+
+    protected $style;
+
     /**
      * Empty constructor as placeholder
      * in case extending classes use it
@@ -12,6 +17,11 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
     public function __construct()
     {
 
+    }
+
+    public function style(Parser $style)
+    {
+        $this->style = $style;
     }
 
     /**

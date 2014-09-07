@@ -2,11 +2,11 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
-use CLImate\CLImate;
+use CLImate\Decorator\Parser;
 
 abstract class BaseDynamicTerminalObject
 {
-    protected $cli;
+    protected $style;
 
     public function __construct()
     {
@@ -19,11 +19,9 @@ abstract class BaseDynamicTerminalObject
      * @param CLImate\CLImate $cli
      */
 
-    public function cli(CLImate $cli)
+    public function style(Parser $style)
     {
-        $this->cli = $cli;
-
-        $this->cli->style->persist();
+        $this->style = $style;
     }
 
 }

@@ -2,6 +2,8 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
+use CLImate\Output;
+
 class Progress extends BaseDynamicTerminalObject
 {
     protected $total           = 0;
@@ -13,15 +15,6 @@ class Progress extends BaseDynamicTerminalObject
         if ($total) {
             $this->total($total);
         }
-    }
-
-    public function result()
-    {
-    }
-
-    public function output()
-    {
-        return false;
     }
 
     public function total($total)
@@ -66,6 +59,6 @@ class Progress extends BaseDynamicTerminalObject
 
         $bar_str = trim($bar_str);
 
-        $this->cli->out("\e[1A\r\e[K{$bar_str}");
+        echo new Output("\e[1A\r\e[K{$bar_str}", $this->style);
     }
 }

@@ -65,14 +65,7 @@ class Table extends BaseTerminalObject
 
     public function __construct(array $data)
     {
-        $this->data          = $data;
-        $this->ignore_tags   = (new Style())->tag_search;
-
-        $this->column_widths = $this->getColumnWidths();
-        $this->table_width   = $this->getWidth();
-        $this->border        = $this->getBorder();
-
-        $this->buildHeaderRow();
+        $this->data = $data;
     }
 
     /**
@@ -83,6 +76,13 @@ class Table extends BaseTerminalObject
 
     public function result()
     {
+        $this->ignore_tags   = $this->style->tag_search;
+        $this->column_widths = $this->getColumnWidths();
+        $this->table_width   = $this->getWidth();
+        $this->border        = $this->getBorder();
+
+        $this->buildHeaderRow();
+
         foreach ($this->data as $key => $columns) {
             $this->rows[] = $this->buildRow($columns);
             $this->rows[] = $this->border;

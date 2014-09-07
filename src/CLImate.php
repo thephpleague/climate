@@ -100,7 +100,7 @@ class CLImate
 
     public function out($str)
     {
-        echo $this->style->apply($str) . "\n";
+        echo new Output($str, $this->style->parser());
 
         $this->style->reset();
 
@@ -226,9 +226,16 @@ class CLImate
         // If we still have something left, let's see if it's a terminal object
         if (strlen($name)) {
             if ( $this->terminal_object->exists($name)) {
+                // Retrieve the parser for the current set of styles
+                $parser = $this->style->parser();
+
+                // Reset the styles
+                $this->style->reset();
+
+                // Execute the terminal object
                 $obj = $this->terminal_object
                             ->settings($this->settings)
-                            ->cli($this)
+                            ->style($parser)
                             ->execute($name, $arguments);
 
                 // If something was returned, return it

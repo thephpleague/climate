@@ -2,7 +2,8 @@
 
 namespace CLImate\TerminalObject;
 
-use CLImate\CLImate;
+use CLImate\Output;
+use CLImate\Decorator\Parser;
 use CLImate\Settings\Manager;
 
 class Router
@@ -13,7 +14,7 @@ class Router
      * @var CLImate\CLImate $cli;
      */
 
-    protected $cli;
+    protected $style;
 
     /**
      * An instance of the Settings Manager class
@@ -63,9 +64,9 @@ class Router
      * @return CLImate\TerminalObject\Router
      */
 
-    public function cli(CLImate $cli)
+    public function style(Parser $style)
     {
-        $this->cli = $cli;
+        $this->style = $style;
 
         return $this;
     }
@@ -146,6 +147,8 @@ class Router
 
     protected function executeBasic($obj)
     {
+        $obj->style($this->style);
+
         // If the object needs any settings, import them
         foreach ($obj->settings() as $obj_setting) {
             $setting = $this->settings->get($obj_setting);
@@ -161,13 +164,9 @@ class Router
             $results = [$results];
         }
 
-        $this->cli->style->persist();
-
         foreach ($results as $result) {
-            $this->cli->out($result);
+            echo new Output($result, $this->style);
         }
-
-        $this->cli->style->reset(true);
     }
 
     /**
@@ -179,7 +178,7 @@ class Router
 
     protected function executeDynamic($obj)
     {
-        $obj->cli($this->cli);
+        $obj->style($this->style);
 
         return $obj;
     }
