@@ -639,12 +639,12 @@ Bonus: If you've got some time on your hands, you can style your art using the s
 <blue> /         \</blue>
 <blue>|           |</blue>
 <blue>|   .-------'._</blue>
-<blue>|  /</blue> <white>/  '.' '.</white> <blue>\</blue>
-<blue>|  \</blue> <white>\</white> <black><blink>@</blink>   <blink>@</blink></black> <white>/</white> <blue>/</blue>
+<blue>|  /<white>/  '.' '.</white> \</blue>
+<blue>|  \<white>\ <black><blink>@   @</blink></black> /</white> /</blue>
 <blue>|   '---------'</blue>
 <blue>|    _______|</blue>
-<blue>|  .'</blue><black>-+-+-+</black><blue>|</blue>
-<blue>|  '.</blue><black>-+-+-+</black><blue>|</blue>
+<blue>|  .'<black>-+-+-+</black>|</blue>
+<blue>|  '.<black>-+-+-+</black>|</blue>
 <blue>|    """""" |</blue>
 <blue>'-.__   __.-'</blue>
 <blue>     """</blue>
