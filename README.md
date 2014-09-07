@@ -381,7 +381,27 @@ Which will result in:
 
 ![Progress Bar](http://joe.codes/images/climate/progress.gif)
 
-You can also shorthand it a bit if you'd like:
+If you'd like a more exact indicator of where you are in the process, pass a label into the `current` method:
+
+```php
+$languages = [
+    'php',
+    'javascript',
+    'python',
+    'ruby',
+    'java',
+];
+
+$progress = $climate->progress()->total(count($languages));
+
+foreach ($languages as $key => $language)
+{
+  $progress->current( $key + 1, $language );
+  usleep(80000);
+}
+```
+
+You can also shorthand it a bit if you'd like and pass the total right into the `progress` method:
 
 ```php
 $climate->progress(100);

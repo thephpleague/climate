@@ -52,13 +52,17 @@ class Progress extends BaseDynamicTerminalObject
 
         $percentage = round($percentage);
 
-        $bar_str    = str_repeat('=', $bar_length);
-        $bar_str    .= '> ';
-        $bar_str    .= $percentage;
-        $bar_str    .= '% ';
-        $bar_str    .= $label;
+        $bar_str = str_repeat('=', $bar_length);
+        $bar_str .= '> ';
+        $bar_str .= str_repeat(' ', $this->full_bar_length - $bar_length);
+        $bar_str .= $percentage;
+        $bar_str .= '% ';
 
-        $bar_str    = trim($bar_str);
+        if ($percentage < 100) {
+            $bar_str .= $label;
+        }
+
+        $bar_str = trim($bar_str);
 
         $this->cli->out("\e[1A\r\e[K{$bar_str}");
     }
