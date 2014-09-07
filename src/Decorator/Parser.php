@@ -29,6 +29,8 @@ class Parser
     {
         $this->current = $current;
         $this->all     = $all;
+
+        $this->buildTags();
     }
 
     /**
@@ -40,8 +42,6 @@ class Parser
 
     public function apply($str)
     {
-        $this->buildTags();
-
         return $this->start() . $this->parse($str) . $this->end();
     }
 

@@ -4,17 +4,12 @@ namespace CLImate\TerminalObject;
 
 use CLImate\Output;
 use CLImate\Decorator\Parser;
+use CLImate\Decorator\ParserImporter;
 use CLImate\Settings\Manager;
 
 class Router
 {
-    /**
-     * An instance of the CLImate class
-     *
-     * @var CLImate\CLImate $cli;
-     */
-
-    protected $style;
+    use ParserImporter;
 
     /**
      * An instance of the Settings Manager class
@@ -50,6 +45,17 @@ class Router
         $reflection = new \ReflectionClass($class);
         $obj        = $reflection->newInstanceArgs($arguments);
 
+        $obj->parser($this->parser);
+
+        // If the object needs any settings, import them
+        foreach ($obj->settings() as $obj_setting) {
+            $setting = $this->settings->get($obj_setting);
+
+            if ($setting) {
+                $obj->importSetting($setting);
+            }
+        }
+
         if ($this->isBasic($name)) {
             $this->executeBasic($obj);
         } else {
@@ -58,15 +64,15 @@ class Router
     }
 
     /**
-     * Set the cli property
+     * Set the parser property
      *
-     * @param  CLImate\CLImate               $cli
+     * @param  CLImate\Decorator\Parser      $parser
      * @return CLImate\TerminalObject\Router
      */
 
-    public function style(Parser $style)
+    public function parser(Parser $parser)
     {
-        $this->style = $style;
+        $this->parser = $parser;
 
         return $this;
     }
@@ -147,17 +153,6 @@ class Router
 
     protected function executeBasic($obj)
     {
-        $obj->style($this->style);
-
-        // If the object needs any settings, import them
-        foreach ($obj->settings() as $obj_setting) {
-            $setting = $this->settings->get($obj_setting);
-
-            if ($setting) {
-                $obj->importSetting($setting);
-            }
-        }
-
         $results = $obj->result();
 
         if (!is_array($results)) {
@@ -165,7 +160,7 @@ class Router
         }
 
         foreach ($results as $result) {
-            echo new Output($result, $this->style);
+            echo new Output($result, $this->parser);
         }
     }
 
@@ -178,7 +173,7 @@ class Router
 
     protected function executeDynamic($obj)
     {
-        $obj->style($this->style);
+        $obj->parser($this->parser);
 
         return $obj;
     }

@@ -59,6 +59,6 @@ class Progress extends BaseDynamicTerminalObject
 
         $bar_str = trim($bar_str);
 
-        echo new Output("\e[1A\r\e[K{$bar_str}", $this->style);
+        echo new Output("\e[1A\r\e[K{$bar_str}", $this->parser);
     }
 }

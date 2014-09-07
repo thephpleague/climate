@@ -2,8 +2,6 @@
 
 namespace CLImate\TerminalObject;
 
-use CLImate\Decorator\Style;
-
 class Table extends BaseTerminalObject
 {
     /**
@@ -76,7 +74,7 @@ class Table extends BaseTerminalObject
 
     public function result()
     {
-        $this->ignore_tags   = $this->style->tag_search;
+        $this->ignore_tags   = $this->parser->tag_search;
         $this->column_widths = $this->getColumnWidths();
         $this->table_width   = $this->getWidth();
         $this->border        = $this->getBorder();

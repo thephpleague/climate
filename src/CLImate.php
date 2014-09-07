@@ -235,7 +235,7 @@ class CLImate
                 // Execute the terminal object
                 $obj = $this->terminal_object
                             ->settings($this->settings)
-                            ->style($parser)
+                            ->parser($parser)
                             ->execute($name, $arguments);
 
                 // If something was returned, return it

@@ -8,16 +8,16 @@ class Output
 {
     protected $output;
 
-    protected $style;
+    protected $parser;
 
-    public function __construct($output, Parser $style)
+    public function __construct($output, Parser $parser)
     {
         $this->output = $output;
-        $this->style = $style;
+        $this->parser = $parser;
     }
 
     public function __toString()
     {
-        return $this->style->apply($this->output) . "\n";
+        return $this->parser->apply($this->output) . "\n";
     }
 }

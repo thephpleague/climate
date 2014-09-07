@@ -1,0 +1,36 @@
+<?php
+
+namespace CLImate\Settings;
+
+trait SettingsImporter
+{
+    /**
+     * Dictates an any settings that a class may need access to
+     *
+     * @return array
+     */
+
+    public function settings()
+    {
+        return [];
+    }
+
+    /**
+     * Import the setting into the class
+     *
+     * @param CLImate\Settings $setting
+     */
+
+    public function importSetting($setting)
+    {
+        $short_name = basename(str_replace('\\', '/', get_class($setting)));
+
+        $method = 'importSetting' . $short_name;
+
+        if (method_exists($this, $method)) {
+            $this->$method($setting);
+        }
+
+    }
+
+}
