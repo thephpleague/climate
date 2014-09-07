@@ -22,20 +22,12 @@ class Parser
 
     /**
      * An array of the tags that should be searched for
+     * and their corresponding replacements
      *
-     * @var array $tag_search
+     * @var array $tags
      */
 
-    public $tag_search  = [];
-
-    /**
-     * A corresponding array of the codes that should be
-     * replaced with the $tag_search
-     *
-     * @var array $tag_replace
-     */
-
-    public $tag_replace = [];
+    public $tags  = [];
 
     public function __construct(array $current, array $all)
     {
@@ -64,11 +56,12 @@ class Parser
      * @return string
      */
 
-    protected function start($style = null)
+    protected function start($codes = null)
     {
-        $style = $style ?: $this->currentCode();
+        $codes = $codes ?: $this->currentCode();
+        $codes = $this->codeStr($codes);
 
-        return "\e[{$style}m";
+        return $this->wrapCodes($codes);
     }
 
     /**
@@ -77,9 +70,29 @@ class Parser
      * @return string
      */
 
-    protected function end()
+    protected function end($codes = null)
     {
-        return "\e[0m";
+        if (empty($codes)) {
+            $codes = [0];
+        } else {
+            if (!is_array($codes)) $codes = [$codes];
+            // Reset everything back to normal up front
+            array_unshift($codes, 0);
+        }
+
+        return $this->wrapCodes($this->codeStr($codes));
+    }
+
+    /**
+     * Wrap the code string in the full escaped sequence
+     *
+     * @param string $codes
+     * @return string
+     */
+
+    protected function wrapCodes($codes)
+    {
+        return "\e[{$codes}m";
     }
 
     /**
@@ -91,38 +104,38 @@ class Parser
 
     protected function parse($str)
     {
-        return str_replace($this->tagSearch(), $this->tagReplace(), $str);
-    }
+        $regex = '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
+        preg_match_all($regex, $str, $matches);
 
-    /**
-     * Retrieve the array of searchable tags
-     *
-     * @return array
-     */
+        // All we want is the array of actual strings matched
+        $matches = reset( $matches );
 
-    protected function tagSearch()
-    {
-        return $this->tag_search;
-    }
+        if ($matches) {
+            // Let's keep a history of styles applied
+            $history = [$this->currentCode()];
+            $history = array_filter($history);
 
-    /**
-     * Retrieve an array of tag replacements
-     *
-     * @return array
-     */
+            // We will be replacing tags one at a time
+            $replace_count = 1;
 
-    protected function tagReplace()
-    {
-        $start_code = $this->start($this->currentCode());
+            foreach ($matches as $match) {
+                if (strstr($match, '/')) {
+                    // We are closing out the tag, pop off the last element and get the codes that are left
+                    array_pop($history);
+                    $str = str_replace($match, $this->end($history), $str, $replace_count);
+                } else {
+                    // We are starting a new tag
 
-        return array_map(function ($item) use ($start_code) {
-            // We have to re-start the parent style after each tag is replaced
-            if ($item == $this->end()) {
-                return $item . $start_code;
+                    // Add it onto the history
+                    $history[] = $this->tags[$match];
+
+                    // Replace the tag with the correct color code
+                    $str = str_replace($match, $this->start($this->tags[$match]), $str, $replace_count);
+                }
             }
+        }
 
-            return $item;
-        }, $this->tag_replace);
+        return $str;
     }
 
     /**
@@ -131,19 +144,14 @@ class Parser
 
     protected function buildTags()
     {
-        $tags   = $this->all;
-        $search = [];
+        $tags       = $this->all;
+        $this->tags = [];
 
         foreach ($tags as $tag => $color) {
-            $search["<{$tag}>"]  = $this->start($this->codeStr($color));
-            $search["</{$tag}>"] = $this->end();
-
-            // Also replace JSONified end tags
-            $search["<\\/{$tag}>"] = $this->end();
+            $this->tags["<{$tag}>"]    = $color;
+            $this->tags["</{$tag}>"]   = $color;
+            $this->tags["<\\/{$tag}>"] = $color;
         }
-
-        $this->tag_search  = array_keys($search);
-        $this->tag_replace = array_values($search);
     }
 
     /**
@@ -155,9 +163,12 @@ class Parser
 
     protected function codeStr($codes)
     {
+        // If we get something that is already a code string, just pass it back
+        if (!is_array($codes) && strstr($codes, ';')) return $codes;
+
         if (!is_array($codes)) $codes = [$codes];
 
-        // For the sake of consistency and testability
+        // Sort for the sake of consistency and testability
         sort($codes);
 
         return implode(';', $codes);

@@ -62,7 +62,7 @@ class JSONTest extends TestBase
                     'cell4' => 'Cell 4',
                 ], JSON_PRETTY_PRINT );
 
-        $should_be = str_replace('Cell 4', "\e[5mCell 4\e[0m\e[m", $should_be);
+        $should_be = str_replace('Cell 4', "\e[5mCell 4\e[0m", $should_be);
 
         $should_be = "\e[m" . $should_be . "\e[0m\n";
 

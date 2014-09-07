@@ -74,7 +74,7 @@ class Table extends BaseTerminalObject
 
     public function result()
     {
-        $this->ignore_tags   = $this->parser->tag_search;
+        $this->ignore_tags   = array_keys( $this->parser->tags );
         $this->column_widths = $this->getColumnWidths();
         $this->table_width   = $this->getWidth();
         $this->border        = $this->getBorder();

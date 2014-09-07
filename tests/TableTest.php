@@ -137,7 +137,7 @@ class TableTest extends TestBase
         $should_be = "\e[m-------------------------------------\e[0m\n";
         $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
         $should_be .= "\e[m=====================================\e[0m\n";
-        $should_be .= "\e[m| Cell \e[31m1\e[0m\e[m | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
+        $should_be .= "\e[m| Cell \e[31m1\e[0m | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
         $should_be .= "\e[m-------------------------------------\e[0m\n";
 
         $this->assertSame($should_be, $result);
