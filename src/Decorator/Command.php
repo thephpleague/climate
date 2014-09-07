@@ -13,6 +13,12 @@ class Command extends BaseDecorator
 
     public $commands = [];
 
+    /**
+     * The default commands available
+     *
+     * @var array $defaults
+     */
+
     protected $defaults = [
             'info'    => 'green',
             'comment' => 'yellow',
@@ -21,10 +27,23 @@ class Command extends BaseDecorator
             'error'   => 'light_red',
         ];
 
+    /**
+     * Add a command into the mix
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+
     public function add($key, $value)
     {
         $this->commands[$key] = $value;
     }
+
+    /**
+     * Retrieve all of the available commands
+     *
+     * @return array
+     */
 
     public function all()
     {
@@ -46,6 +65,13 @@ class Command extends BaseDecorator
 
         return null;
     }
+
+    /**
+     * Set the currently used command
+     *
+     * @param  string $val
+     * @return mixed
+     */
 
     public function set($val)
     {

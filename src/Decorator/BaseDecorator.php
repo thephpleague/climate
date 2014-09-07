@@ -4,14 +4,30 @@ namespace CLImate\Decorator;
 
 abstract class BaseDecorator implements DecoratorInterface
 {
+    /**
+     * An array of defaults for the decorator
+     *
+     * @var array $defaults;
+     */
+
     protected $defaults = [];
 
-    protected $current = [];
+    /**
+     * An array of currently set codes for the decorator
+     *
+     * @var array $current;
+     */
+
+    protected $current  = [];
 
     public function __construct()
     {
         $this->defaults();
     }
+
+    /**
+     * Load up the defaults for this decorator
+     */
 
     public function defaults()
     {
@@ -20,10 +36,20 @@ abstract class BaseDecorator implements DecoratorInterface
         }
     }
 
+    /**
+     * Reset the currently set decorator
+     */
+
     public function reset()
     {
         $this->current = [];
     }
+
+    /**
+     * Retrieve the currently set codes for the decorator
+     *
+     * @return array
+     */
 
     public function current()
     {

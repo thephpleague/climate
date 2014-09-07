@@ -52,6 +52,8 @@ class Progress extends BaseDynamicTerminalObject
 
         $percentage = round($percentage);
 
+        // Basically:
+        // =============>             50% label
         $bar_str = str_repeat('=', $bar_length);
         $bar_str .= '> ';
         $bar_str .= str_repeat(' ', $this->full_bar_length - $bar_length);

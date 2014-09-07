@@ -13,6 +13,12 @@ abstract class BaseDynamicTerminalObject
 
     }
 
+    /**
+     * Set the cli property and persist the style
+     *
+     * @param CLImate\CLImate $cli
+     */
+
     public function cli(CLImate $cli)
     {
         $this->cli = $cli;

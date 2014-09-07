@@ -13,6 +13,12 @@ class Format extends BaseDecorator
 
     protected $formats = [];
 
+    /**
+     * An array of default formats
+     *
+     * @var array $defaults
+     */
+
     protected $defaults = [
             'bold'          => 1,
             'dim'           => 2,
@@ -22,10 +28,23 @@ class Format extends BaseDecorator
             'hidden'        => 8,
         ];
 
+    /**
+     * Add a format into the mix
+     *
+     * @param string $key
+     * @param mixed  $value
+     */
+
     public function add($key, $value)
     {
-        $this->formats[$key] = $value;
+        $this->formats[$key] = (int) $value;
     }
+
+    /**
+     * Retrieve all of the available formats
+     *
+     * @return array
+     */
 
     public function all()
     {
@@ -52,6 +71,13 @@ class Format extends BaseDecorator
 
         return null;
     }
+
+    /**
+     * Set the current format
+     *
+     * @param  string $val
+     * @return mixed
+     */
 
     public function set($val)
     {

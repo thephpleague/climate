@@ -13,6 +13,12 @@ class Color extends BaseDecorator
 
     protected $colors = [];
 
+    /**
+     * An array of default colors
+     *
+     * @var array $defaults
+     */
+
     protected $defaults = [
             'default'       => 39,
             'black'         => 30,
@@ -33,10 +39,23 @@ class Color extends BaseDecorator
             'white'         => 97,
         ];
 
+    /**
+     * Add a color into the mix
+     *
+     * @param string  $key
+     * @param integer $value
+     */
+
     public function add($key, $value)
     {
-        $this->colors[$key] = $value;
+        $this->colors[$key] = (int) $value;
     }
+
+    /**
+     * Retrieve all of available colors
+     *
+     * @return array
+     */
 
     public function all()
     {
@@ -63,6 +82,13 @@ class Color extends BaseDecorator
 
         return null;
     }
+
+    /**
+     * Set the current color
+     *
+     * @param  mixed   $val
+     * @return boolean
+     */
 
     public function set($val)
     {
