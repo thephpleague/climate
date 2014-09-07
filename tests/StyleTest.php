@@ -305,6 +305,23 @@ class StyleTest extends TestBase
 
     /** @test */
 
+    public function it_can_use_a_string_command_as_a_tag()
+    {
+        ob_start();
+
+        $this->cli->style->addCommand('holler', 'light_blue');
+
+        $this->cli->out('This would go <holler>out</holler> to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertSame("\e[mThis would go \e[94mout\e[0m\e[m to the console.\e[0m\n", $result);
+    }
+
+    /** @test */
+
     public function it_can_use_add_a_command_via_an_array()
     {
         ob_start();
@@ -320,6 +337,25 @@ class StyleTest extends TestBase
         ob_end_clean();
 
         $this->assertSame("\e[1;4;94;41mThis would go out to the console.\e[0m\n", $result);
+    }
+
+    /** @test */
+
+    public function it_can_use_an_array_command_as_a_tag()
+    {
+        ob_start();
+
+        $command = ['light_blue', 'background_red', 'bold', 'underline'];
+
+        $this->cli->style->addCommand('holler', $command);
+
+        $this->cli->out('This would go <holler>out</holler> to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertSame("\e[mThis would go \e[94;41;1;4mout\e[0m\e[m to the console.\e[0m\n", $result);
     }
 
 }
