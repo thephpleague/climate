@@ -35,7 +35,7 @@ Using [composer](https://packagist.org/packages/joetannenbaum/climate):
 ```
 {
     "require": {
-        "joetannenbaum/climate": "1.*"
+        "joetannenbaum/climate": "~1.0"
     }
 }
 ```
