@@ -185,7 +185,7 @@ $climate->out('Just this <background_lilac>word</background_lilac> is a pretty c
 
 ## Commands
 
-Commands are simply pre-defined colors for specific output:
+Commands are simply pre-defined styles for specific output:
 
 ```php
 $climate->error('Ruh roh.');
@@ -197,11 +197,18 @@ $climate->info('Nothing fancy here. Just some info.');
 
 ## Custom Commands
 
-You can add your own command, just make sure that the color is defined already.
+You can add your own command, just make sure that the style is defined already.
 
 ```php
 $climate->style->addCommand('rage', 'cyan');
 $climate->rage('SOMETHING IS MESSED UP.');
+
+$climate->style->addCommand('holler', [
+  'underline',
+  'green',
+  'bold',
+]);
+$climate->holler('Yo what up.');
 ```
 
 You can also override any command;
