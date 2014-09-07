@@ -2,6 +2,8 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
+use CLImate\CLImate;
+
 abstract class BaseDynamicTerminalObject
 {
     protected $cli;
@@ -11,7 +13,7 @@ abstract class BaseDynamicTerminalObject
 
     }
 
-    public function cli(\CLImate\CLImate $cli)
+    public function cli(CLImate $cli)
     {
         $this->cli = $cli;
 

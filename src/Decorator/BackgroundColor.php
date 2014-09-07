@@ -4,17 +4,17 @@ namespace CLImate\Decorator;
 
 class BackgroundColor extends Color
 {
-	const ADD = 10;
+    const ADD = 10;
 
     public function get($val)
     {
-    	$color = parent::get($val);
+        $color = parent::get($val);
 
-    	if ($color) {
-    		$color += self::ADD;
-    	}
+        if ($color) {
+            $color += self::ADD;
+        }
 
-    	return $color;
+        return $color;
     }
 
     public function set($val)
@@ -26,11 +26,11 @@ class BackgroundColor extends Color
 
     public function all()
     {
-    	$colors = [];
+        $colors = [];
 
-    	foreach ($this->colors as $color => $code) {
-    		$colors['background_' . $color] = $code + self::ADD;
-    	}
+        foreach ($this->colors as $color => $code) {
+            $colors['background_' . $color] = $code + self::ADD;
+        }
 
         return $colors;
     }

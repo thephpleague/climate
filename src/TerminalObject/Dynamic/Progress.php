@@ -33,7 +33,7 @@ class Progress extends BaseDynamicTerminalObject
         return $this;
     }
 
-    public function current($current)
+    public function current($current, $label = null)
     {
         if ($this->total == 0) {
             // Avoid dividing by 0
@@ -53,7 +53,13 @@ class Progress extends BaseDynamicTerminalObject
         $percentage = round($percentage);
 
         $bar_str    = str_repeat('=', $bar_length);
+        $bar_str    .= '> ';
+        $bar_str    .= $percentage;
+        $bar_str    .= '% ';
+        $bar_str    .= $label;
 
-        $this->cli->out("\e[1A\r\e[K{$bar_str}> {$percentage}%");
+        $bar_str    = trim($bar_str);
+
+        $this->cli->out("\e[1A\r\e[K{$bar_str}");
     }
 }

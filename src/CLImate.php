@@ -50,36 +50,46 @@ namespace CLImate;
  * @method mixed shout()
  * @method mixed error()
  *
- * @method mixed table( array $data )
- * @method mixed json( mixed $var )
+ * @method mixed table(array $data)
+ * @method mixed json(mixed $var)
  * @method mixed br()
- * @method mixed draw( string $art )
- * @method mixed border( string $char, integer $length )
- * @method mixed dump( mixed $var )
- * @method mixed flank( string $output )
+ * @method mixed draw(string $art)
+ * @method mixed border(string $char, integer $length)
+ * @method mixed dump(mixed $var)
+ * @method mixed flank(string $output)
  */
 
 class CLImate
 {
     /**
-     * An instance of the style class
+     * An instance of the Style class
      *
-     * @var CLImate\Style $style
+     * @var CLImate\Decorator\Style $style
      */
 
     public $style;
 
     /**
-     * A collection of CLImate\TerminalObject\Settings objects
+     * An instance of the Terminal Object Router class
      *
-     * @var array $setting
+     * @var CLImate\TerminalObject\Router $terminal_object
      */
 
-    protected $settings = [];
+    protected $terminal_object;
+
+    /**
+     * An instance of the Settings Manager class
+     *
+     * @var CLImate\Settings\Manager $settings
+     */
+
+    protected $settings;
 
     public function __construct()
     {
-        $this->style = new Decorator\Style;
+        $this->style           = new Decorator\Style();
+        $this->terminal_object = new TerminalObject\Router();
+        $this->settings        = new Settings\Manager();
     }
 
     /**
@@ -90,167 +100,11 @@ class CLImate
 
     public function out($str)
     {
-        echo $this->applyStyle($str) . "\n";
+        echo $this->style->apply($str) . "\n";
 
         $this->style->reset();
 
         return $this;
-    }
-
-    /**
-     * Wrap the string in the current style
-     *
-     * @param  string $str
-     * @return string
-     */
-
-    protected function applyStyle($str)
-    {
-        return $this->style->start() . $this->parseTags($str) . $this->style->end();
-    }
-
-    /**
-     * Parse the string for tags and replace them with their codes
-     *
-     * @param  string $str
-     * @return string
-     */
-
-    protected function parseTags($str)
-    {
-        return str_replace($this->style->tagSearch(), $this->style->tagReplace(), $str);
-    }
-
-    /**
-     * Get the full path for a terminal object class
-     *
-     * @param  string $name
-     * @return string
-     */
-
-    protected function getFullTerminalObjectClass($name)
-    {
-        return '\\CLImate\\TerminalObject\\' . ucwords($name);
-    }
-
-    /**
-     * Get the full path for a dynamic terminal object class
-     *
-     * @param  string $name
-     * @return string
-     */
-
-    protected function getFullDynamicTerminalObjectClass($name)
-    {
-        return '\\CLImate\\TerminalObject\\Dynamic\\' . ucwords($name);
-    }
-
-    /**
-     * Get the short name for the requested settings class
-     *
-     * @param  string $name
-     * @return string
-     */
-
-    protected function getSettingsClass($name)
-    {
-        return ucwords(str_replace('add_', '', $name));
-    }
-
-    /**
-     * Get the full path for a settings class
-     *
-     * @param  string $name
-     * @return string
-     */
-
-    protected function getFullSettingsClass($name)
-    {
-        $name = $this->getSettingsClass($name);
-
-        return '\\CLImate\\TerminalObject\\Settings\\' . $name;
-    }
-
-    /**
-     * Add the Settings object into the array
-     *
-     * @param string $name
-     * @param array  $arguments
-     */
-
-    protected function addSetting($name, $arguments)
-    {
-        $name = $this->getSettingsClass($name);
-
-        if (!array_key_exists($name, $this->settings)) {
-            $settings_class = $this->getFullSettingsClass($name);
-            $this->settings[$name] = new $settings_class();
-        }
-
-        $this->settings[$name]->add( reset( $arguments ) );
-    }
-
-    /**
-     * Execute a terminal object using given arguments
-     *
-     * @param string $name
-     * @param mixed  $arguments
-     */
-
-    protected function executeTerminalObject($name, $arguments)
-    {
-        $reflect = new \ReflectionClass($this->getFullTerminalObjectClass($name));
-        $obj     = $reflect->newInstanceArgs($arguments);
-
-        // If the object needs any settings, import them
-        foreach ($obj->settings() as $setting) {
-            if (array_key_exists($setting, $this->settings)) {
-                $obj->importSetting($this->settings[$setting]);
-            }
-        }
-
-        $results = $obj->result();
-
-        if (!is_array($results)) {
-            $results = [$results];
-        }
-
-        $this->style->persist();
-
-        foreach ($results as $result) {
-            $this->out($result);
-        }
-
-        $this->style->reset(true);
-    }
-
-    /**
-     * Execute a dynamic terminal object using given arguments
-     *
-     * @param string $name
-     * @param mixed  $arguments
-     */
-
-    protected function executeDynamicTerminalObject($name, $arguments)
-    {
-        $reflect = new \ReflectionClass($this->getFullDynamicTerminalObjectClass($name));
-        $obj     = $reflect->newInstanceArgs($arguments);
-
-        $obj->cli($this);
-
-        return $obj;
-    }
-
-    /**
-     * Route a method to its appropriate class and execute it
-     *
-     * @param  string  $method
-     * @return boolean
-     */
-
-    protected function routeMethod($method)
-    {
-        return $this->style->set($method);
     }
 
     /**
@@ -276,14 +130,14 @@ class CLImate
 
     /**
      * Search for the method within the string
-     * and route it if we find one
+     * and route it if we find one.
      *
      * @param  string $method
      * @param  string $name
-     * @return string
+     * @return string The new string without the executed method.
      */
 
-    protected function searchForMethod($method, $name)
+    protected function parseStyleMethod($method, $name)
     {
         // If the name starts with this method string...
         if (substr($name, 0, strlen($method)) == $method) {
@@ -293,30 +147,21 @@ class CLImate
             // ...and trim off any of those underscores hanging around
             $name = ltrim($name, '_');
 
-            $this->routeMethod($method);
+            $this->style->set($method);
         }
 
         return $name;
     }
 
     /**
-     * Magic method for anything called that doesn't exist
+     * Search for any style methods within the name and apply them
      *
-     * @param string $name
-     * @param array  $arguments
-     *
-     * List of many of the possible method being called here
-     * documented at the top of this class.
+     * @param  string $name
+     * @return string Anything left over after applying styles
      */
 
-    public function __call($requested_method, $arguments)
+    protected function applyStyleMethods($name)
     {
-        // Convert to snake case
-        $name   = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $requested_method));
-
-        // The first argument is the string|array|object we want to echo out
-        $output = reset($arguments);
-
         // Get all of the possible style attributes
         $method_search = array_keys($this->style->all());
 
@@ -334,7 +179,7 @@ class CLImate
             // Loop through the possible methods
             foreach ($method_search as $method) {
                 // See if we found a valid method
-                $new_name = $this->searchForMethod($method, $name);
+                $new_name = $this->parseStyleMethod($method, $name);
 
                 // If we haven't found one in the loop yet and the name changed,
                 // guess what: we found a valid method
@@ -342,13 +187,36 @@ class CLImate
                     $current_loop_found = true;
                 }
 
-                // Reset name to the new name
+                // Set the name to the new name
                 $name = $new_name;
             }
 
             // Set the found method flag just in case we don't have any more valid methods
             $found_method = $current_loop_found;
         }
+
+        return $name;
+    }
+
+    /**
+     * Magic method for anything called that doesn't exist
+     *
+     * @param string $requested_methods
+     * @param array  $arguments
+     *
+     * List of many of the possible method being called here
+     * documented at the top of this class.
+     */
+
+    public function __call($requested_method, $arguments)
+    {
+        // Convert to snake case
+        $name   = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $requested_method));
+
+        // The first argument is the string|array|object we want to echo out
+        $output = reset($arguments);
+
+        $name   = $this->applyStyleMethods($name);
 
         // If we have fulfilled all of the requested methods and we have output, output it
         if (!strlen($name) && $this->hasOutput($output)) {
@@ -357,23 +225,19 @@ class CLImate
 
         // If we still have something left, let's see if it's a terminal object
         if (strlen($name)) {
-            // If it is, let's execute it
-            if (class_exists($this->getFullTerminalObjectClass($name))) {
+            if ( $this->terminal_object->exists($name)) {
+                $obj = $this->terminal_object
+                            ->settings($this->settings)
+                            ->cli($this)
+                            ->execute($name, $arguments);
 
-                $this->executeTerminalObject($name, $arguments);
-
-            } elseif (class_exists($this->getFullDynamicTerminalObjectClass($name))) {
-                return $this->executeDynamicTerminalObject($name, $arguments);
-
-            } elseif (class_exists($this->getFullSettingsClass($name))) {
-
-                $this->addSetting($name, $arguments);
-
+                // If something was returned, return it
+                if ($obj) return $obj;
+            } elseif ( $this->settings->exists($name)) {
+                $this->settings->add($name, $output);
             } else {
-
                 // If we can't find it at this point, let's fail gracefully
                 return $this->out($output);
-
             }
         }
 

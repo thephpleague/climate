@@ -76,6 +76,52 @@ class ProgressTest extends TestBase
 
     /** @test */
 
+    public function it_can_output_a_progress_bar_with_current_labels()
+    {
+        ob_start();
+
+        $progress = $this->cli->progress(10);
+
+        $labels = [
+            'zeroth',
+            'first',
+            'second',
+            'third',
+            'fourth',
+            'fifth',
+            'sixth',
+            'seventh',
+            'eighth',
+            'ninth',
+            'tenth',
+        ];
+
+        for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i, $labels[$i]);
+        }
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\n";
+        $should_be .= "\e[m\e[1A\r\e[K> 0% zeroth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(10)}> 10% first\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(20)}> 20% second\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(30)}> 30% third\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(40)}> 40% fourth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(50)}> 50% fifth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(60)}> 60% sixth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(70)}> 70% seventh\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(80)}> 80% eighth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(90)}> 90% ninth\e[0m\n";
+        $should_be .= "\e[m\e[1A\r\e[K{$this->repeat(100)}> 100% tenth\e[0m\n";
+
+        $this->assertSame($should_be, $result);
+    }
+
+    /** @test */
+
     public function it_can_output_a_styled_progress_bar()
     {
         ob_start();

@@ -15,11 +15,11 @@ class Format extends BaseDecorator
 
     protected $defaults = [
             'bold'          => 1,
-	        'dim'           => 2,
-	        'underline'     => 4,
-	        'blink'         => 5,
-	        'invert'        => 7,
-	        'hidden'        => 8,
+            'dim'           => 2,
+            'underline'     => 4,
+            'blink'         => 5,
+            'invert'        => 7,
+            'hidden'        => 8,
         ];
 
     public function add($key, $value)
@@ -29,13 +29,13 @@ class Format extends BaseDecorator
 
     public function all()
     {
-    	return $this->formats;
+        return $this->formats;
     }
 
     /**
      * Get the code for the format
      *
-     * @param  mixed $val
+     * @param  mixed  $val
      * @return string
      */
 
@@ -59,6 +59,7 @@ class Format extends BaseDecorator
 
         if ($code) {
             $this->current[] = $code;
+
             return true;
         }
 

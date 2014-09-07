@@ -1,10 +1,19 @@
 <?php
 
-namespace CLImate\TerminalObject\Settings;
+namespace CLImate\Settings;
 
 class Art implements SettingsInterface
 {
+    /**
+	 * An array of valid art directories
+	 *  @var array $dirs
+	 */
+
     public $dirs = [];
+
+    /**
+     * Add directories of art
+     */
 
     public function add()
     {

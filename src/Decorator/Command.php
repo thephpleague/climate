@@ -34,7 +34,7 @@ class Command extends BaseDecorator
     /**
      * Get the style that corresponds to the command
      *
-     * @param  mixed $val
+     * @param  mixed  $val
      * @return string
      */
 

@@ -46,7 +46,7 @@ class Color extends BaseDecorator
     /**
      * Get the code for the color
      *
-     * @param  mixed $val
+     * @param  mixed  $val
      * @return string
      */
 
@@ -70,6 +70,7 @@ class Color extends BaseDecorator
 
         if ($code) {
             $this->current = [$code];
+
             return true;
         }
 

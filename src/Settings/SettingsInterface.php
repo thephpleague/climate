@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\TerminalObject\Settings;
+namespace CLImate\Settings;
 
 interface SettingsInterface
 {
