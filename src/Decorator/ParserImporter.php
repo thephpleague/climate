@@ -4,6 +4,12 @@ namespace CLImate\Decorator;
 
 trait ParserImporter
 {
+    /**
+     * An instance of the Parser class
+     *
+     * @var CLImate\Decorator\Parser $parser
+     */
+
     protected $parser;
 
     /**

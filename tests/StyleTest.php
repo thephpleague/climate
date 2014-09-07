@@ -288,7 +288,7 @@ class StyleTest extends TestBase
 
     /** @test */
 
-    public function it_can_use_add_a_color_command()
+    public function it_can_use_add_a_command_via_a_string()
     {
         ob_start();
 
@@ -301,6 +301,25 @@ class StyleTest extends TestBase
         ob_end_clean();
 
         $this->assertSame("\e[94mThis would go out to the console.\e[0m\n", $result);
+    }
+
+    /** @test */
+
+    public function it_can_use_add_a_command_via_an_array()
+    {
+        ob_start();
+
+        $command = ['light_blue', 'background_red', 'bold', 'underline'];
+
+        $this->cli->style->addCommand('holler', $command);
+
+        $this->cli->holler('This would go out to the console.');
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $this->assertSame("\e[1;4;94;41mThis would go out to the console.\e[0m\n", $result);
     }
 
 }

@@ -77,10 +77,9 @@ class Command extends BaseDecorator
     {
         $code = $this->get($val);
 
-        if ($code) {
-            return $code;
-        }
-
+        // Return the code because it is a string corresponding
+        // to a property in another class
+        if ($code) return $code;
         return false;
     }
 

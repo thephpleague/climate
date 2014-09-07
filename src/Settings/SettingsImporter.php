@@ -5,7 +5,7 @@ namespace CLImate\Settings;
 trait SettingsImporter
 {
     /**
-     * Dictates an any settings that a class may need access to
+     * Dictates any settings that a class may need access to
      *
      * @return array
      */

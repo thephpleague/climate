@@ -22,7 +22,7 @@ class BackgroundColor extends Color
 
     public function get($val)
     {
-        $color = parent::get($val);
+        $color = parent::get($this->strip($val));
 
         if ($color) $color += self::ADD;
         return $color;
@@ -37,9 +37,7 @@ class BackgroundColor extends Color
 
     public function set($val)
     {
-        $val = str_replace('background_', '', $val);
-
-        return parent::set($val);
+        return parent::set($this->strip($val));
     }
 
     /**
@@ -57,5 +55,17 @@ class BackgroundColor extends Color
         }
 
         return $colors;
+    }
+
+    /**
+     * Strip the color of any prefixes
+     *
+     * @param  string $val
+     * @return string
+     */
+
+    protected function strip($val)
+    {
+        return str_replace('background_', '', $val);
     }
 }

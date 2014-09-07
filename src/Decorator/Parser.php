@@ -4,7 +4,19 @@ namespace CLImate\Decorator;
 
 class Parser
 {
+    /**
+     * An array of the currently applied codes
+     *
+     * @var array $current;
+     */
+
     protected $current;
+
+    /**
+     * All of the possible styles available
+     *
+     * @var array $all
+     */
 
     protected $all;
 
@@ -123,7 +135,7 @@ class Parser
         $search = [];
 
         foreach ($tags as $tag => $color) {
-            $search["<{$tag}>"]  = $this->start($color);
+            $search["<{$tag}>"]  = $this->start($this->codeStr($color));
             $search["</{$tag}>"] = $this->end();
 
             // Also replace JSONified end tags
@@ -135,6 +147,19 @@ class Parser
     }
 
     /**
+     * Stringify the codes
+     *
+     * @param  mixed  $code
+     * @return string
+     */
+
+    protected function codeStr($code)
+    {
+        if (!is_array($code)) $code = [$code];
+        return implode(';', $code);
+    }
+
+    /**
      * Retrive the current style code
      *
      * @return string
@@ -142,7 +167,7 @@ class Parser
 
     protected function currentCode()
     {
-        return implode(';', $this->current);
+        return $this->codeStr($this->current);
     }
 
 }

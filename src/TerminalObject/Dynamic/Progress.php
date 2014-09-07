@@ -6,25 +6,57 @@ use CLImate\Output;
 
 class Progress extends BaseDynamicTerminalObject
 {
-    protected $total           = 0;
+    /**
+     * The total number of items involved
+     *
+     * @var integer $total
+     */
 
-    protected $full_bar_length = 100;
+    protected $total       = 0;
+
+    /**
+     * The string length of the bar when at 100%
+     *
+     * @var integer $bar_str_len
+     */
+
+    protected $bar_str_len = 100;
+
+    /**
+     * If they pass in a total, set the total
+     *
+     * @param integer $total
+     */
 
     public function __construct($total = null)
     {
-        if ($total) {
-            $this->total($total);
-        }
+        if ($total) $this->total($total);
     }
+
+    /**
+     * Set the total property
+     *
+     * @param  integer                                 $total
+     * @return CLImate\TerminalObject\Dynamic\Progress
+     */
 
     public function total($total)
     {
+        // Drop down a line, we are about to
+        // re-write this line for the progress bar
         echo "\n";
 
         $this->total = $total;
 
         return $this;
     }
+
+    /**
+     * Determines the current percentage we are at and re-writes the progress bar
+     *
+     * @param integer $current
+     * @param mixed   $label
+     */
 
     public function current($current, $label = null)
     {
@@ -39,7 +71,7 @@ class Progress extends BaseDynamicTerminalObject
 
         $percentage = $current / $this->total;
 
-        $bar_length = round($this->full_bar_length * $percentage);
+        $bar_length = round($this->bar_str_len * $percentage);
 
         $percentage *= 100;
 
@@ -49,7 +81,7 @@ class Progress extends BaseDynamicTerminalObject
         // =============>             50% label
         $bar_str = str_repeat('=', $bar_length);
         $bar_str .= '> ';
-        $bar_str .= str_repeat(' ', $this->full_bar_length - $bar_length);
+        $bar_str .= str_repeat(' ', $this->bar_str_len - $bar_length);
         $bar_str .= $percentage;
         $bar_str .= '% ';
 
