@@ -149,14 +149,18 @@ class Parser
     /**
      * Stringify the codes
      *
-     * @param  mixed  $code
+     * @param  mixed  $codes
      * @return string
      */
 
-    protected function codeStr($code)
+    protected function codeStr($codes)
     {
-        if (!is_array($code)) $code = [$code];
-        return implode(';', $code);
+        if (!is_array($codes)) $codes = [$codes];
+
+        // For the sake of consistency and testability
+        sort($codes);
+
+        return implode(';', $codes);
     }
 
     /**

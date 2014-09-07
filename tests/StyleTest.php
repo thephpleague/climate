@@ -336,7 +336,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame("\e[1;4;94;41mThis would go out to the console.\e[0m\n", $result);
+        $this->assertSame("\e[1;4;41;94mThis would go out to the console.\e[0m\n", $result);
     }
 
     /** @test */
@@ -355,7 +355,7 @@ class StyleTest extends TestBase
 
         ob_end_clean();
 
-        $this->assertSame("\e[mThis would go \e[94;41;1;4mout\e[0m\e[m to the console.\e[0m\n", $result);
+        $this->assertSame("\e[mThis would go \e[1;4;41;94mout\e[0m\e[m to the console.\e[0m\n", $result);
     }
 
 }

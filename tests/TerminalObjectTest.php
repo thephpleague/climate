@@ -136,7 +136,7 @@ class TerminalObjectTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "\e[5;4m### Flank me! ###\e[0m\n";
+        $should_be = "\e[4;5m### Flank me! ###\e[0m\n";
 
         $this->assertSame($should_be, $result);
     }
