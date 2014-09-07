@@ -86,7 +86,7 @@ class Parser
     /**
      * Wrap the code string in the full escaped sequence
      *
-     * @param string $codes
+     * @param  string $codes
      * @return string
      */
 
