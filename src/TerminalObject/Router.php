@@ -14,7 +14,7 @@ class Router
     /**
      * An instance of the Settings Manager class
      *
-     * @var CLImate\Settings\Manager $settings;
+     * @var \CLImate\Settings\Manager $settings;
      */
 
     protected $settings;
@@ -66,8 +66,8 @@ class Router
     /**
      * Set the parser property
      *
-     * @param  CLImate\Decorator\Parser      $parser
-     * @return CLImate\TerminalObject\Router
+     * @param  \CLImate\Decorator\Parser      $parser
+     * @return \CLImate\TerminalObject\Router
      */
 
     public function parser(Parser $parser)
@@ -80,8 +80,8 @@ class Router
     /**
      * Set the settings property
      *
-     * @param  CLImate\Settings\Manager      $settings
-     * @return CLImate\TerminalObject\Router
+     * @param  \CLImate\Settings\Manager      $settings
+     * @return \CLImate\TerminalObject\Router
      */
 
     public function settings(Manager $settings)
@@ -167,8 +167,8 @@ class Router
     /**
      * Execute a dynamic terminal object using given arguments
      *
-     * @param CLImate\TerminalObject\Dynamic $obj
-     * @param CLImate\TerminalObject\Dynamic $arguments
+     * @param \CLImate\TerminalObject\Dynamic $obj
+     * @param \CLImate\TerminalObject\Dynamic $arguments
      */
 
     protected function executeDynamic($obj)
