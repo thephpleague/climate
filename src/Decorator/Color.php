@@ -86,7 +86,7 @@ class Color extends BaseDecorator
     /**
      * Set the current color
      *
-     * @param  mixed   $val
+     * @param  string|integer   $val
      * @return boolean
      */
 

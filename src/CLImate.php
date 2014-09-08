@@ -201,7 +201,7 @@ class CLImate
     /**
      * Magic method for anything called that doesn't exist
      *
-     * @param string $requested_methods
+     * @param string $requested_method
      * @param array  $arguments
      *
      * List of many of the possible method being called here
