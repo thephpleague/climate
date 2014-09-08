@@ -64,7 +64,7 @@ class CLImate
     /**
      * An instance of the Style class
      *
-     * @var CLImate\Decorator\Style $style
+     * @var \CLImate\Decorator\Style $style
      */
 
     public $style;
@@ -72,7 +72,7 @@ class CLImate
     /**
      * An instance of the Terminal Object Router class
      *
-     * @var CLImate\TerminalObject\Router $terminal_object
+     * @var \CLImate\TerminalObject\Router $terminal_object
      */
 
     protected $terminal_object;
@@ -80,7 +80,7 @@ class CLImate
     /**
      * An instance of the Settings Manager class
      *
-     * @var CLImate\Settings\Manager $settings
+     * @var \CLImate\Settings\Manager $settings
      */
 
     protected $settings;
