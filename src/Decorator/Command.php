@@ -70,7 +70,7 @@ class Command extends BaseDecorator
      * Set the currently used command
      *
      * @param  string $val
-     * @return mixed
+     * @return string|false
      */
 
     public function set($val)
