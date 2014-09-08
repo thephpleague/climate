@@ -105,33 +105,33 @@ class Parser
     protected function parse($str)
     {
         $regex = '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
-        preg_match_all($regex, $str, $matches);
+        $count = preg_match_all($regex, $str, $matches);
+
+        if ( !$count ) return $str;
 
         // All we want is the array of actual strings matched
         $matches = reset( $matches );
 
-        if ($matches) {
-            // Let's keep a history of styles applied
-            $history = [$this->currentCode()];
-            $history = array_filter($history);
+        // Let's keep a history of styles applied
+        $history = [$this->currentCode()];
+        $history = array_filter($history);
 
-            // We will be replacing tags one at a time
-            $replace_count = 1;
+        // We will be replacing tags one at a time
+        $replace_count = 1;
 
-            foreach ($matches as $match) {
-                if (strstr($match, '/')) {
-                    // We are closing out the tag, pop off the last element and get the codes that are left
-                    array_pop($history);
-                    $str = str_replace($match, $this->end($history), $str, $replace_count);
-                } else {
-                    // We are starting a new tag
+        foreach ($matches as $match) {
+            if (strstr($match, '/')) {
+                // We are closing out the tag, pop off the last element and get the codes that are left
+                array_pop($history);
+                $str = str_replace($match, $this->end($history), $str, $replace_count);
+            } else {
+                // We are starting a new tag
 
-                    // Add it onto the history
-                    $history[] = $this->tags[$match];
+                // Add it onto the history
+                $history[] = $this->tags[$match];
 
-                    // Replace the tag with the correct color code
-                    $str = str_replace($match, $this->start($this->tags[$match]), $str, $replace_count);
-                }
+                // Replace the tag with the correct color code
+                $str = str_replace($match, $this->start($this->tags[$match]), $str, $replace_count);
             }
         }
 

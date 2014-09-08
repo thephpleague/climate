@@ -47,8 +47,6 @@ class Style
             $class = '\\CLImate\\Decorator\\' . $class;
             $this->style[$key] = new $class();
         }
-
-        $this->buildTags();
     }
 
     /**
