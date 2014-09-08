@@ -57,6 +57,7 @@ namespace CLImate;
  * @method mixed border(string $char, integer $length)
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output)
+ * @method mixed progress(integer $total)
  */
 
 class CLImate
