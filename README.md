@@ -1,7 +1,11 @@
 <p align="center"><img src="http://joe.codes/images/climate/CLImate_Blink.gif" width="300" alt="CLImate" /></p>
 
-[![Build Status](https://travis-ci.org/joetannenbaum/climate.svg?branch=master)](https://travis-ci.org/joetannenbaum/climate)
-[![Coverage Status](https://img.shields.io/coveralls/joetannenbaum/climate.svg)](https://coveralls.io/r/joetannenbaum/climate?branch=master)
+[![Latest Version](https://img.shields.io/github/release/joetannenbaum/climate.svg?style=flat)](https://github.com/joetannenbaum/climate/releases)
+[![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
+[![Build Status](https://img.shields.io/travis/joetannenbaum/climate/master.svg?style=flat)](https://travis-ci.org/joetannenbaum/climate)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/joetannenbaum/climate.svg?style=flat)](https://scrutinizer-ci.com/g/joetannenbaum/climate/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/joetannenbaum/climate.svg?style=flat)](https://scrutinizer-ci.com/g/joetannenbaum/climate)
+[![Total Downloads](https://img.shields.io/packagist/dt/joetannenbaum/climate.svg?style=flat)](https://packagist.org/packages/joetannenbaum/climate)
 
 Running PHP from the command line? CLImate is your new best bud.
 
