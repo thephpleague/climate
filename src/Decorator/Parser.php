@@ -107,10 +107,11 @@ class Parser
         $regex = '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
         $count = preg_match_all($regex, $str, $matches);
 
-        if ( !$count ) return $str;
+        // If we didn't find anything, return the string right back
+        if (!$count) return $str;
 
         // All we want is the array of actual strings matched
-        $matches = reset( $matches );
+        $matches = reset($matches);
 
         // Let's keep a history of styles applied
         $history = [$this->currentCode()];
