@@ -54,10 +54,10 @@ namespace CLImate;
  * @method mixed json(mixed $var)
  * @method mixed br()
  * @method mixed draw(string $art)
- * @method mixed border(string $char, integer $length)
+ * @method mixed border(string $char (optional), integer $length (optional))
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output)
- * @method mixed progress(integer $total)
+ * @method mixed progress(integer $total (optional))
  */
 
 class CLImate
