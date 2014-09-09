@@ -5,10 +5,10 @@ namespace CLImate\TerminalObject;
 class Json extends BaseTerminalObject
 {
     /**
-     * The data to conver to JSON
-     *
-     * @var mixed $data
-     */
+	 * The data to convert to JSON
+	 *
+	 * @var mixed $data
+	 */
 
     protected $data;
 

@@ -59,7 +59,7 @@ namespace CLImate;
  * @method mixed flank(string $output, string $char optional, integer $length optional)
  * @method mixed progress(integer $total optional)
  *
- * @method void addArt(string $dir)
+ * @method \CLImate\CLImate addArt(string $dir)
  */
 
 class CLImate

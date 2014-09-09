@@ -69,7 +69,7 @@ class Command extends BaseDecorator
     /**
      * Set the currently used command
      *
-     * @param  string $val
+     * @param  string       $val
      * @return string|false
      */
 
