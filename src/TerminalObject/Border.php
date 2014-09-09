@@ -5,18 +5,18 @@ namespace CLImate\TerminalObject;
 class Border extends BaseTerminalObject
 {
     /**
-	 * The character to repeat for the border
-	 *
-	 * @var string $char
-	 */
+     * The character to repeat for the border
+     *
+     * @var string $char
+     */
 
     protected $char = '-';
 
     /**
-	 * The length of the border
-	 *
-	 * @var integer $length
-	 */
+     * The length of the border
+     *
+     * @var integer $length
+     */
 
     protected $length = 100;
 
@@ -32,11 +32,11 @@ class Border extends BaseTerminalObject
     }
 
     /**
-	 * Set the character to repeat for the border
-	 *
-	 * @param string $char
-	 * @return Border
-	 */
+     * Set the character to repeat for the border
+     *
+     * @param string $char
+     * @return Border
+     */
 
     public function char($char)
     {
@@ -46,11 +46,11 @@ class Border extends BaseTerminalObject
     }
 
     /**
-	 * Set the length of the border
-	 *
-	 * @param integer $length
-	 * @return Border
-	 */
+     * Set the length of the border
+     *
+     * @param integer $length
+     * @return Border
+     */
 
     public function length($length)
     {
@@ -60,10 +60,10 @@ class Border extends BaseTerminalObject
     }
 
     /**
-	 * Return the border
-	 *
-	 * @return string
-	 */
+     * Return the border
+     *
+     * @return string
+     */
 
     public function result()
     {

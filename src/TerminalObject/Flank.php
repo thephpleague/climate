@@ -5,26 +5,26 @@ namespace CLImate\TerminalObject;
 class Flank extends BaseTerminalObject
 {
     /**
-	 * The string that will be flanked
-	 *
-	 * @var string $str
-	 */
+     * The string that will be flanked
+     *
+     * @var string $str
+     */
 
     protected $str;
 
     /**
-	 * The character(s) to repeat on either side of the string
-	 *
-	 * @var string $char
-	 */
+     * The character(s) to repeat on either side of the string
+     *
+     * @var string $char
+     */
 
     protected $char = '#';
 
     /**
-	 * How many times the character(s) should be repeated on either side
-	 *
-	 * @var integer $repeat
-	 */
+     * How many times the character(s) should be repeated on either side
+     *
+     * @var integer $repeat
+     */
 
     protected $repeat = 3;
 
@@ -42,11 +42,11 @@ class Flank extends BaseTerminalObject
     }
 
     /**
-	 * Set the character(s) to repeat on either side
-	 *
-	 * @param string $char
-	 * @return Flank
-	 */
+     * Set the character(s) to repeat on either side
+     *
+     * @param string $char
+     * @return Flank
+     */
 
     public function char($char)
     {
@@ -56,11 +56,11 @@ class Flank extends BaseTerminalObject
     }
 
     /**
-	 * Set the repeat of the flank character(s)
-	 *
-	 * @param integer $repeat
-	 * @return Flank
-	 */
+     * Set the repeat of the flank character(s)
+     *
+     * @param integer $repeat
+     * @return Flank
+     */
 
     public function repeat($repeat)
     {
@@ -70,10 +70,10 @@ class Flank extends BaseTerminalObject
     }
 
     /**
-	 * Return the flanked string
-	 *
-	 * @return string
-	 */
+     * Return the flanked string
+     *
+     * @return string
+     */
 
     public function result()
     {
