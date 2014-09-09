@@ -56,7 +56,7 @@ namespace CLImate;
  * @method mixed draw(string $art)
  * @method mixed border(string $char (optional), integer $length (optional))
  * @method mixed dump(mixed $var)
- * @method mixed flank(string $output)
+ * @method mixed flank(string $output, string $char (optional), integer $length (optional))
  * @method mixed progress(integer $total (optional))
  *
  * @method void addArt(string $dir)
