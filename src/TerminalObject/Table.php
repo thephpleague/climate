@@ -134,7 +134,6 @@ class Table extends BaseTerminalObject
      * Get table row
      *
      * @param  mixed  $columns
-     * @param  array  $widths
      * @return string
      */
 
@@ -169,7 +168,6 @@ class Table extends BaseTerminalObject
     /**
      * Get the header row for the table if it's an associative array or object
      *
-     * @param  array $rows
      * @return mixed
      */
 
@@ -219,7 +217,6 @@ class Table extends BaseTerminalObject
     /**
      * Determine the width of each column
      *
-     * @param  array $rows
      * @return array
      */
 

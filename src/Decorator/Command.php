@@ -53,7 +53,7 @@ class Command extends BaseDecorator
     /**
      * Get the style that corresponds to the command
      *
-     * @param  mixed  $val
+     * @param  string  $val
      * @return string
      */
 

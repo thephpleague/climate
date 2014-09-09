@@ -52,7 +52,6 @@ class Parser
     /**
      * Get the string that begins the style
      *
-     * @param  string $color
      * @return string
      */
 

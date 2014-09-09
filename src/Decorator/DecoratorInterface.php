@@ -6,6 +6,9 @@ interface DecoratorInterface
 {
     public function add($key, $value);
 
+    /**
+     * @return void
+     */
     public function defaults();
 
     public function get($val);
@@ -16,5 +19,8 @@ interface DecoratorInterface
 
     public function current();
 
+    /**
+     * @return void
+     */
     public function reset();
 }

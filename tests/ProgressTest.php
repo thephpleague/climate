@@ -5,6 +5,9 @@ require_once 'TestBase.php';
 class ProgressTest extends TestBase
 {
 
+    /**
+     * @param integer $length
+     */
     private function repeat($length)
     {
         $bar = str_repeat('=', $length);

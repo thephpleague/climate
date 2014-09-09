@@ -35,7 +35,7 @@ class Border extends BaseTerminalObject
 	 * Set the character to repeat for the border
 	 *
 	 * @param string $char
-	 * @return CLImate\Border
+	 * @return Border
 	 */
 
     public function char($char)
@@ -49,7 +49,7 @@ class Border extends BaseTerminalObject
 	 * Set the length of the border
 	 *
 	 * @param integer $length
-	 * @return CLImate\Border
+	 * @return Border
 	 */
 
     public function length($length)

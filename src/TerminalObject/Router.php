@@ -2,9 +2,9 @@
 
 namespace CLImate\TerminalObject;
 
-use CLImate\Output;
 use CLImate\Decorator\Parser;
 use CLImate\Decorator\ParserImporter;
+use CLImate\Output;
 use CLImate\Settings\Manager;
 
 class Router
@@ -20,11 +20,11 @@ class Router
     protected $settings;
 
     /**
-	 * Check if the name matches an existing terminal object
-	 *
-	 * @param string $name
-	 * @return boolean
-	 */
+     * Check if the name matches an existing terminal object
+     *
+     * @param string $name
+     * @return boolean
+     */
 
     public function exists($name)
     {
@@ -131,7 +131,7 @@ class Router
      * Get the path for the terminal object class
      *
      * @param  string $name
-     * @return mixed
+     * @return string|null
      */
 
     protected function getClass($name)
@@ -168,7 +168,6 @@ class Router
      * Execute a dynamic terminal object using given arguments
      *
      * @param \CLImate\TerminalObject\Dynamic $obj
-     * @param \CLImate\TerminalObject\Dynamic $arguments
      */
 
     protected function executeDynamic($obj)

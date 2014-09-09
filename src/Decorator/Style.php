@@ -87,7 +87,7 @@ class Style
      * Attempt to set some aspect of the styling,
      * return true if attempt was successful
      *
-     * @param  mixed   $key
+     * @param  string   $key
      * @return boolean
      */
 
@@ -126,7 +126,6 @@ class Style
     /**
      * Reset the current styles applied
      *
-     * @param boolean $force If we should reset even if persisting
      */
 
     public function reset()
@@ -139,7 +138,7 @@ class Style
     /**
      * Get a new instance of the Parser class based on the current settings
      *
-     * @return CLImate\Decorator\Parser
+     * @return Parser
      */
 
     public function parser()
@@ -191,7 +190,7 @@ class Style
      *
      * List of possible magic methods are at the top of this class
      *
-     * @param string $requested_methods
+     * @param string $requested_method
      * @param array  $arguments
      */
 

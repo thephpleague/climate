@@ -5,10 +5,10 @@ namespace CLImate\Settings;
 class Manager
 {
     /**
-	 * An array of settings that have been... set
-	 *
-	 * @var array $settings
-	 */
+     * An array of settings that have been... set
+     *
+     * @var array $settings
+     */
 
     protected $settings = [];
 
