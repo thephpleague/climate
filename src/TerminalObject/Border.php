@@ -22,13 +22,7 @@ class Border extends BaseTerminalObject
 
     public function __construct($char = null, $length = null)
     {
-        if ($char) {
-            $this->char($char);
-        }
-
-        if ($length) {
-            $this->length($length);
-        }
+        $this->char($char)->length($length);
     }
 
     /**
@@ -40,7 +34,7 @@ class Border extends BaseTerminalObject
 
     public function char($char)
     {
-        $this->char = $char;
+        $this->set('char', $char);
 
         return $this;
     }
@@ -54,7 +48,7 @@ class Border extends BaseTerminalObject
 
     public function length($length)
     {
-        $this->length = $length;
+        $this->set('length', $length);
 
         return $this;
     }

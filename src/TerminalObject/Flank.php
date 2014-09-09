@@ -32,13 +32,7 @@ class Flank extends BaseTerminalObject
     {
         $this->str = $str;
 
-        if ($char) {
-            $this->char($char);
-        }
-
-        if ($repeat) {
-            $this->repeat($repeat);
-        }
+        $this->char($char)->repeat($repeat);
     }
 
     /**
@@ -50,7 +44,7 @@ class Flank extends BaseTerminalObject
 
     public function char($char)
     {
-        $this->char = $char;
+        $this->set('char', $char);
 
         return $this;
     }
@@ -64,7 +58,7 @@ class Flank extends BaseTerminalObject
 
     public function repeat($repeat)
     {
-        $this->repeat = $repeat;
+        $this->set('repeat', $repeat);
 
         return $this;
     }
