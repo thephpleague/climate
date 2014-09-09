@@ -2,8 +2,8 @@
 
 namespace CLImate\TerminalObject;
 
-use CLImate\Settings\SettingsImporter;
 use CLImate\Decorator\ParserImporter;
+use CLImate\Settings\SettingsImporter;
 
 abstract class BaseTerminalObject implements TerminalObjectInterface
 {

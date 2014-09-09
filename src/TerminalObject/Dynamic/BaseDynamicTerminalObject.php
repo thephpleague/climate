@@ -2,8 +2,8 @@
 
 namespace CLImate\TerminalObject\Dynamic;
 
-use CLImate\Settings\SettingsImporter;
 use CLImate\Decorator\ParserImporter;
+use CLImate\Settings\SettingsImporter;
 
 /**
  * The dynamic terminal object doesn't adhere to the basic terminal object

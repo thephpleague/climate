@@ -37,7 +37,7 @@ class Progress extends BaseDynamicTerminalObject
      * Set the total property
      *
      * @param  integer                                 $total
-     * @return CLImate\TerminalObject\Dynamic\Progress
+     * @return Progress
      */
 
     public function total($total)

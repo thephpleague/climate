@@ -96,10 +96,10 @@ class CLImate
     }
 
     /**
-	 * Prints the string to the console
-	 *
-	 * @param string $str
-	 */
+     * Prints the string to the console
+     *
+     * @param string $str
+     */
 
     public function out($str)
     {

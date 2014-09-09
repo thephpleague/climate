@@ -54,7 +54,7 @@ class Format extends BaseDecorator
     /**
      * Get the code for the format
      *
-     * @param  mixed  $val
+     * @param  string  $val
      * @return string
      */
 
@@ -76,7 +76,7 @@ class Format extends BaseDecorator
      * Set the current format
      *
      * @param  string $val
-     * @return mixed
+     * @return boolean
      */
 
     public function set($val)

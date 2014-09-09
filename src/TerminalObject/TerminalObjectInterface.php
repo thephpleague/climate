@@ -8,6 +8,9 @@ interface TerminalObjectInterface
 
     public function settings();
 
+    /**
+     * @return void
+     */
     public function importSetting( $setting );
 
 }

@@ -6,10 +6,10 @@ class Color extends BaseDecorator
 {
 
     /**
-	 * The available colors
-	 *
-	 * @var array
-	 */
+     * The available colors
+     *
+     * @var array
+     */
 
     protected $colors = [];
 
@@ -86,7 +86,7 @@ class Color extends BaseDecorator
     /**
      * Set the current color
      *
-     * @param  string|integer   $val
+     * @param  string   $val
      * @return boolean
      */
 

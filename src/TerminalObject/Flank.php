@@ -45,7 +45,7 @@ class Flank extends BaseTerminalObject
 	 * Set the character(s) to repeat on either side
 	 *
 	 * @param string $char
-	 * @return CLImate\TerminalObject\Flank
+	 * @return Flank
 	 */
 
     public function char($char)
@@ -59,7 +59,7 @@ class Flank extends BaseTerminalObject
 	 * Set the repeat of the flank character(s)
 	 *
 	 * @param integer $repeat
-	 * @return CLImate\TerminalObject\Flank
+	 * @return Flank
 	 */
 
     public function repeat($repeat)
