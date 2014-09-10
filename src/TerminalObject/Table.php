@@ -199,7 +199,7 @@ class Table extends BaseTerminalObject
 
     protected function lengthWithoutTags($str)
     {
-        return strlen($this->withoutTags($str));
+        return mb_strwidth($this->withoutTags($str), 'UTF-8');
     }
 
     /**

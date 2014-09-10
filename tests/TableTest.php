@@ -143,4 +143,32 @@ class TableTest extends TestBase
         $this->assertSame($should_be, $result);
     }
 
+    /** @test */
+
+    public function it_can_handle_multi_byte_characters()
+    {
+        ob_start();
+
+        $this->cli->table([
+                [
+                    'cell1' => 'Cell Ω',
+                    'cell2' => 'Cell 2',
+                    'cell3' => 'Cell 3',
+                    'cell4' => 'Cell 4',
+                ],
+            ]);
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\e[m-------------------------------------\e[0m\n";
+        $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
+        $should_be .= "\e[m=====================================\e[0m\n";
+        $should_be .= "\e[m| Cell Ω | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
+        $should_be .= "\e[m-------------------------------------\e[0m\n";
+
+        $this->assertSame($should_be, $result);
+    }
+
 }
