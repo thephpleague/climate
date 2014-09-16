@@ -21,6 +21,5 @@
         "psr-4": {
             "League\\CLImate\\": "src/"
         }
-    },
-    "minimum-stability": "stable"
+    }
 }
