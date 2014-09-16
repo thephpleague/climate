@@ -39,7 +39,7 @@ Using [composer](https://packagist.org/packages/league/climate):
 ```
 {
     "require": {
-        "league/climate": "~1.0"
+        "league/climate": "~2.0"
     }
 }
 ```
