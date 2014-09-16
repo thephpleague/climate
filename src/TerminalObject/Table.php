@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject;
 
 class Table extends BaseTerminalObject
 {

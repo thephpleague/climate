@@ -6,7 +6,7 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->cli = new CLImate\CLImate();
+        $this->cli = new League\CLImate\CLImate();
     }
 
     /** @test */

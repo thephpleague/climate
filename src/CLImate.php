@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate;
+namespace League\CLImate;
 
 /**
  * @method mixed black(string $str = null)
@@ -59,7 +59,7 @@ namespace CLImate;
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
  *
- * @method \CLImate\CLImate addArt(string $dir)
+ * @method \League\CLImate\CLImate addArt(string $dir)
  */
 
 class CLImate
@@ -67,7 +67,7 @@ class CLImate
     /**
      * An instance of the Style class
      *
-     * @var \CLImate\Decorator\Style $style
+     * @var \League\CLImate\Decorator\Style $style
      */
 
     public $style;
@@ -75,7 +75,7 @@ class CLImate
     /**
      * An instance of the Terminal Object Router class
      *
-     * @var \CLImate\TerminalObject\Router $terminal_object
+     * @var \League\CLImate\TerminalObject\Router $terminal_object
      */
 
     protected $terminal_object;
@@ -83,7 +83,7 @@ class CLImate
     /**
      * An instance of the Settings Manager class
      *
-     * @var \CLImate\Settings\Manager $settings
+     * @var \League\CLImate\Settings\Manager $settings
      */
 
     protected $settings;

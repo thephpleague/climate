@@ -1,11 +1,11 @@
 <?php
 
-namespace CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject;
 
-use CLImate\Decorator\Parser;
-use CLImate\Decorator\ParserImporter;
-use CLImate\Output;
-use CLImate\Settings\Manager;
+use League\CLImate\Decorator\Parser;
+use League\CLImate\Decorator\ParserImporter;
+use League\CLImate\Output;
+use League\CLImate\Settings\Manager;
 
 class Router
 {
@@ -14,7 +14,7 @@ class Router
     /**
      * An instance of the Settings Manager class
      *
-     * @var \CLImate\Settings\Manager $settings;
+     * @var \League\CLImate\Settings\Manager $settings;
      */
 
     protected $settings;
@@ -66,8 +66,8 @@ class Router
     /**
      * Set the parser property
      *
-     * @param  \CLImate\Decorator\Parser      $parser
-     * @return \CLImate\TerminalObject\Router
+     * @param  \League\CLImate\Decorator\Parser      $parser
+     * @return \League\CLImate\TerminalObject\Router
      */
 
     public function parser(Parser $parser)
@@ -80,8 +80,8 @@ class Router
     /**
      * Set the settings property
      *
-     * @param  \CLImate\Settings\Manager      $settings
-     * @return \CLImate\TerminalObject\Router
+     * @param  \League\CLImate\Settings\Manager      $settings
+     * @return \League\CLImate\TerminalObject\Router
      */
 
     public function settings(Manager $settings)
@@ -100,7 +100,7 @@ class Router
 
     protected function getPath($class)
     {
-        return '\\CLImate\\TerminalObject\\' . $class;
+        return '\\League\CLImate\\TerminalObject\\' . $class;
     }
 
     /**
@@ -148,7 +148,7 @@ class Router
     /**
      * Execute a basic terminal object
      *
-     * @param CLImate\TerminalObject $obj
+     * @param League\CLImate\TerminalObject $obj
      */
 
     protected function executeBasic($obj)
@@ -167,7 +167,7 @@ class Router
     /**
      * Execute a dynamic terminal object using given arguments
      *
-     * @param \CLImate\TerminalObject\Dynamic $obj
+     * @param \League\CLImate\TerminalObject\Dynamic $obj
      */
 
     protected function executeDynamic($obj)

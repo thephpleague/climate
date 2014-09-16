@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\Decorator;
+namespace League\CLImate\Decorator;
 
 class Parser
 {

@@ -1,8 +1,8 @@
 <?php
 
-namespace CLImate\TerminalObject\Dynamic;
+namespace League\CLImate\TerminalObject\Dynamic;
 
-use CLImate\Output;
+use League\CLImate\Output;
 
 class Progress extends BaseDynamicTerminalObject
 {

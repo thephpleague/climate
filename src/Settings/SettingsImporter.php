@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\Settings;
+namespace League\CLImate\Settings;
 
 trait SettingsImporter
 {
@@ -18,7 +18,7 @@ trait SettingsImporter
     /**
      * Import the setting into the class
      *
-     * @param CLImate\Settings $setting
+     * @param League\CLImate\Settings $setting
      */
 
     public function importSetting($setting)

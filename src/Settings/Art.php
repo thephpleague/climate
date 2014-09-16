@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\Settings;
+namespace League\CLImate\Settings;
 
 class Art implements SettingsInterface
 {

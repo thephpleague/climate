@@ -1,9 +1,9 @@
 <?php
 
-namespace CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject;
 
-use CLImate\Decorator\ParserImporter;
-use CLImate\Settings\SettingsImporter;
+use League\CLImate\Decorator\ParserImporter;
+use League\CLImate\Settings\SettingsImporter;
 
 abstract class BaseTerminalObject implements TerminalObjectInterface
 {

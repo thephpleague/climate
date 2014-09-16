@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\Settings;
+namespace League\CLImate\Settings;
 
 class Manager
 {
@@ -69,7 +69,7 @@ class Manager
 
     protected function getPath($name)
     {
-        return '\\CLImate\\Settings\\' . $this->getClassName($name);
+        return '\\League\CLImate\\Settings\\' . $this->getClassName($name);
     }
 
     /**

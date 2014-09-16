@@ -1,11 +1,11 @@
 <p align="center"><img src="http://joe.codes/images/climate/CLImate_Blink.gif" width="300" alt="CLImate" /></p>
 
-[![Latest Version](https://img.shields.io/github/release/joetannenbaum/climate.svg?style=flat)](https://github.com/joetannenbaum/climate/releases)
+[![Latest Version](https://img.shields.io/github/release/thephpleague/climate.svg?style=flat)](https://github.com/thephpleague/climate/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/joetannenbaum/climate/master.svg?style=flat)](https://travis-ci.org/joetannenbaum/climate)
-[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/joetannenbaum/climate.svg?style=flat)](https://scrutinizer-ci.com/g/joetannenbaum/climate/code-structure)
-[![Quality Score](https://img.shields.io/scrutinizer/g/joetannenbaum/climate.svg?style=flat)](https://scrutinizer-ci.com/g/joetannenbaum/climate)
-[![Total Downloads](https://img.shields.io/packagist/dt/joetannenbaum/climate.svg?style=flat)](https://packagist.org/packages/joetannenbaum/climate)
+[![Build Status](https://img.shields.io/travis/thephpleague/climate/master.svg?style=flat)](https://travis-ci.org/thephpleague/climate)
+[![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/climate.svg?style=flat)](https://scrutinizer-ci.com/g/thephpleague/climate/code-structure)
+[![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/climate.svg?style=flat)](https://scrutinizer-ci.com/g/thephpleague/climate)
+[![Total Downloads](https://img.shields.io/packagist/dt/league/climate.svg?style=flat)](https://packagist.org/packages/league/climate)
 
 Running PHP from the command line? CLImate is your new best bud.
 
@@ -34,12 +34,12 @@ CLImate allows you to easily output colored text, special formats, and more.
 
 ## Installation
 
-Using [composer](https://packagist.org/packages/joetannenbaum/climate):
+Using [composer](https://packagist.org/packages/league/climate):
 
 ```
 {
     "require": {
-        "joetannenbaum/climate": "~1.0"
+        "league/climate": "~1.0"
     }
 }
 ```
@@ -51,7 +51,7 @@ The `out` method simply receives a string that will output on a new line:
 ```php
 require_once('vendor/autoload.php');
 
-$climate = new CLImate\CLImate;
+$climate = new League\CLImate\CLImate;
 
 $climate->out('This prints to the terminal.');
 $climate->out('This prints to the terminal.')->out('This will be on a new line');

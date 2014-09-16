@@ -1,8 +1,8 @@
 <?php
 
-namespace CLImate;
+namespace League\CLImate;
 
-use CLImate\Decorator\Parser;
+use League\CLImate\Decorator\Parser;
 
 class Output
 {

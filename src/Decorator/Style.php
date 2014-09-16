@@ -1,6 +1,6 @@
 <?php
 
-namespace CLImate\Decorator;
+namespace League\CLImate\Decorator;
 
 /**
  * @method void addColor(string $color, integer $code)
@@ -44,7 +44,7 @@ class Style
     public function __construct()
     {
         foreach ($this->available as $key => $class) {
-            $class = '\\CLImate\\Decorator\\' . $class;
+            $class = '\\League\CLImate\\Decorator\\' . $class;
             $this->style[$key] = new $class();
         }
     }
