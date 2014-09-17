@@ -112,7 +112,7 @@ class Router
 
     protected function getBasicPath($name)
     {
-        return $this->getPath(ucwords($name));
+        return $this->getPath($this->shortName($name));
     }
 
     /**
@@ -124,7 +124,22 @@ class Router
 
     protected function getDynamicPath($name)
     {
-        return $this->getPath('Dynamic\\' . ucwords($name));
+        return $this->getPath('Dynamic\\' . $this->shortName($name));
+    }
+
+    /**
+     * Get the class short name
+     *
+     * @param string $name
+     * @return string
+     */
+
+    protected function shortName($name)
+    {
+        $name = str_replace('_', ' ', $name);
+        $name = ucwords($name);
+
+        return str_replace(' ', '', $name);
     }
 
     /**

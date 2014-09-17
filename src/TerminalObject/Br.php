@@ -4,6 +4,13 @@ namespace League\CLImate\TerminalObject;
 
 class Br extends BaseTerminalObject
 {
+    protected $count;
+
+    public function __construct($count = 1)
+    {
+        $this->count = round(max((int) $count, 1));
+    }
+
     /**
      * Return an empty string
      *
@@ -12,6 +19,6 @@ class Br extends BaseTerminalObject
 
     public function result()
     {
-        return '';
+        return array_fill(0, $this->count, '');
     }
 }
