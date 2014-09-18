@@ -96,7 +96,7 @@ $climate->lightGreen()->out('It\'s not easy being (light) green.');
 
 ## Backgrounds
 
-To to apply a color as a background, simply prepend the color method with `background`:
+To apply a color as a background, simply prepend the color method with `background`:
 
 ```php
 $climate->backgroundRed('Whoa now this text is red.');
