@@ -9,7 +9,7 @@ class InputTest extends TestBase
 
     public function it_can_prompt_for_basic_info()
     {
-        $reader = Mockery::mock('League\CLImate\Util\ReaderInterface');
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
         $reader->shouldReceive('line')->once()->andReturn('Not much.');
 
         ob_start();
@@ -32,7 +32,7 @@ class InputTest extends TestBase
 
     public function it_will_only_allow_loose_acceptable_responses()
     {
-        $reader = Mockery::mock('League\CLImate\Util\ReaderInterface');
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
         $reader->shouldReceive('line')->once()->andReturn('Not much.');
         $reader->shouldReceive('line')->once()->andReturn('Everything.');
 
@@ -58,7 +58,7 @@ class InputTest extends TestBase
 
     public function it_will_only_allow_strict_acceptable_responses()
     {
-        $reader = Mockery::mock('League\CLImate\Util\ReaderInterface');
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
         $reader->shouldReceive('line')->once()->andReturn('everything.');
         $reader->shouldReceive('line')->once()->andReturn('Everything.');
 
@@ -84,7 +84,7 @@ class InputTest extends TestBase
 
     public function it_will_allow_an_array_of_acceptable_responses()
     {
-        $reader = Mockery::mock('League\CLImate\Util\ReaderInterface');
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
         $reader->shouldReceive('line')->once()->andReturn('stuff.');
         $reader->shouldReceive('line')->once()->andReturn('Stuff.');
 
@@ -110,7 +110,7 @@ class InputTest extends TestBase
 
     public function it_will_display_acceptable_responses()
     {
-        $reader = Mockery::mock('League\CLImate\Util\ReaderInterface');
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
         $reader->shouldReceive('line')->once()->andReturn('Stuff.');
 
         ob_start();
