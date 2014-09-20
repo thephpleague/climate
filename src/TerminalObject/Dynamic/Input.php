@@ -2,6 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
+use League\CLImate\Util\Reader;
+
 class Input extends BaseDynamicTerminalObject
 {
     /**
@@ -36,9 +38,10 @@ class Input extends BaseDynamicTerminalObject
 
     protected $show_acceptable = false;
 
-    public function __construct($prompt)
+    public function __construct($prompt, $reader = null)
     {
         $this->prompt = $prompt;
+        $this->reader = $reader ?: new Reader();
     }
 
     /**
@@ -51,7 +54,7 @@ class Input extends BaseDynamicTerminalObject
     {
         echo $this->promptFormatted();
 
-        $response = $this->readLine();
+        $response = $this->reader->line();
 
         if ($this->isValidResponse($response)) {
             return $response;
@@ -89,21 +92,6 @@ class Input extends BaseDynamicTerminalObject
         $this->strict = true;
 
         return $this;
-    }
-
-    /**
-     * Read the line typed in by the user
-     *
-     * @return string
-     */
-
-    protected function readLine()
-    {
-        $handler  = fopen('php://stdin','r');
-        $response = trim(fgets($handler, 1024));
-        fclose ($handler);
-
-        return $response;
     }
 
     /**
