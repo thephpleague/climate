@@ -38,6 +38,14 @@ class Input extends BaseDynamicTerminalObject
 
     protected $show_acceptable = false;
 
+    /**
+     * An instance of Reader
+     *
+     * @var \League\CLImate\Util\Reader $reader
+     */
+
+    protected $reader;
+
     public function __construct($prompt, $reader = null)
     {
         $this->prompt = $prompt;
@@ -147,7 +155,9 @@ class Input extends BaseDynamicTerminalObject
      * Determine if the user's response is valid
      * according to the acceptable responses array
      *
-     * @param boolean $response
+     * @param string $response
+     *
+     * @return boolean $response
      */
 
     protected function isValidResponse($response)
