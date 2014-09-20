@@ -3,6 +3,7 @@
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Util\Reader;
+use League\CLImate\Util\ReaderInterface;
 
 class Input extends BaseDynamicTerminalObject
 {
@@ -46,7 +47,7 @@ class Input extends BaseDynamicTerminalObject
 
     protected $reader;
 
-    public function __construct($prompt, $reader = null)
+    public function __construct($prompt, ReaderInterface $reader = null)
     {
         $this->prompt = $prompt;
         $this->reader = $reader ?: new Reader();
