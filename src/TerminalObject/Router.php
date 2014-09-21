@@ -51,9 +51,7 @@ class Router
         foreach ($obj->settings() as $obj_setting) {
             $setting = $this->settings->get($obj_setting);
 
-            if ($setting) {
-                $obj->importSetting($setting);
-            }
+            if ($setting) $obj->importSetting($setting);
         }
 
         if ($this->isBasic($name)) {

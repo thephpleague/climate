@@ -22,9 +22,9 @@ class InputTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "\e[m\e[0m\n";
+        $should_be = "\e[mSo what is up? \e[0m";
 
-        $this->assertSame($result, 'So what is up? ');
+        $this->assertSame($result, $should_be);
         $this->assertSame('Not much.', $response);
     }
 
@@ -48,7 +48,7 @@ class InputTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "So what is up? So what is up? ";
+        $should_be = "\e[mSo what is up? \e[0m\e[mSo what is up? \e[0m";
 
         $this->assertSame($should_be, $result);
         $this->assertSame('Everything.', $response);
@@ -74,7 +74,7 @@ class InputTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "So what is up? So what is up? ";
+        $should_be = "\e[mSo what is up? \e[0m\e[mSo what is up? \e[0m";
 
         $this->assertSame($should_be, $result);
         $this->assertSame('Everything.', $response);
@@ -100,7 +100,7 @@ class InputTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "So what is up? So what is up? ";
+        $should_be = "\e[mSo what is up? \e[0m\e[mSo what is up? \e[0m";
 
         $this->assertSame($should_be, $result);
         $this->assertSame('Stuff.', $response);
@@ -125,7 +125,7 @@ class InputTest extends TestBase
 
         ob_end_clean();
 
-        $should_be = "So what is up? [Everything./Stuff.] ";
+        $should_be = "\e[mSo what is up? [Everything./Stuff.] \e[0m";
 
         $this->assertSame($should_be, $result);
         $this->assertSame('Stuff.', $response);

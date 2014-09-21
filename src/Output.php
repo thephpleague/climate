@@ -2,22 +2,39 @@
 
 namespace League\CLImate;
 
+use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Decorator\Parser;
 
 class Output
 {
-    protected $output;
+    use ParserImporter;
 
-    protected $parser;
+    protected $content;
 
-    public function __construct($output, Parser $parser)
+    protected $new_line = true;
+
+    public function __construct($content, Parser $parser)
     {
-        $this->output = $output;
-        $this->parser = $parser;
+        $this->parser($parser);
+        $this->content($content);
+    }
+
+    protected function content($content)
+    {
+        $this->content = $content;
+    }
+
+    public function sameLine()
+    {
+        $this->new_line = false;
     }
 
     public function __toString()
     {
-        return $this->parser->apply($this->output) . "\n";
+        $result = $this->parser->apply($this->content);
+
+        if ($this->new_line) $result .= "\n";
+
+        return $result;
     }
 }
