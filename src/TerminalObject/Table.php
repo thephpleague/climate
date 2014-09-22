@@ -4,6 +4,8 @@ namespace League\CLImate\TerminalObject;
 
 class Table extends BaseTerminalObject
 {
+    use Helper\StringLength;
+
     /**
      * The data for the table, an array of (arrays|objects)
      *
@@ -27,15 +29,6 @@ class Table extends BaseTerminalObject
      */
 
     protected $table_width    = 0;
-
-    /**
-     * Tags the should not be ultimately considered
-     * when calculating any string lengths
-     *
-     * @var array $ignore_tags
-     */
-
-    protected $ignore_tags    = [];
 
     /**
      * The divider between table cells
@@ -74,7 +67,6 @@ class Table extends BaseTerminalObject
 
     public function result()
     {
-        $this->ignore_tags   = array_keys( $this->parser->tags );
         $this->column_widths = $this->getColumnWidths();
         $this->table_width   = $this->getWidth();
         $this->border        = $this->getBorder();
@@ -160,9 +152,7 @@ class Table extends BaseTerminalObject
 
     protected function buildCell($key, $column)
     {
-        $padding = $this->column_widths[$key] - $this->lengthWithoutTags($column);
-
-        return  $column . str_repeat(' ', $padding);
+        return  $this->pad($column, $this->column_widths[$key]);
     }
 
     /**
@@ -188,30 +178,6 @@ class Table extends BaseTerminalObject
         }
 
         return false;
-    }
-
-    /**
-     * Determine the length of the string without any tags
-     *
-     * @param  string  $str
-     * @return integer
-     */
-
-    protected function lengthWithoutTags($str)
-    {
-        return mb_strwidth($this->withoutTags($str), 'UTF-8');
-    }
-
-    /**
-     * Get the string without the tags that are to be ignored
-     *
-     * @param  string $str
-     * @return string
-     */
-
-    protected function withoutTags($str)
-    {
-        return str_replace($this->ignore_tags, '', $str);
     }
 
     /**
