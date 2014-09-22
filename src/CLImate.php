@@ -61,6 +61,7 @@ namespace League\CLImate;
  * @method mixed progress(integer $total = null)
  * @method mixed input(string $prompt, Reader $reader = null)
  * @method mixed confirm(string $prompt, Reader $reader = null)
+ * @method mixed columns(array $data, $count = null)
  * @method mixed clear()
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
