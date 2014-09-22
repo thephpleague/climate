@@ -42,3 +42,17 @@ $data = [
 
 $climate->columns($data);
 ~~~
+
+which results in:
+
+~~~
+12 Monkeys                          Contact                             Interview with the Vampire
+12 Years a Slave                    Cool World                          Johnny Suede
+A River Runs Through It             Cutting Class                       Kalifornia
+Across the Tracks                   Fight Club                          Killing Them Softly
+Babel                               Fury                                Legends of the Fall
+Being John Malkovich                Happy Feet Two                      Less Than Zero
+Burn After Reading                  Happy Together                      Meet Joe Black
+By the Sea                          Hunk                                Megamind
+Confessions of a Dangerous Mind     Inglourious Basterds                Moneyball
+~~~
