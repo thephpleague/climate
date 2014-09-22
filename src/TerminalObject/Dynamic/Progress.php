@@ -69,28 +69,60 @@ class Progress extends BaseDynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
-        $percentage = $current / $this->total;
+        // Move the cursor up one line and clear it to the end
+        $progress_bar = "\e[1A\r\e[K";
+        $progress_bar .= $this->getProgressBar($current, $label);
 
-        $bar_length = round($this->bar_str_len * $percentage);
-
-        $percentage *= 100;
-
-        $percentage = round($percentage);
-
-        // Basically:
-        // =============>             50% label
-        $bar_str = str_repeat('=', $bar_length);
-        $bar_str .= '> ';
-        $bar_str .= str_repeat(' ', $this->bar_str_len - $bar_length);
-        $bar_str .= $percentage;
-        $bar_str .= '% ';
-
-        if ($percentage < 100) {
-            $bar_str .= $label;
-        }
-
-        $bar_str = trim($bar_str);
-
-        echo new Output("\e[1A\r\e[K{$bar_str}", $this->parser);
+        echo new Output($progress_bar, $this->parser);
     }
+
+    /**
+     * Get the progress bar string, basically:
+     * =============>             50% label
+     *
+     * @param integer $current
+     * @param string $label
+     *
+     * @return string
+     */
+
+    protected function getProgressBar($current, $label)
+    {
+        $percentage = $current / $this->total;
+        $bar_length = round($this->bar_str_len * $percentage);
+        $label      = ($percentage < 1) ? $label: '';
+
+        $bar        = $this->getBar($bar_length);
+        $number     = $this->percentageFormatted($percentage);
+
+        return trim("{$bar} {$number} {$label}");
+    }
+
+    /**
+     * Get the string for the actual bar based on the current length
+     *
+     * @param integer $length
+     *
+     * @return string
+     */
+
+    protected function getBar($length)
+    {
+        $bar     = str_repeat('=', $length);
+        $padding = str_repeat(' ', $this->bar_str_len - $length);
+
+        return "{$bar}>{$padding}";
+    }
+
+    /**
+     * Format the percentage so it looks pretty
+     *
+     * @param float|integer $percentage
+     */
+
+    protected function percentageFormatted($percentage)
+    {
+        return round($percentage * 100) . '%';
+    }
+
 }

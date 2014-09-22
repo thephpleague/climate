@@ -58,6 +58,9 @@ namespace League\CLImate;
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
+ * @method mixed input(string $prompt, Reader $reader = null)
+ * @method mixed confirm(string $prompt, Reader $reader = null)
+ * @method mixed clear()
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
  */
@@ -75,7 +78,7 @@ class CLImate
     /**
      * An instance of the Terminal Object Router class
      *
-     * @var \League\CLImate\TerminalObject\Router $terminal_object
+     * @var \League\CLImate\TerminalObject\Router\Router $terminal_object
      */
 
     protected $terminal_object;
@@ -91,7 +94,7 @@ class CLImate
     public function __construct()
     {
         $this->style           = new Decorator\Style();
-        $this->terminal_object = new TerminalObject\Router();
+        $this->terminal_object = new TerminalObject\Router\Router();
         $this->settings        = new Settings\Manager();
     }
 
@@ -236,10 +239,10 @@ class CLImate
                 $this->style->reset();
 
                 // Execute the terminal object
-                $obj = $this->terminal_object
-                            ->settings($this->settings)
-                            ->parser($parser)
-                            ->execute($name, $arguments);
+                $this->terminal_object->settings($this->settings);
+                $this->terminal_object->parser($parser);
+
+                $obj = $this->terminal_object->execute($name, $arguments);
 
                 // If something was returned, return it
                 if ($obj) return $obj;
