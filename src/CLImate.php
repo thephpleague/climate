@@ -93,7 +93,7 @@ class CLImate
     public function __construct()
     {
         $this->style           = new Decorator\Style();
-        $this->terminal_object = new TerminalObject\Router();
+        $this->terminal_object = new TerminalObject\Router\Router();
         $this->settings        = new Settings\Manager();
     }
 
@@ -238,10 +238,10 @@ class CLImate
                 $this->style->reset();
 
                 // Execute the terminal object
-                $obj = $this->terminal_object
-                            ->settings($this->settings)
-                            ->parser($parser)
-                            ->execute($name, $arguments);
+                $this->terminal_object->settings($this->settings);
+                $this->terminal_object->parser($parser);
+
+                $obj = $this->terminal_object->execute($name, $arguments);
 
                 // If something was returned, return it
                 if ($obj) return $obj;

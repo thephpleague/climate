@@ -23,4 +23,15 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
             $this->$key = $value;
         }
     }
+
+    /**
+     * Get the parser for the current object
+     *
+     * @return \League\CLImate\Decorator\Parser
+     */
+
+    public function getParser()
+    {
+        return $this->parser;
+    }
 }
