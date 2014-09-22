@@ -9,7 +9,6 @@ Columns
 The `columns` method allows you to list out an array of data so that it is easily readable, much like the format of the `ls` command:
 
 ~~~.language-php
-
 $data = [
     '12 Monkeys',
     '12 Years a Slave',
@@ -46,13 +45,21 @@ $climate->columns($data);
 which results in:
 
 ~~~
-12 Monkeys                          Contact                             Interview with the Vampire
-12 Years a Slave                    Cool World                          Johnny Suede
-A River Runs Through It             Cutting Class                       Kalifornia
-Across the Tracks                   Fight Club                          Killing Them Softly
-Babel                               Fury                                Legends of the Fall
-Being John Malkovich                Happy Feet Two                      Less Than Zero
-Burn After Reading                  Happy Together                      Meet Joe Black
-By the Sea                          Hunk                                Megamind
-Confessions of a Dangerous Mind     Inglourious Basterds                Moneyball
+12 Monkeys                          Contact                  Interview with the Vampire
+12 Years a Slave                    Cool World               Johnny Suede
+A River Runs Through It             Cutting Class            Kalifornia
+Across the Tracks                   Fight Club               Killing Them Softly
+Babel                               Fury                     Legends of the Fall
+Being John Malkovich                Happy Feet Two           Less Than Zero
+Burn After Reading                  Happy Together           Meet Joe Black
+By the Sea                          Hunk                     Megamind
+Confessions of a Dangerous Mind     Inglourious Basterds     Moneyball
 ~~~
+
+You can specify the number of columns by passing in a second parameter:
+
+~~~.language-php
+$climate->columns($data, 4);
+~~~
+
+Otherwise CLImate will try to figure out how it best fits in your terminal.
