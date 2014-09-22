@@ -77,7 +77,7 @@ class CLImate
     /**
      * An instance of the Terminal Object Router class
      *
-     * @var \League\CLImate\TerminalObject\Router $terminal_object
+     * @var \League\CLImate\TerminalObject\Router\Router $terminal_object
      */
 
     protected $terminal_object;
