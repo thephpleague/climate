@@ -17,7 +17,7 @@ $climate->json([
 ]);
 ~~~
 
-~~~.language-javascript
+~~~javascript
 {
     "name": "Gary",
     "age": 52,
