@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Formatting
+permalink: /styling/formatting/
 ---
 
 Formatting
@@ -17,7 +18,7 @@ You have several formatting options:
 
 To apply a format:
 
-~~~.language-php
+~~~php
 $climate->bold('Bold and beautiful.');
 $climate->underline('I have a line beneath me.');
 
@@ -28,7 +29,7 @@ $climate->underline()->out('I have a line beneath me.');
 You can apply multiple formats by chaining them:
 
 
-~~~.language-php
+~~~php
 $climate->bold()->underline()->out('Bold (and underlined) and beautiful.');
 $climate->blink()->dim('Dim. But noticeable.');
 ~~~

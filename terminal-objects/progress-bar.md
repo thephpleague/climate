@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Progress Bar
+permalink: /terminal-objects/progress-bar/
 ---
 
 Progress Bar
@@ -8,7 +9,7 @@ Progress Bar
 
 Easily add a progress bar to your output:
 
-~~~.language-php
+~~~php
 $progress = $climate->progress()->total(100);
 
 for ($i = 0; $i <= 100; $i++) {
@@ -25,7 +26,7 @@ Which will result in:
 
 If you'd like a more exact indicator of where you are in the process, pass a label into the `current` method:
 
-~~~.language-php
+~~~php
 $languages = [
     'php',
     'javascript',
@@ -46,6 +47,6 @@ foreach ($languages as $key => $language) {
 
 You can also shorthand it a bit if you'd like and pass the total right into the `progress` method:
 
-~~~.language-php
+~~~php
 $climate->progress(100);
 ~~~

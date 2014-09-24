@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Draw
+permalink: /terminal-objects/draw/
 ---
 
 Draw
@@ -18,7 +19,7 @@ There are a few pre-defined choices:
 
 To draw some art:
 
-~~~.language-php
+~~~php
 $climate->draw('bender');
 ~~~
 
@@ -62,13 +63,13 @@ For example, let's say you this was your art collection:
 
 Just let CLImate know where it is via the full path:
 
-~~~.language-php
+~~~php
 $climate->addArt('/home/important/art');
 ~~~
 
 and now you can use anything in that directory:
 
-~~~.language-php
+~~~php
 $climate->draw('dog');
 $climate->red()->draw('cat');
 $climate->boldDraw('mug');

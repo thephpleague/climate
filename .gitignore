@@ -1,3 +1,4 @@
-/.sculpin/
-/output_*/
-/source/themes/
+_site
+functional
+node_modules
+vendor

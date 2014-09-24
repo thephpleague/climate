@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Installation
+permalink: /installation/
 ---
 
 Installation
@@ -8,7 +9,7 @@ Installation
 
 This library is available via Composer:
 
-~~~.language-javascript
+~~~javascript
 {
     "require": {
         "league/climate": "~2.0"

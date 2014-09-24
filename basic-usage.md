@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Basic Usage
+permalink: /basic-usage/
 ---
 
 Basic Usage
@@ -8,7 +9,7 @@ Basic Usage
 
 The `out` method simply receives a string that will output on a new line:
 
-~~~.language-php
+~~~php
 require_once('vendor/autoload.php');
 
 $climate = new League\CLImate\CLImate;

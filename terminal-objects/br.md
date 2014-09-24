@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Break
+permalink: /terminal-objects/br/
 ---
 
 Break
@@ -8,12 +9,12 @@ Break
 
 The `br` method does exactly that, inserts a line break:
 
-~~~.language-php
+~~~php
 $climate->br();
 ~~~
 
 For ease of use, the `br` method is also chainable:
 
-~~~.language-php
+~~~php
 $climate->br()->out('I have moved down a line.');
 ~~~

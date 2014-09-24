@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Dump
+permalink: /terminal-objects/dump/
 ---
 
 Dump
@@ -8,7 +9,7 @@ Dump
 
 The `dump` method allows you to `var_dump` variables out to the terminal:
 
-~~~.language-php
+~~~php
 $climate->dump([
   'This',
   'That',

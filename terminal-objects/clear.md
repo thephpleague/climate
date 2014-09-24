@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Clear
+permalink: /terminal-objects/clear/
 ---
 
 Clear
@@ -8,6 +9,6 @@ Clear
 
 The `clear` method clears the terminal:
 
-~~~.language-php
+~~~php
 $climate->clear();
 ~~~

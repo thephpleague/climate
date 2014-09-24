@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Commands
+permalink: /styling/commands/
 ---
 
 Commands
@@ -8,7 +9,7 @@ Commands
 
 Commands are simply pre-defined styles for specific output:
 
-~~~.language-php
+~~~php
 $climate->error('Ruh roh.');
 $climate->comment('Just so you know.');
 $climate->whisper('Not so important, just a heads up.');

@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Terminal Objects
+permalink: /terminal-objects/overview/
 ---
 
 Terminal Objects
@@ -12,7 +13,7 @@ Terminal Objects are classes that allow for a little more than just basic output
 
 You can combine any of the styling options with Terminal Objects. All of the following are examples of things you could do:
 
-~~~.language-php
+~~~php
 $climate->redTable([
     [
       'name'       => 'Walter White',

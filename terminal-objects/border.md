@@ -1,14 +1,15 @@
 ---
-layout: layout
-title: Borders
+layout: default
+title: Border
+permalink: /terminal-objects/border/
 ---
 
-Borders
+Border
 ==============
 
 If you want to insert a border to break up output, simply use the `border` method. By default, `border` outputs a dashed border with 100 characters in it:
 
-~~~.language-php
+~~~php
 $climate->border();
 // ----------------------------------------------------------------------------------------------------
 ~~~
@@ -18,7 +19,7 @@ The `border` method takes two optional arguments:
 + Character(s) to be repeated
 + Length of the border
 
-~~~.language-php
+~~~php
 $climate->border('*');
 // ****************************************************************************************************
 

@@ -1,9 +1,10 @@
 ---
-layout: layout
-title: Tables
+layout: default
+title: Table
+permalink: /terminal-objects/table/
 ---
 
-Tables
+Table
 ==============
 
 The `table` method can receive any of the following:
@@ -14,7 +15,7 @@ The `table` method can receive any of the following:
 
 ## Array of Arrays
 
-~~~.language-php
+~~~php
 $data = [
     [
       'Walter White',
@@ -50,7 +51,7 @@ $climate->table($data);
 
 If you pass in an array of associative arrays or objects, the keys will automatically become the first row (header) of the table.
 
-~~~.language-php
+~~~php
 $data = [
     [
   		'name'       => 'Walter White',

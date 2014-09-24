@@ -1,6 +1,7 @@
 ---
-layout: layout
+layout: default
 title: Columns
+permalink: /terminal-objects/columns/
 ---
 
 Columns
@@ -8,7 +9,7 @@ Columns
 
 The `columns` method allows you to list out an array of data so that it is easily readable, much like the format of the `ls` command:
 
-~~~.language-php
+~~~php
 $data = [
     '12 Monkeys',
     '12 Years a Slave',
@@ -58,7 +59,7 @@ Confessions of a Dangerous Mind     Inglourious Basterds     Moneyball
 
 You can specify the number of columns by passing in a second parameter:
 
-~~~.language-php
+~~~php
 $climate->columns($data, 4);
 ~~~
 
