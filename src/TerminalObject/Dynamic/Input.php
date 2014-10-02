@@ -18,10 +18,10 @@ class Input extends BaseDynamicTerminalObject
     /**
      * An array of acceptable responses
      *
-     * @var array $acceptable
+     * @var array|object $acceptable
      */
 
-    protected $acceptable = [];
+    protected $acceptable;
 
     /**
      * Whether we should be strict about the response given
@@ -94,7 +94,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @param  array|object $acceptable
      * @param  boolean $show
-     *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
 
@@ -123,7 +122,6 @@ class Input extends BaseDynamicTerminalObject
      * Set a default response
      *
      * @param string $default
-     *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
 
@@ -186,11 +184,37 @@ class Input extends BaseDynamicTerminalObject
     }
 
     /**
-     * Determine if the user's response is valid
-     * according to the acceptable responses array
+     * Determine whether or not the acceptable property is of type closure
+     *
+     * @return boolean
+     */
+
+    protected function acceptableIsClosure()
+    {
+        return (is_object($this->acceptable) && $this->acceptable instanceof \Closure);
+    }
+
+    /**
+     * Determine if the user's response is in the acceptable responses array
      *
      * @param string $response
+     * @return boolean $response
+     */
+
+    protected function isAcceptableResponse($response)
+    {
+        if (!$this->strict) {
+            $this->acceptable = $this->levelPlayingField((array) $this->acceptable);
+            $response         = $this->levelPlayingField($response);
+        }
+
+        return in_array($response, $this->acceptable);
+    }
+
+    /**
+     * Determine if the user's response is valid based on the current settings
      *
+     * @param string $response
      * @return boolean $response
      */
 
@@ -198,16 +222,10 @@ class Input extends BaseDynamicTerminalObject
     {
         if (empty($this->acceptable)) return true;
 
-        if (is_object($this->acceptable) && $this->acceptable instanceof \Closure) {
-            $func = $this->acceptable;
-            return $func($response);
+        if ($this->acceptableIsClosure()) {
+            return call_user_func($this->acceptable, $response);
         }
 
-        if (!$this->strict) {
-            $this->acceptable = $this->levelPlayingField((array) $this->acceptable);
-            $response         = $this->levelPlayingField($response);
-        }
-
-        return in_array($response, $this->acceptable);
+        return $this->isAcceptableResponse($response);
     }
 }
