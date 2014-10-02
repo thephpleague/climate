@@ -20,7 +20,7 @@ class Progress extends BaseDynamicTerminalObject
      * @var integer $bar_str_len
      */
 
-    protected $bar_str_len = 100;
+    protected $bar_str_len;
 
     /**
      * If they pass in a total, set the total
@@ -89,7 +89,7 @@ class Progress extends BaseDynamicTerminalObject
     protected function getProgressBar($current, $label)
     {
         $percentage = $current / $this->total;
-        $bar_length = round($this->bar_str_len * $percentage);
+        $bar_length = round($this->getBarStrLen() * $percentage);
         $label      = ($percentage < 1) ? $label: '';
 
         $bar        = $this->getBar($bar_length);
@@ -109,9 +109,25 @@ class Progress extends BaseDynamicTerminalObject
     protected function getBar($length)
     {
         $bar     = str_repeat('=', $length);
-        $padding = str_repeat(' ', $this->bar_str_len - $length);
+        $padding = str_repeat(' ', $this->getBarStrLen() - $length);
 
         return "{$bar}>{$padding}";
+    }
+
+    /**
+     * Get the length of the bar string based on the width of the terminal window
+     *
+     * @return integer
+     */
+
+    protected function getBarStrLen()
+    {
+        if (!$this->bar_str_len) {
+            // Subtract 10 because of the '> 100%' plus some padding, max 100
+            $this->bar_str_len = min( exec('tput cols') - 10, 100 );
+        }
+
+        return $this->bar_str_len;
     }
 
     /**

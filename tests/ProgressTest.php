@@ -10,9 +10,10 @@ class ProgressTest extends TestBase
      */
     private function repeat($length)
     {
-        $bar = str_repeat('=', $length);
+        $repeat = ($length / 100) * 70;
+        $bar = str_repeat('=', $repeat);
         $bar .= '>';
-        $bar .= str_repeat(' ', 100 - $length);
+        $bar .= str_repeat(' ', max(70 - $repeat, 0));
 
         return $bar;
     }
