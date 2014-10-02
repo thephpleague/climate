@@ -133,6 +133,61 @@ class InputTest extends TestBase
 
     /** @test */
 
+    public function it_will_accept_a_closure_as_an_acceptable_response()
+    {
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
+        $reader->shouldReceive('line')->once()->andReturn('everything.');
+
+        ob_start();
+
+        $input = $this->cli->input('So what is up?', $reader);
+
+        $input->accept(function($response) {
+            return ($response == 'everything.');
+        });
+
+        $response = $input->strict()->prompt();
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\e[mSo what is up? \e[0m";
+
+        $this->assertSame($should_be, $result);
+        $this->assertSame('everything.', $response);
+    }
+
+    /** @test */
+
+    public function it_will_fail_via_an_accept_closure()
+    {
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
+        $reader->shouldReceive('line')->once()->andReturn('everything!');
+        $reader->shouldReceive('line')->once()->andReturn('everything.');
+
+        ob_start();
+
+        $input = $this->cli->input('So what is up?', $reader);
+
+        $input->accept(function($response) {
+            return ($response == 'everything.');
+        });
+
+        $response = $input->strict()->prompt();
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\e[mSo what is up? \e[0m\e[mSo what is up? \e[0m";
+
+        $this->assertSame($should_be, $result);
+        $this->assertSame('everything.', $response);
+    }
+
+    /** @test */
+
     public function it_will_accept_a_default_if_no_answer_is_given()
     {
         $reader = Mockery::mock('League\CLImate\Util\Reader');

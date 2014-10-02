@@ -92,7 +92,7 @@ class Input extends BaseDynamicTerminalObject
      * Define the acceptable responses and whether or not to
      * display them to the user
      *
-     * @param  array $acceptable
+     * @param  array|object $acceptable
      * @param  boolean $show
      *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
@@ -100,7 +100,7 @@ class Input extends BaseDynamicTerminalObject
 
     public function accept($acceptable, $show = false)
     {
-        $this->acceptable = (array) $acceptable;
+        $this->acceptable      = $acceptable;
         $this->show_acceptable = $show;
 
         return $this;
@@ -142,6 +142,8 @@ class Input extends BaseDynamicTerminalObject
 
     protected function acceptableFormatted()
     {
+        if (!is_array($this->acceptable)) return '';
+
         return '[' . implode('/', $this->acceptable) . ']';
     }
 
@@ -196,8 +198,13 @@ class Input extends BaseDynamicTerminalObject
     {
         if (empty($this->acceptable)) return true;
 
+        if (is_object($this->acceptable) && $this->acceptable instanceof \Closure) {
+            $func = $this->acceptable;
+            return $func($response);
+        }
+
         if (!$this->strict) {
-            $this->acceptable = $this->levelPlayingField($this->acceptable);
+            $this->acceptable = $this->levelPlayingField((array) $this->acceptable);
             $response         = $this->levelPlayingField($response);
         }
 
