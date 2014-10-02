@@ -17,6 +17,8 @@ $response = $input->prompt();
 
 ## Acceptable Answers
 
+### Via an Array
+
 If you only want to accept certain answers from the user, you can specify those using the `accept` method. Simply pass an array in:
 
 ~~~php
@@ -47,6 +49,32 @@ $input->strict();
 
 $response = $input->prompt();
 // 'fine' or 'ok' will cause a re-prompt
+~~~
+
+### Via a Closure
+
+You can also pass a closure into the `accept` method:
+
+~~~php
+$input = $climate->input('How you doin?');
+
+$input->accept(function($response) {
+    return ($response == 'Fine');
+});
+
+$response = $input->prompt();
+~~~
+
+## Default Response
+
+You can specify a default response for when the user simply presses `enter` without typing anything in:
+
+~~~php
+$input = $climate->input('How you doin?');
+
+$input->defaultTo('Great!');
+
+$response = $input->prompt();
 ~~~
 
 ## Confirmation
