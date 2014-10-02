@@ -113,16 +113,16 @@ class ProgressTest extends TestBase
         ob_end_clean();
 
         $should_be = "\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(0)} 0%\nzeroth\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\nfirst\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\nsecond\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(30)} 30%\nthird\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(40)} 40%\nfourth\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(50)} 50%\nfifth\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(60)} 60%\nsixth\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(70)} 70%\nseventh\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(80)} 80%\neighth\e[0m\n";
-        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(90)} 90%\nninth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kfirst\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Ksecond\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(30)} 30%\n\r\e[Kthird\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(40)} 40%\n\r\e[Kfourth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(50)} 50%\n\r\e[Kfifth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(60)} 60%\n\r\e[Ksixth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(70)} 70%\n\r\e[Kseventh\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(80)} 80%\n\r\e[Keighth\e[0m\n";
+        $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(90)} 90%\n\r\e[Kninth\e[0m\n";
         $should_be .= "\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m\n";
 
         $this->assertSame($should_be, $result);
