@@ -70,7 +70,8 @@ class Progress extends BaseDynamicTerminalObject
         }
 
         // Move the cursor up one line and clear it to the end
-        $progress_bar = "\e[1A\r\e[K";
+        $line_count    = ($label) ? 2: 1;
+        $progress_bar  = "\e[{$line_count}A\r\e[K";
         $progress_bar .= $this->getProgressBar($current, $label);
 
         echo new Output($progress_bar, $this->parser);
@@ -95,7 +96,9 @@ class Progress extends BaseDynamicTerminalObject
         $bar        = $this->getBar($bar_length);
         $number     = $this->percentageFormatted($percentage);
 
-        return trim("{$bar} {$number} {$label}");
+        if ($label) $label = "\n" . $label;
+
+        return trim("{$bar} {$number}{$label}");
     }
 
     /**
