@@ -40,6 +40,15 @@ class Input extends BaseDynamicTerminalObject
     protected $show_acceptable = false;
 
     /**
+     * A default answer in the case of no user response,
+     * prevents re-prompting
+     *
+     * @var string
+     */
+
+    protected $default = '';
+
+    /**
      * An instance of Reader
      *
      * @var \League\CLImate\Util\Reader $reader
@@ -67,6 +76,10 @@ class Input extends BaseDynamicTerminalObject
         echo $output;
 
         $response = $this->reader->line();
+
+        if (strlen($response) == 0 && strlen($this->default)) {
+            $response = $this->default;
+        }
 
         if ($this->isValidResponse($response)) {
             return $response;
@@ -102,6 +115,21 @@ class Input extends BaseDynamicTerminalObject
     public function strict()
     {
         $this->strict = true;
+
+        return $this;
+    }
+
+    /**
+     * Set a default response
+     *
+     * @param string $default
+     *
+     * @return \League\CLImate\TerminalObject\Dynamic\Input
+     */
+
+    public function defaultTo($default)
+    {
+        $this->default = $default;
 
         return $this;
     }

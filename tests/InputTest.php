@@ -131,4 +131,29 @@ class InputTest extends TestBase
         $this->assertSame('Stuff.', $response);
     }
 
+    /** @test */
+
+    public function it_will_accept_a_default_if_no_answer_is_given()
+    {
+        $reader = Mockery::mock('League\CLImate\Util\Reader');
+        $reader->shouldReceive('line')->once()->andReturn('');
+
+        ob_start();
+
+        $input = $this->cli->input('So what is up?', $reader);
+
+        $input->defaultTo('Not much.');
+
+        $response = $input->prompt();
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        $should_be = "\e[mSo what is up? \e[0m";
+
+        $this->assertSame($should_be, $result);
+        $this->assertSame('Not much.', $response);
+    }
+
 }
