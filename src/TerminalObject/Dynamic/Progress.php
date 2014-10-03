@@ -156,34 +156,6 @@ class Progress extends BaseDynamicTerminalObject
         return "{$bar}>{$padding}";
     }
 
-    protected function getLinuxWidth()
-    {
-        $width = exec('tput cols');
-
-        return (is_numeric($width)) ? $width : null;
-    }
-
-    protected function getWindowsWidth()
-    {
-        $info = exec('mode');
-
-        preg_match_all('/.*:\s*(\d+)/', $info, $matches);
-
-        return (!empty($matches[1][1])) ? $matches[1][1] : null;
-    }
-
-    protected function getTerminalWidth()
-    {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $width = $this->getWindowsWidth();
-        } else {
-            $width = $this->getLinuxWidth();
-        }
-
-        // Default to standard width as a best guess
-        return (is_numeric($width)) ? $width : 80;
-    }
-
     /**
      * Get the length of the bar string based on the width of the terminal window
      *
