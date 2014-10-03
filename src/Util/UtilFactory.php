@@ -12,9 +12,18 @@ class UtilFactory {
 
     public $dimensions;
 
+    /**
+     * A instance of the Cursor class
+     *
+     * @var \League\CLImate\Util\Cursor
+     */
+
+    public $cursor;
+
     public function __construct()
     {
         $this->dimensions = new Dimensions();
+        $this->cursor     = new Cursor();
     }
 
 }

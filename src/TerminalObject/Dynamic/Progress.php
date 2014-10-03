@@ -72,46 +72,12 @@ class Progress extends BaseDynamicTerminalObject
         // Move the cursor up one line and clear it to the end
         $line_count    = (strlen($label) > 0) ? 2: 1;
 
-        $progress_bar  = $this->moveCursorUp($line_count);
-        $progress_bar .= $this->moveCursorToBeginning();
-        $progress_bar .= $this->deleteLine();
+        $progress_bar  = $this->util->cursor->up($line_count);
+        $progress_bar .= $this->util->cursor->startOfCurrentLine();
+        $progress_bar .= $this->util->cursor->deleteCurrentLine();
         $progress_bar .= $this->getProgressBar($current, $label);
 
         echo new Output($progress_bar, $this->parser);
-    }
-
-    /**
-     * Move the cursor up in the terminal x number of lines
-     *
-     * @param integer $number_of_lines
-     * @return string
-     */
-
-    protected function moveCursorUp($number_of_lines)
-    {
-        return "\e[{$number_of_lines}A";
-    }
-
-    /**
-     * Move cursor to the beginning of the current line
-     *
-     * @return string
-     */
-
-    protected function moveCursorToBeginning()
-    {
-        return "\r";
-    }
-
-    /**
-     * Delete the current line to the end
-     *
-     * @return string
-     */
-
-    protected function deleteLine()
-    {
-        return "\e[K";
     }
 
     /**
@@ -133,9 +99,7 @@ class Progress extends BaseDynamicTerminalObject
         $bar        = $this->getBar($bar_length);
         $number     = $this->percentageFormatted($percentage);
 
-        if ($label) {
-            $label = "\n" . $this->moveCursorToBeginning() . $this->deleteLine() . $label;
-        }
+        if ($label) $label = $this->labelFormatted($label);
 
         return trim("{$bar} {$number}{$label}");
     }
@@ -181,6 +145,17 @@ class Progress extends BaseDynamicTerminalObject
     protected function percentageFormatted($percentage)
     {
         return round($percentage * 100) . '%';
+    }
+
+    /**
+     * Format the label so it is positioned correctly
+     *
+     * @param string $label
+     */
+
+    protected function labelFormatted($label)
+    {
+        return "\n" . $this->util->cursor->startOfCurrentLine() . $this->util->cursor->deleteCurrentLine() . $label;
     }
 
 }
