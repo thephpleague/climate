@@ -5,6 +5,7 @@ namespace League\CLImate\TerminalObject\Router;
 use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Settings\Manager;
 use League\CLImate\Settings\SettingsImporter;
+use League\CLImate\Util\UtilFactory;
 
 class Router
 {
@@ -69,6 +70,7 @@ class Router
         $obj        = $reflection->newInstanceArgs($arguments);
 
         $obj->parser($this->parser);
+        $obj->util(new UtilFactory());
 
         // If the object needs any settings, import them
         foreach ($obj->settings() as $obj_setting) {

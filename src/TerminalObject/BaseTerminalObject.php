@@ -4,11 +4,13 @@ namespace League\CLImate\TerminalObject;
 
 use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Settings\SettingsImporter;
+use League\CLImate\Util\UtilImporter;
 
 abstract class BaseTerminalObject implements TerminalObjectInterface
 {
     use SettingsImporter;
     use ParserImporter;
+    use UtilImporter;
 
     /**
      * Set the property if there is a valid value

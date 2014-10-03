@@ -166,7 +166,7 @@ class Progress extends BaseDynamicTerminalObject
     {
         if (!$this->bar_str_len) {
             // Subtract 10 because of the '> 100%' plus some padding, max 100
-            $this->bar_str_len = min($this->getTerminalWidth() - 10, 100);
+            $this->bar_str_len = min($this->util->dimensions->width() - 10, 100);
         }
 
         return $this->bar_str_len;

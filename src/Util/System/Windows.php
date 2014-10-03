@@ -4,6 +4,12 @@ namespace League\CLImate\Util\System;
 
 class Windows implements SystemInterface {
 
+    /**
+     * Get the width of the terminal
+     *
+     * @return integer|null
+     */
+
     public function width()
     {
         $dimensions = $this->getDimensions();
@@ -11,12 +17,24 @@ class Windows implements SystemInterface {
         return (!empty($dimensions[1])) ? $dimensions[1] : null;
     }
 
+    /**
+     * Get the height of the terminal
+     *
+     * @return integer|null
+     */
+
     public function height()
     {
         $dimensions = $this->getDimensions();
 
         return (!empty($dimensions[0])) ? $dimensions[0] : null;
     }
+
+    /**
+     * Get information about the dimensions of the terminal
+     *
+     * @return integer|null
+     */
 
     protected function getDimensions()
     {

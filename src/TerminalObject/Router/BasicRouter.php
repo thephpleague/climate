@@ -7,19 +7,6 @@ use League\CLImate\Output;
 class BasicRouter extends BaseRouter implements RouterInterface {
 
     /**
-     * Determines if the requested class is a
-     * valid basic terminal object class
-     *
-     * @param  string  $class
-     * @return boolean
-     */
-
-    public function exists($class)
-    {
-        return class_exists($this->path($class));
-    }
-
-    /**
      * Get the full path for a terminal object class
      *
      * @param  string $class
