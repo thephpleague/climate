@@ -10,7 +10,7 @@ class Dimensions {
     /**
      * A instance of the class specific to the current system
      *
-     * @var \League\CLImate\Util\System
+     * @var \League\CLImate\Util\System\Windows|\League\CLImate\Util\System\Linux
      */
 
     protected $system;

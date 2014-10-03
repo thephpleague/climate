@@ -7,7 +7,7 @@ trait UtilImporter
     /**
      * An instance of the UtilFactory
      *
-     * @var League\CLImate\Util\UtilFactory $util
+     * @var \League\CLImate\Util\UtilFactory $util
      */
 
     protected $util;
