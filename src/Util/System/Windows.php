@@ -42,6 +42,8 @@ class Windows implements SystemInterface {
 
         $output = implode("\n", $output);
 
+        if (!is_array($output)) return [];
+
         preg_match_all('/.*:\s*(\d+)/', $output, $matches);
 
         return (!empty($matches[1])) ? $matches[1] : [];
