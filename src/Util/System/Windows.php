@@ -38,9 +38,11 @@ class Windows implements SystemInterface {
 
     protected function getDimensions()
     {
-        $info = exec('mode');
+        exec('mode', $output);
 
-        preg_match_all('/.*:\s*(\d+)/', $info, $matches);
+        $output = implode("\n", $output);
+
+        preg_match_all('/.*:\s*(\d+)/', $output, $matches);
 
         return (!empty($matches[1])) ? $matches[1] : [];
     }
