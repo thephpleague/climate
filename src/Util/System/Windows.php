@@ -40,9 +40,9 @@ class Windows implements SystemInterface {
     {
         exec('mode', $output);
 
-        $output = implode("\n", $output);
-
         if (!is_array($output)) return [];
+
+        $output = implode("\n", $output);
 
         preg_match_all('/.*:\s*(\d+)/', $output, $matches);
 
