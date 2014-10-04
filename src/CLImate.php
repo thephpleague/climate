@@ -202,7 +202,7 @@ class CLImate
      * Build up the terminal object and return it
      *
      * @param string $name
-     * @param arguments $arguments
+     * @param array $arguments
      * @return object|null
      */
 
