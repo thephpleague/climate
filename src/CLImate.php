@@ -93,6 +93,12 @@ class CLImate
 
     protected $settings;
 
+    /**
+     * An instance of the Output class
+     *
+     * @var \League\CLImate\Util\Output $output
+     */
+
     protected $output;
 
     public function __construct(Output $output = null)
@@ -101,22 +107,6 @@ class CLImate
         $this->terminal_object = new TerminalObject\Router\Router();
         $this->settings        = new Settings\Manager();
         $this->output          = $output ?: new Output();
-    }
-
-    /**
-     * Prints the string to the console
-     *
-     * @param string $str
-     */
-
-    public function out($str)
-    {
-        $str = $this->style->parser()->apply($str);
-        $this->output->write($str);
-
-        $this->style->reset();
-
-        return $this;
     }
 
     /**
@@ -129,10 +119,7 @@ class CLImate
     protected function hasOutput($output)
     {
         if (is_string($output) || is_numeric($output)) {
-            if (strlen($output)) {
-                return true;
-            }
-
+            if (strlen($output)) return true;
         } elseif (!empty($output)) {
             return true;
         }
