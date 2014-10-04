@@ -2,8 +2,6 @@
 
 namespace League\CLImate\Util;
 
-use League\CLImate\Decorator\Parser;
-use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Util\Writer\WriterInterface;
 
 class Output

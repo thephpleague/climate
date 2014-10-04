@@ -103,8 +103,8 @@ class Router
     /**
      * Set the settings property
      *
-     * @param  \League\CLImate\Settings\Manager      $settings
-     * @return \League\CLImate\TerminalObject\Router
+     * @param  \League\CLImate\Settings\Manager $settings
+     * @return Router
      */
 
     public function settings(Manager $settings)

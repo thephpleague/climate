@@ -20,15 +20,32 @@ class TestBase extends PHPUnit_Framework_TestCase
         Mockery::close();
     }
 
+    /**
+     * Helper for writer mock
+     *
+     * @param string  $content
+     * @param integer|null $count
+     */
+
     protected function shouldWrite($content, $count = 1)
     {
         $this->output->shouldReceive('write')->times($count)->with($content);
     }
 
+    /**
+     * Helper for reader mock
+     *
+     * @param string $response
+     */
+
     protected function shouldReadAndReturn($response)
     {
         $this->reader->shouldReceive('line')->once()->andReturn($response);
     }
+
+    /**
+     * Helper for same line output mock
+     */
 
     protected function shouldReceiveSameLine()
     {
