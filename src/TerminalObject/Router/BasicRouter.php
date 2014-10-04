@@ -2,9 +2,11 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-use League\CLImate\Output;
+use League\CLImate\Util\OutputImporter;
 
 class BasicRouter extends BaseRouter implements RouterInterface {
+
+    use OutputImporter;
 
     /**
      * Get the full path for a terminal object class
@@ -28,12 +30,10 @@ class BasicRouter extends BaseRouter implements RouterInterface {
     {
         $results = $obj->result();
 
-        if (!is_array($results)) {
-            $results = [$results];
-        }
+        if (!is_array($results)) $results = [$results];
 
         foreach ($results as $result) {
-            echo new Output($result, $obj->getParser());
+            $this->output->write($obj->getParser()->apply($result));
         }
     }
 

@@ -2,8 +2,6 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
-use League\CLImate\Output;
-
 class Progress extends BaseDynamicTerminalObject
 {
     /**
@@ -21,6 +19,8 @@ class Progress extends BaseDynamicTerminalObject
      */
 
     protected $bar_str_len;
+
+    protected $first_line = true;
 
     /**
      * If they pass in a total, set the total
@@ -42,10 +42,6 @@ class Progress extends BaseDynamicTerminalObject
 
     public function total($total)
     {
-        // Drop down a line, we are about to
-        // re-write this line for the progress bar
-        echo "\n";
-
         $this->total = $total;
 
         return $this;
@@ -69,6 +65,13 @@ class Progress extends BaseDynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
+        if ($this->first_line) {
+            // Drop down a line, we are about to
+            // re-write this line for the progress bar
+            $this->output->write('');
+            $this->first_line = false;
+        }
+
         // Move the cursor up one line and clear it to the end
         $line_count    = (strlen($label) > 0) ? 2: 1;
 
@@ -77,7 +80,7 @@ class Progress extends BaseDynamicTerminalObject
         $progress_bar .= $this->util->cursor->deleteCurrentLine();
         $progress_bar .= $this->getProgressBar($current, $label);
 
-        echo new Output($progress_bar, $this->parser);
+        $this->output->write($this->parser->apply($progress_bar));
     }
 
     /**

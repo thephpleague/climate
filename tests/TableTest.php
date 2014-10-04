@@ -9,7 +9,9 @@ class TableTest extends TestBase
 
     public function it_can_output_a_basic_table()
     {
-        ob_start();
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
         $this->cli->table([
                 [
@@ -19,23 +21,18 @@ class TableTest extends TestBase
                     'Cell 4',
                 ],
         ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
     /** @test */
 
     public function it_can_output_an_array_of_objects_table()
     {
-        ob_start();
+
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m=====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
         $this->cli->table([
                 (object) [
@@ -45,25 +42,17 @@ class TableTest extends TestBase
                     'cell4' => 'Cell 4',
                 ],
             ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m=====================================\e[0m\n";
-        $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
     /** @test */
 
     public function it_can_output_an_array_of_associative_arrays_table()
     {
-        ob_start();
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m=====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
         $this->cli->table([
                 [
@@ -73,25 +62,17 @@ class TableTest extends TestBase
                     'cell4' => 'Cell 4',
                 ],
             ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m=====================================\e[0m\n";
-        $should_be .= "\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
     /** @test */
 
     public function it_can_persist_a_style_on_the_table()
     {
-        ob_start();
+        $this->shouldWrite("\e[31m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[31m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[31m=====================================\e[0m");
+        $this->shouldWrite("\e[31m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[31m-------------------------------------\e[0m");
 
         $this->cli->redTable([
                 [
@@ -101,25 +82,17 @@ class TableTest extends TestBase
                     'cell4' => 'Cell 4',
                 ],
             ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[31m-------------------------------------\e[0m\n";
-        $should_be .= "\e[31m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[31m=====================================\e[0m\n";
-        $should_be .= "\e[31m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[31m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
     /** @test */
 
     public function it_can_handle_tags_within_the_data()
     {
-        ob_start();
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m=====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell \e[31m1\e[0m | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
         $this->cli->table([
                 [
@@ -129,25 +102,17 @@ class TableTest extends TestBase
                     'cell4' => 'Cell 4',
                 ],
             ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m=====================================\e[0m\n";
-        $should_be .= "\e[m| Cell \e[31m1\e[0m | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
     /** @test */
 
     public function it_can_handle_multi_byte_characters()
     {
-        ob_start();
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m=====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell Ω | Cell 2 | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
         $this->cli->table([
                 [
@@ -157,18 +122,6 @@ class TableTest extends TestBase
                     'cell4' => 'Cell 4',
                 ],
             ]);
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m-------------------------------------\e[0m\n";
-        $should_be .= "\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m\n";
-        $should_be .= "\e[m=====================================\e[0m\n";
-        $should_be .= "\e[m| Cell Ω | Cell 2 | Cell 3 | Cell 4 |\e[0m\n";
-        $should_be .= "\e[m-------------------------------------\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
 }

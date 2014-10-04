@@ -5,6 +5,7 @@ namespace League\CLImate\TerminalObject\Dynamic;
 use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Settings\SettingsImporter;
 use League\CLImate\Util\UtilImporter;
+use League\CLImate\Util\OutputImporter;
 
 /**
  * The dynamic terminal object doesn't adhere to the basic terminal object
@@ -13,7 +14,5 @@ use League\CLImate\Util\UtilImporter;
 
 abstract class BaseDynamicTerminalObject
 {
-    use SettingsImporter;
-    use ParserImporter;
-    use UtilImporter;
+    use SettingsImporter, ParserImporter, OutputImporter, UtilImporter;
 }

@@ -12,9 +12,7 @@ class Reader implements ReaderInterface {
 
     public function line()
     {
-        $handler  = fopen('php://stdin','r');
-        $response = trim(fgets($handler, 1024));
-        fclose ($handler);
+        $response = trim(fgets(STDIN, 1024));
 
         return $response;
     }

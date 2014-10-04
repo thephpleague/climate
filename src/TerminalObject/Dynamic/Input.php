@@ -2,7 +2,6 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
-use League\CLImate\Output;
 use League\CLImate\Util\Reader;
 
 class Input extends BaseDynamicTerminalObject
@@ -70,10 +69,9 @@ class Input extends BaseDynamicTerminalObject
 
     public function prompt()
     {
-        $output = new Output($this->promptFormatted(), $this->parser);
-        $output->sameLine();
+        $prompt_str = $this->parser->apply($this->promptFormatted());
 
-        echo $output;
+        $this->output->sameLine()->write($prompt_str);
 
         $response = $this->reader->line();
 

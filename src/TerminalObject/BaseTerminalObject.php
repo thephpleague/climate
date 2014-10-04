@@ -8,9 +8,7 @@ use League\CLImate\Util\UtilImporter;
 
 abstract class BaseTerminalObject implements TerminalObjectInterface
 {
-    use SettingsImporter;
-    use ParserImporter;
-    use UtilImporter;
+    use SettingsImporter, ParserImporter, UtilImporter;
 
     /**
      * Set the property if there is a valid value
@@ -21,9 +19,7 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
 
     protected function set($key, $value)
     {
-        if (strlen($value)) {
-            $this->$key = $value;
-        }
+        if (strlen($value)) $this->$key = $value;
     }
 
     /**

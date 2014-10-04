@@ -9,22 +9,14 @@ class ConfirmTest extends TestBase
 
     public function it_will_return_true_for_y()
     {
-        $reader = Mockery::mock('League\CLImate\Util\Reader');
-        $reader->shouldReceive('line')->once()->andReturn('y');
+        $this->shouldReadAndReturn('y');
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m");
 
-        ob_start();
-
-        $input = $this->cli->confirm('Keep going?', $reader);
+        $input = $this->cli->confirm('Keep going?', $this->reader);
 
         $response = $input->confirmed();
 
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[mKeep going? [y/n] \e[0m";
-
-        $this->assertSame($result, $should_be);
         $this->assertTrue($response);
     }
 
@@ -32,22 +24,14 @@ class ConfirmTest extends TestBase
 
     public function it_will_return_false_for_n()
     {
-        $reader = Mockery::mock('League\CLImate\Util\Reader');
-        $reader->shouldReceive('line')->once()->andReturn('n');
+        $this->shouldReadAndReturn('n');
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m");
 
-        ob_start();
-
-        $input = $this->cli->confirm('Keep going?', $reader);
+        $input = $this->cli->confirm('Keep going?', $this->reader);
 
         $response = $input->confirmed();
 
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[mKeep going? [y/n] \e[0m";
-
-        $this->assertSame($result, $should_be);
         $this->assertFalse($response);
     }
 
@@ -55,23 +39,16 @@ class ConfirmTest extends TestBase
 
     public function it_will_only_allow_strict_confirmations()
     {
-        $reader = Mockery::mock('League\CLImate\Util\Reader');
-        $reader->shouldReceive('line')->once()->andReturn('Y');
-        $reader->shouldReceive('line')->once()->andReturn('y');
+        $this->shouldReadAndReturn('Y');
+        $this->shouldReadAndReturn('y');
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m", 2);
 
-        ob_start();
-
-        $input = $this->cli->confirm('Keep going?', $reader);
+        $input = $this->cli->confirm('Keep going?', $this->reader);
 
         $response = $input->confirmed();
 
-        $result = ob_get_contents();
 
-        ob_end_clean();
-
-        $should_be = "\e[mKeep going? [y/n] \e[0m\e[mKeep going? [y/n] \e[0m";
-
-        $this->assertSame($should_be, $result);
     }
 
 }

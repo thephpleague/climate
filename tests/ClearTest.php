@@ -9,17 +9,8 @@ class ClearTest extends TestBase
 
     public function it_can_clear_the_terminal()
     {
-        ob_start();
-
+        $this->shouldWrite("\e[m\e[2J\e[0m");
         $this->cli->clear();
-
-        $result = ob_get_contents();
-
-        ob_end_clean();
-
-        $should_be = "\e[m\e[2J\e[0m\n";
-
-        $this->assertSame($should_be, $result);
     }
 
 }

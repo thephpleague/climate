@@ -5,13 +5,12 @@ namespace League\CLImate\TerminalObject\Router;
 use League\CLImate\Decorator\ParserImporter;
 use League\CLImate\Settings\Manager;
 use League\CLImate\Settings\SettingsImporter;
+use League\CLImate\Util\OutputImporter;
 use League\CLImate\Util\UtilFactory;
 
 class Router
 {
-    use ParserImporter;
-
-    use SettingsImporter;
+    use ParserImporter, SettingsImporter, OutputImporter;
 
     /**
      * An instance of the Settings Manager class
@@ -65,6 +64,8 @@ class Router
     public function execute($name, $arguments)
     {
         $router     = $this->getRouter($name);
+
+        $router->output($this->output);
 
         $reflection = new \ReflectionClass($router->path($name));
         $obj        = $reflection->newInstanceArgs($arguments);

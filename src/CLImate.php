@@ -65,6 +65,8 @@ namespace League\CLImate;
  * @method \League\CLImate\CLImate addArt(string $dir)
  */
 
+use League\CLImate\Util\Output;
+
 class CLImate
 {
     /**
@@ -91,11 +93,14 @@ class CLImate
 
     protected $settings;
 
-    public function __construct()
+    protected $output;
+
+    public function __construct(Output $output = null)
     {
         $this->style           = new Decorator\Style();
         $this->terminal_object = new TerminalObject\Router\Router();
         $this->settings        = new Settings\Manager();
+        $this->output          = $output ?: new Output();
     }
 
     /**
@@ -106,7 +111,8 @@ class CLImate
 
     public function out($str)
     {
-        echo new Output($str, $this->style->parser());
+        $str = $this->style->parser()->apply($str);
+        $this->output->write($str);
 
         $this->style->reset();
 
@@ -241,6 +247,7 @@ class CLImate
                 // Execute the terminal object
                 $this->terminal_object->settings($this->settings);
                 $this->terminal_object->parser($parser);
+                $this->terminal_object->output($this->output);
 
                 $obj = $this->terminal_object->execute($name, $arguments);
 
