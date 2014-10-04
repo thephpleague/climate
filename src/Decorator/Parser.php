@@ -112,26 +112,35 @@ class Parser
         // All we want is the array of actual strings matched
         $matches = reset($matches);
 
-        // Let's keep a history of styles applied
-        $history = [$this->currentCode()];
-        $history = array_filter($history);
+        return $this->parseTags($str, $matches);
+    }
 
-        // We will be replacing tags one at a time
+    /**
+     * Parse the given string for the tags and replace them with the appropriate codes
+     *
+     * @param string $str
+     * @param array $tags
+     */
+
+    protected function parseTags($str, $tags)
+    {
+        // Let's keep a history of styles applied
+        $history = ($this->currentCode()) ? [$this->currentCode()] : [];
+
+        // We will be replacing tags one at a time, can't pass this by reference
         $replace_count = 1;
 
-        foreach ($matches as $match) {
-            if (strstr($match, '/')) {
+        foreach ($tags as $tag) {
+            if (strstr($tag, '/')) {
                 // We are closing out the tag, pop off the last element and get the codes that are left
                 array_pop($history);
-                $str = str_replace($match, $this->end($history), $str, $replace_count);
+                $str = str_replace($tag, $this->end($history), $str, $replace_count);
             } else {
-                // We are starting a new tag
-
-                // Add it onto the history
-                $history[] = $this->tags[$match];
+                // We are starting a new tag, add it onto the history
+                $history[] = $this->tags[$tag];
 
                 // Replace the tag with the correct color code
-                $str = str_replace($match, $this->start($this->tags[$match]), $str, $replace_count);
+                $str = str_replace($tag, $this->start($this->tags[$tag]), $str, $replace_count);
             }
         }
 
