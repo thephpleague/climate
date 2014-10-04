@@ -24,7 +24,7 @@ class TestBase extends PHPUnit_Framework_TestCase
      * Helper for writer mock
      *
      * @param string  $content
-     * @param integer|null $count
+     * @param integer $count
      */
 
     protected function shouldWrite($content, $count = 1)

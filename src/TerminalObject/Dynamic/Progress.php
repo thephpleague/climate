@@ -164,7 +164,7 @@ class Progress extends BaseDynamicTerminalObject
     /**
      * Format the percentage so it looks pretty
      *
-     * @param float|integer $percentage
+     * @param integer $percentage
      */
 
     protected function percentageFormatted($percentage)
