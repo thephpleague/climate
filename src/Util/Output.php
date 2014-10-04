@@ -4,6 +4,7 @@ namespace League\CLImate\Util;
 
 use League\CLImate\Decorator\Parser;
 use League\CLImate\Decorator\ParserImporter;
+use League\CLImate\Util\Writer\WriterInterface;
 
 class Output
 {
@@ -24,6 +25,19 @@ class Output
     protected $new_line = true;
 
     /**
+     * Instance of a WriterInterface implementation
+     *
+     * @var \League\CLImate\Util\Writer\WriterInterface
+     */
+
+    protected $writer;
+
+    public function __construct(WriterInterface $writer = null)
+    {
+        $this->writer = $writer ?: new Writer\StdOut();
+    }
+
+    /**
      * Dictate that a new line should not be added after the output
      */
 
@@ -34,12 +48,19 @@ class Output
         return $this;
     }
 
+    /**
+     * Write the content using the provided writer
+     *
+     * @param  string $content
+     */
+
     public function write($content)
     {
         if ($this->new_line) $content .= PHP_EOL;
 
-        fwrite(STDOUT, $content);
+        $this->writer->write($content);
 
+        // Reset new line flag for next time
         $this->new_line = true;
     }
 
