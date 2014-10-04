@@ -94,29 +94,8 @@ class Style
     public function set($key)
     {
         foreach ($this->style as $style) {
-
-            $code = $style->set($key);
-
-            if ($code) {
-                // If we have something but it's not an integer,
-                // plug it back in and see what we get
-                if (is_string($code)) {
-                    return $this->set($code);
-
-                // If we got an array back, loop through it
-                // and add each of the properties
-                } elseif (is_array($code)) {
-                    $adds = [];
-
-                    foreach ($code as $c) {
-                        $adds[] = $this->set($c);
-                    }
-
-                    // If any of them came back true, we're good to go
-                    return in_array(true, $adds);
-                }
-
-                return true;
+            if ($code = $style->set($key)) {
+                return $this->validateCode($code);
             }
         }
 
@@ -167,6 +146,35 @@ class Style
         $full_current = array_filter($full_current);
 
         return array_values($full_current);
+    }
+
+    /**
+     * Make sure that the code is an integer, if not let's try and get it there
+     *
+     * @param mixed $code
+     * @return boolean
+     */
+
+    protected function validateCode($code)
+    {
+        if (is_integer($code)) return true;
+
+        // Plug it back in and see what we get
+        if (is_string($code)) return $this->set($code);
+
+        if (is_array($code)) {
+            // Loop through it and add each of the properties
+            $adds = [];
+
+            foreach ($code as $c) {
+                $adds[] = $this->set($c);
+            }
+
+            // If any of them came back true, we're good to go
+            return in_array(true, $adds);
+        }
+
+        return false;
     }
 
     protected function convertToCodes(array $codes)
