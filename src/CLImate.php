@@ -199,6 +199,30 @@ class CLImate
     }
 
     /**
+     * Build up the terminal object and return it
+     *
+     * @param string $name
+     * @param arguments $arguments
+     * @return object|null
+     */
+
+    protected function buildTerminalObject($name, $arguments)
+    {
+        // Retrieve the parser for the current set of styles
+        $parser = $this->style->parser();
+
+        // Reset the styles
+        $this->style->reset();
+
+        // Execute the terminal object
+        $this->terminal_object->settings($this->settings);
+        $this->terminal_object->parser($parser);
+        $this->terminal_object->output($this->output);
+
+        return $this->terminal_object->execute($name, $arguments);
+    }
+
+    /**
      * Magic method for anything called that doesn't exist
      *
      * @param string $requested_method
@@ -226,26 +250,15 @@ class CLImate
         // If we still have something left, let's see if it's a terminal object
         if (strlen($name)) {
             if ( $this->terminal_object->exists($name)) {
-                // Retrieve the parser for the current set of styles
-                $parser = $this->style->parser();
-
-                // Reset the styles
-                $this->style->reset();
-
-                // Execute the terminal object
-                $this->terminal_object->settings($this->settings);
-                $this->terminal_object->parser($parser);
-                $this->terminal_object->output($this->output);
-
-                $obj = $this->terminal_object->execute($name, $arguments);
+                $obj = $this->buildTerminalObject($name, $arguments);
 
                 // If something was returned, return it
-                if ($obj) return $obj;
+                if (is_object($obj)) return $obj;
             } elseif ( $this->settings->exists($name)) {
                 $this->settings->add($name, $output);
             } else {
                 // If we can't find it at this point, let's fail gracefully
-                return $this->out($output);
+                $this->out($output);
             }
         }
 
