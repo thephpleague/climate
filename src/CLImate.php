@@ -50,6 +50,7 @@ namespace League\CLImate;
  * @method mixed shout(string $str = null)
  * @method mixed error(string $str = null)
  *
+ * @method mixed out(string $str)
  * @method mixed table(array $data)
  * @method mixed json(mixed $var)
  * @method mixed br()
