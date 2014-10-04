@@ -242,19 +242,17 @@ class CLImate
 
         $name   = $this->applyStyleMethods($name);
 
-        // If we have fulfilled all of the requested methods and we have output, output it
-        if (!strlen($name) && $this->hasOutput($output)) {
-            return $this->out($output);
-        }
-
-        // If we still have something left, let's see if it's a terminal object
-        if (strlen($name)) {
-            if ( $this->terminal_object->exists($name)) {
+        if (!strlen($name)) {
+            // If we have fulfilled all of the requested methods and we have output, output it
+            if ($this->hasOutput($output)) $this->out($output);
+        } else {
+            // If we still have something left, let's figure out what it is
+            if ($this->terminal_object->exists($name)) {
                 $obj = $this->buildTerminalObject($name, $arguments);
 
                 // If something was returned, return it
                 if (is_object($obj)) return $obj;
-            } elseif ( $this->settings->exists($name)) {
+            } elseif ($this->settings->exists($name)) {
                 $this->settings->add($name, $output);
             } else {
                 // If we can't find it at this point, let's fail gracefully
