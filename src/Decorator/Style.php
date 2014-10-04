@@ -162,19 +162,28 @@ class Style
         // Plug it back in and see what we get
         if (is_string($code)) return $this->set($code);
 
-        if (is_array($code)) {
-            // Loop through it and add each of the properties
-            $adds = [];
-
-            foreach ($code as $c) {
-                $adds[] = $this->set($c);
-            }
-
-            // If any of them came back true, we're good to go
-            return in_array(true, $adds);
-        }
+        if (is_array($code)) return $this->validateCodeArray($code);
 
         return false;
+    }
+
+    /**
+     * Validate an array of codes
+     *
+     * @param array $codes
+     */
+
+    protected function validateCodeArray($codes)
+    {
+        // Loop through it and add each of the properties
+        $adds = [];
+
+        foreach ($codes as $code) {
+            $adds[] = $this->set($code);
+        }
+
+        // If any of them came back true, we're good to go
+        return in_array(true, $adds);
     }
 
     protected function convertToCodes(array $codes)
