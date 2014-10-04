@@ -20,6 +20,12 @@ class Progress extends BaseDynamicTerminalObject
 
     protected $bar_str_len;
 
+    /**
+     * Flag indicating whether we are writing the bar for the first time
+     *
+     * @var boolean $first_line
+     */
+
     protected $first_line = true;
 
     /**
@@ -65,6 +71,22 @@ class Progress extends BaseDynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
+        $progress_bar = $this->getProgressBar($current, $label);
+
+        $this->output->write($this->parser->apply($progress_bar));
+    }
+
+    /**
+     * Build the progress bar str and return it
+     *
+     * @param integer $current
+     * @param string $label
+     *
+     * @return string
+     */
+
+    protected function getProgressBar($current, $label)
+    {
         if ($this->first_line) {
             // Drop down a line, we are about to
             // re-write this line for the progress bar
@@ -78,9 +100,9 @@ class Progress extends BaseDynamicTerminalObject
         $progress_bar  = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();
         $progress_bar .= $this->util->cursor->deleteCurrentLine();
-        $progress_bar .= $this->getProgressBar($current, $label);
+        $progress_bar .= $this->getProgressBarStr($current, $label);
 
-        $this->output->write($this->parser->apply($progress_bar));
+        return $progress_bar;
     }
 
     /**
@@ -93,7 +115,7 @@ class Progress extends BaseDynamicTerminalObject
      * @return string
      */
 
-    protected function getProgressBar($current, $label)
+    protected function getProgressBarStr($current, $label)
     {
         $percentage = $current / $this->total;
         $bar_length = round($this->getBarStrLen() * $percentage);
