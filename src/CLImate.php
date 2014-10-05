@@ -119,13 +119,10 @@ class CLImate
 
     protected function hasOutput($output)
     {
-        if (is_string($output) || is_numeric($output)) {
-            if (strlen($output)) return true;
-        } elseif (!empty($output)) {
-            return true;
-        }
+        if (!empty($output)) return true;
 
-        return false;
+        // Check for type first to avoid errors with objects/arrays/etc
+        return ((is_string($output) || is_numeric($output)) && strlen($output) > 0);
     }
 
     /**
