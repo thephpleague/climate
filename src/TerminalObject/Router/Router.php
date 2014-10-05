@@ -63,7 +63,7 @@ class Router
 
     public function execute($name, $arguments)
     {
-        $router     = $this->getRouter($name);
+        $router = $this->getRouter($name);
 
         $router->output($this->output);
 
