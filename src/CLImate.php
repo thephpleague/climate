@@ -218,6 +218,30 @@ class CLImate
     }
 
     /**
+     * Route anything leftover after styles were applied
+     *
+     * @param string $name
+     * @param array $arguments
+     * @return object|null
+     */
+
+    protected function routeRemainingMethod($name, array $arguments)
+    {
+        // If we still have something left, let's figure out what it is
+        if ($this->terminal_object->exists($name)) {
+            $obj = $this->buildTerminalObject($name, $arguments);
+
+            // If something was returned, return it
+            if (is_object($obj)) return $obj;
+        } elseif ($this->settings->exists($name)) {
+            $this->settings->add($name, reset($arguments));
+        } else {
+            // If we can't find it at this point, let's fail gracefully
+            $this->out(reset($arguments));
+        }
+    }
+
+    /**
      * Magic method for anything called that doesn't exist
      *
      * @param string $requested_method
@@ -237,22 +261,13 @@ class CLImate
 
         $name   = $this->applyStyleMethods($name);
 
-        if (!strlen($name)) {
+        if (strlen($name)) {
+            // If we have something left, let's try and route it to the appropriate place
+            $result = $this->routeRemainingMethod($name, $arguments);
+            if ($result) return $result;
+        } else {
             // If we have fulfilled all of the requested methods and we have output, output it
             if ($this->hasOutput($output)) $this->out($output);
-        } else {
-            // If we still have something left, let's figure out what it is
-            if ($this->terminal_object->exists($name)) {
-                $obj = $this->buildTerminalObject($name, $arguments);
-
-                // If something was returned, return it
-                if (is_object($obj)) return $obj;
-            } elseif ($this->settings->exists($name)) {
-                $this->settings->add($name, $output);
-            } else {
-                // If we can't find it at this point, let's fail gracefully
-                $this->out($output);
-            }
         }
 
         return $this;
