@@ -15,9 +15,11 @@ class Dimensions {
 
     protected $system;
 
-    public function __construct()
+    public function __construct($system = null)
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        if ($system) {
+            $this->system = $system;
+        } elseif (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             $this->system = new Windows();
         } else {
             $this->system = new Linux();
