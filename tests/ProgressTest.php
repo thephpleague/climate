@@ -156,7 +156,7 @@ class ProgressTest extends TestBase
     }
 
     /**
-     * test
+     * @test
      * @expectedException        Exception
      * @expectedExceptionMessage The progress total must be greater than zero.
      */
@@ -171,7 +171,7 @@ class ProgressTest extends TestBase
     }
 
     /**
-     * test
+     * @test
      * @expectedException        Exception
      * @expectedExceptionMessage The current is greater than the total.
      */

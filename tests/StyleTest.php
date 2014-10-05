@@ -7,7 +7,7 @@ class StyleTest extends TestBase
 
     /** @test */
 
-    public function it_can_use_a_background_color_and_foreground_color_methodcolor_method()
+    public function it_can_use_a_foreground_color_method()
     {
         $this->shouldWrite("\e[31mThis would go out to the console.\e[0m");
         $this->cli->red('This would go out to the console.');
