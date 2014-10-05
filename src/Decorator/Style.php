@@ -76,8 +76,7 @@ class Style
     public function get($key)
     {
         foreach ($this->style as $style) {
-            $code = $style->get($key);
-            if ($code) return $code;
+            if ($code = $style->get($key)) return $code;
         }
 
         return false;
