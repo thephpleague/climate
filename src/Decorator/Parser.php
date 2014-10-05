@@ -107,7 +107,7 @@ class Parser
         $count = preg_match_all($regex, $str, $matches);
 
         // If we didn't find anything, return the string right back
-        if (!$count) return $str;
+        if (!$count || !is_array($matches)) return $str;
 
         // All we want is the array of actual strings matched
         $matches = reset($matches);

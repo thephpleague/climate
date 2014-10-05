@@ -173,7 +173,7 @@ class Style
      * @param array $codes
      */
 
-    protected function validateCodeArray($codes)
+    protected function validateCodeArray(array $codes)
     {
         // Loop through it and add each of the properties
         $adds = [];
@@ -185,6 +185,12 @@ class Style
         // If any of them came back true, we're good to go
         return in_array(true, $adds);
     }
+
+    /**
+     * Convert the array of codes to integers
+     *
+     * @param array $codes
+     */
 
     protected function convertToCodes(array $codes)
     {
