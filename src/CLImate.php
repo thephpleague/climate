@@ -265,9 +265,9 @@ class CLImate
             // If we have something left, let's try and route it to the appropriate place
             $result = $this->routeRemainingMethod($name, $arguments);
             if ($result) return $result;
-        } else {
+        } elseif ($this->hasOutput($output)) {
             // If we have fulfilled all of the requested methods and we have output, output it
-            if ($this->hasOutput($output)) $this->out($output);
+            $this->out($output);
         }
 
         return $this;
