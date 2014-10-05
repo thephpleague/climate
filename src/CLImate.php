@@ -167,8 +167,7 @@ class CLImate
 
         // While we still have a name left and we keep finding methods,
         // loop through the possibilities
-        if (strlen($new_name) > 0 && $new_name != $name)
-        {
+        if (strlen($new_name) > 0 && $new_name != $name) {
             return $this->applyStyleMethods($new_name, $method_search);
         }
 
