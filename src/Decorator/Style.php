@@ -196,13 +196,38 @@ class Style
     {
         foreach ($codes as $key => $code) {
             if (is_int($code)) continue;
-            if (is_array($code)) {
-                foreach ($code as $code_key => $c) {
-                    $codes[$key][$code_key] = $this->get($c);
-                }
-            } else {
-                $codes[$key] = $this->get($code);
-            }
+
+            $codes[$key] = $this->getCode($code);
+        }
+
+        return $codes;
+    }
+
+    /**
+     * Retrieve the integers from the mixed code input
+     *
+     * @param string|array $code
+     * @return integer|array
+     */
+
+    protected function getCode($code)
+    {
+        if (is_array($code)) return $this->getCodeArray($code);
+
+        return $this->get($code);
+    }
+
+    /**
+     * Retrieve an array of integers from the array of codes
+     *
+     * @param array $codes
+     * @return array
+     */
+
+    protected function getCodeArray(array $codes)
+    {
+        foreach ($codes as $key => $code) {
+            $codes[$key] = $this->get($code);
         }
 
         return $codes;
