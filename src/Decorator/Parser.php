@@ -134,14 +134,14 @@ class Parser
             if (strstr($tag, '/')) {
                 // We are closing out the tag, pop off the last element and get the codes that are left
                 array_pop($history);
-                $str = str_replace($tag, $this->end($history), $str, $replace_count);
+                $replace = $this->end($history);
             } else {
-                // We are starting a new tag, add it onto the history
+                // We are starting a new tag, add it onto the history and replace with correct color code
                 $history[] = $this->tags[$tag];
-
-                // Replace the tag with the correct color code
-                $str = str_replace($tag, $this->start($this->tags[$tag]), $str, $replace_count);
+                $replace = $this->start($this->tags[$tag]);
             }
+
+            $str = str_replace($tag, $replace, $str, $replace_count);
         }
 
         return $str;
