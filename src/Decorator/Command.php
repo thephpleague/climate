@@ -75,12 +75,9 @@ class Command extends BaseDecorator
 
     public function set($val)
     {
-        $code = $this->get($val);
-
         // Return the code because it is a string corresponding
         // to a property in another class
-        if ($code) return $code;
-        return false;
+        return ($code = $this->get($val)) ? $code : false;
     }
 
 }
