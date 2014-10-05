@@ -41,9 +41,9 @@ The following versions of PHP are supported by this version.
 
 ## Documentation
 
-CLImate has [full documentation](http://climate.thephpleague.com), powered by [Sculpin](https://sculpin.io).
+CLImate has [full documentation](http://climate.thephpleague.com), powered by [Jekyll](http://jekyllrb.com/).
 
-Contribute to this documentation in the [sculpin branch](https://github.com/thephpleague/climate/tree/gh-pages-sculpin/source).
+Contribute to this documentation in the [gh-pages branch](https://github.com/thephpleague/climate/tree/gh-pages/).
 
 ## Credits
 
