@@ -7,7 +7,7 @@ trait OutputImporter
     /**
      * An instance of the OutputFactory
      *
-     * @var \League\CLImate\Output\Output $output
+     * @var \League\CLImate\Util\Output $output
      */
 
     protected $output;
