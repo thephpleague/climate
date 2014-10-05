@@ -70,21 +70,6 @@ class ProgressTest extends TestBase
 
     public function it_can_output_a_progress_bar_with_current_labels()
     {
-        $this->shouldWrite('');
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kfirst\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Ksecond\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(30)} 30%\n\r\e[Kthird\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(40)} 40%\n\r\e[Kfourth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(50)} 50%\n\r\e[Kfifth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(60)} 60%\n\r\e[Ksixth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(70)} 70%\n\r\e[Kseventh\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(80)} 80%\n\r\e[Keighth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(90)} 90%\n\r\e[Kninth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m");
-
-        $progress = $this->cli->progress(10);
-
         $labels = [
             'zeroth',
             'first',
@@ -98,6 +83,17 @@ class ProgressTest extends TestBase
             'ninth',
             'tenth',
         ];
+
+        $this->shouldWrite('');
+
+        for ($i = 0; $i < 100; $i += 10) {
+            $label_i = $i / 10;
+            $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat($i)} {$i}%\n\r\e[K{$labels[$label_i]}\e[0m");
+        }
+
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $progress = $this->cli->progress(10);
 
         for ($i = 0; $i <= 10; $i++) {
             $progress->current($i, $labels[$i]);
