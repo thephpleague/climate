@@ -171,25 +171,30 @@ class CLImate
         // loop through the possibilities
         while (strlen($name) > 0 && $found_method) {
             // We haven't found a method in the current loop yet
-            $current_loop_found = false;
-
-            // Loop through the possible methods
-            foreach ($method_search as $method) {
-                // See if we found a valid method
-                $new_name = $this->parseStyleMethod($method, $name);
-
-                // If we haven't found one in the loop yet and the name changed,
-                // guess what: we found a valid method
-                if (!$current_loop_found && $new_name != $name) {
-                    $current_loop_found = true;
-                }
-
-                // Set the name to the new name
-                $name = $new_name;
-            }
+            $new_name = $this->searchForStyleMethods($name, $method_search);
 
             // Set the found method flag just in case we don't have any more valid methods
-            $found_method = $current_loop_found;
+            $found_method = ($new_name != $name);
+
+            $name = $new_name;
+        }
+
+        return $name;
+    }
+
+    /**
+     * Search for style methods in the current name
+     *
+     * @param string $name
+     * @param array $search
+     */
+
+    protected function searchForStyleMethods($name, $search)
+    {
+        // Loop through the possible methods
+        foreach ($search as $method) {
+            // See if we found a valid method
+            $name = $this->parseStyleMethod($method, $name);
         }
 
         return $name;
