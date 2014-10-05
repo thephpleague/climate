@@ -127,24 +127,38 @@ class Parser
         // Let's keep a history of styles applied
         $history = ($this->currentCode()) ? [$this->currentCode()] : [];
 
-        // We will be replacing tags one at a time, can't pass this by reference
-        $replace_count = 1;
-
         foreach ($tags as $tag) {
-            if (strstr($tag, '/')) {
-                // We are closing out the tag, pop off the last element and get the codes that are left
-                array_pop($history);
-                $replace = $this->end($history);
-            } else {
-                // We are starting a new tag, add it onto the history and replace with correct color code
-                $history[] = $this->tags[$tag];
-                $replace = $this->start($this->tags[$tag]);
-            }
-
-            $str = str_replace($tag, $replace, $str, $replace_count);
+            $str = $this->replaceTag($str, $tag, $history);
         }
 
         return $str;
+    }
+
+    /**
+     * Replace the tag in the str
+     *
+     * @param string $str
+     * @param string $tag
+     * @param array $history
+     * @return string
+     */
+
+    protected function replaceTag($str, $tag, &$history)
+    {
+        // We will be replacing tags one at a time, can't pass this by reference
+        $replace_count = 1;
+
+        if (strstr($tag, '/')) {
+            // We are closing out the tag, pop off the last element and get the codes that are left
+            array_pop($history);
+            $replace = $this->end($history);
+        } else {
+            // We are starting a new tag, add it onto the history and replace with correct color code
+            $history[] = $this->tags[$tag];
+            $replace = $this->start($this->tags[$tag]);
+        }
+
+        return str_replace($tag, $replace, $str, $replace_count);
     }
 
     /**
