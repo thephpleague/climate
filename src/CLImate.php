@@ -154,32 +154,25 @@ class CLImate
      * Search for any style methods within the name and apply them
      *
      * @param  string $name
+     * @param  array $method_search
      * @return string Anything left over after applying styles
      */
 
-    protected function applyStyleMethods($name)
+    protected function applyStyleMethods($name, $method_search = null)
     {
         // Get all of the possible style attributes
-        $method_search = array_keys($this->style->all());
+        $method_search = $method_search ?: array_keys($this->style->all());
 
-        // A flag to see if we are still finding valid methods
-        // We need this flag because of terminal objects
-        // and failing gracefully when a whack method is passed in
-        $found_method = true;
+        $new_name = $this->searchForStyleMethods($name, $method_search);
 
         // While we still have a name left and we keep finding methods,
         // loop through the possibilities
-        while (strlen($name) > 0 && $found_method) {
-            // We haven't found a method in the current loop yet
-            $new_name = $this->searchForStyleMethods($name, $method_search);
-
-            // Set the found method flag just in case we don't have any more valid methods
-            $found_method = ($new_name != $name);
-
-            $name = $new_name;
+        if (strlen($new_name) > 0 && $new_name != $name)
+        {
+            return $this->applyStyleMethods($new_name, $method_search);
         }
 
-        return $name;
+        return $new_name;
     }
 
     /**
