@@ -222,25 +222,18 @@ class Table extends BaseTerminalObject
 
     protected function getColumnWidths()
     {
-        // Fill an array with the same count with zeros
         $first_row = reset($this->data);
 
         if (is_object($first_row)) {
             $first_row = get_object_vars($first_row);
         }
 
-        $zeros = array_fill(0, count($first_row), 0);
-        $keys  = array_keys($first_row);
-
         // Create an array with the columns as keys and values of zero
-        $column_widths = array_combine($keys, $zeros);
+        $column_widths = $this->getDefaultColumnWidths($first_row);
 
         foreach ($this->data as $columns) {
             foreach ($columns as $key => $column) {
-                $column_widths[$key] = max(
-                                                $this->determineCellWidth($key, $column),
-                                                $column_widths[$key]
-                                            );
+                $column_widths[$key] = $this->getCellWidth($column_widths[$key], $column);
             }
         }
 
@@ -248,20 +241,34 @@ class Table extends BaseTerminalObject
     }
 
     /**
+     * Set up an array of default column widths
+     *
+     * @param array $columns
+     * @return array
+     */
+
+    protected function getDefaultColumnWidths(array $columns)
+    {
+        $widths = [];
+
+        foreach ( $columns as $key => $column )
+        {
+            $widths[$key] = $this->lengthWithoutTags($key);
+        }
+
+        return $widths;
+    }
+
+    /**
      * Determine the width of the columns without tags
      *
      * @param mixed  $key
      * @param string $column
+     * @return integer
      */
 
-    protected function determineCellWidth($key, $column)
+    protected function getCellWidth($current_width, $str)
     {
-        $column_length = $this->lengthWithoutTags($column);
-
-        // In case it's an array of objects or an associative
-        // array, check the key length
-        $key_length    = $this->lengthWithoutTags($key);
-
-        return max($column_length, $key_length);
+        return max($current_width, $this->lengthWithoutTags($str));
     }
 }
