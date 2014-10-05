@@ -252,7 +252,7 @@ class Style
      * @param string $value
      */
 
-    protected function addStyle($style, $key, $value)
+    protected function add($style, $key, $value)
     {
         $this->style[$style]->add($key, $value);
 
@@ -281,7 +281,7 @@ class Style
 
         if (array_key_exists($style, $this->style)) {
             list($key, $value) = $arguments;
-            $this->addStyle($style, $key, $value);
+            $this->add($style, $key, $value);
         }
     }
 
