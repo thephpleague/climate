@@ -234,6 +234,36 @@ class Style
     }
 
     /**
+     * Parse the add method for the style they are trying to add
+     *
+     * @param string $method
+     */
+
+    protected function parseAddMethod($method)
+    {
+        return strtolower(substr($method, 3, strlen($method)));
+    }
+
+    /**
+     * Add a custom style
+     *
+     * @param string $style
+     * @param string $key
+     * @param string $value
+     */
+
+    protected function addStyle($style, $key, $value)
+    {
+        $this->style[$style]->add($key, $value);
+
+        // If we are adding a color, make sure it gets added
+        // as a background color too
+        if ($style == 'color') {
+            $this->style['background']->add($key, $value);
+        }
+    }
+
+    /**
      * Magic Methods
      *
      * List of possible magic methods are at the top of this class
@@ -245,23 +275,13 @@ class Style
     public function __call($requested_method, $arguments)
     {
         // The only methods we are concerned about are 'add' methods
-        if (substr($requested_method, 0, 3) == 'add') {
+        if (substr($requested_method, 0, 3) != 'add') return false;
 
-            $style = substr($requested_method, 3, strlen($requested_method));
-            $style = strtolower($style);
+        $style = $this->parseAddMethod($requested_method);
 
-            if (array_key_exists($style, $this->style)) {
-
-                list($key, $value) = $arguments;
-
-                $this->style[$style]->add($key, $value);
-
-                // If we are adding a color, make sure it gets added
-                // as a background color too
-                if ($style == 'color') {
-                    $this->style['background']->add($key, $value);
-                }
-            }
+        if (array_key_exists($style, $this->style)) {
+            list($key, $value) = $arguments;
+            $this->addStyle($style, $key, $value);
         }
     }
 
