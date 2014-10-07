@@ -63,4 +63,4 @@ You can specify the number of columns by passing in a second parameter:
 $climate->columns($data, 4);
 ~~~
 
-Otherwise CLImate will try to figure out how it best fits in your terminal.
+Otherwise CLImate will try to figure out how the content best fits in your terminal.

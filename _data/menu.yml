@@ -12,7 +12,7 @@ Terminal Objects:
     Overview: '/terminal-objects/overview/'
     Input: '/terminal-objects/input/'
     Table: '/terminal-objects/table/'
-    # Columns: '/terminal-objects/columns/'
+    Columns: '/terminal-objects/columns/'
     Border: '/terminal-objects/border/'
     Progress Bar: '/terminal-objects/progress-bar/'
     JSON: '/terminal-objects/json/'
