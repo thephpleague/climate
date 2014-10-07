@@ -82,10 +82,8 @@ class Columns extends BaseTerminalObject
 
     protected function getColumnWidth($data)
     {
-        $column_width = array_map([$this, 'lengthWithoutTags'], $data);
-
         // Return the maximum width plus a buffer
-        return max($column_width) + 5;
+        return $this->maxStrLen($data) + 5;
     }
 
     /**

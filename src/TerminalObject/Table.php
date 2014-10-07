@@ -172,10 +172,8 @@ class Table extends BaseTerminalObject
         $keys       = array_keys($first_item);
         $first_key  = reset($keys);
 
-        if (!is_int($first_key)) {
-            // We have an associative array (probably), let's have a header row
-            return array_combine($keys, $keys);
-        }
+        // We have an associative array (probably), let's have a header row
+        if (!is_int($first_key)) return array_combine($keys, $keys);
 
         return false;
     }
@@ -215,14 +213,9 @@ class Table extends BaseTerminalObject
 
     protected function getDefaultColumnWidths(array $columns)
     {
-        $widths = [];
+        $widths = $this->arrayOfStrLens(array_flip($columns));
 
-        foreach ( $columns as $key => $column )
-        {
-            $widths[$key] = $this->lengthWithoutTags($key);
-        }
-
-        return $widths;
+        return array_combine(array_keys($columns), $widths);
     }
 
     /**

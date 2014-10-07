@@ -48,11 +48,41 @@ trait StringLength {
         return str_replace($this->ignore_tags, '', $str);
     }
 
+    /**
+     * Apply padding to a string
+     *
+     * @param  string $str
+     * @param  integer $final_length
+     * @return string
+     */
+
     protected function pad($str, $final_length)
     {
         $padding = $final_length - $this->lengthWithoutTags($str);
 
         return $str . str_repeat(' ', $padding);
+    }
+
+    /**
+     * Find the max string length in an array
+     *
+     * @param array $arr
+     */
+
+    protected function maxStrLen(array $arr)
+    {
+        return max($this->arrayOfStrLens($arr));
+    }
+
+    /**
+     * Get an array of the string lengths from an array of strings
+     *
+     * @param array $arr
+     */
+
+    protected function arrayOfStrLens(array $arr)
+    {
+        return array_map([$this, 'lengthWithoutTags'], $arr);
     }
 
 }
