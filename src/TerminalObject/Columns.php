@@ -106,6 +106,17 @@ class Columns extends BaseTerminalObject
     }
 
     /**
+     * Set the count property
+     *
+     * @param integer $column_width
+     */
+
+    protected function setCount($column_width)
+    {
+        $this->count = floor($this->util->dimensions->width() / $column_width);
+    }
+
+    /**
      * Get the number of rows per column
      *
      * @param integer $column_width
@@ -114,11 +125,7 @@ class Columns extends BaseTerminalObject
 
     protected function getMaxRows($column_width)
     {
-        // If a count wasn't specified, determine based on terminal width
-        if (!$this->count) {
-            $terminal_width = exec('tput cols');
-            $this->count    = floor($terminal_width / $column_width);
-        }
+        if (!$this->count) $this->setCount($column_width);
 
         return ceil(count($this->data) / $this->count);
     }
