@@ -213,7 +213,7 @@ class Table extends BaseTerminalObject
 
     protected function getDefaultColumnWidths(array $columns)
     {
-        $widths = $this->arrayOfStrLens(array_flip($columns));
+        $widths = $this->arrayOfStrLens(array_keys($columns));
 
         return array_combine(array_keys($columns), $widths);
     }

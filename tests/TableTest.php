@@ -124,4 +124,24 @@ class TableTest extends TestBase
             ]);
     }
 
+    /** @test */
+
+    public function it_can_handle_the_same_value_more_than_once()
+    {
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m=====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 3 |\e[0m");
+        $this->shouldWrite("\e[m-------------------------------------\e[0m");
+
+        $this->cli->table([
+                [
+                    'cell1' => 'Cell 1',
+                    'cell2' => 'Cell 2',
+                    'cell3' => 'Cell 3',
+                    'cell4' => 'Cell 3',
+                ],
+            ]);
+    }
+
 }
