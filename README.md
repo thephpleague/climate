@@ -22,12 +22,8 @@ CLImate allows you to easily output colored text, special formats, and more.
 
 Using [composer](https://packagist.org/packages/league/climate):
 
-```
-{
-    "require": {
-        "league/climate": "~2.0"
-    }
-}
+```bash
+$ composer require league/climate
 ```
 
 ## Requirements
