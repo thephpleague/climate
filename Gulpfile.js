@@ -12,7 +12,7 @@ gulp.task("tests", function ()
 		            notify: true
 		        }))
 		    .on("error", function() {
-		        run("notify-send 'Tests Failed' 'Got some problems dude.'").exec();
+		        run("notify-send 'Tests Failed' 'Got some problems buddy.'").exec();
 		    })
         	.pipe( run("notify-send 'Tests Passed' 'Nailed it.'"));
 });
