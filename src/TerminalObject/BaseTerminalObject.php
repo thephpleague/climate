@@ -32,4 +32,15 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
     {
         return $this->parser;
     }
+
+    /**
+     * Check if this object requires a new line to be added after the output
+     *
+     * @return boolean
+     */
+
+    public function sameLine()
+    {
+        return false;
+    }
 }

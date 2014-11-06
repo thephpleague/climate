@@ -13,4 +13,8 @@ interface TerminalObjectInterface
      */
     public function importSetting( $setting );
 
+    /**
+     * @return boolean
+     */
+    public function sameLine();
 }
