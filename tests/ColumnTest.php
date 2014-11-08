@@ -91,4 +91,23 @@ class ColumnTest extends TestBase
                     ]);
     }
 
+    /** @test */
+
+    public function it_can_output_an_associative_array_as_columns()
+    {
+        $this->shouldWrite("\e[mone       first one\e[0m");
+        $this->shouldWrite("\e[mtwo       second one\e[0m");
+        $this->shouldWrite("\e[mthree     third one\e[0m");
+        $this->shouldWrite("\e[mfour      fourth one\e[0m");
+        $this->shouldWrite("\e[mfive      fifth one\e[0m");
+
+        $this->cli->columns([
+                        'one' => 'first one',
+                        'two' => 'second one',
+                        'three' => 'third one',
+                        'four' => 'fourth one',
+                        'five' => 'fifth one',
+                    ]);
+    }
+
 }

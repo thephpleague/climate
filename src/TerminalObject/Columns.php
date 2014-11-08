@@ -36,10 +36,24 @@ class Columns extends BaseTerminalObject
 
     public function result()
     {
-        $column_width = $this->getColumnWidth($this->data);
-        $max_rows     = $this->getMaxRows($column_width);
+        $keys      = array_keys($this->data);
+        $first_key = reset($keys);
 
-        $this->data   = array_chunk($this->data, $max_rows);
+        return (!is_int($first_key)) ? $this->associativeColumns() : $this->columns();
+    }
+
+    /**
+     * Get columns for a regular array
+     *
+     * @return array
+     */
+
+    protected function columns()
+    {
+        $column_width  = $this->getColumnWidth($this->data);
+        $max_rows      = $this->getMaxRows($column_width);
+
+        $this->data    = array_chunk($this->data, $max_rows);
 
         $column_widths = $this->getColumnWidths();
 
@@ -47,6 +61,24 @@ class Columns extends BaseTerminalObject
 
         for ($i = 0; $i < $max_rows; $i++) {
             $output[] = $this->getRow($i, $column_widths);
+        }
+
+        return $output;
+    }
+
+    /**
+     * Get columns for an associative array
+     *
+     * @return array
+     */
+
+    protected function associativeColumns()
+    {
+        $column_width = $this->getColumnWidth(array_keys($this->data));
+        $output       = [];
+
+        foreach ($this->data as $key => $value) {
+            $output[] = $this->pad($key, $column_width) . $value;
         }
 
         return $output;
