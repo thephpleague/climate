@@ -1,19 +1,33 @@
 <?php
 
 require_once 'TestBase.php';
+require_once __DIR__ . '/../src/Util/Dimensions.php';
 
 class ProgressTest extends TestBase
 {
+
+    /**
+     * The string length of the bar when at 100%
+     *
+     * @var integer $bar_str_len
+     */
+
+    protected $bar_str_len;
 
     /**
      * @param integer $length
      */
     private function repeat($length)
     {
-        $repeat = ($length / 100) * 70;
+        if (!$this->bar_str_len) {
+            // Subtract 10 because of the '> 100%' plus some padding, max 100
+            $this->bar_str_len = min((new \League\CLImate\Util\Dimensions())->width() - 10, 100);
+        }
+
+        $repeat = ($length / 100) * $this->bar_str_len;
         $bar = str_repeat('=', $repeat);
         $bar .= '>';
-        $bar .= str_repeat(' ', max(70 - $repeat, 0));
+        $bar .= str_repeat(' ', max($this->bar_str_len - $repeat, 0));
 
         return $bar;
     }
