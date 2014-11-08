@@ -120,7 +120,9 @@ class CLImate
 
     protected function hasOutput($output)
     {
-        if (!empty($output)) return true;
+        if (!empty($output)) {
+            return true;
+        }
 
         // Check for type first to avoid errors with objects/arrays/etc
         return ((is_string($output) || is_numeric($output)) && strlen($output) > 0);
@@ -155,7 +157,7 @@ class CLImate
      * Search for any style methods within the name and apply them
      *
      * @param  string $name
-     * @param  array $method_search
+     * @param  array  $method_search
      * @return string Anything left over after applying styles
      */
 
@@ -179,7 +181,7 @@ class CLImate
      * Search for style methods in the current name
      *
      * @param string $name
-     * @param array $search
+     * @param array  $search
      */
 
     protected function searchForStyleMethods($name, $search)
@@ -196,8 +198,8 @@ class CLImate
     /**
      * Build up the terminal object and return it
      *
-     * @param string $name
-     * @param array $arguments
+     * @param  string      $name
+     * @param  array       $arguments
      * @return object|null
      */
 
@@ -220,8 +222,8 @@ class CLImate
     /**
      * Route anything leftover after styles were applied
      *
-     * @param string $name
-     * @param array $arguments
+     * @param  string      $name
+     * @param  array       $arguments
      * @return object|null
      */
 
@@ -232,7 +234,9 @@ class CLImate
             $obj = $this->buildTerminalObject($name, $arguments);
 
             // If something was returned, return it
-            if (is_object($obj)) return $obj;
+            if (is_object($obj)) {
+                return $obj;
+            }
         } elseif ($this->settings->exists($name)) {
             $this->settings->add($name, reset($arguments));
         } else {
@@ -264,7 +268,9 @@ class CLImate
         if (strlen($name)) {
             // If we have something left, let's try and route it to the appropriate place
             $result = $this->routeRemainingMethod($name, $arguments);
-            if ($result) return $result;
+            if ($result) {
+                return $result;
+            }
         } elseif ($this->hasOutput($output)) {
             // If we have fulfilled all of the requested methods and we have output, output it
             $this->out($output);

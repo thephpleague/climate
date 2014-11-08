@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-interface RouterInterface {
-
+interface RouterInterface
+{
     /**
      * @return string
      */
@@ -21,5 +21,4 @@ interface RouterInterface {
      */
 
     public function execute($obj);
-
 }

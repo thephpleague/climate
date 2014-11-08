@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class OutputTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_output_content()
@@ -26,5 +25,4 @@ class OutputTest extends TestBase
         $output = new League\CLImate\Util\Output($writer);
         $output->sameLine()->write('Oh, hey there.');
     }
-
 }

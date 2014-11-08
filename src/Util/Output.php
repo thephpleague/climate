@@ -49,17 +49,18 @@ class Output
     /**
      * Write the content using the provided writer
      *
-     * @param  string $content
+     * @param string $content
      */
 
     public function write($content)
     {
-        if ($this->new_line) $content .= PHP_EOL;
+        if ($this->new_line) {
+            $content .= PHP_EOL;
+        }
 
         $this->writer->write($content);
 
         // Reset new line flag for next time
         $this->new_line = true;
     }
-
 }

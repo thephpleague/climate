@@ -4,7 +4,6 @@ namespace League\CLImate\Decorator;
 
 class Format extends BaseDecorator
 {
-
     /**
      * The available formatting options
      *
@@ -54,7 +53,7 @@ class Format extends BaseDecorator
     /**
      * Get the code for the format
      *
-     * @param  string  $val
+     * @param  string $val
      * @return string
      */
 
@@ -75,7 +74,7 @@ class Format extends BaseDecorator
     /**
      * Set the current format
      *
-     * @param  string $val
+     * @param  string  $val
      * @return boolean
      */
 
@@ -91,5 +90,4 @@ class Format extends BaseDecorator
 
         return false;
     }
-
 }

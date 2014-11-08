@@ -1,11 +1,10 @@
 <?php
 
 require_once 'TestBase.php';
-require_once __DIR__ . '/../src/Util/Dimensions.php';
+require_once __DIR__.'/../src/Util/Dimensions.php';
 
 class ProgressTest extends TestBase
 {
-
     /**
      * The string length of the bar when at 100%
      *
@@ -192,7 +191,7 @@ class ProgressTest extends TestBase
 
     public function it_can_throws_an_exception_when_the_current_is_greater_than_the_total()
     {
-        $progress = $this->cli->progress( 1 );
+        $progress = $this->cli->progress(1);
 
         for ($i = 2; $i <= 10; $i++) {
             $progress->current($i);
@@ -217,6 +216,4 @@ class ProgressTest extends TestBase
         $progress->advance(-2);
         $progress->advance(5);
     }
-
-
 }

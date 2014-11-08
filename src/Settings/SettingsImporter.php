@@ -25,12 +25,10 @@ trait SettingsImporter
     {
         $short_name = basename(str_replace('\\', '/', get_class($setting)));
 
-        $method = 'importSetting' . $short_name;
+        $method = 'importSetting'.$short_name;
 
         if (method_exists($this, $method)) {
             $this->$method($setting);
         }
-
     }
-
 }

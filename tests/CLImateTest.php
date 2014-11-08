@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class CLImateTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_echo_out_a_string()
@@ -21,5 +20,4 @@ class CLImateTest extends TestBase
         $this->shouldWrite("\e[mThis is another line.\e[0m");
         $this->cli->out('This is a line.')->out('This is another line.');
     }
-
 }

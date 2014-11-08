@@ -28,7 +28,7 @@ class Border extends BaseTerminalObject
     /**
      * Set the character to repeat for the border
      *
-     * @param string $char
+     * @param  string $char
      * @return Border
      */
 
@@ -42,7 +42,7 @@ class Border extends BaseTerminalObject
     /**
      * Set the length of the border
      *
-     * @param integer $length
+     * @param  integer $length
      * @return Border
      */
 

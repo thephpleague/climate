@@ -4,8 +4,8 @@ namespace League\CLImate\TerminalObject\Router;
 
 use League\CLImate\Util\OutputImporter;
 
-class DynamicRouter extends BaseRouter implements RouterInterface {
-
+class DynamicRouter extends BaseRouter implements RouterInterface
+{
     use OutputImporter;
 
     /**
@@ -17,7 +17,7 @@ class DynamicRouter extends BaseRouter implements RouterInterface {
 
     public function path($class)
     {
-        return $this->getPath('Dynamic\\' . $this->shortName($class));
+        return $this->getPath('Dynamic\\'.$this->shortName($class));
     }
 
     /**
@@ -32,5 +32,4 @@ class DynamicRouter extends BaseRouter implements RouterInterface {
 
         return $obj;
     }
-
 }

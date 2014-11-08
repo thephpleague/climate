@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
-interface SystemInterface {
-
+interface SystemInterface
+{
     /**
      * @return integer|null
      */
@@ -15,5 +15,4 @@ interface SystemInterface {
      */
 
     public function height();
-
 }

@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class InputTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_prompt_for_basic_info()
@@ -99,7 +98,7 @@ class InputTest extends TestBase
 
         $input = $this->cli->input('So what is up?', $this->reader);
 
-        $input->accept(function($response) {
+        $input->accept(function ($response) {
             return ($response == 'everything.');
         });
 
@@ -119,7 +118,7 @@ class InputTest extends TestBase
 
         $input = $this->cli->input('So what is up?', $this->reader);
 
-        $input->accept(function($response) {
+        $input->accept(function ($response) {
             return ($response == 'everything.');
         });
 
@@ -144,5 +143,4 @@ class InputTest extends TestBase
 
         $this->assertSame('Not much.', $response);
     }
-
 }

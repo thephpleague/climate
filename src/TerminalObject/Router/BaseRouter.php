@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-abstract class BaseRouter {
-
+abstract class BaseRouter
+{
     /**
      * Determines if the requested class is a
      * valid terminal object class
@@ -26,13 +26,13 @@ abstract class BaseRouter {
 
     protected function getPath($class)
     {
-        return '\League\CLImate\TerminalObject\\' . $class;
+        return '\League\CLImate\TerminalObject\\'.$class;
     }
 
     /**
      * Get the class short name
      *
-     * @param string $name
+     * @param  string $name
      * @return string
      */
 
@@ -43,5 +43,4 @@ abstract class BaseRouter {
 
         return str_replace(' ', '', $name);
     }
-
 }

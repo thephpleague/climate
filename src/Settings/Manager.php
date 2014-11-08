@@ -69,7 +69,7 @@ class Manager
 
     protected function getPath($name)
     {
-        return '\\League\CLImate\\Settings\\' . $this->getClassName($name);
+        return '\\League\CLImate\\Settings\\'.$this->getClassName($name);
     }
 
     /**
@@ -83,5 +83,4 @@ class Manager
     {
         return ucwords(str_replace('add_', '', $name));
     }
-
 }

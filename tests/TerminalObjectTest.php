@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class TerminalObjectTest extends TestBase
 {
-
     /** @test **/
 
     public function it_gracefully_handles_non_existent_objects()
@@ -18,7 +17,6 @@ class TerminalObjectTest extends TestBase
 
     public function it_can_chain_a_foreground_color_and_terminal_object()
     {
-
         $this->shouldWrite("\e[31m### Flank me! ###\e[0m");
 
         $this->cli->red()->flank('Flank me!');
@@ -95,5 +93,4 @@ class TerminalObjectTest extends TestBase
 
         $this->cli->blinkRedBackgroundRedFlank('Flank me!');
     }
-
 }

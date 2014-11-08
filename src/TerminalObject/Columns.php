@@ -78,7 +78,7 @@ class Columns extends BaseTerminalObject
         $output       = [];
 
         foreach ($this->data as $key => $value) {
-            $output[] = $this->pad($key, $column_width) . $value;
+            $output[] = $this->pad($key, $column_width).$value;
         }
 
         return $output;
@@ -87,8 +87,8 @@ class Columns extends BaseTerminalObject
     /**
      * Get the row of data
      *
-     * @param integer $key
-     * @param integer $column_width
+     * @param  integer $key
+     * @param  integer $column_width
      * @return string
      */
 
@@ -108,7 +108,7 @@ class Columns extends BaseTerminalObject
     /**
      * Get the standard column width
      *
-     * @param array $data
+     * @param  array   $data
      * @return integer
      */
 
@@ -149,13 +149,15 @@ class Columns extends BaseTerminalObject
     /**
      * Get the number of rows per column
      *
-     * @param integer $column_width
+     * @param  integer $column_width
      * @return integer
      */
 
     protected function getMaxRows($column_width)
     {
-        if (!$this->count) $this->setCount($column_width);
+        if (!$this->count) {
+            $this->setCount($column_width);
+        }
 
         return ceil(count($this->data) / $this->count);
     }

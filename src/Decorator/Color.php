@@ -4,7 +4,6 @@ namespace League\CLImate\Decorator;
 
 class Color extends BaseDecorator
 {
-
     /**
      * The available colors
      *
@@ -65,14 +64,16 @@ class Color extends BaseDecorator
     /**
      * Get the code for the color
      *
-     * @param  string  $val
+     * @param  string $val
      * @return string
      */
 
     public function get($val)
     {
         // If we already have the code, just return that
-        if (is_numeric($val)) return $val;
+        if (is_numeric($val)) {
+            return $val;
+        }
 
         if (array_key_exists($val, $this->colors)) {
             return $this->colors[$val];
@@ -84,7 +85,7 @@ class Color extends BaseDecorator
     /**
      * Set the current color
      *
-     * @param  string   $val
+     * @param  string  $val
      * @return boolean
      */
 
@@ -100,5 +101,4 @@ class Color extends BaseDecorator
 
         return false;
     }
-
 }

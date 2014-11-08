@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class TableTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_output_a_basic_table()
@@ -27,7 +26,6 @@ class TableTest extends TestBase
 
     public function it_can_output_an_array_of_objects_table()
     {
-
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
         $this->shouldWrite("\e[m| cell1  | cell2  | cell3  | cell4  |\e[0m");
         $this->shouldWrite("\e[m=====================================\e[0m");
@@ -143,5 +141,4 @@ class TableTest extends TestBase
                 ],
             ]);
     }
-
 }

@@ -5,8 +5,8 @@ namespace League\CLImate\Util;
 use League\CLImate\Util\System\Linux;
 use League\CLImate\Util\System\Windows;
 
-class Dimensions {
-
+class Dimensions
+{
     /**
      * A instance of the class specific to the current system
      *
@@ -54,12 +54,11 @@ class Dimensions {
      * Determine if the value is numeric, fallback to a default if not
      *
      * @param integer|null $num
-     * @param integer $default
+     * @param integer      $default
      */
 
     protected function isNumeric($num, $default)
     {
         return (is_numeric($num)) ? $num : $default;
     }
-
 }

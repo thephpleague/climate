@@ -90,8 +90,8 @@ class Input extends BaseDynamicTerminalObject
      * Define the acceptable responses and whether or not to
      * display them to the user
      *
-     * @param  array|object $acceptable
-     * @param  boolean $show
+     * @param  array|object                                 $acceptable
+     * @param  boolean                                      $show
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
 
@@ -119,7 +119,7 @@ class Input extends BaseDynamicTerminalObject
     /**
      * Set a default response
      *
-     * @param string $default
+     * @param  string                                       $default
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
 
@@ -138,9 +138,11 @@ class Input extends BaseDynamicTerminalObject
 
     protected function acceptableFormatted()
     {
-        if (!is_array($this->acceptable)) return '';
+        if (!is_array($this->acceptable)) {
+            return '';
+        }
 
-        return '[' . implode('/', $this->acceptable) . ']';
+        return '['.implode('/', $this->acceptable).']';
     }
 
     /**
@@ -151,10 +153,10 @@ class Input extends BaseDynamicTerminalObject
 
     protected function promptFormatted()
     {
-        $prompt = $this->prompt . ' ';
+        $prompt = $this->prompt.' ';
 
         if ($this->show_acceptable) {
-            $prompt .= $this->acceptableFormatted() . ' ';
+            $prompt .= $this->acceptableFormatted().' ';
         }
 
         return $prompt;
@@ -195,7 +197,7 @@ class Input extends BaseDynamicTerminalObject
     /**
      * Determine if the user's response is in the acceptable responses array
      *
-     * @param string $response
+     * @param  string  $response
      * @return boolean $response
      */
 
@@ -212,13 +214,15 @@ class Input extends BaseDynamicTerminalObject
     /**
      * Determine if the user's response is valid based on the current settings
      *
-     * @param string $response
+     * @param  string  $response
      * @return boolean $response
      */
 
     protected function isValidResponse($response)
     {
-        if (empty($this->acceptable)) return true;
+        if (empty($this->acceptable)) {
+            return true;
+        }
 
         if ($this->acceptableIsClosure()) {
             return call_user_func($this->acceptable, $response);
