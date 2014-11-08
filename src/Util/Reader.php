@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-class Reader implements ReaderInterface {
-
+class Reader implements ReaderInterface
+{
     /**
      * Read the line typed in by the user
      *

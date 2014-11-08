@@ -4,8 +4,8 @@ namespace League\CLImate\TerminalObject\Router;
 
 use League\CLImate\Util\OutputImporter;
 
-class DynamicRouter extends BaseRouter implements RouterInterface {
-
+class DynamicRouter extends BaseRouter implements RouterInterface
+{
     use OutputImporter;
 
     /**

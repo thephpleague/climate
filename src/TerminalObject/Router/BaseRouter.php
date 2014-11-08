@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-abstract class BaseRouter {
-
+abstract class BaseRouter
+{
     /**
      * Determines if the requested class is a
      * valid terminal object class

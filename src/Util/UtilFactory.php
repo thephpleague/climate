@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-class UtilFactory {
-
+class UtilFactory
+{
     /**
      * A instance of the Dimension class
      *

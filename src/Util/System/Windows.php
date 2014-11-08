@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
-class Windows implements SystemInterface {
-
+class Windows implements SystemInterface
+{
     /**
      * Get the width of the terminal
      *
