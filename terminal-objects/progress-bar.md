@@ -24,7 +24,31 @@ Which will result in:
 
 ![Progress Bar](/img/progress.gif)
 
-If you'd like a more exact indicator of where you are in the process, pass a label into the `current` method:
+You can also shorthand it a bit if you'd like and pass the total right into the `progress` method:
+
+~~~php
+$climate->progress(100);
+~~~
+
+## Manually Advancing
+
+You can also manually advance the bar:
+
+~~~php
+$progress = $climate->progress()->total(100);
+
+// Do something
+
+$progress->advance(); // Adds 1 to the current progress
+
+// Do something
+
+$progress->advance(10); // Adds 10 to the current progress
+~~~
+
+## Labels
+
+If you'd like a more descriptive indicator of where you are in the process, pass a **label** into the `current` method:
 
 ~~~php
 $languages = [
@@ -45,8 +69,3 @@ foreach ($languages as $key => $language) {
 }
 ~~~
 
-You can also shorthand it a bit if you'd like and pass the total right into the `progress` method:
-
-~~~php
-$climate->progress(100);
-~~~
