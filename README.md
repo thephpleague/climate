@@ -1,4 +1,4 @@
-<p align="center"><img src="http://joe.codes/images/climate/CLImate_Blink.gif" width="300" alt="CLImate" /></p>
+<p align="center"><img src="http://climate.thephpleague.com/img/CLImate_Blink.gif" width="300" alt="CLImate" /></p>
 
 [![Latest Version](https://img.shields.io/github/release/thephpleague/climate.svg?style=flat)](https://github.com/thephpleague/climate/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
