@@ -199,4 +199,24 @@ class ProgressTest extends TestBase
         }
     }
 
+    /** @test */
+
+    public function it_can_output_a_progress_bar_using_increments()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(10)} 10%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(70)} 70%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $progress = $this->cli->progress()->total(10);
+        $progress->advance();
+        $progress->advance(1);
+        $progress->advance(5);
+        $progress->advance(-2);
+        $progress->advance(5);
+    }
+
+
 }

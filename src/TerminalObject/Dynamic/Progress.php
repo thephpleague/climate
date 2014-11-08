@@ -13,6 +13,14 @@ class Progress extends BaseDynamicTerminalObject
     protected $total       = 0;
 
     /**
+     * The current item that the progress bar represents
+     *
+     * @var integer $current
+     */
+
+    protected $current = 0;
+
+    /**
      * The string length of the bar when at 100%
      *
      * @var integer $bar_str_len
@@ -37,6 +45,7 @@ class Progress extends BaseDynamicTerminalObject
     public function __construct($total = null)
     {
         if ($total) $this->total($total);
+        $this->current = 0;
     }
 
     /**
@@ -74,6 +83,19 @@ class Progress extends BaseDynamicTerminalObject
         $progress_bar = $this->getProgressBar($current, $label);
 
         $this->output->write($this->parser->apply($progress_bar));
+
+        $this->current = $current;
+    }
+
+    /**
+     * Increments the current position we are at and re-writes the progress bar
+     *
+     * @param integer $increment The number of items to increment by
+     */
+
+    public function advance($increment = 1)
+    {
+        $this->current($this->current + $increment);
     }
 
     /**
