@@ -33,11 +33,7 @@ class BasicRouter extends BaseRouter implements RouterInterface {
         if (!is_array($results)) $results = [$results];
 
         foreach ($results as $result) {
-
-            # If this object requires no new line then prevent one from being output
-            if ($obj->sameLine()) {
-                $this->output->sameLine();
-            }
+            if ($obj->sameLine()) $this->output->sameLine();
 
             $this->output->write($obj->getParser()->apply($result));
         }
