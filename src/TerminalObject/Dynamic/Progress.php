@@ -44,7 +44,9 @@ class Progress extends BaseDynamicTerminalObject
 
     public function __construct($total = null)
     {
-        if ($total) $this->total($total);
+        if ($total) {
+            $this->total($total);
+        }
     }
 
     /**
@@ -116,7 +118,7 @@ class Progress extends BaseDynamicTerminalObject
         }
 
         // Move the cursor up one line and clear it to the end
-        $line_count    = (strlen($label) > 0) ? 2: 1;
+        $line_count    = (strlen($label) > 0) ? 2 : 1;
 
         $progress_bar  = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();
@@ -140,12 +142,14 @@ class Progress extends BaseDynamicTerminalObject
     {
         $percentage = $current / $this->total;
         $bar_length = round($this->getBarStrLen() * $percentage);
-        $label      = ($percentage < 1) ? $label: '';
+        $label      = ($percentage < 1) ? $label : '';
 
         $bar        = $this->getBar($bar_length);
         $number     = $this->percentageFormatted($percentage);
 
-        if ($label) $label = $this->labelFormatted($label);
+        if ($label) {
+            $label = $this->labelFormatted($label);
+        }
 
         return trim("{$bar} {$number}{$label}");
     }

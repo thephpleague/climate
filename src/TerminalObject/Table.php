@@ -173,7 +173,9 @@ class Table extends BaseTerminalObject
         $first_key  = reset($keys);
 
         // We have an associative array (probably), let's have a header row
-        if (!is_int($first_key)) return array_combine($keys, $keys);
+        if (!is_int($first_key)) {
+            return array_combine($keys, $keys);
+        }
 
         return false;
     }

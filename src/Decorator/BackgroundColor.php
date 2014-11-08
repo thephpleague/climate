@@ -24,7 +24,9 @@ class BackgroundColor extends Color
     {
         $color = parent::get($this->strip($val));
 
-        if ($color) $color += self::ADD;
+        if ($color) {
+            $color += self::ADD;
+        }
         return $color;
     }
 

@@ -74,7 +74,9 @@ class Parser
         if (empty($codes)) {
             $codes = [0];
         } else {
-            if (!is_array($codes)) $codes = [$codes];
+            if (!is_array($codes)) {
+                $codes = [$codes];
+            }
             // Reset everything back to normal up front
             array_unshift($codes, 0);
         }
@@ -107,7 +109,9 @@ class Parser
         $count = preg_match_all($regex, $str, $matches);
 
         // If we didn't find anything, return the string right back
-        if (!$count || !is_array($matches)) return $str;
+        if (!$count || !is_array($matches)) {
+            return $str;
+        }
 
         // All we want is the array of actual strings matched
         $matches = reset($matches);
@@ -187,9 +191,13 @@ class Parser
     protected function codeStr($codes)
     {
         // If we get something that is already a code string, just pass it back
-        if (!is_array($codes) && strstr($codes, ';')) return $codes;
+        if (!is_array($codes) && strstr($codes, ';')) {
+            return $codes;
+        }
 
-        if (!is_array($codes)) $codes = [$codes];
+        if (!is_array($codes)) {
+            $codes = [$codes];
+        }
 
         // Sort for the sake of consistency and testability
         sort($codes);

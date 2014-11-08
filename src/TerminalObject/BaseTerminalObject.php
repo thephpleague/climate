@@ -19,7 +19,9 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
 
     protected function set($key, $value)
     {
-        if (strlen($value)) $this->$key = $value;
+        if (strlen($value)) {
+            $this->$key = $value;
+        }
     }
 
     /**
