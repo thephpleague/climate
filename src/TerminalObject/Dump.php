@@ -5,7 +5,7 @@ namespace League\CLImate\TerminalObject;
 class Dump extends BaseTerminalObject
 {
     /**
-     * The data to conver to JSON
+     * The data to convert to JSON
      *
      * @var mixed $data
      */
