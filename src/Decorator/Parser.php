@@ -198,7 +198,7 @@ class Parser
     }
 
     /**
-     * Retrive the current style code
+     * Retrieve the current style code
      *
      * @return string
      */
