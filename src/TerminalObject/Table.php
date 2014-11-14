@@ -139,7 +139,7 @@ class Table extends BaseTerminalObject
 
         $row = implode($this->column_divider, $row);
 
-        return trim($this->column_divider . $row . $this->column_divider);
+        return trim($this->column_divider.$row.$this->column_divider);
     }
 
     /**
@@ -173,7 +173,9 @@ class Table extends BaseTerminalObject
         $first_key  = reset($keys);
 
         // We have an associative array (probably), let's have a header row
-        if (!is_int($first_key)) return array_combine($keys, $keys);
+        if (!is_int($first_key)) {
+            return array_combine($keys, $keys);
+        }
 
         return false;
     }
@@ -207,7 +209,7 @@ class Table extends BaseTerminalObject
     /**
      * Set up an array of default column widths
      *
-     * @param array $columns
+     * @param  array $columns
      * @return array
      */
 
@@ -221,8 +223,8 @@ class Table extends BaseTerminalObject
     /**
      * Determine the width of the columns without tags
      *
-     * @param mixed  $key
-     * @param string $column
+     * @param  mixed   $key
+     * @param  string  $column
      * @return integer
      */
 

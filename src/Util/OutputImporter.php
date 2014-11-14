@@ -20,5 +20,4 @@ trait OutputImporter
     {
         $this->output = $output;
     }
-
 }

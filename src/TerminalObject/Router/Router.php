@@ -45,7 +45,7 @@ class Router
     /**
      * Check if the name matches an existing terminal object
      *
-     * @param string $name
+     * @param  string  $name
      * @return boolean
      */
 
@@ -77,7 +77,9 @@ class Router
         foreach ($obj->settings() as $obj_setting) {
             $setting = $this->settings->get($obj_setting);
 
-            if ($setting) $obj->importSetting($setting);
+            if ($setting) {
+                $obj->importSetting($setting);
+            }
         }
 
         return $router->execute($obj);
@@ -113,5 +115,4 @@ class Router
 
         return $this;
     }
-
 }

@@ -21,5 +21,4 @@ class Art implements SettingsInterface
         $this->dirs = array_filter($this->dirs);
         $this->dirs = array_values($this->dirs);
     }
-
 }

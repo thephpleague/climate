@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Helper;
 
-trait StringLength {
-
+trait StringLength
+{
     /**
      * Tags the should not be ultimately considered
      * when calculating any string lengths
@@ -16,7 +16,7 @@ trait StringLength {
     protected function setIgnoreTags()
     {
         if (!count($this->ignore_tags)) {
-            $this->ignore_tags = array_keys( $this->parser->tags );
+            $this->ignore_tags = array_keys($this->parser->tags);
         }
     }
 
@@ -51,7 +51,7 @@ trait StringLength {
     /**
      * Apply padding to a string
      *
-     * @param  string $str
+     * @param  string  $str
      * @param  integer $final_length
      * @return string
      */
@@ -60,7 +60,7 @@ trait StringLength {
     {
         $padding = $final_length - $this->lengthWithoutTags($str);
 
-        return $str . str_repeat(' ', $padding);
+        return $str.str_repeat(' ', $padding);
     }
 
     /**
@@ -84,5 +84,4 @@ trait StringLength {
     {
         return array_map([$this, 'lengthWithoutTags'], $arr);
     }
-
 }

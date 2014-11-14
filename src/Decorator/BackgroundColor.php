@@ -24,7 +24,10 @@ class BackgroundColor extends Color
     {
         $color = parent::get($this->strip($val));
 
-        if ($color) $color += self::ADD;
+        if ($color) {
+            $color += self::ADD;
+        }
+
         return $color;
     }
 
@@ -51,7 +54,7 @@ class BackgroundColor extends Color
         $colors = [];
 
         foreach ($this->colors as $color => $code) {
-            $colors['background_' . $color] = $code + self::ADD;
+            $colors['background_'.$color] = $code + self::ADD;
         }
 
         return $colors;

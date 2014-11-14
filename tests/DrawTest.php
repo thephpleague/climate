@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class DrawTest extends TestBase
 {
-
     protected function drawWorks()
     {
         $this->shouldWrite("\e[m __          ______  _____  _  __ _____\e[0m");
@@ -59,7 +58,7 @@ class DrawTest extends TestBase
     public function it_can_take_a_custom_art_directory()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->addArt(__DIR__.'/art');
         $this->cli->draw('works');
     }
 
@@ -68,7 +67,7 @@ class DrawTest extends TestBase
     public function it_can_take_a_custom_art_directory_with_a_trailing_slash()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art/');
+        $this->cli->addArt(__DIR__.'/art/');
         $this->cli->draw('works');
     }
 
@@ -77,7 +76,6 @@ class DrawTest extends TestBase
     public function it_can_chain_the_art_setting()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art')->draw('works');
+        $this->cli->addArt(__DIR__.'/art')->draw('works');
     }
-
 }

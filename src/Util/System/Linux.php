@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
-class Linux implements SystemInterface {
-
+class Linux implements SystemInterface
+{
     /**
      * Get the width of the terminal
      *
@@ -29,5 +29,4 @@ class Linux implements SystemInterface {
 
         return (is_numeric($height)) ? $height : null;
     }
-
 }

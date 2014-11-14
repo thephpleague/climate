@@ -6,7 +6,6 @@ use League\CLImate\Util\Dimensions;
 
 class DimensionsTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_determine_the_terminal_width()
@@ -50,5 +49,4 @@ class DimensionsTest extends TestBase
 
         $this->assertSame(25, $dimension->height());
     }
-
 }

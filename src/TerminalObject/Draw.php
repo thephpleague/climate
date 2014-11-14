@@ -5,42 +5,42 @@ namespace League\CLImate\TerminalObject;
 class Draw extends BaseTerminalObject
 {
     /**
-	 * The directories we should be looking for art in
-	 *
-	 * @var array $art_dirs
-	 */
+     * The directories we should be looking for art in
+     *
+     * @var array $art_dirs
+     */
 
     protected $art_dirs = [];
 
     /**
-	 * The default art if we can't find what the user requested
-	 *
-	 * @var string $default_art
-	 */
+     * The default art if we can't find what the user requested
+     *
+     * @var string $default_art
+     */
 
     protected $default_art = '404';
 
     /**
-	 * The art requested by the user
-	 *
-	 * @var string $art
-	 */
+     * The art requested by the user
+     *
+     * @var string $art
+     */
 
     protected $art = '';
 
     public function __construct($art)
     {
         // Add the default art directory
-        $this->addDir(__DIR__ . '/../ASCII');
+        $this->addDir(__DIR__.'/../ASCII');
 
         $this->art = $art;
     }
 
     /**
-	 * Specify which settings Draw needs to import
-	 *
-	 * @return array
-	 */
+     * Specify which settings Draw needs to import
+     *
+     * @return array
+     */
 
     public function settings()
     {
@@ -48,10 +48,10 @@ class Draw extends BaseTerminalObject
     }
 
     /**
-	 * Import the Art setting (any directories the user added)
-	 *
-	 * @param array $setting
-	 */
+     * Import the Art setting (any directories the user added)
+     *
+     * @param array $setting
+     */
 
     public function importSettingArt($setting)
     {
@@ -61,10 +61,10 @@ class Draw extends BaseTerminalObject
     }
 
     /**
-	 * Add a directory to search for art in
-	 *
-	 * @param string $dir
-	 */
+     * Add a directory to search for art in
+     *
+     * @param string $dir
+     */
 
     protected function addDir($dir)
     {
@@ -79,17 +79,17 @@ class Draw extends BaseTerminalObject
     }
 
     /**
-	 * Find a valid art path
-	 *
-	 * @param string $art
-	 * @return string
-	 */
+     * Find a valid art path
+     *
+     * @param  string $art
+     * @return string
+     */
 
     protected function path($art)
     {
         foreach ($this->art_dirs as $dir) {
             // Look for anything that has the $art filename
-            $paths  = glob($dir . '/' . $art . '.*');
+            $paths  = glob($dir.'/'.$art.'.*');
 
             // If we've got one, no need to look any further
             if (!empty($paths)) {
@@ -101,11 +101,11 @@ class Draw extends BaseTerminalObject
     }
 
     /**
-	 * Parse the contents of the file and return each line
-	 *
-	 * @param string $path
-	 * @return array
-	 */
+     * Parse the contents of the file and return each line
+     *
+     * @param  string $path
+     * @return array
+     */
 
     protected function parse($path)
     {
@@ -117,10 +117,10 @@ class Draw extends BaseTerminalObject
     }
 
     /**
-	 * Return the art
-	 *
-	 * @return array
-	 */
+     * Return the art
+     *
+     * @return array
+     */
 
     public function result()
     {

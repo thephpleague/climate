@@ -11,7 +11,7 @@ interface TerminalObjectInterface
     /**
      * @return void
      */
-    public function importSetting( $setting );
+    public function importSetting($setting);
 
     /**
      * @return boolean

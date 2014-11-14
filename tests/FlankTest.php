@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class FlankTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_output_a_basic_flank()
@@ -36,5 +35,4 @@ class FlankTest extends TestBase
         $this->shouldWrite("\e[m----- Flank me! -----\e[0m");
         $this->cli->flank('Flank me!', '-', 5);
     }
-
 }

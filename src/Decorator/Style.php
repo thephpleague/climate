@@ -10,7 +10,6 @@ namespace League\CLImate\Decorator;
 
 class Style
 {
-
     /**
      * An array of Decorator objects
      *
@@ -44,7 +43,7 @@ class Style
     public function __construct()
     {
         foreach ($this->available as $key => $class) {
-            $class = '\\League\CLImate\\Decorator\\' . $class;
+            $class = '\\League\CLImate\\Decorator\\'.$class;
             $this->style[$key] = new $class();
         }
     }
@@ -76,7 +75,9 @@ class Style
     public function get($key)
     {
         foreach ($this->style as $style) {
-            if ($code = $style->get($key)) return $code;
+            if ($code = $style->get($key)) {
+                return $code;
+            }
         }
 
         return false;
@@ -86,7 +87,7 @@ class Style
      * Attempt to set some aspect of the styling,
      * return true if attempt was successful
      *
-     * @param  string   $key
+     * @param  string  $key
      * @return boolean
      */
 
@@ -137,7 +138,9 @@ class Style
         foreach ($this->style as $style) {
             $current = $style->current();
 
-            if (!is_array($current)) $current = [$current];
+            if (!is_array($current)) {
+                $current = [$current];
+            }
 
             $full_current = array_merge($full_current, $current);
         }
@@ -150,18 +153,24 @@ class Style
     /**
      * Make sure that the code is an integer, if not let's try and get it there
      *
-     * @param mixed $code
+     * @param  mixed   $code
      * @return boolean
      */
 
     protected function validateCode($code)
     {
-        if (is_integer($code)) return true;
+        if (is_integer($code)) {
+            return true;
+        }
 
         // Plug it back in and see what we get
-        if (is_string($code)) return $this->set($code);
+        if (is_string($code)) {
+            return $this->set($code);
+        }
 
-        if (is_array($code)) return $this->validateCodeArray($code);
+        if (is_array($code)) {
+            return $this->validateCodeArray($code);
+        }
 
         return false;
     }
@@ -194,7 +203,9 @@ class Style
     protected function convertToCodes(array $codes)
     {
         foreach ($codes as $key => $code) {
-            if (is_int($code)) continue;
+            if (is_int($code)) {
+                continue;
+            }
 
             $codes[$key] = $this->getCode($code);
         }
@@ -205,13 +216,15 @@ class Style
     /**
      * Retrieve the integers from the mixed code input
      *
-     * @param string|array $code
+     * @param  string|array  $code
      * @return integer|array
      */
 
     protected function getCode($code)
     {
-        if (is_array($code)) return $this->getCodeArray($code);
+        if (is_array($code)) {
+            return $this->getCodeArray($code);
+        }
 
         return $this->get($code);
     }
@@ -219,7 +232,7 @@ class Style
     /**
      * Retrieve an array of integers from the array of codes
      *
-     * @param array $codes
+     * @param  array $codes
      * @return array
      */
 
@@ -274,7 +287,9 @@ class Style
     public function __call($requested_method, $arguments)
     {
         // The only methods we are concerned about are 'add' methods
-        if (substr($requested_method, 0, 3) != 'add') return false;
+        if (substr($requested_method, 0, 3) != 'add') {
+            return false;
+        }
 
         $style = $this->parseAddMethod($requested_method);
 
@@ -283,5 +298,4 @@ class Style
             $this->add($style, $key, $value);
         }
     }
-
 }

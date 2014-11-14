@@ -2,12 +2,12 @@
 
 namespace League\CLImate\Util;
 
-class Cursor {
-
+class Cursor
+{
     /**
      * Move the cursor up in the terminal x number of lines
      *
-     * @param integer $number_of_lines
+     * @param  integer $number_of_lines
      * @return string
      */
 
@@ -37,5 +37,4 @@ class Cursor {
     {
         return "\e[K";
     }
-
 }

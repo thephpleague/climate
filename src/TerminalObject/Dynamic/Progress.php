@@ -44,13 +44,15 @@ class Progress extends BaseDynamicTerminalObject
 
     public function __construct($total = null)
     {
-        if ($total) $this->total($total);
+        if ($total) {
+            $this->total($total);
+        }
     }
 
     /**
      * Set the total property
      *
-     * @param  integer                                 $total
+     * @param  integer  $total
      * @return Progress
      */
 
@@ -101,7 +103,7 @@ class Progress extends BaseDynamicTerminalObject
      * Build the progress bar str and return it
      *
      * @param integer $current
-     * @param string $label
+     * @param string  $label
      *
      * @return string
      */
@@ -116,7 +118,7 @@ class Progress extends BaseDynamicTerminalObject
         }
 
         // Move the cursor up one line and clear it to the end
-        $line_count    = (strlen($label) > 0) ? 2: 1;
+        $line_count    = (strlen($label) > 0) ? 2 : 1;
 
         $progress_bar  = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();
@@ -131,7 +133,7 @@ class Progress extends BaseDynamicTerminalObject
      * =============>             50% label
      *
      * @param integer $current
-     * @param string $label
+     * @param string  $label
      *
      * @return string
      */
@@ -140,12 +142,14 @@ class Progress extends BaseDynamicTerminalObject
     {
         $percentage = $current / $this->total;
         $bar_length = round($this->getBarStrLen() * $percentage);
-        $label      = ($percentage < 1) ? $label: '';
+        $label      = ($percentage < 1) ? $label : '';
 
         $bar        = $this->getBar($bar_length);
         $number     = $this->percentageFormatted($percentage);
 
-        if ($label) $label = $this->labelFormatted($label);
+        if ($label) {
+            $label = $this->labelFormatted($label);
+        }
 
         return trim("{$bar} {$number}{$label}");
     }
@@ -190,7 +194,7 @@ class Progress extends BaseDynamicTerminalObject
 
     protected function percentageFormatted($percentage)
     {
-        return round($percentage * 100) . '%';
+        return round($percentage * 100).'%';
     }
 
     /**
@@ -201,7 +205,6 @@ class Progress extends BaseDynamicTerminalObject
 
     protected function labelFormatted($label)
     {
-        return "\n" . $this->util->cursor->startOfCurrentLine() . $this->util->cursor->deleteCurrentLine() . $label;
+        return "\n".$this->util->cursor->startOfCurrentLine().$this->util->cursor->deleteCurrentLine().$label;
     }
-
 }

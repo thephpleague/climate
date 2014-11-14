@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class ColumnTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_output_columns()
@@ -109,5 +108,4 @@ class ColumnTest extends TestBase
                         'five' => 'fifth one',
                     ]);
     }
-
 }

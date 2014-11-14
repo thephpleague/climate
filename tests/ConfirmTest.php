@@ -4,7 +4,6 @@ require_once 'TestBase.php';
 
 class ConfirmTest extends TestBase
 {
-
     /** @test */
 
     public function it_will_return_true_for_y()
@@ -48,5 +47,4 @@ class ConfirmTest extends TestBase
 
         $response = $input->confirmed();
     }
-
 }

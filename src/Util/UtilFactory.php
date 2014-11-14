@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-class UtilFactory {
-
+class UtilFactory
+{
     /**
      * A instance of the Dimension class
      *
@@ -25,5 +25,4 @@ class UtilFactory {
         $this->dimensions = new Dimensions();
         $this->cursor     = new Cursor();
     }
-
 }
