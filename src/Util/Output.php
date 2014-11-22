@@ -54,7 +54,9 @@ class Output
 
     public function write($content)
     {
-        if ($this->new_line) $content .= PHP_EOL;
+        if ($this->new_line) {
+            $content .= PHP_EOL;
+        }
 
         $this->writer->write($content);
 

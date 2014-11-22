@@ -72,7 +72,9 @@ class Color extends BaseDecorator
     public function get($val)
     {
         // If we already have the code, just return that
-        if (is_numeric($val)) return $val;
+        if (is_numeric($val)) {
+            return $val;
+        }
 
         if (array_key_exists($val, $this->colors)) {
             return $this->colors[$val];

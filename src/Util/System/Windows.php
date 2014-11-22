@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
-class Windows implements SystemInterface {
-
+class Windows implements SystemInterface
+{
     /**
      * Get the width of the terminal
      *
@@ -40,7 +40,9 @@ class Windows implements SystemInterface {
     {
         exec('mode', $output);
 
-        if (!is_array($output)) return [];
+        if (!is_array($output)) {
+            return [];
+        }
 
         $output = implode("\n", $output);
 

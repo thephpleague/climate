@@ -155,7 +155,9 @@ class Columns extends BaseTerminalObject
 
     protected function getMaxRows($column_width)
     {
-        if (!$this->count) $this->setCount($column_width);
+        if (!$this->count) {
+            $this->setCount($column_width);
+        }
 
         return ceil(count($this->data) / $this->count);
     }

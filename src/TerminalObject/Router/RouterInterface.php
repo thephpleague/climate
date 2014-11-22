@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-interface RouterInterface {
-
+interface RouterInterface
+{
     /**
      * @return string
      */

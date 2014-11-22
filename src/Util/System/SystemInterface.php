@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
-interface SystemInterface {
-
+interface SystemInterface
+{
     /**
      * @return integer|null
      */

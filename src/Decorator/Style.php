@@ -76,7 +76,9 @@ class Style
     public function get($key)
     {
         foreach ($this->style as $style) {
-            if ($code = $style->get($key)) return $code;
+            if ($code = $style->get($key)) {
+                return $code;
+            }
         }
 
         return false;
@@ -137,7 +139,9 @@ class Style
         foreach ($this->style as $style) {
             $current = $style->current();
 
-            if (!is_array($current)) $current = [$current];
+            if (!is_array($current)) {
+                $current = [$current];
+            }
 
             $full_current = array_merge($full_current, $current);
         }
@@ -156,12 +160,18 @@ class Style
 
     protected function validateCode($code)
     {
-        if (is_integer($code)) return true;
+        if (is_integer($code)) {
+            return true;
+        }
 
         // Plug it back in and see what we get
-        if (is_string($code)) return $this->set($code);
+        if (is_string($code)) {
+            return $this->set($code);
+        }
 
-        if (is_array($code)) return $this->validateCodeArray($code);
+        if (is_array($code)) {
+            return $this->validateCodeArray($code);
+        }
 
         return false;
     }
@@ -194,7 +204,9 @@ class Style
     protected function convertToCodes(array $codes)
     {
         foreach ($codes as $key => $code) {
-            if (is_int($code)) continue;
+            if (is_int($code)) {
+                continue;
+            }
 
             $codes[$key] = $this->getCode($code);
         }
@@ -211,7 +223,9 @@ class Style
 
     protected function getCode($code)
     {
-        if (is_array($code)) return $this->getCodeArray($code);
+        if (is_array($code)) {
+            return $this->getCodeArray($code);
+        }
 
         return $this->get($code);
     }
@@ -274,7 +288,9 @@ class Style
     public function __call($requested_method, $arguments)
     {
         // The only methods we are concerned about are 'add' methods
-        if (substr($requested_method, 0, 3) != 'add') return false;
+        if (substr($requested_method, 0, 3) != 'add') {
+            return false;
+        }
 
         $style = $this->parseAddMethod($requested_method);
 

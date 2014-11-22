@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Helper;
 
-trait StringLength {
-
+trait StringLength
+{
     /**
      * Tags the should not be ultimately considered
      * when calculating any string lengths

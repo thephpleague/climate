@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-class Cursor {
-
+class Cursor
+{
     /**
      * Move the cursor up in the terminal x number of lines
      *

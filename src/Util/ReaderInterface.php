@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-interface ReaderInterface {
-
+interface ReaderInterface
+{
     /**
      * @return string
      */

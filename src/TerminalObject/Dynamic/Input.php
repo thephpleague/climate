@@ -138,7 +138,9 @@ class Input extends BaseDynamicTerminalObject
 
     protected function acceptableFormatted()
     {
-        if (!is_array($this->acceptable)) return '';
+        if (!is_array($this->acceptable)) {
+            return '';
+        }
 
         return '[' . implode('/', $this->acceptable) . ']';
     }
@@ -218,7 +220,9 @@ class Input extends BaseDynamicTerminalObject
 
     protected function isValidResponse($response)
     {
-        if (empty($this->acceptable)) return true;
+        if (empty($this->acceptable)) {
+            return true;
+        }
 
         if ($this->acceptableIsClosure()) {
             return call_user_func($this->acceptable, $response);

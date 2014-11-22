@@ -4,8 +4,8 @@ namespace League\CLImate\TerminalObject\Router;
 
 use League\CLImate\Util\OutputImporter;
 
-class BasicRouter extends BaseRouter implements RouterInterface {
-
+class BasicRouter extends BaseRouter implements RouterInterface
+{
     use OutputImporter;
 
     /**
@@ -30,10 +30,14 @@ class BasicRouter extends BaseRouter implements RouterInterface {
     {
         $results = $obj->result();
 
-        if (!is_array($results)) $results = [$results];
+        if (!is_array($results)) {
+            $results = [$results];
+        }
 
         foreach ($results as $result) {
-            if ($obj->sameLine()) $this->output->sameLine();
+            if ($obj->sameLine()) {
+                $this->output->sameLine();
+            }
 
             $this->output->write($obj->getParser()->apply($result));
         }
