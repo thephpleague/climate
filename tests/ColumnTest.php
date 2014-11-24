@@ -129,4 +129,23 @@ class ColumnTest extends TestBase
                     ]);
     }
 
+    /** @test */
+
+    public function it_can_output_an_uneven_array_of_arrays_as_columns()
+    {
+        $this->shouldWrite("\e[mone       first one      first third column\e[0m");
+        $this->shouldWrite("\e[mtwo       second one     second third column\e[0m");
+        $this->shouldWrite("\e[mthree     third one      third third column\e[0m");
+        $this->shouldWrite("\e[mfour      fourth one     fourth third column     also this one\e[0m");
+        $this->shouldWrite("\e[mfive      fifth one      fifth third column\e[0m");
+
+        $this->cli->columns([
+                        ['one', 'first one', 'first third column'],
+                        ['two', 'second one', 'second third column'],
+                        ['three', 'third one', 'third third column'],
+                        ['four', 'fourth one', 'fourth third column', 'also this one'],
+                        ['five', 'fifth one', 'fifth third column'],
+                    ]);
+    }
+
 }

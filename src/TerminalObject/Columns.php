@@ -84,13 +84,13 @@ class Columns extends BaseTerminalObject
 
     protected function setArrayOfArraysData()
     {
-        $this->setCountViaArray($this->data);
+        $this->setColumnCountViaArray($this->data);
 
         $new_data = array_fill(0, $this->column_count, []);
 
         foreach ($this->data as $items) {
-            foreach ($items as $key => $item) {
-                $new_data[$key][] = $item;
+            for ($i = 0; $i < $this->column_count; $i++) {
+                $new_data[$i][] = (array_key_exists($i, $items)) ? $items[$i] : null;
             }
         }
 
@@ -172,7 +172,7 @@ class Columns extends BaseTerminalObject
      * @param integer $column_width
      */
 
-    protected function setCount($column_width)
+    protected function setColumnCount($column_width)
     {
         $this->column_count = floor($this->util->dimensions->width() / $column_width);
     }
@@ -183,7 +183,7 @@ class Columns extends BaseTerminalObject
      * @param array $items
      */
 
-    protected function setCountViaArray($items)
+    protected function setColumnCountViaArray($items)
     {
         $counts = array_map(function($arr) {
             return count($arr);
@@ -202,7 +202,7 @@ class Columns extends BaseTerminalObject
     protected function getMaxRows($column_width)
     {
         if (!$this->column_count) {
-            $this->setCount($column_width);
+            $this->setColumnCount($column_width);
         }
 
         return ceil(count($this->data) / $this->column_count);
