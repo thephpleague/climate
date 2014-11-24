@@ -9,10 +9,10 @@ class Columns extends BaseTerminalObject
     /**
      * Number of columns
      *
-     * @var integer $count
+     * @var integer $column_count
      */
 
-    protected $count;
+    protected $column_count;
 
     /**
      * Data to columnize
@@ -22,10 +22,10 @@ class Columns extends BaseTerminalObject
 
     protected $data;
 
-    public function __construct($data, $count = null)
+    public function __construct($data, $column_count = null)
     {
         $this->data  = $data;
-        $this->count = $count;
+        $this->column_count = $column_count;
     }
 
     /**
@@ -50,20 +50,51 @@ class Columns extends BaseTerminalObject
 
     protected function columns()
     {
-        $column_width  = $this->getColumnWidth($this->data);
-        $max_rows      = $this->getMaxRows($column_width);
-
-        $this->data    = array_chunk($this->data, $max_rows);
-
+        $this->data    = $this->setData();
         $column_widths = $this->getColumnWidths();
+        $output        = [];
 
-        $output = [];
-
-        for ($i = 0; $i < $max_rows; $i++) {
+        for ($i = 0; $i < count(reset($this->data)); $i++) {
             $output[] = $this->getRow($i, $column_widths);
         }
 
         return $output;
+    }
+
+    /**
+     * Re-configure the data into it's final form
+     */
+
+    protected function setData()
+    {
+        // If it's already an array of arrays, we're good to go
+        if (is_array(reset($this->data))) {
+            return $this->setArrayOfArraysData();
+        }
+
+        $column_width = $this->getColumnWidth($this->data);
+        $row_count    = $this->getMaxRows($column_width);
+
+        return array_chunk($this->data, $row_count);
+    }
+
+    /**
+     * Re-configure an array of arrays into column arrays
+     */
+
+    protected function setArrayOfArraysData()
+    {
+        $this->setCountViaArray($this->data);
+
+        $new_data = array_fill(0, $this->column_count, []);
+
+        foreach ($this->data as $items) {
+            foreach ($items as $key => $item) {
+                $new_data[$key][] = $item;
+            }
+        }
+
+        return $new_data;
     }
 
     /**
@@ -96,13 +127,13 @@ class Columns extends BaseTerminalObject
     {
         $row = [];
 
-        for ($j = 0; $j < $this->count; $j++) {
+        for ($j = 0; $j < $this->column_count; $j++) {
             if (array_key_exists($key, $this->data[$j])) {
                 $row[] = $this->pad($this->data[$j][$key], $column_widths[$j]);
             }
         }
 
-        return implode('', $row);
+        return trim(implode('', $row));
     }
 
     /**
@@ -128,7 +159,7 @@ class Columns extends BaseTerminalObject
     {
         $column_widths = [];
 
-        for ($i = 0; $i < $this->count; $i++) {
+        for ($i = 0; $i < $this->column_count; $i++) {
             $column_widths[] = $this->getColumnWidth($this->data[$i]);
         }
 
@@ -143,7 +174,22 @@ class Columns extends BaseTerminalObject
 
     protected function setCount($column_width)
     {
-        $this->count = floor($this->util->dimensions->width() / $column_width);
+        $this->column_count = floor($this->util->dimensions->width() / $column_width);
+    }
+
+    /**
+     * Set the count property via an array
+     *
+     * @param array $items
+     */
+
+    protected function setCountViaArray($items)
+    {
+        $counts = array_map(function($arr) {
+            return count($arr);
+        }, $items);
+
+        $this->column_count = max($counts);
     }
 
     /**
@@ -155,10 +201,10 @@ class Columns extends BaseTerminalObject
 
     protected function getMaxRows($column_width)
     {
-        if (!$this->count) {
+        if (!$this->column_count) {
             $this->setCount($column_width);
         }
 
-        return ceil(count($this->data) / $this->count);
+        return ceil(count($this->data) / $this->column_count);
     }
 }
