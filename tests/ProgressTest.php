@@ -219,4 +219,20 @@ class ProgressTest extends TestBase
     }
 
 
+    /** @test */
+
+    public function it_can_output_a_progress_bar_using_increments_with_label()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kstart\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Knext\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $progress = $this->cli->progress()->total(10);
+        $progress->advance(1, "start");
+        $progress->advance(1, "next");
+        $progress->advance(8, "final");
+    }
+
+
 }

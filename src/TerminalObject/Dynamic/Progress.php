@@ -92,11 +92,12 @@ class Progress extends BaseDynamicTerminalObject
      * Increments the current position we are at and re-writes the progress bar
      *
      * @param integer $increment The number of items to increment by
+     * @param string $label
      */
 
-    public function advance($increment = 1)
+    public function advance($increment = 1, $label = null)
     {
-        $this->current($this->current + $increment);
+        $this->current($this->current + $increment, $label);
     }
 
     /**
@@ -207,5 +208,4 @@ class Progress extends BaseDynamicTerminalObject
     {
         return "\n" . $this->util->cursor->startOfCurrentLine() . $this->util->cursor->deleteCurrentLine() . $label;
     }
-
 }
