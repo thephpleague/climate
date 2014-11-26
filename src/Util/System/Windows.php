@@ -48,4 +48,23 @@ class Windows implements SystemInterface
         return (!empty($matches[1])) ? $matches[1] : [];
     }
 
+    /**
+     * Check if the stream supports ansi escape characters.
+     *
+     * Based on https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Output/StreamOutput.php
+     *
+     * @return bool
+     */
+
+    public function hasAnsiSupport()
+    {
+        if (getenv('ANSICON') === true) {
+            return true;
+        }
+        if (getenv('ConEmuANSI') === 'ON') {
+            return true;
+        }
+
+        return false;
+    }
 }
