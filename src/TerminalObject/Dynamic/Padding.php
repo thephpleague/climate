@@ -15,47 +15,39 @@ class Padding extends BaseDynamicTerminalObject
     /**
      * The character(s) that should be used to pad
      *
-     * @var string $chars
+     * @var string $char
      */
 
-    protected $chars = ".";
-
-    /**
-     * If the output should add a new line at the end or not
-     *
-     * @var boolean $inline
-     */
-
-    protected $inline = false;
+    protected $char = '.';
 
 
     /**
-     * If they pass in a padding character, set the chars
+     * If they pass in a padding character, set the char
      *
-     * @param string $chars
+     * @param string $char
      */
 
-    public function __construct($length = null, $chars = null)
+    public function __construct($length = null, $char = null)
     {
         if ($length) {
             $this->length($length);
         }
-        if (is_string($chars)) {
-            $this->padWith($chars);
+
+        if (is_string($char)) {
+            $this->char($char);
         }
     }
 
     /**
      * Set the character(s) that should be used to pad
      *
-     * @param string $chars
-     *
-     * @return Padding
+     * @param string $char
+     * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
 
-    public function padWith($chars)
+    public function char($char)
     {
-        $this->chars = $chars;
+        $this->char = $char;
 
         return $this;
     }
@@ -64,8 +56,7 @@ class Padding extends BaseDynamicTerminalObject
      * Set the length of the line that should be generated
      *
      * @param integer $length
-     *
-     * @return Padding
+     * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
 
     public function length($length)
@@ -91,68 +82,58 @@ class Padding extends BaseDynamicTerminalObject
     }
 
     /**
-     * Output the content and pad to the previously defined length, without a newline
+     * Pad the content with the characters
      *
      * @param string $content
-     *
-     * @return Padding
+     * @return string
      */
 
-    public function inline($content)
+    protected function padContent($content)
     {
-        $this->inline = true;
-        $this->pad($content);
-        $this->inline = false;
+        if (strlen($this->char) > 0) {
+            $length = $this->getLength();
+            $padding_length = ceil($length / strlen($this->char));
 
-        return $this;
+            $padding = str_repeat($this->char, $padding_length);
+            $content .= substr($padding, 0, $length - strlen($content));
+        }
+
+        return $content;
     }
 
     /**
      * Output the content and pad to the previously defined length
      *
      * @param string $content
-     *
-     * @return Padding
+     * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
 
-    public function pad($content)
+    public function label($content)
     {
-        $length = $this->getLength();
-        $max = $this->util->dimensions->width();
+        // Handle long labels by splitting them across several lines
+        $lines   = str_split($content, $this->util->dimensions->width());
+        $content = array_pop($lines);
 
-        if (strlen($content) > $max) {
-            $lines = str_split($content, $max);
-            $content = array_pop($lines);
-            foreach ($lines as $line) {
-                $this->output->write($line);
-            }
+        foreach ($lines as $line) {
+            $this->output->write($line);
         }
 
-        if (strlen($content) < $length && strlen($this->chars) > 0) {
-            $padding = str_repeat($this->chars, ceil($length / strlen($this->chars)));
-            $content .= substr($padding, strlen($content));
-        }
+        $content = $this->padContent($content);
 
-        $this->out($content);
+        $this->output->sameLine();
+        $this->output->write($content);
 
         return $this;
     }
 
-
     /**
-     * Output the content
+     * Output result
      *
      * @param string $content
-     *
-     * @return Padding
      */
-    public function out($content)
-    {
-        if ($this->inline) {
-            $this->output->sameLine();
-        }
-        $this->output->write($content);
 
-        return $this;
+    public function result($content)
+    {
+        $this->output->write($content);
     }
 }
