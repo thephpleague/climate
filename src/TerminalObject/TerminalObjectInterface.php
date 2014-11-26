@@ -21,5 +21,5 @@ interface TerminalObjectInterface
     /**
      * @return boolean
      */
-    public function hasColorSupport();
+    public function hasAnsiSupport();
 }

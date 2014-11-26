@@ -52,8 +52,8 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
      * @return bool
      */
 
-    public function hasColorSupport()
+    public function hasAnsiSupport()
     {
-        return $this->util->system->hasColorSupport();
+        return $this->util->system->hasAnsiSupport();
     }
 }
