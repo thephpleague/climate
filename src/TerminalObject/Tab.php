@@ -5,7 +5,7 @@ namespace League\CLImate\TerminalObject;
 /**
  * Tab class to enable tabs to be output without using the escape character.
  */
-class Tab extends Br
+class Tab extends Repeatable
 {
 
     /**
