@@ -2,15 +2,8 @@
 
 namespace League\CLImate\TerminalObject;
 
-class Br extends BaseTerminalObject
+class Br extends Repeatable
 {
-    protected $count;
-
-    public function __construct($count = 1)
-    {
-        $this->count = round(max((int) $count, 1));
-    }
-
     /**
      * Return an empty string
      *
