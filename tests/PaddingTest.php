@@ -19,7 +19,7 @@ class PaddingTest extends TestBase
         $this->output->shouldReceive('sameLine');
         $this->shouldWrite(substr($content, 0, $maxWidth));
         $this->shouldWrite(substr($content, $maxWidth) . '.....');
-        $this->shouldWrite('result');
+        $this->shouldWrite(' result');
         $padding->label($content)->result('result');
     }
 
@@ -31,7 +31,7 @@ class PaddingTest extends TestBase
 
         $this->output->shouldReceive('sameLine');
         $this->shouldWrite('Pad me....');
-        $this->shouldWrite('extra');
+        $this->shouldWrite(' extra');
 
         $padding->label('Pad me')->result('extra');
     }
@@ -45,7 +45,7 @@ class PaddingTest extends TestBase
 
         $this->output->shouldReceive('sameLine');
         $this->shouldWrite('Pad me.-.-');
-        $this->shouldWrite('extra');
+        $this->shouldWrite(' extra');
 
         $padding->label('Pad me')->result('extra');
     }
@@ -59,7 +59,7 @@ class PaddingTest extends TestBase
 
         $this->output->shouldReceive('sameLine');
         $this->shouldWrite('Pad odd.-.');
-        $this->shouldWrite('extra');
+        $this->shouldWrite(' extra');
 
         $padding->label('Pad odd')->result('extra');
     }
