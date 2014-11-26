@@ -138,4 +138,14 @@ class Padding extends DynamicTerminalObject
     {
         $this->output->write($this->parser->apply(' ' . $content));
     }
+
+
+    /**
+     * Output a line break
+     */
+
+    public function br()
+    {
+        $this->output->write("");
+    }
 }

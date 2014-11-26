@@ -88,4 +88,15 @@ class PaddingTest extends TestBase
         $padding->label($content)->result('result');
     }
 
+    /** @test */
+    public function it_can_add_newline_without_result()
+    {
+        $padding = $this->cli->padding(10);
+
+        $this->output->shouldReceive('sameLine');
+        $this->shouldWrite('Pad me....');
+        $this->shouldWrite('');
+
+        $padding->label('Pad me')->br();
+    }
 }
