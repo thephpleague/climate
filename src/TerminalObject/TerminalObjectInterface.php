@@ -17,4 +17,9 @@ interface TerminalObjectInterface
      * @return boolean
      */
     public function sameLine();
+
+    /**
+     * @return boolean
+     */
+    public function hasColorSupport();
 }
