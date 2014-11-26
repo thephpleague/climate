@@ -90,6 +90,17 @@ class Parser
     }
 
     /**
+     * Get the regular expression that can be used to parse the string for tags
+     *
+     * @return string
+     */
+
+    protected function getRegexForTags()
+    {
+        return '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
+    }
+
+    /**
      * Parse the string for tags and replace them with their codes
      *
      * @param  string $str
@@ -97,8 +108,7 @@ class Parser
      */
     protected function parse($str)
     {
-        $regex = '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
-        $count = preg_match_all($regex, $str, $matches);
+        $count = preg_match_all($this->getRegexForTags(), $str, $matches);
 
         // If we didn't find anything, return the string right back
         if (!$count || !is_array($matches)) {
@@ -109,6 +119,18 @@ class Parser
         $matches = reset($matches);
 
         return $this->parseTags($str, $matches);
+    }
+
+    /**
+     * Parse the string for tags and remove them
+     *
+     * @param  string $str
+     * @return string
+     */
+
+    public function ignore($str)
+    {
+        return preg_replace($this->getRegexForTags(), "", $str);
     }
 
     /**
@@ -202,5 +224,4 @@ class Parser
     {
         return $this->codeStr($this->current);
     }
-
 }
