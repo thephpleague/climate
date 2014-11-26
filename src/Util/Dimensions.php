@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-use League\CLImate\Util\System\Linux;
-use League\CLImate\Util\System\Windows;
+use League\CLImate\Util\System\SystemFactory;
+use League\CLImate\Util\System\SystemInterface;
 
 class Dimensions {
 
@@ -14,14 +14,12 @@ class Dimensions {
      */
     protected $system;
 
-    public function __construct($system = null)
+    public function __construct(SystemInterface $system = null)
     {
         if ($system) {
             $this->system = $system;
-        } elseif (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            $this->system = new Windows();
         } else {
-            $this->system = new Linux();
+            $this->system = SystemFactory::getInstance();
         }
     }
 
@@ -57,5 +55,4 @@ class Dimensions {
     {
         return (is_numeric($num)) ? $num : $default;
     }
-
 }
