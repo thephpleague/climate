@@ -134,6 +134,6 @@ class Padding extends BaseDynamicTerminalObject
 
     public function result($content)
     {
-        $this->output->write($content);
+        $this->output->write(' ' . $content);
     }
 }
