@@ -60,6 +60,7 @@ namespace League\CLImate;
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
+ * @method mixed padding(integer $length = 0, string $char = '.'')
  * @method mixed input(string $prompt, Reader $reader = null)
  * @method mixed confirm(string $prompt, Reader $reader = null)
  * @method mixed columns(array $data, $column_count = null)
