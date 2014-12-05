@@ -130,8 +130,48 @@ class Animate extends BaseDynamicTerminalObject
 
         $files = array_reverse($files);
 
-        foreach ($files as $file) {
-            $lines = $this->parse($file);
+        $files = [
+            ['[]'],
+            ['[H]'],
+            ['[He]'],
+            ['[Hel]'],
+            ['[Hell]'],
+            ['[Hello]'],
+            ['[Hello ]'],
+            ['[Hello W]'],
+            ['[Hello Wo]'],
+            ['[Hello Wor]'],
+            ['[Hello Worl]'],
+            ['[Hello World]'],
+            ['[Hello World /'],
+            ['[Hello World  -'],
+            ['[Hello World   ['],
+            ['[Hello World    \\'],
+            ['[Hello World     -'],
+            ['[Hello World      ]'],
+            ['[Hello World       ]'],
+            ['[Hello World      ]'],
+            ['[Hello World     ]'],
+            ['[Hello World    ]'],
+            ['[Hello World   ]'],
+            ['[Hello World  ]'],
+            ['[Hello World ]'],
+            ['[Hello World]'],
+            ['[Hello Worl]'],
+            ['[Hello Wor]'],
+            ['[Hello Wo]'],
+            ['[Hello W]'],
+            ['[Hello ]'],
+            ['[Hello]'],
+            ['[Hell]'],
+            ['[Hel]'],
+            ['[He]'],
+            ['[H]'],
+            ['[]'],
+        ];
+
+        foreach ($files as $lines) {
+            // $lines = $this->parse($file);
             foreach ($lines as $key => $line) {
                 if ($count > 0) {
                     $content = '';
@@ -145,7 +185,7 @@ class Animate extends BaseDynamicTerminalObject
                 } else {
                     $content = $line;
                 }
-                $this->output->write($content);
+                $this->output->write($this->parser->apply($content));
             }
             usleep(50000);
             $count = count($lines);
