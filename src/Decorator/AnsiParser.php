@@ -132,22 +132,6 @@ class AnsiParser extends Parser
     }
 
     /**
-     * Build the search and replace for all of the various style tags
-     */
-
-    protected function buildTags()
-    {
-        $tags       = $this->all;
-        $this->tags = [];
-
-        foreach ($tags as $tag => $color) {
-            $this->tags["<{$tag}>"]    = $color;
-            $this->tags["</{$tag}>"]   = $color;
-            $this->tags["<\\/{$tag}>"] = $color;
-        }
-    }
-
-    /**
      * Stringify the codes
      *
      * @param  mixed  $codes
