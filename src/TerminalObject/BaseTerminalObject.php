@@ -43,14 +43,4 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
         return false;
     }
 
-    /**
-     * Check if the stream supports colors.
-     *
-     * @return bool
-     */
-
-    public function hasAnsiSupport()
-    {
-        return $this->util->system->hasAnsiSupport();
-    }
 }

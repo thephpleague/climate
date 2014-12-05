@@ -40,7 +40,7 @@ class Style
     public function __construct()
     {
         foreach ($this->available as $key => $class) {
-            $class = '\\League\CLImate\\Decorator\\' . $class;
+            $class = 'League\CLImate\Decorator\\' . $class;
             $this->style[$key] = new $class();
         }
     }
@@ -114,7 +114,7 @@ class Style
      */
     public function parser()
     {
-        return new Parser($this->current(), $this->all());
+        return ParserFactory::getInstance($this->current(), $this->all());
     }
 
     /**

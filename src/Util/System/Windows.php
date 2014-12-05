@@ -58,13 +58,6 @@ class Windows implements SystemInterface
 
     public function hasAnsiSupport()
     {
-        if (getenv('ANSICON') === true) {
-            return true;
-        }
-        if (getenv('ConEmuANSI') === 'ON') {
-            return true;
-        }
-
-        return false;
+        return (getenv('ANSICON') === true || getenv('ConEmuANSI') === 'ON');
     }
 }

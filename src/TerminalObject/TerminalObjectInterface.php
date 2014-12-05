@@ -18,8 +18,4 @@ interface TerminalObjectInterface
      */
     public function sameLine();
 
-    /**
-     * @return boolean
-     */
-    public function hasAnsiSupport();
 }

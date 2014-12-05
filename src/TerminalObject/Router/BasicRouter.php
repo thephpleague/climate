@@ -37,13 +37,7 @@ class BasicRouter extends BaseRouter implements RouterInterface
                 $this->output->sameLine();
             }
 
-            if ($obj->hasAnsiSupport()) {
-                $result = $obj->getParser()->apply($result);
-            } else {
-                $result = $obj->getParser()->ignore($result);
-            }
-
-            $this->output->write($result);
+            $this->output->write($obj->getParser()->apply($result));
         }
     }
 }

@@ -7,6 +7,7 @@ class SystemFactory
     /**
      * @var SystemInterface $instance An instance of the system class for the operating system we are running on
      */
+
     protected static $instance;
 
     /**
@@ -14,6 +15,7 @@ class SystemFactory
      *
      * @return SystemInterface
      */
+
     public static function getInstance()
     {
         if (static::$instance) {
