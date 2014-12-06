@@ -12,15 +12,13 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->output = Mockery::mock('League\CLImate\Util\Output');
-        $this->reader = Mockery::mock('League\CLImate\Util\Reader');
-
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
         $system->shouldReceive('hasAnsiSupport')->andReturn(true);
-        $dimensions = Mockery::mock('League\CLImate\Util\Dimensions');
-        $dimensions->shouldReceive('width')->andReturn(80);
+        $system->shouldReceive('width')->andReturn(80);
 
-        $this->util = new \League\CLImate\Util\UtilFactory($system, $dimensions);
+        $this->output = Mockery::mock('League\CLImate\Util\Output');
+        $this->reader = Mockery::mock('League\CLImate\Util\Reader');
+        $this->util   = new \League\CLImate\Util\UtilFactory($system);
 
         $this->cli = new League\CLImate\CLImate();
         $this->cli->setOutput($this->output);

@@ -69,7 +69,7 @@ class Padding extends BaseDynamicTerminalObject
     protected function getLength()
     {
         if (!$this->length) {
-            $this->length = $this->util->dimensions->width();
+            $this->length = $this->util->width();
         }
 
         return $this->length;
@@ -103,7 +103,7 @@ class Padding extends BaseDynamicTerminalObject
     public function label($content)
     {
         // Handle long labels by splitting them across several lines
-        $lines   = str_split($content, $this->util->dimensions->width());
+        $lines   = str_split($content, $this->util->width());
         $content = array_pop($lines);
 
         foreach ($lines as $line) {

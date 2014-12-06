@@ -8,7 +8,7 @@ class PaddingTest extends TestBase
     /** @test */
     public function it_can_wrap_a_line()
     {
-        $max_width = $this->util->dimensions->width();
+        $max_width = $this->util->width();
         $padding   = $this->cli->padding();
 
         $content   = str_repeat('a', $max_width * 2);

@@ -1,7 +1,6 @@
 <?php
 
 require_once 'TestBase.php';
-require_once __DIR__ . '/../src/Util/Dimensions.php';
 
 class ProgressTest extends TestBase
 {
@@ -20,7 +19,7 @@ class ProgressTest extends TestBase
     {
         if (!$this->bar_str_len) {
             // Subtract 10 because of the '> 100%' plus some padding, max 100
-            $this->bar_str_len = min($this->util->dimensions->width() - 10, 100);
+            $this->bar_str_len = min($this->util->width() - 10, 100);
         }
 
         $repeat = ($length / 100) * $this->bar_str_len;
