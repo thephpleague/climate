@@ -4,21 +4,45 @@ namespace League\CLImate\Decorator;
 
 class Tags {
 
-    protected $tags = [];
+    /**
+     * Original keys passed in to build tags
+     *
+     * @var array $tags
+     */
 
     protected $keys = [];
+
+    /**
+     * Available tags and their values
+     *
+     * @var array $tags
+     */
+
+    protected $tags = [];
 
     public function __construct(array $keys)
     {
         $this->keys = $keys;
-
         $this->build();
     }
+
+    /**
+     * Get all available tags
+     *
+     * @return array
+     */
 
     public function all()
     {
         return $this->tags;
     }
+
+    /**
+     * Get the value of the requested tag
+     *
+     * @param string $key
+     * @return string|null
+     */
 
     public function value($key)
     {
