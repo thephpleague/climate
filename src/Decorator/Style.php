@@ -30,6 +30,8 @@ class Style
         'command'    =>  'Command',
     ];
 
+    protected $parser;
+
     /**
      * An array of the current styles applied
      *
@@ -105,6 +107,11 @@ class Style
         foreach ($this->style as $style) {
             $style->reset();
         }
+    }
+
+    public function setParser(Parser $parser)
+    {
+        $this->parser = $parser;
     }
 
     /**

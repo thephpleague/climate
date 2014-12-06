@@ -8,11 +8,23 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public $reader;
 
+    public $util;
+
     public function setUp()
     {
         $this->output = Mockery::mock('League\CLImate\Util\Output');
         $this->reader = Mockery::mock('League\CLImate\Util\Reader');
-        $this->cli = new League\CLImate\CLImate($this->output);
+
+        $system = Mockery::mock('League\CLImate\Util\System\Linux');
+        $system->shouldReceive('hasAnsiSupport')->andReturn(true);
+        $dimensions = Mockery::mock('League\CLImate\Util\Dimensions');
+        $dimensions->shouldReceive('width')->andReturn(80);
+
+        $this->util = new \League\CLImate\Util\UtilFactory($system, $dimensions);
+
+        $this->cli = new League\CLImate\CLImate();
+        $this->cli->setOutput($this->output);
+        $this->cli->setUtil($this->util);
     }
 
     public function tearDown()

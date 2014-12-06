@@ -22,12 +22,17 @@ class SystemFactory
             return static::$instance;
         }
 
+        self::setSystem();
+
+        return static::$instance;
+    }
+
+    protected static function setSystem()
+    {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
             static::$instance = new Windows();
         } else {
             static::$instance = new Linux();
         }
-
-        return static::$instance;
     }
 }

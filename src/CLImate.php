@@ -70,6 +70,13 @@ use League\CLImate\Util\Output;
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
  */
+
+use League\CLImate\Decorator\Style;
+use League\CLImate\Settings\Manager;
+use League\CLImate\TerminalObject\Router\Router;
+use League\CLImate\Util\Output;
+use League\CLImate\Util\UtilFactory;
+
 class CLImate
 {
     /**
@@ -82,9 +89,9 @@ class CLImate
     /**
      * An instance of the Terminal Object Router class
      *
-     * @var \League\CLImate\TerminalObject\Router\Router $terminal_object
+     * @var \League\CLImate\TerminalObject\Router\Router $router
      */
-    protected $terminal_object;
+    protected $router;
 
     /**
      * An instance of the Settings Manager class
@@ -100,12 +107,40 @@ class CLImate
      */
     protected $output;
 
-    public function __construct(Output $output = null)
+    protected $util;
+
+    public function __construct()
     {
-        $this->style           = new Decorator\Style();
-        $this->terminal_object = new TerminalObject\Router\Router();
-        $this->settings        = new Settings\Manager();
-        $this->output          = $output ?: new Output();
+        $this->setStyle();
+        $this->setRouter();
+        $this->setSettingsManager();
+        $this->setOutput();
+        $this->setUtil();
+    }
+
+    public function setStyle(Style $style = null)
+    {
+        $this->style = $style ?: new Style();
+    }
+
+    public function setRouter(Router $router = null)
+    {
+        $this->router = $router ?: new Router();
+    }
+
+    public function setSettingsManager(Manager $manager = null)
+    {
+        $this->settings = $manager ?: new Manager();
+    }
+
+    public function setOutput(Output $output = null)
+    {
+        $this->output = $output ?: new Output();
+    }
+
+    public function setUtil(UtilFactory $util = null)
+    {
+        $this->util = $util ?: new UtilFactory();
     }
 
     /**
@@ -204,11 +239,12 @@ class CLImate
         $this->style->reset();
 
         // Execute the terminal object
-        $this->terminal_object->settings($this->settings);
-        $this->terminal_object->parser($parser);
-        $this->terminal_object->output($this->output);
+        $this->router->settings($this->settings);
+        $this->router->parser($parser);
+        $this->router->output($this->output);
+        $this->router->util($this->util);
 
-        return $this->terminal_object->execute($name, $arguments);
+        return $this->router->execute($name, $arguments);
     }
 
     /**
@@ -221,7 +257,7 @@ class CLImate
     protected function routeRemainingMethod($name, array $arguments)
     {
         // If we still have something left, let's figure out what it is
-        if ($this->terminal_object->exists($name)) {
+        if ($this->router->exists($name)) {
             $obj = $this->buildTerminalObject($name, $arguments);
 
             // If something was returned, return it

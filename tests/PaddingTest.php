@@ -8,17 +8,17 @@ class PaddingTest extends TestBase
     /** @test */
     public function it_can_wrap_a_line()
     {
-        $maxWidth = (new \League\CLImate\Util\Dimensions())->width();
+        $max_width = $this->util->dimensions->width();
+        $padding   = $this->cli->padding();
 
-        $padding = $this->cli->padding();
-
-        $content = str_repeat('a', $maxWidth * 2);
-        $content = substr($content, 0, ($maxWidth * 2) - 5);
+        $content   = str_repeat('a', $max_width * 2);
+        $content   = substr($content, 0, ($max_width * 2) - 5);
 
         $this->output->shouldReceive('sameLine');
-        $this->shouldWrite(substr($content, 0, $maxWidth));
-        $this->shouldWrite(substr($content, $maxWidth) . '.....');
+        $this->shouldWrite(substr($content, 0, $max_width));
+        $this->shouldWrite(substr($content, $max_width) . '.....');
         $this->shouldWrite(' result');
+
         $padding->label($content)->result('result');
     }
 

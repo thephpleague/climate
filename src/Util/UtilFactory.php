@@ -3,6 +3,7 @@
 namespace League\CLImate\Util;
 
 use League\CLImate\Util\System\SystemFactory;
+use League\CLImate\Util\System\SystemInterface;
 
 class UtilFactory
 {
@@ -28,10 +29,10 @@ class UtilFactory
      */
     public $cursor;
 
-    public function __construct()
+    public function __construct(SystemInterface $system = null, Dimensions $dimensions = null, Cursor $cursor = null)
     {
-        $this->system     = SystemFactory::getInstance();
-        $this->dimensions = new Dimensions($this->system);
-        $this->cursor     = new Cursor();
+        $this->system     = $system ?: SystemFactory::getInstance();
+        $this->dimensions = $dimensions ?: new Dimensions($this->system);
+        $this->cursor     = $cursor ?: new Cursor();
     }
 }
