@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\Util;
+namespace League\CLImate\Util\Reader;
 
-class Reader implements ReaderInterface
+class Stdin implements ReaderInterface
 {
     /**
      * Read the line typed in by the user

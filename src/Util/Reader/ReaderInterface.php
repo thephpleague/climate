@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\Util;
+namespace League\CLImate\Util\Reader;
 
 interface ReaderInterface
 {

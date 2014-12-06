@@ -17,7 +17,7 @@ class TestBase extends PHPUnit_Framework_TestCase
         $system->shouldReceive('width')->andReturn(80);
 
         $this->output = Mockery::mock('League\CLImate\Util\Output');
-        $this->reader = Mockery::mock('League\CLImate\Util\Reader');
+        $this->reader = Mockery::mock('League\CLImate\Util\Reader\Stdin');
         $this->util   = new \League\CLImate\Util\UtilFactory($system);
 
         $this->cli = new League\CLImate\CLImate();
