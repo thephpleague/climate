@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-use League\CLImate\Decorator\ParserImporter;
+use League\CLImate\Decorator\Parser\ParserImporter;
 use League\CLImate\Settings\Manager;
 use League\CLImate\Settings\SettingsImporter;
 use League\CLImate\Util\OutputImporter;

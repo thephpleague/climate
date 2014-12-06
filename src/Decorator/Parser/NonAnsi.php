@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\Decorator;
+namespace League\CLImate\Decorator\Parser;
 
-class NonAnsiParser extends Parser
+class NonAnsi extends Parser
 {
     /**
      * Strip the string of any tags

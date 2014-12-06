@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\Decorator;
+namespace League\CLImate\Decorator\Parser;
 
 trait ParserImporter
 {

@@ -9,6 +9,7 @@ interface DecoratorInterface
     /**
      * @return void
      */
+
     public function defaults();
 
     public function get($val);
@@ -22,5 +23,6 @@ interface DecoratorInterface
     /**
      * @return void
      */
+
     public function reset();
 }

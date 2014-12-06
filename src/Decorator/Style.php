@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Decorator;
 
+use League\CLImate\Decorator\Parser\ParserFactory;
+
 /**
  * @method void addColor(string $color, integer $code)
  * @method void addFormat(string $format, integer $code)

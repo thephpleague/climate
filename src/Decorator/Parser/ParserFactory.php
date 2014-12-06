@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\Decorator;
+namespace League\CLImate\Decorator\Parser;
 
 use League\CLImate\Util\System\SystemFactory;
 
@@ -20,9 +20,9 @@ class ParserFactory
         $system = SystemFactory::getInstance();
 
         if ($system->hasAnsiSupport()) {
-            return new AnsiParser($current, $all);
+            return new Ansi($current, $all);
         }
 
-        return new NonAnsiParser($current, $all);
+        return new NonAnsi($current, $all);
     }
 }

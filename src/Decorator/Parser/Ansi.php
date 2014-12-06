@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\Decorator;
+namespace League\CLImate\Decorator\Parser;
 
-class AnsiParser extends Parser
+class Ansi extends Parser
 {
     /**
      * Wrap the string in the current style
