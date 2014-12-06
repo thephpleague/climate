@@ -4,6 +4,7 @@ require_once 'TestBase.php';
 
 use League\CLImate\TerminalObject\Router\BasicRouter;
 use League\CLImate\Decorator\Style;
+use League\CLImate\Decorator\Tags;
 use League\CLImate\Decorator\Parser\NonAnsi;
 use League\CLImate\Decorator\Parser\Ansi;
 
@@ -18,7 +19,7 @@ class AnsiTest extends TestBase
         $router->output($this->output);
 
         $style  = new Style();
-        $parser = new Ansi($style->current(), $style->all());
+        $parser = new Ansi($style->current(), new Tags($style->all()));
 
         $obj = Mockery::mock('League\CLImate\TerminalObject');
         $obj->shouldReceive('result')->once()->andReturn("<green>I am green</green>");
@@ -39,7 +40,7 @@ class AnsiTest extends TestBase
         $router->output($this->output);
 
         $style  = new Style();
-        $parser = new NonAnsi($style->current(), $style->all());
+        $parser = new NonAnsi($style->current(), new Tags($style->all()));
 
         $obj = Mockery::mock('League\CLImate\TerminalObject');
         $obj->shouldReceive('result')->once()->andReturn("<green>I am not green</green>");

@@ -72,7 +72,7 @@ class Ansi extends Parser
 
     protected function parse($str)
     {
-        $count = preg_match_all($this->getRegexForTags(), $str, $matches);
+        $count = preg_match_all($this->tags->regex(), $str, $matches);
 
         // If we didn't find anything, return the string right back
         if (!$count || !is_array($matches)) {
@@ -124,8 +124,8 @@ class Ansi extends Parser
             $replace = $this->end($history);
         } else {
             // We are starting a new tag, add it onto the history and replace with correct color code
-            $history[] = $this->tags[$tag];
-            $replace = $this->start($this->tags[$tag]);
+            $history[] = $this->tags->value($tag);
+            $replace = $this->start($this->tags->value($tag));
         }
 
         return str_replace($tag, $replace, $str, $replace_count);

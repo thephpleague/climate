@@ -15,7 +15,7 @@ trait StringLength
     protected function setIgnoreTags()
     {
         if (!count($this->ignore_tags)) {
-            $this->ignore_tags = array_keys( $this->parser->tags );
+            $this->ignore_tags = array_keys($this->parser->tags->all());
         }
     }
 

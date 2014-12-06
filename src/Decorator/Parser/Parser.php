@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Decorator\Parser;
 
+use League\CLImate\Decorator\Tags;
+
 abstract class Parser
 {
     /**
@@ -12,26 +14,17 @@ abstract class Parser
     protected $current = [];
 
     /**
-     * All of the possible styles available
-     *
-     * @var array $all
-     */
-    protected $all = [];
-
-    /**
      * An array of the tags that should be searched for
      * and their corresponding replacements
      *
      * @var array $tags
      */
-    public $tags  = [];
+    public $tags;
 
-    public function __construct(array $current, array $all)
+    public function __construct(array $current, Tags $tags)
     {
         $this->current = $current;
-        $this->all     = $all;
-
-        $this->buildTags();
+        $this->tags    = $tags;
     }
 
     /**
@@ -41,30 +34,4 @@ abstract class Parser
      * @return string
      */
     abstract public function apply($str);
-
-    /**
-     * Get the regular expression that can be used to parse the string for tags
-     *
-     * @return string
-     */
-
-    protected function getRegexForTags()
-    {
-        return '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
-    }
-
-    /**
-     * Build the search and replace for all of the various style tags
-     */
-    protected function buildTags()
-    {
-        $tags       = $this->all;
-        $this->tags = [];
-
-        foreach ($tags as $tag => $color) {
-            $this->tags["<{$tag}>"]    = $color;
-            $this->tags["</{$tag}>"]   = $color;
-            $this->tags["<\\/{$tag}>"] = $color;
-        }
-    }
 }

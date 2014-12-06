@@ -13,6 +13,6 @@ class NonAnsi extends Parser
 
     public function apply($str)
     {
-        return preg_replace($this->getRegexForTags(), '', $str);
+        return preg_replace($this->tags->regex(), '', $str);
     }
 }
