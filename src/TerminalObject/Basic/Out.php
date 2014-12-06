@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Out extends BaseTerminalObject
+class Out extends BasicTerminalObject
 {
     /**
      * The content to output

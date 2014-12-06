@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
-class Progress extends BaseDynamicTerminalObject
+class Progress extends DynamicTerminalObject
 {
     /**
      * The total number of items involved

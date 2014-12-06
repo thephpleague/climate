@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Json extends BaseTerminalObject
+class Dump extends BasicTerminalObject
 {
     /**
      * The data to convert to JSON
@@ -23,6 +23,14 @@ class Json extends BaseTerminalObject
      */
     public function result()
     {
-        return json_encode($this->data, JSON_PRETTY_PRINT);
+        ob_start();
+
+        var_dump($this->data);
+
+        $result = ob_get_contents();
+
+        ob_end_clean();
+
+        return $result;
     }
 }

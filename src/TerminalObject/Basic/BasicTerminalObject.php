@@ -1,12 +1,12 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
 use League\CLImate\Decorator\Parser\ParserImporter;
 use League\CLImate\Settings\SettingsImporter;
 use League\CLImate\Util\UtilImporter;
 
-abstract class BaseTerminalObject implements TerminalObjectInterface
+abstract class BasicTerminalObject implements BasicTerminalObjectInterface
 {
     use SettingsImporter, ParserImporter, UtilImporter;
 

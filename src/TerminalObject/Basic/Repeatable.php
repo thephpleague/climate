@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-abstract class Repeatable extends BaseTerminalObject
+abstract class Repeatable extends BasicTerminalObject
 {
     /**
      * How many times the element should be repeated

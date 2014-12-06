@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
 class Br extends Repeatable
 {

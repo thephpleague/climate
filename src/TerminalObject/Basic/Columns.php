@@ -1,10 +1,12 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Columns extends BaseTerminalObject
+use League\CLImate\TerminalObject\Helper\StringLength;
+
+class Columns extends BasicTerminalObject
 {
-    use Helper\StringLength;
+    use StringLength;
 
     /**
      * Number of columns

@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Flank extends BaseTerminalObject
+class Flank extends BasicTerminalObject
 {
     /**
      * The string that will be flanked

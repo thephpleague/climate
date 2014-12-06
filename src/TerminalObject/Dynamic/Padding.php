@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
-class Padding extends BaseDynamicTerminalObject
+class Padding extends DynamicTerminalObject
 {
     /**
      * The length that lines should be padded too

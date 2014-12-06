@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Border extends BaseTerminalObject
+class Border extends BasicTerminalObject
 {
     /**
      * The character to repeat for the border

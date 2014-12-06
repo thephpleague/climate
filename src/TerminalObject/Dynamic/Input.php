@@ -4,7 +4,7 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Util\Reader\ReaderInterface;
 
-class Input extends BaseDynamicTerminalObject
+class Input extends DynamicTerminalObject
 {
     /**
      * The prompt text

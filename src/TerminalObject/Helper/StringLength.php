@@ -10,7 +10,7 @@ trait StringLength
      *
      * @var array $ignore_tags
      */
-    protected $ignore_tags    = [];
+    protected $ignore_tags = [];
 
     protected function setIgnoreTags()
     {

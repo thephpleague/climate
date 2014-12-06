@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Clear extends BaseTerminalObject
+class Clear extends BasicTerminalObject
 {
     /**
      * Clear the terminal

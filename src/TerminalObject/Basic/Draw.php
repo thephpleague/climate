@@ -1,8 +1,8 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Draw extends BaseTerminalObject
+class Draw extends BasicTerminalObject
 {
     /**
 	 * The directories we should be looking for art in
@@ -28,7 +28,7 @@ class Draw extends BaseTerminalObject
     public function __construct($art)
     {
         // Add the default art directory
-        $this->addDir(__DIR__ . '/../ASCII');
+        $this->addDir(__DIR__ . '/../../ASCII');
 
         $this->art = $art;
     }

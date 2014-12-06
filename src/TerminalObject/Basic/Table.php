@@ -1,10 +1,12 @@
 <?php
 
-namespace League\CLImate\TerminalObject;
+namespace League\CLImate\TerminalObject\Basic;
 
-class Table extends BaseTerminalObject
+use League\CLImate\TerminalObject\Helper\StringLength;
+
+class Table extends BasicTerminalObject
 {
-    use Helper\StringLength;
+    use StringLength;
 
     /**
      * The data for the table, an array of (arrays|objects)
