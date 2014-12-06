@@ -44,7 +44,7 @@ class Style
     public function __construct()
     {
         foreach ($this->available as $key => $class) {
-            $class = 'League\CLImate\Decorator\\' . $class;
+            $class = 'League\CLImate\Decorator\Component\\' . $class;
             $this->style[$key] = new $class();
         }
     }

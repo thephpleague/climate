@@ -2,7 +2,7 @@
 
 require_once 'TestBase.php';
 
-use League\CLImate\Decorator\Command;
+use League\CLImate\Decorator\Component\Command;
 
 class CommandTest extends TestBase
 {
