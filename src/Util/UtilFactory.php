@@ -24,8 +24,8 @@ class UtilFactory
 
     public function __construct(SystemInterface $system = null, Cursor $cursor = null)
     {
-        $this->system     = $system ?: SystemFactory::getInstance();
-        $this->cursor     = $cursor ?: new Cursor();
+        $this->system = $system ?: SystemFactory::getInstance();
+        $this->cursor = $cursor ?: new Cursor();
     }
 
     /**

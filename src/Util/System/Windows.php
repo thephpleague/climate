@@ -11,9 +11,7 @@ class Windows implements SystemInterface
      */
     public function width()
     {
-        $dimensions = $this->getDimensions();
-
-        return (!empty($dimensions[1])) ? $dimensions[1] : null;
+        return $this->getDimension('width');
     }
 
     /**
@@ -23,15 +21,21 @@ class Windows implements SystemInterface
      */
     public function height()
     {
+        return $this->getDimension('height');
+    }
+
+    protected function getDimension($key)
+    {
+        $index      = array_search($key, ['height', 'width']);
         $dimensions = $this->getDimensions();
 
-        return (!empty($dimensions[0])) ? $dimensions[0] : null;
+        return (!empty($dimensions[$index])) ? $dimensions[$index] : null;
     }
 
     /**
      * Get information about the dimensions of the terminal
      *
-     * @return integer|null
+     * @return array
      */
     protected function getDimensions()
     {
