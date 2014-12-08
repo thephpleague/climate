@@ -3,6 +3,7 @@
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Util\Reader\ReaderInterface;
+use League\CLImate\Util\Reader\Stdin;
 
 class Input extends DynamicTerminalObject
 {
@@ -43,16 +44,16 @@ class Input extends DynamicTerminalObject
     protected $default = '';
 
     /**
-     * An instance of Reader
+     * An instance of ReaderInterface
      *
-     * @var \League\CLImate\Util\Reader $reader
+     * @var \League\CLImate\Util\Reader\ReaderInterface $reader
      */
     protected $reader;
 
     public function __construct($prompt, ReaderInterface $reader = null)
     {
         $this->prompt = $prompt;
-        $this->reader = $reader ?: new Reader();
+        $this->reader = $reader ?: new Stdin();
     }
 
     /**

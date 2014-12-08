@@ -17,7 +17,7 @@ abstract class Parser
      * An array of the tags that should be searched for
      * and their corresponding replacements
      *
-     * @var array $tags
+     * @var \League\CLImate\Decorator\Tags $tags
      */
     public $tags;
 
