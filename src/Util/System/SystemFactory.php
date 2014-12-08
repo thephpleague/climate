@@ -5,7 +5,7 @@ namespace League\CLImate\Util\System;
 class SystemFactory
 {
     /**
-     * @var SystemInterface $instance An instance of the system class for the operating system we are running on
+     * @var \League\CLImate\Util\System\SystemInterface $instance
      */
 
     protected static $instance;
@@ -13,7 +13,7 @@ class SystemFactory
     /**
      * Get an instance of the appropriate System class
      *
-     * @return SystemInterface
+     * @return \League\CLImate\Util\System\SystemInterface
      */
 
     public static function getInstance()
@@ -22,17 +22,23 @@ class SystemFactory
             return static::$instance;
         }
 
-        self::setSystem();
+        static::$instance = self::getSystem();
 
         return static::$instance;
     }
 
-    protected static function setSystem()
+    /**
+     * Set the $instance property to the appropriate system
+     *
+     * @return \League\CLImate\Util\System\SystemInterface
+     */
+
+    protected static function getSystem()
     {
         if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-            static::$instance = new Windows();
-        } else {
-            static::$instance = new Linux();
+            return new Windows();
         }
+
+        return new Linux();
     }
 }

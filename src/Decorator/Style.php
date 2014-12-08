@@ -3,6 +3,7 @@
 namespace League\CLImate\Decorator;
 
 use League\CLImate\Decorator\Parser\ParserFactory;
+use League\CLImate\Util\System\SystemInterface;
 
 /**
  * @method void addColor(string $color, integer $code)
@@ -111,19 +112,14 @@ class Style
         }
     }
 
-    public function setParser(Parser $parser)
-    {
-        $this->parser = $parser;
-    }
-
     /**
      * Get a new instance of the Parser class based on the current settings
      *
      * @return Parser
      */
-    public function parser()
+    public function parser(SystemInterface $system)
     {
-        return ParserFactory::getInstance($this->current(), new Tags($this->all()));
+        return ParserFactory::getInstance($system, $this->current(), new Tags($this->all()));
     }
 
     /**

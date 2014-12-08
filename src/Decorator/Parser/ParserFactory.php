@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Decorator\Parser;
 
-use League\CLImate\Util\System\SystemFactory;
+use League\CLImate\Util\System\SystemInterface;
 use League\CLImate\Decorator\Tags;
 
 class ParserFactory
@@ -16,10 +16,8 @@ class ParserFactory
      * @return League\CLImate\Decorator\Parser
      */
 
-    public static function getInstance(array $current, Tags $tags)
+    public static function getInstance(SystemInterface $system, array $current, Tags $tags)
     {
-        $system = SystemFactory::getInstance();
-
         if ($system->hasAnsiSupport()) {
             return new Ansi($current, $tags);
         }

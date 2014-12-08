@@ -233,7 +233,7 @@ class CLImate
     protected function buildTerminalObject($name, $arguments)
     {
         // Retrieve the parser for the current set of styles
-        $parser = $this->style->parser();
+        $parser = $this->style->parser($this->util->system);
 
         // Reset the styles
         $this->style->reset();

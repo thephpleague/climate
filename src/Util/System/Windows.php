@@ -24,6 +24,13 @@ class Windows implements SystemInterface
         return $this->getDimension('height');
     }
 
+    /**
+     * Get specified terminal dimension
+     *
+     * @param string $key
+     * @return integer|null
+     */
+
     protected function getDimension($key)
     {
         $index      = array_search($key, ['height', 'width']);
