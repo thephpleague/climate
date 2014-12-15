@@ -7,7 +7,6 @@ namespace League\CLImate\Decorator;
  * @method void addFormat(string $format, integer $code)
  * @method void addCommand(string $command, mixed $style)
  */
-
 class Style
 {
 
@@ -16,7 +15,6 @@ class Style
      *
      * @var array $style
      */
-
     protected $style = [];
 
     /**
@@ -25,7 +23,6 @@ class Style
      *
      * @var array $available
      */
-
     protected $available = [
         'format'     =>  'Format',
         'color'      =>  'Color',
@@ -38,7 +35,6 @@ class Style
      *
      * @var array $current
      */
-
     protected $current = [];
 
     public function __construct()
@@ -54,7 +50,6 @@ class Style
      *
      * @return array
      */
-
     public function all()
     {
         $all = [];
@@ -72,7 +67,6 @@ class Style
      * @param  mixed $key
      * @return mixed
      */
-
     public function get($key)
     {
         foreach ($this->style as $style) {
@@ -91,7 +85,6 @@ class Style
      * @param  string   $key
      * @return boolean
      */
-
     public function set($key)
     {
         foreach ($this->style as $style) {
@@ -107,7 +100,6 @@ class Style
      * Reset the current styles applied
      *
      */
-
     public function reset()
     {
         foreach ($this->style as $style) {
@@ -120,7 +112,6 @@ class Style
      *
      * @return Parser
      */
-
     public function parser()
     {
         return new Parser($this->current(), $this->all());
@@ -131,7 +122,6 @@ class Style
      *
      * @return array
      */
-
     public function current()
     {
         $full_current = [];
@@ -157,7 +147,6 @@ class Style
      * @param mixed $code
      * @return boolean
      */
-
     protected function validateCode($code)
     {
         if (is_integer($code)) {
@@ -181,7 +170,6 @@ class Style
      *
      * @param array $codes
      */
-
     protected function validateCodeArray(array $codes)
     {
         // Loop through it and add each of the properties
@@ -200,7 +188,6 @@ class Style
      *
      * @param array $codes
      */
-
     protected function convertToCodes(array $codes)
     {
         foreach ($codes as $key => $code) {
@@ -220,7 +207,6 @@ class Style
      * @param string|array $code
      * @return integer|array
      */
-
     protected function getCode($code)
     {
         if (is_array($code)) {
@@ -236,7 +222,6 @@ class Style
      * @param array $codes
      * @return array
      */
-
     protected function getCodeArray(array $codes)
     {
         foreach ($codes as $key => $code) {
@@ -251,7 +236,6 @@ class Style
      *
      * @param string $method
      */
-
     protected function parseAddMethod($method)
     {
         return strtolower(substr($method, 3, strlen($method)));
@@ -264,7 +248,6 @@ class Style
      * @param string $key
      * @param string $value
      */
-
     protected function add($style, $key, $value)
     {
         $this->style[$style]->add($key, $value);
@@ -284,7 +267,6 @@ class Style
      * @param string $requested_method
      * @param array  $arguments
      */
-
     public function __call($requested_method, $arguments)
     {
         // The only methods we are concerned about are 'add' methods

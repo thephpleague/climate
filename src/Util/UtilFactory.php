@@ -9,7 +9,6 @@ class UtilFactory
      *
      * @var \League\CLImate\Util\Dimensions
      */
-
     public $dimensions;
 
     /**
@@ -17,7 +16,6 @@ class UtilFactory
      *
      * @var \League\CLImate\Util\Cursor
      */
-
     public $cursor;
 
     public function __construct()

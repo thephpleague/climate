@@ -9,7 +9,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @var integer $total
      */
-
     protected $total       = 0;
 
     /**
@@ -17,7 +16,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @var integer $current
      */
-
     protected $current = 0;
 
     /**
@@ -25,7 +23,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @var integer $bar_str_len
      */
-
     protected $bar_str_len;
 
     /**
@@ -33,7 +30,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @var boolean $first_line
      */
-
     protected $first_line = true;
 
     /**
@@ -41,7 +37,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @param integer $total
      */
-
     public function __construct($total = null)
     {
         if ($total) {
@@ -55,7 +50,6 @@ class Progress extends BaseDynamicTerminalObject
      * @param  integer                                 $total
      * @return Progress
      */
-
     public function total($total)
     {
         $this->total = $total;
@@ -69,7 +63,6 @@ class Progress extends BaseDynamicTerminalObject
      * @param integer $current
      * @param mixed   $label
      */
-
     public function current($current, $label = null)
     {
         if ($this->total == 0) {
@@ -94,7 +87,6 @@ class Progress extends BaseDynamicTerminalObject
      * @param integer $increment The number of items to increment by
      * @param string $label
      */
-
     public function advance($increment = 1, $label = null)
     {
         $this->current($this->current + $increment, $label);
@@ -108,7 +100,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     protected function getProgressBar($current, $label)
     {
         if ($this->first_line) {
@@ -138,7 +129,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     protected function getProgressBarStr($current, $label)
     {
         $percentage = $current / $this->total;
@@ -162,7 +152,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     protected function getBar($length)
     {
         $bar     = str_repeat('=', $length);
@@ -176,7 +165,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @return integer
      */
-
     protected function getBarStrLen()
     {
         if (!$this->bar_str_len) {
@@ -192,7 +180,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @param integer $percentage
      */
-
     protected function percentageFormatted($percentage)
     {
         return round($percentage * 100) . '%';
@@ -203,7 +190,6 @@ class Progress extends BaseDynamicTerminalObject
      *
      * @param string $label
      */
-
     protected function labelFormatted($label)
     {
         return "\n" . $this->util->cursor->startOfCurrentLine() . $this->util->cursor->deleteCurrentLine() . $label;

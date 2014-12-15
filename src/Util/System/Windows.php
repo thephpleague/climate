@@ -9,7 +9,6 @@ class Windows implements SystemInterface
      *
      * @return integer|null
      */
-
     public function width()
     {
         $dimensions = $this->getDimensions();
@@ -22,7 +21,6 @@ class Windows implements SystemInterface
      *
      * @return integer|null
      */
-
     public function height()
     {
         $dimensions = $this->getDimensions();
@@ -35,7 +33,6 @@ class Windows implements SystemInterface
      *
      * @return integer|null
      */
-
     protected function getDimensions()
     {
         exec('mode', $output);

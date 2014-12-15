@@ -8,7 +8,6 @@ class DimensionsTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_determine_the_terminal_width()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
@@ -19,7 +18,6 @@ class DimensionsTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_default_to_the_standard_terminal_width()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
@@ -30,7 +28,6 @@ class DimensionsTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_determine_the_terminal_height()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
@@ -41,7 +38,6 @@ class DimensionsTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_default_to_the_standard_terminal_height()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Linux');

@@ -6,7 +6,6 @@ class FlankTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_output_a_basic_flank()
     {
         $this->shouldWrite("\e[m### Flank me! ###\e[0m");
@@ -14,7 +13,6 @@ class FlankTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_flank_with_a_different_character()
     {
         $this->shouldWrite("\e[m--- Flank me! ---\e[0m");
@@ -22,7 +20,6 @@ class FlankTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_flank_with_a_different_length()
     {
         $this->shouldWrite("\e[m##### Flank me! #####\e[0m");
@@ -30,7 +27,6 @@ class FlankTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_flank_with_a_character_and_different_length()
     {
         $this->shouldWrite("\e[m----- Flank me! -----\e[0m");

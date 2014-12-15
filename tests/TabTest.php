@@ -6,7 +6,6 @@ class TabTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_output_a_tab()
     {
         $this->output->shouldReceive("sameLine");
@@ -16,7 +15,6 @@ class TabTest extends TestBase
     }
 
     /** @test */
-
     public function it_is_chainable()
     {
         $this->output->shouldReceive("sameLine");
@@ -27,7 +25,6 @@ class TabTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_accept_the_number_of_tabs_as_an_argument()
     {
         $this->output->shouldReceive("sameLine");
@@ -38,7 +35,6 @@ class TabTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_ignore_a_negative_number_of_tabs()
     {
         $this->output->shouldReceive("sameLine");
@@ -48,7 +44,6 @@ class TabTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_ignore_a_partial_number_of_tabs()
     {
         $this->output->shouldReceive("sameLine");

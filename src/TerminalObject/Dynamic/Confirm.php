@@ -9,7 +9,6 @@ class Confirm extends Input
      *
      * @return boolean
      */
-
     public function confirmed()
     {
         $this->accept(['y', 'n'], true);

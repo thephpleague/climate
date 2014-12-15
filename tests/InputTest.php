@@ -6,7 +6,6 @@ class InputTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_prompt_for_basic_info()
     {
         $this->shouldReadAndReturn('Not much.');
@@ -20,7 +19,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_only_allow_loose_acceptable_responses()
     {
         $this->shouldReadAndReturn('Not much.');
@@ -37,7 +35,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_only_allow_strict_acceptable_responses()
     {
         $this->shouldReadAndReturn('everything.');
@@ -55,7 +52,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_allow_an_array_of_acceptable_responses()
     {
         $this->shouldReadAndReturn('stuff.');
@@ -73,7 +69,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_display_acceptable_responses()
     {
         $this->shouldReadAndReturn('Stuff.');
@@ -90,7 +85,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_accept_a_closure_as_an_acceptable_response()
     {
         $this->shouldReadAndReturn('everything.');
@@ -109,7 +103,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_fail_via_an_accept_closure()
     {
         $this->shouldReadAndReturn('everything!');
@@ -129,7 +122,6 @@ class InputTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_accept_a_default_if_no_answer_is_given()
     {
         $this->shouldReadAndReturn('');

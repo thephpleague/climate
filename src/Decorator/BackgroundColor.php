@@ -10,7 +10,6 @@ class BackgroundColor extends Color
      *
      * @const integer ADD
      */
-
     const ADD = 10;
 
     /**
@@ -19,7 +18,6 @@ class BackgroundColor extends Color
      * @param  mixed $val
      * @return mixed
      */
-
     public function get($val)
     {
         $color = parent::get($this->strip($val));
@@ -36,7 +34,6 @@ class BackgroundColor extends Color
      * @param  mixed   $val
      * @return boolean
      */
-
     public function set($val)
     {
         return parent::set($this->strip($val));
@@ -47,7 +44,6 @@ class BackgroundColor extends Color
      *
      * @return array
      */
-
     public function all()
     {
         $colors = [];
@@ -65,7 +61,6 @@ class BackgroundColor extends Color
      * @param  string $val
      * @return string
      */
-
     protected function strip($val)
     {
         return str_replace('background_', '', $val);

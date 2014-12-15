@@ -11,7 +11,6 @@ class Columns extends BaseTerminalObject
      *
      * @var integer $column_count
      */
-
     protected $column_count;
 
     /**
@@ -19,7 +18,6 @@ class Columns extends BaseTerminalObject
      *
      * @var array $data
      */
-
     protected $data;
 
     public function __construct($data, $column_count = null)
@@ -33,7 +31,6 @@ class Columns extends BaseTerminalObject
      *
      * @return array
      */
-
     public function result()
     {
         $keys      = array_keys($this->data);
@@ -47,7 +44,6 @@ class Columns extends BaseTerminalObject
      *
      * @return array
      */
-
     protected function columns()
     {
         $this->data    = $this->setData();
@@ -64,7 +60,6 @@ class Columns extends BaseTerminalObject
     /**
      * Re-configure the data into it's final form
      */
-
     protected function setData()
     {
         // If it's already an array of arrays, we're good to go
@@ -81,7 +76,6 @@ class Columns extends BaseTerminalObject
     /**
      * Re-configure an array of arrays into column arrays
      */
-
     protected function setArrayOfArraysData()
     {
         $this->setColumnCountViaArray($this->data);
@@ -102,7 +96,6 @@ class Columns extends BaseTerminalObject
      *
      * @return array
      */
-
     protected function associativeColumns()
     {
         $column_width = $this->getColumnWidth(array_keys($this->data));
@@ -122,7 +115,6 @@ class Columns extends BaseTerminalObject
      * @param integer $column_width
      * @return string
      */
-
     protected function getRow($key, $column_widths)
     {
         $row = [];
@@ -142,7 +134,6 @@ class Columns extends BaseTerminalObject
      * @param array $data
      * @return integer
      */
-
     protected function getColumnWidth($data)
     {
         // Return the maximum width plus a buffer
@@ -154,7 +145,6 @@ class Columns extends BaseTerminalObject
      *
      * @return array
      */
-
     protected function getColumnWidths()
     {
         $column_widths = [];
@@ -171,7 +161,6 @@ class Columns extends BaseTerminalObject
      *
      * @param integer $column_width
      */
-
     protected function setColumnCount($column_width)
     {
         $this->column_count = floor($this->util->dimensions->width() / $column_width);
@@ -182,7 +171,6 @@ class Columns extends BaseTerminalObject
      *
      * @param array $items
      */
-
     protected function setColumnCountViaArray($items)
     {
         $counts = array_map(function($arr) {
@@ -198,7 +186,6 @@ class Columns extends BaseTerminalObject
      * @param integer $column_width
      * @return integer
      */
-
     protected function getMaxRows($column_width)
     {
         if (!$this->column_count) {

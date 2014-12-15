@@ -6,7 +6,6 @@ class ColumnTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_output_columns()
     {
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
@@ -27,7 +26,6 @@ class ColumnTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_specific_number_of_columns()
     {
         $this->shouldWrite("\e[mthis      too\e[0m");
@@ -71,7 +69,6 @@ class ColumnTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_handle_multibyte_strings()
     {
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
@@ -92,7 +89,6 @@ class ColumnTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_an_associative_array_as_columns()
     {
         $this->shouldWrite("\e[mone       first one\e[0m");
@@ -111,7 +107,6 @@ class ColumnTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_an_array_of_arrays_as_columns()
     {
         $this->shouldWrite("\e[mone       first one      first third column\e[0m");
@@ -130,7 +125,6 @@ class ColumnTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_an_uneven_array_of_arrays_as_columns()
     {
         $this->shouldWrite("\e[mone       first one      first third column\e[0m");

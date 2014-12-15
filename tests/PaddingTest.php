@@ -6,7 +6,6 @@ class PaddingTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_wrap_a_line()
     {
         $maxWidth = (new \League\CLImate\Util\Dimensions())->width();
@@ -24,7 +23,6 @@ class PaddingTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_chain()
     {
         $padding = $this->cli->padding(10);
@@ -38,7 +36,6 @@ class PaddingTest extends TestBase
 
 
     /** @test */
-
     public function it_can_pad_with_multiple_characters()
     {
         $padding = $this->cli->padding(10)->char('.-');
@@ -52,7 +49,6 @@ class PaddingTest extends TestBase
 
 
     /** @test */
-
     public function it_can_pad_with_multiple_characters_odd()
     {
         $padding = $this->cli->padding(10)->char('.-');

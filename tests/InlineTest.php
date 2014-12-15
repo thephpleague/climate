@@ -6,7 +6,6 @@ class InlineTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_output_inline()
     {
         $should_be = [

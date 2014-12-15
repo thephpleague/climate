@@ -11,7 +11,6 @@ class ProgressTest extends TestBase
      *
      * @var integer $bar_str_len
      */
-
     protected $bar_str_len;
 
     /**
@@ -33,7 +32,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_progress_bar()
     {
         $this->shouldWrite('');
@@ -57,7 +55,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_progress_bar_via_constructor()
     {
         $this->shouldWrite('');
@@ -81,7 +78,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_progress_bar_with_current_labels()
     {
         $this->shouldWrite('');
@@ -119,7 +115,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_styled_progress_bar()
     {
         $this->shouldWrite('');
@@ -143,7 +138,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_styled_progress_bar_and_resets_the_style()
     {
         $this->shouldWrite('');
@@ -174,7 +168,6 @@ class ProgressTest extends TestBase
      * @expectedException        Exception
      * @expectedExceptionMessage The progress total must be greater than zero.
      */
-
     public function it_can_throws_an_exception_for_a_zero_total_progress_bar()
     {
         $progress = $this->cli->progress();
@@ -189,7 +182,6 @@ class ProgressTest extends TestBase
      * @expectedException        Exception
      * @expectedExceptionMessage The current is greater than the total.
      */
-
     public function it_can_throws_an_exception_when_the_current_is_greater_than_the_total()
     {
         $progress = $this->cli->progress( 1 );
@@ -200,7 +192,6 @@ class ProgressTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_output_a_progress_bar_using_increments()
     {
         $this->shouldWrite('');
@@ -220,7 +211,6 @@ class ProgressTest extends TestBase
 
 
     /** @test */
-
     public function it_can_output_a_progress_bar_using_increments_with_label()
     {
         $this->shouldWrite('');

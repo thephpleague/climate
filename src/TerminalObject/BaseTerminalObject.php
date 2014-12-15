@@ -16,7 +16,6 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
      * @param string $key
      * @param string $value
      */
-
     protected function set($key, $value)
     {
         if (strlen($value)) {
@@ -29,7 +28,6 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
      *
      * @return \League\CLImate\Decorator\Parser
      */
-
     public function getParser()
     {
         return $this->parser;
@@ -40,7 +38,6 @@ abstract class BaseTerminalObject implements TerminalObjectInterface
      *
      * @return boolean
      */
-
     public function sameLine()
     {
         return false;

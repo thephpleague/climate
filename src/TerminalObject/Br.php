@@ -9,7 +9,6 @@ class Br extends Repeatable
      *
      * @return string
      */
-
     public function result()
     {
         return array_fill(0, $this->count, '');

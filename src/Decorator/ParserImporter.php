@@ -9,7 +9,6 @@ trait ParserImporter
      *
      * @var \League\CLImate\Decorator\Parser $parser
      */
-
     protected $parser;
 
     /**
@@ -17,7 +16,6 @@ trait ParserImporter
      *
      * @param \League\CLImate\Decorator\Parser $parser
      */
-
     public function parser(Parser $parser)
     {
         $this->parser = $parser;

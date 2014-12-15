@@ -10,7 +10,6 @@ class Color extends BaseDecorator
      *
      * @var array
      */
-
     protected $colors = [];
 
     /**
@@ -18,7 +17,6 @@ class Color extends BaseDecorator
      *
      * @var array $defaults
      */
-
     protected $defaults = [
             'default'       => 39,
             'black'         => 30,
@@ -45,7 +43,6 @@ class Color extends BaseDecorator
      * @param string  $key
      * @param integer $value
      */
-
     public function add($key, $value)
     {
         $this->colors[$key] = (int) $value;
@@ -56,7 +53,6 @@ class Color extends BaseDecorator
      *
      * @return array
      */
-
     public function all()
     {
         return $this->colors;
@@ -68,7 +64,6 @@ class Color extends BaseDecorator
      * @param  string  $val
      * @return string
      */
-
     public function get($val)
     {
         // If we already have the code, just return that
@@ -89,7 +84,6 @@ class Color extends BaseDecorator
      * @param  string   $val
      * @return boolean
      */
-
     public function set($val)
     {
         $code = $this->get($val);

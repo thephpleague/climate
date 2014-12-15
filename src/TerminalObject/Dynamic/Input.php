@@ -11,7 +11,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var string $prompt
      */
-
     protected $prompt;
 
     /**
@@ -19,7 +18,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var array|object $acceptable
      */
-
     protected $acceptable;
 
     /**
@@ -27,7 +25,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var boolean $strict
      */
-
     protected $strict = false;
 
     /**
@@ -35,7 +32,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var boolean $show_acceptable
      */
-
     protected $show_acceptable = false;
 
     /**
@@ -44,7 +40,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var string
      */
-
     protected $default = '';
 
     /**
@@ -52,7 +47,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @var \League\CLImate\Util\Reader $reader
      */
-
     protected $reader;
 
     public function __construct($prompt, Reader $reader = null)
@@ -66,7 +60,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     public function prompt()
     {
         $prompt_str = $this->parser->apply($this->promptFormatted());
@@ -94,7 +87,6 @@ class Input extends BaseDynamicTerminalObject
      * @param  boolean $show
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
-
     public function accept($acceptable, $show = false)
     {
         $this->acceptable      = $acceptable;
@@ -108,7 +100,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
-
     public function strict()
     {
         $this->strict = true;
@@ -122,7 +113,6 @@ class Input extends BaseDynamicTerminalObject
      * @param string $default
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
-
     public function defaultTo($default)
     {
         $this->default = $default;
@@ -135,7 +125,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     protected function acceptableFormatted()
     {
         if (!is_array($this->acceptable)) {
@@ -150,7 +139,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @return string
      */
-
     protected function promptFormatted()
     {
         $prompt = $this->prompt . ' ';
@@ -167,7 +155,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @param string|array $var
      */
-
     protected function levelPlayingField($var)
     {
         $levelers = ['trim', 'strtolower'];
@@ -188,7 +175,6 @@ class Input extends BaseDynamicTerminalObject
      *
      * @return boolean
      */
-
     protected function acceptableIsClosure()
     {
         return (is_object($this->acceptable) && $this->acceptable instanceof \Closure);
@@ -200,7 +186,6 @@ class Input extends BaseDynamicTerminalObject
      * @param string $response
      * @return boolean $response
      */
-
     protected function isAcceptableResponse($response)
     {
         if (!$this->strict) {
@@ -217,7 +202,6 @@ class Input extends BaseDynamicTerminalObject
      * @param string $response
      * @return boolean $response
      */
-
     protected function isValidResponse($response)
     {
         if (empty($this->acceptable)) {

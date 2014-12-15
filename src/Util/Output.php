@@ -11,7 +11,6 @@ class Output
      *
      * @var string $content
      */
-
     protected $content;
 
     /**
@@ -19,7 +18,6 @@ class Output
      *
      * @var boolean $new_line
      */
-
     protected $new_line = true;
 
     /**
@@ -27,7 +25,6 @@ class Output
      *
      * @var \League\CLImate\Util\Writer\WriterInterface
      */
-
     protected $writer;
 
     public function __construct(WriterInterface $writer = null)
@@ -38,7 +35,6 @@ class Output
     /**
      * Dictate that a new line should not be added after the output
      */
-
     public function sameLine()
     {
         $this->new_line = false;
@@ -51,7 +47,6 @@ class Output
      *
      * @param  string $content
      */
-
     public function write($content)
     {
         if ($this->new_line) {

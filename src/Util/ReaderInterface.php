@@ -7,7 +7,6 @@ interface ReaderInterface
     /**
      * @return string
      */
-
     public function line();
 
 }

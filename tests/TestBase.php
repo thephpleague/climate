@@ -26,7 +26,6 @@ class TestBase extends PHPUnit_Framework_TestCase
      * @param string  $content
      * @param integer $count
      */
-
     protected function shouldWrite($content, $count = 1)
     {
         $this->output->shouldReceive('write')->times($count)->with($content);
@@ -37,7 +36,6 @@ class TestBase extends PHPUnit_Framework_TestCase
      *
      * @param string $response
      */
-
     protected function shouldReadAndReturn($response)
     {
         $this->reader->shouldReceive('line')->once()->andReturn($response);
@@ -46,14 +44,12 @@ class TestBase extends PHPUnit_Framework_TestCase
     /**
      * Helper for same line output mock
      */
-
     protected function shouldReceiveSameLine()
     {
         $this->output->shouldReceive('sameLine')->andReturn($this->output);
     }
 
     /** @test */
-
     public function it_does_nothing()
     {
         // nada

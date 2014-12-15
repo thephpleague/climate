@@ -14,7 +14,6 @@ class BasicRouter extends BaseRouter implements RouterInterface
      * @param  string $class
      * @return string
      */
-
     public function path($class)
     {
         return $this->getPath($this->shortName($class));
@@ -25,7 +24,6 @@ class BasicRouter extends BaseRouter implements RouterInterface
      *
      * @param League\CLImate\TerminalObject $obj
      */
-
     public function execute($obj)
     {
         $results = $obj->result();

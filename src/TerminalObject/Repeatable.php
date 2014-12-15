@@ -9,7 +9,6 @@ abstract class Repeatable extends BaseTerminalObject
      *
      * @var integer
      */
-
     protected $count;
 
     public function __construct($count = 1)

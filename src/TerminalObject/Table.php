@@ -11,7 +11,6 @@ class Table extends BaseTerminalObject
      *
      * @var array $data
      */
-
     protected $data           = [];
 
     /**
@@ -19,7 +18,6 @@ class Table extends BaseTerminalObject
      *
      * @var array $column_widths
      */
-
     protected $column_widths  = [];
 
     /**
@@ -27,7 +25,6 @@ class Table extends BaseTerminalObject
      *
      * @var integer $table_width
      */
-
     protected $table_width    = 0;
 
     /**
@@ -35,7 +32,6 @@ class Table extends BaseTerminalObject
      *
      * @var string $column_divider
      */
-
     protected $column_divider = ' | ';
 
     /**
@@ -43,7 +39,6 @@ class Table extends BaseTerminalObject
      *
      * @var string $border
      */
-
     protected $border;
 
     /**
@@ -51,7 +46,6 @@ class Table extends BaseTerminalObject
      *
      * @var array $rows
      */
-
     protected $rows           = [];
 
     public function __construct(array $data)
@@ -64,7 +58,6 @@ class Table extends BaseTerminalObject
      *
      * @return array
      */
-
     public function result()
     {
         $this->column_widths = $this->getColumnWidths();
@@ -86,7 +79,6 @@ class Table extends BaseTerminalObject
      *
      * @return integer
      */
-
     protected function getWidth()
     {
         $first_row = reset($this->data);
@@ -98,7 +90,6 @@ class Table extends BaseTerminalObject
     /**
      * Get the border for each row based on the table width
      */
-
     protected function getBorder()
     {
         return (new Border())->length($this->table_width)->result();
@@ -108,7 +99,6 @@ class Table extends BaseTerminalObject
      * Check for a header row (if it's an array of associative arrays or objects),
      * if there is one, tack it onto the front of the rows array
      */
-
     protected function buildHeaderRow()
     {
         $header_row = $this->getHeaderRow();
@@ -128,7 +118,6 @@ class Table extends BaseTerminalObject
      * @param  mixed  $columns
      * @return string
      */
-
     protected function buildRow($columns)
     {
         $row = [];
@@ -149,7 +138,6 @@ class Table extends BaseTerminalObject
      * @param  string $column
      * @return string
      */
-
     protected function buildCell($key, $column)
     {
         return  $this->pad($column, $this->column_widths[$key]);
@@ -160,7 +148,6 @@ class Table extends BaseTerminalObject
      *
      * @return mixed
      */
-
     protected function getHeaderRow()
     {
         $first_item = reset($this->data);
@@ -185,7 +172,6 @@ class Table extends BaseTerminalObject
      *
      * @return array
      */
-
     protected function getColumnWidths()
     {
         $first_row = reset($this->data);
@@ -212,7 +198,6 @@ class Table extends BaseTerminalObject
      * @param array $columns
      * @return array
      */
-
     protected function getDefaultColumnWidths(array $columns)
     {
         $widths = $this->arrayOfStrLens(array_keys($columns));
@@ -227,7 +212,6 @@ class Table extends BaseTerminalObject
      * @param string $column
      * @return integer
      */
-
     protected function getCellWidth($current_width, $str)
     {
         return max($current_width, $this->lengthWithoutTags($str));

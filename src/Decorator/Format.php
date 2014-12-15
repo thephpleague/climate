@@ -10,7 +10,6 @@ class Format extends BaseDecorator
      *
      * @var array
      */
-
     protected $formats = [];
 
     /**
@@ -18,7 +17,6 @@ class Format extends BaseDecorator
      *
      * @var array $defaults
      */
-
     protected $defaults = [
             'bold'          => 1,
             'dim'           => 2,
@@ -34,7 +32,6 @@ class Format extends BaseDecorator
      * @param string $key
      * @param mixed  $value
      */
-
     public function add($key, $value)
     {
         $this->formats[$key] = (int) $value;
@@ -45,7 +42,6 @@ class Format extends BaseDecorator
      *
      * @return array
      */
-
     public function all()
     {
         return $this->formats;
@@ -57,7 +53,6 @@ class Format extends BaseDecorator
      * @param  string  $val
      * @return string
      */
-
     public function get($val)
     {
         // If we already have the code, just return that
@@ -78,7 +73,6 @@ class Format extends BaseDecorator
      * @param  string $val
      * @return boolean
      */
-
     public function set($val)
     {
         $code = $this->get($val);

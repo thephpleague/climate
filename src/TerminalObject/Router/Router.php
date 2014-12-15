@@ -17,7 +17,6 @@ class Router
      *
      * @var \League\CLImate\Settings\Manager $settings;
      */
-
     protected $settings;
 
     /**
@@ -25,7 +24,6 @@ class Router
      *
      * @var \League\CLImate\TerminalObject\Router\DynamicRouter $dynamic;
      */
-
     protected $dynamic;
 
     /**
@@ -33,7 +31,6 @@ class Router
      *
      * @var \League\CLImate\TerminalObject\Router\BasicRouter $basic;
      */
-
     protected $basic;
 
     public function __construct(DynamicRouter $dynamic = null, BasicRouter $basic = null)
@@ -48,7 +45,6 @@ class Router
      * @param string $name
      * @return boolean
      */
-
     public function exists($name)
     {
         return ($this->basic->exists($name) || $this->dynamic->exists($name));
@@ -60,7 +56,6 @@ class Router
      * @param string $name
      * @param mixed  $arguments
      */
-
     public function execute($name, $arguments)
     {
         $router = $this->getRouter($name);
@@ -92,7 +87,6 @@ class Router
      *
      * @return \League\CLImate\TerminalObject\Router\RouterInterface
      */
-
     protected function getRouter($name)
     {
         if ($this->basic->exists($name)) {
@@ -108,7 +102,6 @@ class Router
      * @param  \League\CLImate\Settings\Manager $settings
      * @return Router
      */
-
     public function settings(Manager $settings)
     {
         $this->settings = $settings;

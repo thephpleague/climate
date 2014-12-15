@@ -14,7 +14,6 @@ class DynamicRouter extends BaseRouter implements RouterInterface
      * @param  string $class
      * @return string
      */
-
     public function path($class)
     {
         return $this->getPath('Dynamic\\' . $this->shortName($class));
@@ -25,7 +24,6 @@ class DynamicRouter extends BaseRouter implements RouterInterface
      *
      * @param \League\CLImate\TerminalObject\Dynamic $obj
      */
-
     public function execute($obj)
     {
         $obj->output($this->output);

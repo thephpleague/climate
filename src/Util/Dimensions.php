@@ -12,7 +12,6 @@ class Dimensions {
      *
      * @var \League\CLImate\Util\System\Windows|\League\CLImate\Util\System\Linux
      */
-
     protected $system;
 
     public function __construct($system = null)
@@ -31,7 +30,6 @@ class Dimensions {
      *
      * @return integer|null
      */
-
     public function width()
     {
         // Default to standard width as a best guess
@@ -43,7 +41,6 @@ class Dimensions {
      *
      * @return integer|null
      */
-
     public function height()
     {
         // Default to standard height as a best guess
@@ -56,7 +53,6 @@ class Dimensions {
      * @param integer|null $num
      * @param integer $default
      */
-
     protected function isNumeric($num, $default)
     {
         return (is_numeric($num)) ? $num : $default;

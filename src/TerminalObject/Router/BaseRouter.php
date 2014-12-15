@@ -11,7 +11,6 @@ abstract class BaseRouter
      * @param  string  $class
      * @return boolean
      */
-
     public function exists($class)
     {
         return class_exists($this->path($class));
@@ -23,7 +22,6 @@ abstract class BaseRouter
      * @param  string $class
      * @return string
      */
-
     protected function getPath($class)
     {
         return '\League\CLImate\TerminalObject\\' . $class;
@@ -35,7 +33,6 @@ abstract class BaseRouter
      * @param string $name
      * @return string
      */
-
     protected function shortName($name)
     {
         $name = str_replace('_', ' ', $name);

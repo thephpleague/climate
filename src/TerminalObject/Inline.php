@@ -9,7 +9,6 @@ class Inline extends Out
      *
      * @return boolean
      */
-
     public function sameLine()
     {
         return true;
