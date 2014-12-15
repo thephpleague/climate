@@ -9,7 +9,6 @@ class Json extends BaseTerminalObject
      *
      * @var mixed $data
      */
-
     protected $data;
 
     public function __construct($data)
@@ -22,7 +21,6 @@ class Json extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         return json_encode($this->data, JSON_PRETTY_PRINT);

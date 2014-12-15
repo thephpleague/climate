@@ -9,7 +9,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @var array $art_dirs
 	 */
-
     protected $art_dirs = [];
 
     /**
@@ -17,7 +16,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @var string $default_art
 	 */
-
     protected $default_art = '404';
 
     /**
@@ -25,7 +23,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @var string $art
 	 */
-
     protected $art = '';
 
     public function __construct($art)
@@ -41,7 +38,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @return array
 	 */
-
     public function settings()
     {
         return ['Art'];
@@ -52,7 +48,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @param array $setting
 	 */
-
     public function importSettingArt($setting)
     {
         foreach ($setting->dirs as $dir) {
@@ -65,7 +60,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @param string $dir
 	 */
-
     protected function addDir($dir)
     {
         // Add any additional directories to the top of the array
@@ -84,7 +78,6 @@ class Draw extends BaseTerminalObject
 	 * @param string $art
 	 * @return string
 	 */
-
     protected function path($art)
     {
         foreach ($this->art_dirs as $dir) {
@@ -106,7 +99,6 @@ class Draw extends BaseTerminalObject
 	 * @param string $path
 	 * @return array
 	 */
-
     protected function parse($path)
     {
         $output = file_get_contents($path);
@@ -121,7 +113,6 @@ class Draw extends BaseTerminalObject
 	 *
 	 * @return array
 	 */
-
     public function result()
     {
         $file = $this->path($this->art) ?: $this->path($this->default_art);

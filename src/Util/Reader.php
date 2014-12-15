@@ -9,7 +9,6 @@ class Reader implements ReaderInterface
      *
      * @return string
      */
-
     public function line()
     {
         $response = trim(fgets(STDIN, 1024));

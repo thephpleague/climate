@@ -9,7 +9,6 @@ class Flank extends BaseTerminalObject
      *
      * @var string $str
      */
-
     protected $str;
 
     /**
@@ -17,7 +16,6 @@ class Flank extends BaseTerminalObject
      *
      * @var string $char
      */
-
     protected $char = '#';
 
     /**
@@ -25,7 +23,6 @@ class Flank extends BaseTerminalObject
      *
      * @var integer $repeat
      */
-
     protected $repeat = 3;
 
     public function __construct($str, $char = null, $repeat = null)
@@ -41,7 +38,6 @@ class Flank extends BaseTerminalObject
      * @param string $char
      * @return Flank
      */
-
     public function char($char)
     {
         $this->set('char', $char);
@@ -55,7 +51,6 @@ class Flank extends BaseTerminalObject
      * @param integer $repeat
      * @return Flank
      */
-
     public function repeat($repeat)
     {
         $this->set('repeat', $repeat);
@@ -68,7 +63,6 @@ class Flank extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         $flank = str_repeat($this->char, $this->repeat);

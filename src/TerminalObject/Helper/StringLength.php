@@ -10,7 +10,6 @@ trait StringLength
      *
      * @var array $ignore_tags
      */
-
     protected $ignore_tags    = [];
 
     protected function setIgnoreTags()
@@ -26,7 +25,6 @@ trait StringLength
      * @param  string  $str
      * @return integer
      */
-
     protected function lengthWithoutTags($str)
     {
         $this->setIgnoreTags();
@@ -40,7 +38,6 @@ trait StringLength
      * @param  string $str
      * @return string
      */
-
     protected function withoutTags($str)
     {
         $this->setIgnoreTags();
@@ -55,7 +52,6 @@ trait StringLength
      * @param  integer $final_length
      * @return string
      */
-
     protected function pad($str, $final_length)
     {
         $padding = $final_length - $this->lengthWithoutTags($str);
@@ -68,7 +64,6 @@ trait StringLength
      *
      * @param array $arr
      */
-
     protected function maxStrLen(array $arr)
     {
         return max($this->arrayOfStrLens($arr));
@@ -79,7 +74,6 @@ trait StringLength
      *
      * @param array $arr
      */
-
     protected function arrayOfStrLens(array $arr)
     {
         return array_map([$this, 'lengthWithoutTags'], $arr);

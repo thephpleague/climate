@@ -9,7 +9,6 @@ abstract class BaseDecorator implements DecoratorInterface
      *
      * @var array $defaults;
      */
-
     protected $defaults = [];
 
     /**
@@ -17,7 +16,6 @@ abstract class BaseDecorator implements DecoratorInterface
      *
      * @var array $current;
      */
-
     protected $current  = [];
 
     public function __construct()
@@ -28,7 +26,6 @@ abstract class BaseDecorator implements DecoratorInterface
     /**
      * Load up the defaults for this decorator
      */
-
     public function defaults()
     {
         foreach ($this->defaults as $name => $code) {
@@ -39,7 +36,6 @@ abstract class BaseDecorator implements DecoratorInterface
     /**
      * Reset the currently set decorator
      */
-
     public function reset()
     {
         $this->current = [];
@@ -50,7 +46,6 @@ abstract class BaseDecorator implements DecoratorInterface
      *
      * @return array
      */
-
     public function current()
     {
         return $this->current;

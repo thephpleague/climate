@@ -6,7 +6,6 @@ class DumpTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_dump_a_variable()
     {
         $should_be = [

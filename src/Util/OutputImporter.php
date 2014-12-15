@@ -9,13 +9,11 @@ trait OutputImporter
      *
      * @var \League\CLImate\Util\Output $output
      */
-
     protected $output;
 
     /**
      * Sets the $output property
      */
-
     public function output(Output $output)
     {
         $this->output = $output;

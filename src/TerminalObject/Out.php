@@ -9,7 +9,6 @@ class Out extends BaseTerminalObject
      *
      * @var string $content
      */
-
     protected $content;
 
     public function __construct($content)
@@ -22,7 +21,6 @@ class Out extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         return $this->content;

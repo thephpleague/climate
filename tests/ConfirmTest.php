@@ -6,7 +6,6 @@ class ConfirmTest extends TestBase
 {
 
     /** @test */
-
     public function it_will_return_true_for_y()
     {
         $this->shouldReadAndReturn('y');
@@ -21,7 +20,6 @@ class ConfirmTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_return_false_for_n()
     {
         $this->shouldReadAndReturn('n');
@@ -36,7 +34,6 @@ class ConfirmTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_only_allow_strict_confirmations()
     {
         $this->shouldReadAndReturn('Y');

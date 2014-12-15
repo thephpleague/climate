@@ -10,7 +10,6 @@ class Command extends BaseDecorator
      *
      * @var array
      */
-
     public $commands = [];
 
     /**
@@ -18,7 +17,6 @@ class Command extends BaseDecorator
      *
      * @var array $defaults
      */
-
     protected $defaults = [
             'info'    => 'green',
             'comment' => 'yellow',
@@ -33,7 +31,6 @@ class Command extends BaseDecorator
      * @param string $key
      * @param mixed  $value
      */
-
     public function add($key, $value)
     {
         $this->commands[$key] = $value;
@@ -44,7 +41,6 @@ class Command extends BaseDecorator
      *
      * @return array
      */
-
     public function all()
     {
         return $this->commands;
@@ -56,7 +52,6 @@ class Command extends BaseDecorator
      * @param  string  $val
      * @return string
      */
-
     public function get($val)
     {
         if (array_key_exists($val, $this->commands)) {
@@ -72,7 +67,6 @@ class Command extends BaseDecorator
      * @param  string       $val
      * @return string|false
      */
-
     public function set($val)
     {
         // Return the code because it is a string corresponding

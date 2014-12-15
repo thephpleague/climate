@@ -9,7 +9,6 @@ class Parser
      *
      * @var array $current;
      */
-
     protected $current;
 
     /**
@@ -17,7 +16,6 @@ class Parser
      *
      * @var array $all
      */
-
     protected $all;
 
     /**
@@ -26,7 +24,6 @@ class Parser
      *
      * @var array $tags
      */
-
     public $tags  = [];
 
     public function __construct(array $current, array $all)
@@ -43,7 +40,6 @@ class Parser
      * @param  string $str
      * @return string
      */
-
     public function apply($str)
     {
         return $this->start() . $this->parse($str) . $this->end();
@@ -54,7 +50,6 @@ class Parser
      *
      * @return string
      */
-
     protected function start($codes = null)
     {
         $codes = $codes ?: $this->currentCode();
@@ -68,7 +63,6 @@ class Parser
      *
      * @return string
      */
-
     protected function end($codes = null)
     {
         if (empty($codes)) {
@@ -90,7 +84,6 @@ class Parser
      * @param  string $codes
      * @return string
      */
-
     protected function wrapCodes($codes)
     {
         return "\e[{$codes}m";
@@ -102,7 +95,6 @@ class Parser
      * @param  string $str
      * @return string
      */
-
     protected function parse($str)
     {
         $regex = '(<(?:(?:(?:\\\)*\/)*(?:' . implode('|', array_keys($this->all)) . '))>)';
@@ -125,7 +117,6 @@ class Parser
      * @param string $str
      * @param array $tags
      */
-
     protected function parseTags($str, $tags)
     {
         // Let's keep a history of styles applied
@@ -146,7 +137,6 @@ class Parser
      * @param array $history
      * @return string
      */
-
     protected function replaceTag($str, $tag, &$history)
     {
         // We will be replacing tags one at a time, can't pass this by reference
@@ -168,7 +158,6 @@ class Parser
     /**
      * Build the search and replace for all of the various style tags
      */
-
     protected function buildTags()
     {
         $tags       = $this->all;
@@ -187,7 +176,6 @@ class Parser
      * @param  mixed  $codes
      * @return string
      */
-
     protected function codeStr($codes)
     {
         // If we get something that is already a code string, just pass it back
@@ -210,7 +198,6 @@ class Parser
      *
      * @return string
      */
-
     protected function currentCode()
     {
         return $this->codeStr($this->current);

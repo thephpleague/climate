@@ -8,7 +8,6 @@ class RouterTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_find_a_basic_object()
     {
         $router = new Router();
@@ -17,7 +16,6 @@ class RouterTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_find_a_dynamic_object()
     {
         $router = new Router();
@@ -26,7 +24,6 @@ class RouterTest extends TestBase
     }
 
     /** @test */
-
     public function it_returns_false_on_a_non_existent_object()
     {
         $router = new Router();

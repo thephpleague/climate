@@ -9,7 +9,6 @@ class Manager
      *
      * @var array $settings
      */
-
     protected $settings = [];
 
     /**
@@ -18,7 +17,6 @@ class Manager
      * @param  string  $name
      * @return boolean
      */
-
     public function exists($name)
     {
         return class_exists($this->getPath($name));
@@ -30,7 +28,6 @@ class Manager
      * @param string $name
      * @param mixed  $value
      */
-
     public function add($name, $value)
     {
         $setting = $this->getPath($name);
@@ -50,7 +47,6 @@ class Manager
      * @param  string $key
      * @return mixed
      */
-
     public function get($key)
     {
         if (array_key_exists($key, $this->settings)) {
@@ -66,7 +62,6 @@ class Manager
      * @param  string $name
      * @return string
      */
-
     protected function getPath($name)
     {
         return '\\League\CLImate\\Settings\\' . $this->getClassName($name);
@@ -78,7 +73,6 @@ class Manager
      * @param  string $name
      * @return string
      */
-
     protected function getClassName($name)
     {
         return ucwords(str_replace('add_', '', $name));

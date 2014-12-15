@@ -2,6 +2,8 @@
 
 namespace League\CLImate;
 
+use League\CLImate\Util\Output;
+
 /**
  * @method mixed black(string $str = null)
  * @method mixed red(string $str = null)
@@ -68,9 +70,6 @@ namespace League\CLImate;
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
  */
-
-use League\CLImate\Util\Output;
-
 class CLImate
 {
     /**
@@ -78,7 +77,6 @@ class CLImate
      *
      * @var \League\CLImate\Decorator\Style $style
      */
-
     public $style;
 
     /**
@@ -86,7 +84,6 @@ class CLImate
      *
      * @var \League\CLImate\TerminalObject\Router\Router $terminal_object
      */
-
     protected $terminal_object;
 
     /**
@@ -94,7 +91,6 @@ class CLImate
      *
      * @var \League\CLImate\Settings\Manager $settings
      */
-
     protected $settings;
 
     /**
@@ -102,7 +98,6 @@ class CLImate
      *
      * @var \League\CLImate\Util\Output $output
      */
-
     protected $output;
 
     public function __construct(Output $output = null)
@@ -119,7 +114,6 @@ class CLImate
      * @param  mixed   $output
      * @return boolean
      */
-
     protected function hasOutput($output)
     {
         if (!empty($output)) {
@@ -138,7 +132,6 @@ class CLImate
      * @param  string $name
      * @return string The new string without the executed method.
      */
-
     protected function parseStyleMethod($method, $name)
     {
         // If the name starts with this method string...
@@ -162,7 +155,6 @@ class CLImate
      * @param  array $method_search
      * @return string Anything left over after applying styles
      */
-
     protected function applyStyleMethods($name, $method_search = null)
     {
         // Get all of the possible style attributes
@@ -185,7 +177,6 @@ class CLImate
      * @param string $name
      * @param array $search
      */
-
     protected function searchForStyleMethods($name, $search)
     {
         // Loop through the possible methods
@@ -204,7 +195,6 @@ class CLImate
      * @param array $arguments
      * @return object|null
      */
-
     protected function buildTerminalObject($name, $arguments)
     {
         // Retrieve the parser for the current set of styles
@@ -228,7 +218,6 @@ class CLImate
      * @param array $arguments
      * @return object|null
      */
-
     protected function routeRemainingMethod($name, array $arguments)
     {
         // If we still have something left, let's figure out what it is
@@ -256,7 +245,6 @@ class CLImate
      * List of many of the possible method being called here
      * documented at the top of this class.
      */
-
     public function __call($requested_method, $arguments)
     {
         // Convert to snake case

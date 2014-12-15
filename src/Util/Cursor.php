@@ -10,7 +10,6 @@ class Cursor
      * @param integer $number_of_lines
      * @return string
      */
-
     public function up($number_of_lines = 1)
     {
         return "\e[{$number_of_lines}A";
@@ -21,7 +20,6 @@ class Cursor
      *
      * @return string
      */
-
     public function startOfCurrentLine()
     {
         return "\r";
@@ -32,7 +30,6 @@ class Cursor
      *
      * @return string
      */
-
     public function deleteCurrentLine()
     {
         return "\e[K";

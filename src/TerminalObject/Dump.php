@@ -9,7 +9,6 @@ class Dump extends BaseTerminalObject
      *
      * @var mixed $data
      */
-
     protected $data;
 
     public function __construct($data)
@@ -22,7 +21,6 @@ class Dump extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         ob_start();

@@ -9,7 +9,6 @@ trait SettingsImporter
      *
      * @return array
      */
-
     public function settings()
     {
         return [];
@@ -20,7 +19,6 @@ trait SettingsImporter
      *
      * @param League\CLImate\Settings $setting
      */
-
     public function importSetting($setting)
     {
         $short_name = basename(str_replace('\\', '/', get_class($setting)));

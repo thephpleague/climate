@@ -9,7 +9,6 @@ class StdOut implements WriterInterface
      *
      * @param  string $content
      */
-
     public function write($content)
     {
         fwrite(STDOUT, $content);

@@ -9,7 +9,6 @@ class Padding extends BaseDynamicTerminalObject
      *
      * @var integer $length
      */
-
     protected $length = 0;
 
     /**
@@ -17,7 +16,6 @@ class Padding extends BaseDynamicTerminalObject
      *
      * @var string $char
      */
-
     protected $char = '.';
 
 
@@ -26,7 +24,6 @@ class Padding extends BaseDynamicTerminalObject
      *
      * @param string $char
      */
-
     public function __construct($length = null, $char = null)
     {
         if ($length) {
@@ -44,7 +41,6 @@ class Padding extends BaseDynamicTerminalObject
      * @param string $char
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
-
     public function char($char)
     {
         $this->char = $char;
@@ -58,7 +54,6 @@ class Padding extends BaseDynamicTerminalObject
      * @param integer $length
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
-
     public function length($length)
     {
         $this->length = $length;
@@ -71,7 +66,6 @@ class Padding extends BaseDynamicTerminalObject
      *
      * @return integer
      */
-
     protected function getLength()
     {
         if (!$this->length) {
@@ -87,7 +81,6 @@ class Padding extends BaseDynamicTerminalObject
      * @param string $content
      * @return string
      */
-
     protected function padContent($content)
     {
         if (strlen($this->char) > 0) {
@@ -107,7 +100,6 @@ class Padding extends BaseDynamicTerminalObject
      * @param string $content
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
-
     public function label($content)
     {
         // Handle long labels by splitting them across several lines
@@ -131,7 +123,6 @@ class Padding extends BaseDynamicTerminalObject
      *
      * @param string $content
      */
-
     public function result($content)
     {
         $this->output->write(' ' . $content);

@@ -9,7 +9,6 @@ class Border extends BaseTerminalObject
      *
      * @var string $char
      */
-
     protected $char = '-';
 
     /**
@@ -17,7 +16,6 @@ class Border extends BaseTerminalObject
      *
      * @var integer $length
      */
-
     protected $length = 100;
 
     public function __construct($char = null, $length = null)
@@ -31,7 +29,6 @@ class Border extends BaseTerminalObject
      * @param string $char
      * @return Border
      */
-
     public function char($char)
     {
         $this->set('char', $char);
@@ -45,7 +42,6 @@ class Border extends BaseTerminalObject
      * @param integer $length
      * @return Border
      */
-
     public function length($length)
     {
         $this->set('length', $length);
@@ -58,7 +54,6 @@ class Border extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         $str = str_repeat($this->char, $this->length);

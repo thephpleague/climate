@@ -6,7 +6,6 @@ class JSONTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_output_an_object_as_json()
     {
         $should_be = json_encode((object) [
@@ -31,7 +30,6 @@ class JSONTest extends TestBase
      * we want to make sure we're taking care of that
      *
      * @test */
-
     public function it_can_output_json_with_tags()
     {
         $should_be = json_encode((object) [

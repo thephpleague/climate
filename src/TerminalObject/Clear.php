@@ -9,7 +9,6 @@ class Clear extends BaseTerminalObject
      *
      * @return string
      */
-
     public function result()
     {
         return "\e[2J";

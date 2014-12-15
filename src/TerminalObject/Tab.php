@@ -13,7 +13,6 @@ class Tab extends Repeatable
      *
      * @return boolean
      */
-
     public function sameLine()
     {
         return true;
@@ -24,7 +23,6 @@ class Tab extends Repeatable
      *
      * @return string
      */
-
     public function result()
     {
         return str_repeat("\t", $this->count);

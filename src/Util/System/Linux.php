@@ -9,7 +9,6 @@ class Linux implements SystemInterface
      *
      * @return integer|null
      */
-
     public function width()
     {
         $width = exec('tput cols');
@@ -22,7 +21,6 @@ class Linux implements SystemInterface
      *
      * @return integer|null
      */
-
     public function height()
     {
         $height = exec('tput lines');
