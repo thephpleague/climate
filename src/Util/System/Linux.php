@@ -28,4 +28,16 @@ class Linux implements SystemInterface
         return (is_numeric($height)) ? $height : null;
     }
 
+    /**
+     * Check if the stream supports ansi escape characters.
+     *
+     * Based on https://github.com/symfony/symfony/blob/master/src/Symfony/Component/Console/Output/StreamOutput.php
+     *
+     * @return bool
+     */
+
+    public function hasAnsiSupport()
+    {
+        return function_exists('posix_isatty') && @posix_isatty(STDOUT);
+    }
 }

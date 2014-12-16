@@ -14,4 +14,11 @@ interface SystemInterface
      */
     public function height();
 
+    /**
+     * Check if the stream supports ansi escape characters.
+     *
+     * @return bool
+     */
+
+    public function hasAnsiSupport();
 }
