@@ -5,49 +5,39 @@ namespace League\CLImate;
 use League\CLImate\Util\Output;
 use League\CLImate\Util\Writer\StdErr;
 
-final class Stdio
+final class Terminal
 {
     /**
      * CLImate object outputting to the StdErr stream
      * @var League\CLImate\CLImate
      */
-    private $err;
+    private $stdErr;
 
     /**
      * CLImate object outputting to the StdOut stream
      * @var League\CLImate\CLImate
      */
-    private $out;
+    private $stdOut;
 
     /**
      * create a new instance of Stdio
      *
-     * @param League\CLImate\CLImate $out [description]
-     * @param League\CLImate\CLImate $err [description]
+     * @param League\CLImate\CLImate $out
+     * @param League\CLImate\CLImate $err
      */
     public function __construct(CLImate $out = null, CLImate $err = null)
     {
-        $this->out = $out ?: new CLImate();
-        $this->err = $err ?: new CLImate(new Output(new StdErr()));
+        $this->stdOut = $out ?: new CLImate();
+        $this->stdErr = $err ?: new CLImate(new Output(new StdErr()));
     }
 
     /**
-     * return the CLImate StdErr object
+     * return the specified CLImate object
      *
      * @return League\CLImate\CLImate
      */
-    public function err()
+    public function __get($value)
     {
-        return $this->err;
-    }
-
-    /**
-     * return the CLImate StdOut object
-     *
-     * @return League\CLImate\CLImate
-     */
-    public function out()
-    {
-        return $this->out;
+        return $this->$value;
     }
 }
