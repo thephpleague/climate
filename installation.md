@@ -9,10 +9,6 @@ Installation
 
 This library is available via Composer:
 
-~~~javascript
-{
-    "require": {
-        "league/climate": "~2.0"
-    }
-}
+~~~sh
+composer require league/climate
 ~~~
