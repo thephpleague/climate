@@ -3,14 +3,14 @@
 namespace League\CLImate\Util;
 
 use League\CLImate\Util\System\SystemFactory;
-use League\CLImate\Util\System\SystemInterface;
+use League\CLImate\Util\System\System;
 
 class UtilFactory
 {
     /**
      * A instance of the appropriate System class
      *
-     * @var \League\CLImate\Util\System\SystemInterface
+     * @var \League\CLImate\Util\System\System
      */
 
     public $system;
@@ -22,7 +22,7 @@ class UtilFactory
      */
     public $cursor;
 
-    public function __construct(SystemInterface $system = null, Cursor $cursor = null)
+    public function __construct(System $system = null, Cursor $cursor = null)
     {
         $this->system = $system ?: SystemFactory::getInstance();
         $this->cursor = $cursor ?: new Cursor();

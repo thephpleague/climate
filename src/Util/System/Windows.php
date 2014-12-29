@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Util\System;
 
-class Windows implements SystemInterface
+class Windows extends System
 {
     /**
      * Get the width of the terminal
@@ -46,7 +46,7 @@ class Windows implements SystemInterface
      */
     protected function getDimensions()
     {
-        exec('mode', $output);
+        $output = $this->exec('mode', true);
 
         if (!is_array($output)) {
             return [];

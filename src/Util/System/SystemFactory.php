@@ -5,7 +5,7 @@ namespace League\CLImate\Util\System;
 class SystemFactory
 {
     /**
-     * @var \League\CLImate\Util\System\SystemInterface $instance
+     * @var \League\CLImate\Util\System\System $instance
      */
 
     protected static $instance;
@@ -13,7 +13,7 @@ class SystemFactory
     /**
      * Get an instance of the appropriate System class
      *
-     * @return \League\CLImate\Util\System\SystemInterface
+     * @return \League\CLImate\Util\System\System
      */
 
     public static function getInstance()
@@ -30,7 +30,7 @@ class SystemFactory
     /**
      * Set the $instance property to the appropriate system
      *
-     * @return \League\CLImate\Util\System\SystemInterface
+     * @return \League\CLImate\Util\System\System
      */
 
     protected static function getSystem()

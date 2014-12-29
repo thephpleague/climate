@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Util\System;
 
-class Linux implements SystemInterface
+class Linux extends System
 {
     /**
      * Get the width of the terminal
@@ -11,9 +11,7 @@ class Linux implements SystemInterface
      */
     public function width()
     {
-        $width = exec('tput cols');
-
-        return (is_numeric($width)) ? $width : null;
+        return $this->getDimension($this->exec('tput cols'));
     }
 
     /**
@@ -23,9 +21,18 @@ class Linux implements SystemInterface
      */
     public function height()
     {
-        $height = exec('tput lines');
+        return $this->getDimension($this->exec('tput lines'));
+    }
 
-        return (is_numeric($height)) ? $height : null;
+    /**
+     * Determine if dimension is numeric and return it
+     *
+     * @param integer|null $dimension
+     * @return integer|null
+     */
+    protected function getDimension($dimension)
+    {
+        return (is_numeric($dimension)) ? $dimension : null;
     }
 
     /**
