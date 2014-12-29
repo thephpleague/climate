@@ -7,6 +7,7 @@ use League\CLImate\Decorator\Style;
 use League\CLImate\Decorator\Tags;
 use League\CLImate\Decorator\Parser\NonAnsi;
 use League\CLImate\Decorator\Parser\Ansi;
+use League\CLImate\Decorator\Parser\ParserFactory;
 
 class AnsiTest extends TestBase
 {
@@ -31,7 +32,6 @@ class AnsiTest extends TestBase
         $router->execute($obj);
     }
 
-
     /** @test */
 
     public function it_can_output_without_ansi()
@@ -50,6 +50,18 @@ class AnsiTest extends TestBase
         $this->shouldWrite("I am not green");
 
         $router->execute($obj);
+    }
+
+    /** @test */
+
+    public function it_will_recognize_non_ansi_systems()
+    {
+        $system = Mockery::mock('League\CLImate\Util\System\Windows');
+        $system->shouldReceive('hasAnsiSupport')->andReturn(false);
+
+        $parser = ParserFactory::getInstance($system, [], new Tags([]));
+
+        $this->assertInstanceOf('League\CLImate\Decorator\Parser\NonAnsi', $parser);
     }
 
 }
