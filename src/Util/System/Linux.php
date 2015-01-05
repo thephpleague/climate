@@ -27,7 +27,7 @@ class Linux extends System
     /**
      * Determine if dimension is numeric and return it
      *
-     * @param integer|null $dimension
+     * @param integer|string|null $dimension
      * @return integer|null
      */
     protected function getDimension($dimension)
