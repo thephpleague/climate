@@ -5,9 +5,10 @@ namespace League\CLImate\Util;
 class Cursor
 {
     /**
-     * Move the cursor up in the terminal x number of lines
+     * Move the cursor up in the terminal x number of lines.
      *
-     * @param integer $number_of_lines
+     * @param int $number_of_lines
+     *
      * @return string
      */
     public function up($number_of_lines = 1)
@@ -16,7 +17,7 @@ class Cursor
     }
 
     /**
-     * Move cursor to the beginning of the current line
+     * Move cursor to the beginning of the current line.
      *
      * @return string
      */
@@ -26,7 +27,7 @@ class Cursor
     }
 
     /**
-     * Delete the current line to the end
+     * Delete the current line to the end.
      *
      * @return string
      */
@@ -34,5 +35,4 @@ class Cursor
     {
         return "\e[K";
     }
-
 }
