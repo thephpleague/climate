@@ -124,7 +124,7 @@ class CLImate
     /**
      * Set the style property
      *
-     * @param type \League\CLImate\Decorator\Style $style
+     * @param \League\CLImate\Decorator\Style $style
      */
     public function setStyle(Style $style = null)
     {
@@ -134,7 +134,7 @@ class CLImate
     /**
      * Set the router property
      *
-     * @param type \League\CLImate\TerminalObject\Router\Router $router
+     * @param \League\CLImate\TerminalObject\Router\Router $router
      */
     public function setRouter(Router $router = null)
     {
@@ -144,7 +144,7 @@ class CLImate
     /**
      * Set the settings property
      *
-     * @param type \League\CLImate\Settings\Manager $manager
+     * @param \League\CLImate\Settings\Manager $manager
      */
     public function setSettingsManager(Manager $manager = null)
     {
@@ -154,7 +154,7 @@ class CLImate
     /**
      * Set the output property
      *
-     * @param type \League\CLImate\Util\Output $output
+     * @param \League\CLImate\Util\Output $output
      */
     public function setOutput(Output $output = null)
     {
@@ -164,7 +164,7 @@ class CLImate
     /**
      * Set the util property
      *
-     * @param type \League\CLImate\Util\UtilFactory $util
+     * @param \League\CLImate\Util\UtilFactory $util
      */
     public function setUtil(UtilFactory $util = null)
     {
