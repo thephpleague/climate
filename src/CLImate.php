@@ -2,8 +2,6 @@
 
 namespace League\CLImate;
 
-use League\CLImate\Util\Output;
-
 /**
  * @method mixed black(string $str = null)
  * @method mixed red(string $str = null)
