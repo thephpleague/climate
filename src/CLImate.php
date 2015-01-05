@@ -174,6 +174,7 @@ class CLImate
      * Check if we have valid output
      *
      * @param  mixed   $output
+     *
      * @return boolean
      */
     protected function hasOutput($output)
@@ -192,6 +193,7 @@ class CLImate
      *
      * @param  string $method
      * @param  string $name
+     *
      * @return string The new string without the executed method.
      */
     protected function parseStyleMethod($method, $name)
@@ -215,6 +217,7 @@ class CLImate
      *
      * @param  string $name
      * @param  array $method_search
+     *
      * @return string Anything left over after applying styles
      */
     protected function applyStyleMethods($name, $method_search = null)
@@ -255,6 +258,7 @@ class CLImate
      *
      * @param string $name
      * @param array $arguments
+     *
      * @return object|null
      */
     protected function buildTerminalObject($name, $arguments)
@@ -279,6 +283,7 @@ class CLImate
      *
      * @param string $name
      * @param array $arguments
+     *
      * @return object|null
      */
     protected function routeRemainingMethod($name, array $arguments)

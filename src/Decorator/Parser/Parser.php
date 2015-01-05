@@ -31,6 +31,7 @@ abstract class Parser
      * Wrap the string in the current style
      *
      * @param  string $str
+     *
      * @return string
      */
     abstract public function apply($str);

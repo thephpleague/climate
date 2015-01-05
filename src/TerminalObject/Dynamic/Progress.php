@@ -47,7 +47,8 @@ class Progress extends DynamicTerminalObject
     /**
      * Set the total property
      *
-     * @param  integer                                 $total
+     * @param  integer $total
+     *
      * @return Progress
      */
     public function total($total)

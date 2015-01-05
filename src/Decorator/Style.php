@@ -70,6 +70,7 @@ class Style
      * Attempt to get the corresponding code for the style
      *
      * @param  mixed $key
+     *
      * @return mixed
      */
     public function get($key)
@@ -88,6 +89,7 @@ class Style
      * return true if attempt was successful
      *
      * @param  string   $key
+     *
      * @return boolean
      */
     public function set($key)
@@ -116,6 +118,7 @@ class Style
      * Get a new instance of the Parser class based on the current settings
      *
      * @param \League\CLImate\Util\System\System $system
+     *
      * @return Parser
      */
     public function parser(System $system)
@@ -151,6 +154,7 @@ class Style
      * Make sure that the code is an integer, if not let's try and get it there
      *
      * @param mixed $code
+     *
      * @return boolean
      */
     protected function validateCode($code)
@@ -175,6 +179,8 @@ class Style
      * Validate an array of codes
      *
      * @param array $codes
+     *
+     * @return boolean
      */
     protected function validateCodeArray(array $codes)
     {
@@ -211,6 +217,7 @@ class Style
      * Retrieve the integers from the mixed code input
      *
      * @param string|array $code
+     *
      * @return integer|array
      */
     protected function getCode($code)
@@ -226,6 +233,7 @@ class Style
      * Retrieve an array of integers from the array of codes
      *
      * @param array $codes
+     *
      * @return array
      */
     protected function getCodeArray(array $codes)
@@ -241,6 +249,8 @@ class Style
      * Parse the add method for the style they are trying to add
      *
      * @param string $method
+     *
+     * @return string
      */
     protected function parseAddMethod($method)
     {

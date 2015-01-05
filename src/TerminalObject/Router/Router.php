@@ -43,6 +43,7 @@ class Router
      * Check if the name matches an existing terminal object
      *
      * @param string $name
+     *
      * @return boolean
      */
     public function exists($name)
@@ -100,6 +101,7 @@ class Router
      * Set the settings property
      *
      * @param  \League\CLImate\Settings\Manager $settings
+     *
      * @return Router
      */
     public function settings(Manager $settings)

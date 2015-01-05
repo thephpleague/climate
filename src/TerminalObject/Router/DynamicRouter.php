@@ -12,6 +12,7 @@ class DynamicRouter extends BaseRouter implements RouterInterface
      * Get the full path for a dynamic terminal object class
      *
      * @param  string $class
+     *
      * @return string
      */
     public function path($class)
@@ -23,6 +24,8 @@ class DynamicRouter extends BaseRouter implements RouterInterface
      * Execute a dynamic terminal object using given arguments
      *
      * @param \League\CLImate\TerminalObject\Dynamic $obj
+     *
+     * @return \League\CLImate\TerminalObject\Dynamic
      */
     public function execute($obj)
     {

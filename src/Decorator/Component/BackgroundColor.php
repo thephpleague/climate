@@ -16,6 +16,7 @@ class BackgroundColor extends Color
      * Get the code for the requested color
      *
      * @param  mixed $val
+     *
      * @return mixed
      */
     public function get($val)
@@ -33,6 +34,7 @@ class BackgroundColor extends Color
      * Set the current background color
      *
      * @param  mixed   $val
+     *
      * @return boolean
      */
     public function set($val)
@@ -60,6 +62,7 @@ class BackgroundColor extends Color
      * Strip the color of any prefixes
      *
      * @param  string $val
+     *
      * @return string
      */
     protected function strip($val)

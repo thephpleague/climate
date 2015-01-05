@@ -27,6 +27,7 @@ class Border extends BasicTerminalObject
      * Set the character to repeat for the border
      *
      * @param string $char
+     *
      * @return Border
      */
     public function char($char)
@@ -40,6 +41,7 @@ class Border extends BasicTerminalObject
      * Set the length of the border
      *
      * @param integer $length
+     *
      * @return Border
      */
     public function length($length)

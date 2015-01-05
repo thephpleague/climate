@@ -62,6 +62,7 @@ class Color extends BaseDecorator
      * Get the code for the color
      *
      * @param  string  $val
+     *
      * @return string
      */
     public function get($val)
@@ -82,6 +83,7 @@ class Color extends BaseDecorator
      * Set the current color
      *
      * @param  string   $val
+     *
      * @return boolean
      */
     public function set($val)

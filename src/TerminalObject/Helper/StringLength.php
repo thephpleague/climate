@@ -26,6 +26,7 @@ trait StringLength
      * Determine the length of the string without any tags
      *
      * @param  string  $str
+     *
      * @return integer
      */
     protected function lengthWithoutTags($str)
@@ -39,6 +40,7 @@ trait StringLength
      * Get the string without the tags that are to be ignored
      *
      * @param  string $str
+     *
      * @return string
      */
     protected function withoutTags($str)
@@ -53,6 +55,7 @@ trait StringLength
      *
      * @param  string $str
      * @param  integer $final_length
+     *
      * @return string
      */
     protected function pad($str, $final_length)

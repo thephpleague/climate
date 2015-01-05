@@ -115,6 +115,7 @@ class Columns extends BasicTerminalObject
      *
      * @param integer $key
      * @param integer $column_width
+     *
      * @return string
      */
     protected function getRow($key, $column_widths)
@@ -134,6 +135,7 @@ class Columns extends BasicTerminalObject
      * Get the standard column width
      *
      * @param array $data
+     *
      * @return integer
      */
     protected function getColumnWidth($data)
@@ -186,6 +188,7 @@ class Columns extends BasicTerminalObject
      * Get the number of rows per column
      *
      * @param integer $column_width
+     *
      * @return integer
      */
     protected function getMaxRows($column_width)

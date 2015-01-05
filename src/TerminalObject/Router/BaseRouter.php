@@ -9,6 +9,7 @@ abstract class BaseRouter
      * valid terminal object class
      *
      * @param  string  $class
+     *
      * @return boolean
      */
     public function exists($class)
@@ -20,6 +21,7 @@ abstract class BaseRouter
      * Get the full path for the terminal object class
      *
      * @param  string $class
+     *
      * @return string
      */
     protected function getPath($class)
@@ -31,6 +33,7 @@ abstract class BaseRouter
      * Get the class short name
      *
      * @param string $name
+     *
      * @return string
      */
     protected function shortName($name)

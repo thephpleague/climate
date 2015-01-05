@@ -76,6 +76,7 @@ class Draw extends BasicTerminalObject
 	 * Find a valid art path
 	 *
 	 * @param string $art
+     *
 	 * @return string
 	 */
     protected function path($art)
@@ -97,6 +98,7 @@ class Draw extends BasicTerminalObject
 	 * Parse the contents of the file and return each line
 	 *
 	 * @param string $path
+     *
 	 * @return array
 	 */
     protected function parse($path)

@@ -86,6 +86,7 @@ class Input extends DynamicTerminalObject
      *
      * @param  array|object $acceptable
      * @param  boolean $show
+     *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
     public function accept($acceptable, $show = false)
@@ -112,6 +113,7 @@ class Input extends DynamicTerminalObject
      * Set a default response
      *
      * @param string $default
+     *
      * @return \League\CLImate\TerminalObject\Dynamic\Input
      */
     public function defaultTo($default)
@@ -185,6 +187,7 @@ class Input extends DynamicTerminalObject
      * Determine if the user's response is in the acceptable responses array
      *
      * @param string $response
+     *
      * @return boolean $response
      */
     protected function isAcceptableResponse($response)
@@ -201,6 +204,7 @@ class Input extends DynamicTerminalObject
      * Determine if the user's response is valid based on the current settings
      *
      * @param string $response
+     *
      * @return boolean $response
      */
     protected function isValidResponse($response)

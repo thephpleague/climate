@@ -12,6 +12,7 @@ class BasicRouter extends BaseRouter implements RouterInterface
      * Get the full path for a terminal object class
      *
      * @param  string $class
+     *
      * @return string
      */
     public function path($class)

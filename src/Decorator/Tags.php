@@ -41,6 +41,7 @@ class Tags {
      * Get the value of the requested tag
      *
      * @param string $key
+     *
      * @return string|null
      */
 

@@ -13,6 +13,7 @@ class ParserFactory
      *
      * @param array $current
      * @param array $tags
+     *
      * @return League\CLImate\Decorator\Parser
      */
 

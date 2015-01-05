@@ -28,6 +28,7 @@ class Windows extends System
      * Get specified terminal dimension
      *
      * @param string $key
+     *
      * @return integer|null
      */
 

@@ -51,6 +51,7 @@ class Format extends BaseDecorator
      * Get the code for the format
      *
      * @param  string  $val
+     *
      * @return string
      */
     public function get($val)
@@ -71,6 +72,7 @@ class Format extends BaseDecorator
      * Set the current format
      *
      * @param  string $val
+     *
      * @return boolean
      */
     public function set($val)

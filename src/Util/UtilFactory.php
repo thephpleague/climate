@@ -55,6 +55,7 @@ class UtilFactory
      *
      * @param integer|null $dimension
      * @param integer $default
+     *
      * @return integer
      */
 

@@ -39,6 +39,7 @@ class Padding extends DynamicTerminalObject
      * Set the character(s) that should be used to pad
      *
      * @param string $char
+     *
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
     public function char($char)
@@ -52,6 +53,7 @@ class Padding extends DynamicTerminalObject
      * Set the length of the line that should be generated
      *
      * @param integer $length
+     *
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
     public function length($length)
@@ -79,6 +81,7 @@ class Padding extends DynamicTerminalObject
      * Pad the content with the characters
      *
      * @param string $content
+     *
      * @return string
      */
     protected function padContent($content)
@@ -98,6 +101,7 @@ class Padding extends DynamicTerminalObject
      * Output the content and pad to the previously defined length
      *
      * @param string $content
+     *
      * @return \League\CLImate\TerminalObject\Dynamic\Padding
      */
     public function label($content)

@@ -118,6 +118,7 @@ class Table extends BasicTerminalObject
      * Get table row
      *
      * @param  mixed  $columns
+     *
      * @return string
      */
     protected function buildRow($columns)
@@ -138,6 +139,7 @@ class Table extends BasicTerminalObject
      *
      * @param  mixed  $key
      * @param  string $column
+     *
      * @return string
      */
     protected function buildCell($key, $column)
@@ -198,6 +200,7 @@ class Table extends BasicTerminalObject
      * Set up an array of default column widths
      *
      * @param array $columns
+     *
      * @return array
      */
     protected function getDefaultColumnWidths(array $columns)
@@ -212,6 +215,7 @@ class Table extends BasicTerminalObject
      *
      * @param mixed  $key
      * @param string $column
+     *
      * @return integer
      */
     protected function getCellWidth($current_width, $str)

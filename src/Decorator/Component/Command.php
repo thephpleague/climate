@@ -50,6 +50,7 @@ class Command extends BaseDecorator
      * Get the style that corresponds to the command
      *
      * @param  string  $val
+     *
      * @return string
      */
     public function get($val)
@@ -65,6 +66,7 @@ class Command extends BaseDecorator
      * Set the currently used command
      *
      * @param  string       $val
+     *
      * @return string|false
      */
     public function set($val)

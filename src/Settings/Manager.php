@@ -15,6 +15,7 @@ class Manager
      * Check and see if the requested setting is a valid, registered setting
      *
      * @param  string  $name
+     *
      * @return boolean
      */
     public function exists($name)
@@ -45,6 +46,7 @@ class Manager
      * Get the value of the requested setting if it exists
      *
      * @param  string $key
+     *
      * @return mixed
      */
     public function get($key)
@@ -60,6 +62,7 @@ class Manager
      * Get the short name for the requested settings class
      *
      * @param  string $name
+     *
      * @return string
      */
     protected function getPath($name)
@@ -71,6 +74,7 @@ class Manager
      * Get the short class name for the setting
      *
      * @param  string $name
+     *
      * @return string
      */
     protected function getClassName($name)

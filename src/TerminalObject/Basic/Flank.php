@@ -36,6 +36,7 @@ class Flank extends BasicTerminalObject
      * Set the character(s) to repeat on either side
      *
      * @param string $char
+     *
      * @return Flank
      */
     public function char($char)
@@ -49,6 +50,7 @@ class Flank extends BasicTerminalObject
      * Set the repeat of the flank character(s)
      *
      * @param integer $repeat
+     *
      * @return Flank
      */
     public function repeat($repeat)

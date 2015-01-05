@@ -8,6 +8,7 @@ class Ansi extends Parser
      * Wrap the string in the current style
      *
      * @param  string $str
+     *
      * @return string
      */
 
@@ -55,6 +56,7 @@ class Ansi extends Parser
      * Wrap the code string in the full escaped sequence
      *
      * @param  string $codes
+     *
      * @return string
      */
 
@@ -67,6 +69,7 @@ class Ansi extends Parser
      * Parse the string for tags and replace them with their codes
      *
      * @param  string $str
+     *
      * @return string
      */
 
@@ -90,6 +93,8 @@ class Ansi extends Parser
      *
      * @param string $str
      * @param array $tags
+     *
+     * @return string
      */
 
     protected function parseTags($str, $tags)
@@ -110,6 +115,7 @@ class Ansi extends Parser
      * @param string $str
      * @param string $tag
      * @param array $history
+     *
      * @return string
      */
 
@@ -135,6 +141,7 @@ class Ansi extends Parser
      * Stringify the codes
      *
      * @param  mixed  $codes
+     *
      * @return string
      */
 

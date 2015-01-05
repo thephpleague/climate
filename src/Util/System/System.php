@@ -29,6 +29,7 @@ abstract class System
      *
      * @param string $command
      * @param boolean $full
+     *
      * @return string|array
      */
     protected function exec($command, $full = false)
