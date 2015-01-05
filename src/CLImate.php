@@ -2,6 +2,12 @@
 
 namespace League\CLImate;
 
+use League\CLImate\Decorator\Style;
+use League\CLImate\Settings\Manager;
+use League\CLImate\TerminalObject\Router\Router;
+use League\CLImate\Util\Output;
+use League\CLImate\Util\UtilFactory;
+
 /**
  * @method mixed black(string $str = null)
  * @method mixed red(string $str = null)
@@ -68,13 +74,6 @@ namespace League\CLImate;
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
  */
-
-use League\CLImate\Decorator\Style;
-use League\CLImate\Settings\Manager;
-use League\CLImate\TerminalObject\Router\Router;
-use League\CLImate\Util\Output;
-use League\CLImate\Util\UtilFactory;
-
 class CLImate
 {
     /**
