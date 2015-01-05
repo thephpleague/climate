@@ -12,6 +12,9 @@ trait StringLength
      */
     protected $ignore_tags = [];
 
+    /**
+     * Set the ignore tags property
+     */
     protected function setIgnoreTags()
     {
         if (!count($this->ignore_tags)) {

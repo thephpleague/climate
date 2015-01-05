@@ -115,6 +115,7 @@ class Style
     /**
      * Get a new instance of the Parser class based on the current settings
      *
+     * @param \League\CLImate\Util\System\System $system
      * @return Parser
      */
     public function parser(System $system)

@@ -105,6 +105,11 @@ class CLImate
      */
     protected $output;
 
+    /**
+     * An instance of the Util Factory
+     *
+     * @var \League\CLImate\Util\UtilFactory $util
+     */
     protected $util;
 
     public function __construct()
@@ -116,26 +121,51 @@ class CLImate
         $this->setUtil();
     }
 
+    /**
+     * Set the style property
+     *
+     * @param type \League\CLImate\Decorator\Style $style
+     */
     public function setStyle(Style $style = null)
     {
         $this->style = $style ?: new Style();
     }
 
+    /**
+     * Set the router property
+     *
+     * @param type \League\CLImate\TerminalObject\Router\Router $router
+     */
     public function setRouter(Router $router = null)
     {
         $this->router = $router ?: new Router();
     }
 
+    /**
+     * Set the settings property
+     *
+     * @param type \League\CLImate\Settings\Manager $manager
+     */
     public function setSettingsManager(Manager $manager = null)
     {
         $this->settings = $manager ?: new Manager();
     }
 
+    /**
+     * Set the output property
+     *
+     * @param type \League\CLImate\Util\Output $output
+     */
     public function setOutput(Output $output = null)
     {
         $this->output = $output ?: new Output();
     }
 
+    /**
+     * Set the util property
+     *
+     * @param type \League\CLImate\Util\UtilFactory $util
+     */
     public function setUtil(UtilFactory $util = null)
     {
         $this->util = $util ?: new UtilFactory();
