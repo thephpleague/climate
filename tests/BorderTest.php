@@ -7,14 +7,14 @@ class BorderTest extends TestBase
     /** @test */
     public function it_can_output_a_basic_border()
     {
-        $this->shouldWrite("\e[m" . str_repeat('-', 100) . "\e[0m");
+        $this->shouldWrite("\e[m" . str_repeat('-', $this->util->width() ?: 100) . "\e[0m");
         $this->cli->border();
     }
 
     /** @test */
     public function it_can_output_a_border_with_a_different_character()
     {
-        $this->shouldWrite("\e[m" . str_repeat('@', 100) . "\e[0m");
+        $this->shouldWrite("\e[m" . str_repeat('@', $this->util->width() ?: 100) . "\e[0m");
         $this->cli->border('@');
     }
 
