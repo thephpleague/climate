@@ -8,7 +8,7 @@ Introduction
 
 [![Author](http://img.shields.io/badge/author-@joetannenbaum-blue.svg?style=flat)](https://twitter.com/joetannenbaum)
 [![Source](http://img.shields.io/badge/source-league/climate-blue.svg?style=flat)](https://github.com/thephpleague/climate)
-[![Latest Version](https://img.shields.io/github/release/thephpleague/climate.svg?style=flat)](https://github.com/thephpleague/climate/releases)<br />
+[![Latest Version](https://img.shields.io/github/tag/thephpleague/climate.svg?style=flat&label=release)](https://github.com/thephpleague/climate/tags)<br />
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/thephpleague/climate/master.svg?style=flat)](https://travis-ci.org/thephpleague/climate)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/climate.svg?style=flat)](https://scrutinizer-ci.com/g/thephpleague/climate/code-structure)
