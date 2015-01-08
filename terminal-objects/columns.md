@@ -43,7 +43,7 @@ $data = [
 $climate->columns($data);
 ~~~
 
-which results in:
+would result in:
 
 ~~~
 12 Monkeys                          Contact                  Interview with the Vampire
@@ -57,10 +57,33 @@ By the Sea                          Hunk                     Megamind
 Confessions of a Dangerous Mind     Inglourious Basterds     Moneyball
 ~~~
 
+## Column Count
+
+### Via a Paramater
+
 You can specify the number of columns by passing in a second parameter:
 
 ~~~php
 $climate->columns($data, 4);
 ~~~
 
-Otherwise CLImate will try to figure out how the content best fits in your terminal.
+### Via an Array of Arrays
+
+~~~php
+$data = [
+    ['Gary', 'Mary', 'Larry', 'Terry'],
+    [1.2, 4.3, 0.1, 3.0],
+    [6.6, 4.4, 5.5, 3.3],
+    [9.1, 8.2, 7.3, 6.4],
+];
+
+$climate->columns($data);
+~~~
+
+would result in:
+
+
+
+By default CLImate will try to figure out how the content best fits in your terminal.
+
+
