@@ -82,6 +82,12 @@ $climate->columns($data);
 
 would result in:
 
+~~~
+Gary     Mary     Larry     Terry
+1.2      4.3      0.1       3
+6.6      4.4      5.5       3.3
+9.1      8.2      7.3       6.4
+~~~
 
 
 By default CLImate will try to figure out how the content best fits in your terminal.
