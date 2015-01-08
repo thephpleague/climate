@@ -44,6 +44,10 @@ $progress->advance(); // Adds 1 to the current progress
 // Do something
 
 $progress->advance(10); // Adds 10 to the current progress
+
+// Do something
+
+$progress->advance(5, 'Still going.'); // Adds 5, displays a label
 ~~~
 
 ## Labels
