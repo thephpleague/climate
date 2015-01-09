@@ -13,77 +13,48 @@ class Animation extends DynamicTerminalObject
     public function __construct($art)
     {
         // Add the default art directory
+        $this->addDir(__DIR__ . '/../../ASCII');
         $this->addDir(__DIR__ . '/../../ASCII/animations');
 
         $this->art = $art;
     }
 
-    public function speed($multiplier)
+    public function speed($percentage)
     {
-        if (is_numeric($multiplier)) {
-            $this->speed = $multiplier;
+        if (is_numeric($percentage)) {
+            $this->speed = $percentage / 100;
         }
 
         return $this;
     }
 
+    public function exitToTop()
+    {
+        $this->leave('top');
+    }
+
+    public function exitToBottom()
+    {
+        $this->leave('bottom');
+    }
+
     public function enterFromTop()
     {
-        $files = $this->path($this->art);
-        var_dump($files);
+        $this->enter('top');
+    }
+
+    public function enterFromBottom()
+    {
+        $this->enter('bottom');
     }
 
     /**
-	 * Return the art
-	 *
-	 * @return array
-	 */
-
+     * Run a basic animation
+     */
     public function run()
     {
         $files = $this->artDir($this->art);
-
         $files = array_reverse($files);
-
-        // $files = [
-        //     ['[]'],
-        //     ['[H]'],
-        //     ['[He]'],
-        //     ['[Hel]'],
-        //     ['[Hell]'],
-        //     ['[Hello]'],
-        //     ['[Hello ]'],
-        //     ['[Hello W]'],
-        //     ['[Hello Wo]'],
-        //     ['[Hello Wor]'],
-        //     ['[Hello Worl]'],
-        //     ['[Hello World]'],
-        //     ['[Hello World /'],
-        //     ['[Hello World  -'],
-        //     ['[Hello World   ['],
-        //     ['[Hello World    \\'],
-        //     ['[Hello World     -'],
-        //     ['[Hello World      ]'],
-        //     ['[Hello World       ]'],
-        //     ['[Hello World      ]'],
-        //     ['[Hello World     ]'],
-        //     ['[Hello World    ]'],
-        //     ['[Hello World   ]'],
-        //     ['[Hello World  ]'],
-        //     ['[Hello World ]'],
-        //     ['[Hello World]'],
-        //     ['[Hello Worl]'],
-        //     ['[Hello Wor]'],
-        //     ['[Hello Wo]'],
-        //     ['[Hello W]'],
-        //     ['[Hello ]'],
-        //     ['[Hello]'],
-        //     ['[Hell]'],
-        //     ['[Hel]'],
-        //     ['[He]'],
-        //     ['[H]'],
-        //     ['[]'],
-        // ];
 
         $animation = [];
 
@@ -92,6 +63,71 @@ class Animation extends DynamicTerminalObject
         }
 
         $this->animate($animation);
+    }
+
+    protected function leave($destination)
+    {
+        $file        = $this->artFile($this->art);
+        $lines       = $this->parse($file);
+        $line_count  = count($lines);
+        $line_method = $this->getLineMethod($destination);
+
+        $keyframes = [];
+
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+
+        for ($i = $line_count - 1; $i >= 0; $i--) {
+            $keyframes[] = $this->$line_method($lines, $line_count, $i);
+        }
+
+        $keyframes[] = array_fill(0, $line_count, '');
+
+        $this->animate($keyframes);
+    }
+
+    protected function enter($origin)
+    {
+        $file        = $this->artFile($this->art);
+        $lines       = $this->parse($file);
+        $line_count  = count($lines);
+        $line_method = $this->getLineMethod($origin);
+
+        $keyframes   = [array_fill(0, $line_count, '')];
+
+        for ($i = 1; $i < $line_count; $i++) {
+            $keyframes[] = $this->$line_method($lines, $line_count, $i);
+        }
+
+        $keyframes[] = $lines;
+
+        $this->animate($keyframes);
+    }
+
+    protected function getLineMethod($direction)
+    {
+        $map = [
+            'bottom' => 'top',
+            'top'    => 'bottom',
+        ];
+
+        return 'get' . ucwords($map[$direction]) . 'Lines';
+    }
+
+    protected function getBottomLines($lines, $total_lines, $current)
+    {
+        $keyframe = array_slice($lines, -$current, $current);
+
+        return array_merge($keyframe, array_fill(0, $total_lines - $current, ''));
+    }
+
+    protected function getTopLines($lines, $total_lines, $current)
+    {
+        $keyframe = array_fill(0, $total_lines - $current, '');
+
+        return array_merge($keyframe, array_slice($lines, 0, $current));
     }
 
     /**
@@ -117,19 +153,19 @@ class Animation extends DynamicTerminalObject
         }
     }
 
-    protected function getLineFormatted($line, $key, $count)
+    protected function getLineFormatted($line, $key, $last_frame_count)
     {
         // If this is the first thing we're writing, just return the line
-        if ($count == 0) {
+        if ($last_frame_count == 0) {
             return $line;
         }
 
         $content = '';
 
-        // If this is the first line of the next frame,
-        // move the cursor up the total number of previous lines
+        // If this is the first line of the frame,
+        // move the cursor up the total number of previous lines from the previous frame
         if ($key == 0) {
-            $content .= $this->util->cursor->up($count);
+            $content .= $this->util->cursor->up($last_frame_count);
         }
 
         $content .= $this->util->cursor->startOfCurrentLine();
@@ -143,4 +179,5 @@ class Animation extends DynamicTerminalObject
     {
         usleep(50000 * $this->speed);
     }
+
 }
