@@ -103,7 +103,6 @@ class Animation extends DynamicTerminalObject
 
         $keyframes[] = array_fill(0, $line_count, '');
 
-
         $this->animate($keyframes);
     }
 
