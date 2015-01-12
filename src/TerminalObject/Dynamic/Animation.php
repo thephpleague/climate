@@ -65,6 +65,24 @@ class Animation extends DynamicTerminalObject
         $this->animate($animation);
     }
 
+    protected function enter($origin)
+    {
+        $file        = $this->artFile($this->art);
+        $lines       = $this->parse($file);
+        $line_count  = count($lines);
+        $line_method = $this->getLineMethod($origin);
+
+        $keyframes   = [array_fill(0, $line_count, '')];
+
+        for ($i = 1; $i < $line_count; $i++) {
+            $keyframes[] = $this->$line_method($lines, $line_count, $i);
+        }
+
+        $keyframes[] = $lines;
+
+        $this->animate($keyframes);
+    }
+
     protected function leave($destination)
     {
         $file        = $this->artFile($this->art);
@@ -85,23 +103,6 @@ class Animation extends DynamicTerminalObject
 
         $keyframes[] = array_fill(0, $line_count, '');
 
-        $this->animate($keyframes);
-    }
-
-    protected function enter($origin)
-    {
-        $file        = $this->artFile($this->art);
-        $lines       = $this->parse($file);
-        $line_count  = count($lines);
-        $line_method = $this->getLineMethod($origin);
-
-        $keyframes   = [array_fill(0, $line_count, '')];
-
-        for ($i = 1; $i < $line_count; $i++) {
-            $keyframes[] = $this->$line_method($lines, $line_count, $i);
-        }
-
-        $keyframes[] = $lines;
 
         $this->animate($keyframes);
     }
