@@ -8,6 +8,11 @@ class Animation extends DynamicTerminalObject
 {
     use Art;
 
+    /**
+     * The speed at which the animation should be run
+     *
+     * @var integer $speed
+     */
     protected $speed = 1;
 
     public function __construct($art)
@@ -19,6 +24,13 @@ class Animation extends DynamicTerminalObject
         $this->art = $art;
     }
 
+    /**
+     * Assign the speed of the animation
+     *
+     * @param integer $percentage
+     *
+     * @return \League\CLImate\TerminalObject\Dynamic\Animation
+     */
     public function speed($percentage)
     {
         if (is_numeric($percentage)) {
@@ -28,24 +40,36 @@ class Animation extends DynamicTerminalObject
         return $this;
     }
 
+    /**
+     * Animate the art exiting to the top of the screen
+     */
     public function exitToTop()
     {
-        $this->leave('top');
+        $this->fromStatic('leave', 'top');
     }
 
+    /**
+     * Animate the art exiting to the bottom of the screen
+     */
     public function exitToBottom()
     {
-        $this->leave('bottom');
+        $this->fromStatic('leave', 'bottom');
     }
 
+    /**
+     * Animate the art entering from the top of the screen
+     */
     public function enterFromTop()
     {
-        $this->enter('top');
+        $this->fromStatic('enter', 'top');
     }
 
+    /**
+     * Animate the art entering from the bottom of the screen
+     */
     public function enterFromBottom()
     {
-        $this->enter('bottom');
+        $this->fromStatic('enter', 'bottom');
     }
 
     /**
@@ -65,13 +89,33 @@ class Animation extends DynamicTerminalObject
         $this->animate($animation);
     }
 
-    protected function enter($origin)
+    /**
+     * Create an animation from static art
+     *
+     * @param string $type Accepts enter|leave
+     * @param string $direction Accepts top|bottom
+     */
+    protected function fromStatic($type, $direction)
     {
-        $file        = $this->artFile($this->art);
-        $lines       = $this->parse($file);
-        $line_count  = count($lines);
-        $line_method = $this->getLineMethod($origin);
+        $lines       = $this->parse($this->artFile($this->art));
+        $line_method = $this->getLineMethod($direction);
 
+        $keyframes = $this->$type($lines, count($lines), $line_method);
+
+        $this->animate($keyframes);
+    }
+
+    /**
+     * Create the entrance animation
+     *
+     * @param array $lines
+     * @param integer $line_count
+     * @param string $line_method
+     *
+     * @return array
+     */
+    protected function enter($lines, $line_count, $line_method)
+    {
         $keyframes   = [array_fill(0, $line_count, '')];
 
         for ($i = 1; $i < $line_count; $i++) {
@@ -80,16 +124,20 @@ class Animation extends DynamicTerminalObject
 
         $keyframes[] = $lines;
 
-        $this->animate($keyframes);
+        return $keyframes;
     }
 
-    protected function leave($destination)
+    /**
+     * Create the exit animation
+     *
+     * @param array $lines
+     * @param integer $line_count
+     * @param string $line_method
+     *
+     * @return array
+     */
+    protected function leave($lines, $line_count, $line_method)
     {
-        $file        = $this->artFile($this->art);
-        $lines       = $this->parse($file);
-        $line_count  = count($lines);
-        $line_method = $this->getLineMethod($destination);
-
         $keyframes = [];
 
         $keyframes[] = $lines;
@@ -103,9 +151,16 @@ class Animation extends DynamicTerminalObject
 
         $keyframes[] = array_fill(0, $line_count, '');
 
-        $this->animate($keyframes);
+        return $keyframes;
     }
 
+    /**
+     * Retrieve the corresponding line helper method
+     *
+     * @param string $direction Accepts top|bottom
+     *
+     * @return string
+     */
     protected function getLineMethod($direction)
     {
         $map = [
@@ -116,6 +171,15 @@ class Animation extends DynamicTerminalObject
         return 'get' . ucwords($map[$direction]) . 'Lines';
     }
 
+    /**
+     * Slice off X number of lines from the bottom and fill the rest with empty strings
+     *
+     * @param array $lines
+     * @param integer $total_lines
+     * @param integer $current
+     *
+     * @return array
+     */
     protected function getBottomLines($lines, $total_lines, $current)
     {
         $keyframe = array_slice($lines, -$current, $current);
@@ -123,6 +187,15 @@ class Animation extends DynamicTerminalObject
         return array_merge($keyframe, array_fill(0, $total_lines - $current, ''));
     }
 
+    /**
+     * Slice off X number of lines from the top and fill the rest with empty strings
+     *
+     * @param array $lines
+     * @param integer $total_lines
+     * @param integer $current
+     *
+     * @return array
+     */
     protected function getTopLines($lines, $total_lines, $current)
     {
         $keyframe = array_fill(0, $total_lines - $current, '');
@@ -132,6 +205,7 @@ class Animation extends DynamicTerminalObject
 
     /**
      * Animate the given keyframes
+     *
      * @param array $keyframes Array of arrays
      */
     protected function animate(array $keyframes)
@@ -145,6 +219,12 @@ class Animation extends DynamicTerminalObject
         }
     }
 
+    /**
+     * Write the current keyframe to the terminal, line by line
+     *
+     * @param array $lines
+     * @param integer $count
+     */
     protected function writeKeyFrame(array $lines, $count)
     {
         foreach ($lines as $key => $line) {
@@ -153,6 +233,15 @@ class Animation extends DynamicTerminalObject
         }
     }
 
+    /**
+     * Format the line to re-write previous lines, if necessary
+     *
+     * @param string $line
+     * @param integer $key
+     * @param integer $last_frame_count
+     *
+     * @return string
+     */
     protected function getLineFormatted($line, $key, $last_frame_count)
     {
         // If this is the first thing we're writing, just return the line
@@ -175,6 +264,9 @@ class Animation extends DynamicTerminalObject
         return $content;
     }
 
+    /**
+     * Sleep between frames to create the animation effect
+     */
     protected function sleep()
     {
         usleep(50000 * $this->speed);
