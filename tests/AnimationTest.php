@@ -3,11 +3,12 @@
 require_once 'TestBase.php';
 require_once 'Animation/ExitToTopFrames.php';
 require_once 'Animation/ExitToBottomFrames.php';
+require_once 'Animation/ExitToLeftFrames.php';
 
 class AnimationTest extends TestBase
 {
 
-    use ExitToTopFrames, ExitToBottomFrames;
+    use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames;
 
     protected function emptyFrame()
     {
@@ -80,6 +81,47 @@ class AnimationTest extends TestBase
         $this->fullArtExitTopPlus();
 
         $this->cli->animation('404')->enterFromTop();
+    }
+
+    /** @test */
+
+    public function it_can_exit_to_left()
+    {
+        $this->fullArtExitLeft();
+        $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
+        $this->exitLeftFrame1();
+        $this->exitLeftFrame2();
+        $this->exitLeftFrame3();
+        $this->exitLeftFrame4();
+        $this->exitLeftFrame5();
+        $this->exitLeftFrame6();
+        $this->exitLeftFrame7();
+        $this->exitLeftFrame8();
+        $this->exitLeftFrame9();
+
+        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->animation('4')->exitToLeft();
+    }
+
+    /** @test */
+
+    public function it_can_enter_from_left()
+    {
+        $this->emptyFrame();
+        $this->exitLeftFrame8();
+        $this->exitLeftFrame7();
+        $this->exitLeftFrame6();
+        $this->exitLeftFrame5();
+        $this->exitLeftFrame4();
+        $this->exitLeftFrame3();
+        $this->exitLeftFrame2();
+        $this->exitLeftFrame1();
+        $this->fullArtExitLeftPlus();
+
+        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->animation('4')->enterFromLeft();
     }
 
 }

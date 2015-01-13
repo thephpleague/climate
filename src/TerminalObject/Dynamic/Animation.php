@@ -3,10 +3,11 @@
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\TerminalObject\Helper\Art;
+use League\CLImate\TerminalObject\Helper\StringLength;
 
 class Animation extends DynamicTerminalObject
 {
-    use Art;
+    use Art, StringLength;
 
     /**
      * The speed at which the animation should be run
@@ -34,7 +35,7 @@ class Animation extends DynamicTerminalObject
     public function speed($percentage)
     {
         if (is_numeric($percentage)) {
-            $this->speed = $percentage / 100;
+            $this->speed = 100 / $percentage;
         }
 
         return $this;
@@ -54,6 +55,102 @@ class Animation extends DynamicTerminalObject
     public function exitToBottom()
     {
         $this->fromStatic('leave', 'bottom');
+    }
+
+    public function exitToLeft()
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $this->maxStrLen($lines);
+        $lines  = $this->padArray($lines, $length);
+
+        $keyframes   = [];
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+
+        for ($i = $length; $i > 0; $i--) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = substr($line, -$i);
+            }
+
+            $keyframes[] = $current_frame;
+        }
+
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        $this->animate($keyframes);
+    }
+
+    public function exitToRight()
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $this->util->width();
+        $lines  = $this->padArray($lines, $length);
+
+        $keyframes   = [];
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+
+        for ($i = $length; $i > 0; $i--) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = str_repeat(' ', $length - $i) . substr($line, 0, $i);
+            }
+
+            $keyframes[] = $current_frame;
+        }
+
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        $this->animate($keyframes);
+    }
+
+    public function enterFromRight()
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $this->util->width();
+        $lines  = $this->padArray($lines, $length);
+
+        $keyframes   = [];
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+        $keyframes[] = $lines;
+
+        for ($i = $length; $i > 0; $i--) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = str_repeat(' ', $length - $i) . substr($line, 0, $i);
+            }
+
+            $keyframes[] = $current_frame;
+        }
+
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        $this->animate($keyframes);
+    }
+
+    public function enterFromLeft()
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $this->maxStrLen($lines);
+        $lines  = $this->padArray($lines, $length);
+
+        $keyframes   = [];
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        for ($i = 1; $i <= $length; $i++) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = substr($line, -$i);
+            }
+
+            $keyframes[] = $current_frame;
+        }
+
+        $this->animate($keyframes);
     }
 
     /**
