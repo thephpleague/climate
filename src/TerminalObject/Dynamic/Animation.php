@@ -27,11 +27,18 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
-     * @param \League\CLImate\TerminalObject\Helper\Sleeper $sleeper
+     * Run a basic animation
      */
-    protected function setSleeper($sleeper)
+    public function run()
     {
-        $this->sleeper = $sleeper ?: new Sleeper();
+        $files     = $this->artDir($this->art);
+        $animation = [];
+
+        foreach ($files as $file) {
+            $animation[] = $this->parse($file);
+        }
+
+        $this->animate($animation);
     }
 
     /**
@@ -58,115 +65,19 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
-     * Animate the art exiting to the bottom of the screen
-     */
-    public function exitToBottom()
-    {
-        $this->fromStatic('leave', 'bottom');
-    }
-
-    public function exitToLeft()
-    {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $this->maxStrLen($lines);
-        $lines  = $this->padArray($lines, $length);
-
-        $keyframes   = [];
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-
-        for ($i = $length; $i > 0; $i--) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = substr($line, -$i);
-            }
-
-            $keyframes[] = $current_frame;
-        }
-
-        $keyframes[] = array_fill(0, count($lines), '');
-
-        $this->animate($keyframes);
-    }
-
-    public function enterFromLeft()
-    {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $this->maxStrLen($lines);
-        $lines  = $this->padArray($lines, $length);
-
-        $keyframes   = [];
-        $keyframes[] = array_fill(0, count($lines), '');
-
-        for ($i = 1; $i <= $length; $i++) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = substr($line, -$i);
-            }
-
-            $keyframes[] = $current_frame;
-        }
-
-        $this->animate($keyframes);
-    }
-
-    public function exitToRight()
-    {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $this->util->width();
-        $lines  = $this->padArray($lines, $length);
-
-        $keyframes   = [];
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-
-        for ($i = $length; $i > 0; $i--) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = str_repeat(' ', $length - $i) . substr($line, 0, $i);
-            }
-
-            $keyframes[] = $current_frame;
-        }
-
-        $keyframes[] = array_fill(0, count($lines), '');
-
-        $this->animate($keyframes);
-    }
-
-    public function enterFromRight()
-    {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $this->util->width();
-        $lines  = $this->padArray($lines, $length);
-
-        $keyframes   = [];
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-
-        for ($i = $length; $i > 0; $i--) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = str_repeat(' ', $length - $i) . substr($line, 0, $i);
-            }
-
-            $keyframes[] = $current_frame;
-        }
-
-        $keyframes[] = array_fill(0, count($lines), '');
-
-        $this->animate($keyframes);
-    }
-
-    /**
      * Animate the art entering from the top of the screen
      */
     public function enterFromTop()
     {
         $this->fromStatic('enter', 'top');
+    }
+
+    /**
+     * Animate the art exiting to the bottom of the screen
+     */
+    public function exitToBottom()
+    {
+        $this->fromStatic('leave', 'bottom');
     }
 
     /**
@@ -177,21 +88,71 @@ class Animation extends DynamicTerminalObject
         $this->fromStatic('enter', 'bottom');
     }
 
-    /**
-     * Run a basic animation
-     */
-    public function run()
+    public function exitToLeft()
     {
-        $files = $this->artDir($this->art);
-        $files = array_reverse($files);
+        $this->animate($this->exitHorizontalKeyframes('left'));
+    }
 
-        $animation = [];
+    public function enterFromLeft()
+    {
+        $this->animate(array_reverse($this->exitHorizontalKeyframes('left')));
+    }
 
-        foreach ($files as $file) {
-            $animation[] = $this->parse($file);
+    public function exitToRight()
+    {
+        $this->animate($this->exitToRightKeyframes());
+    }
+
+    public function enterFromRight()
+    {
+        $this->animate(array_reverse($this->exitToRightKeyframes()));
+    }
+
+    /**
+     * @param \League\CLImate\TerminalObject\Helper\Sleeper $sleeper
+     */
+    protected function setSleeper($sleeper)
+    {
+        $this->sleeper = $sleeper ?: new Sleeper();
+    }
+
+    protected function exitToRightKeyframes()
+    {
+        return $this->exitHorizontalKeyframes('right', $this->util->width());
+    }
+
+    protected function exitHorizontalKeyframes($direction, $width = null)
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $width ?: $this->maxStrLen($lines);
+        $lines  = $this->padArray($lines, $length);
+
+        $line_method = 'exit' . ucwords($direction) . 'Line';
+
+        $keyframes = array_fill(0, 3, $lines);
+
+        for ($i = $length; $i > 0; $i--) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = $this->$line_method($line, $i, $length);
+            }
+
+            $keyframes[] = $current_frame;
         }
 
-        $this->animate($animation);
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        return $keyframes;
+    }
+
+    protected function exitLeftLine($line, $i, $length)
+    {
+        return substr($line, -$i);
+    }
+
+    protected function exitRightLine($line, $i, $length)
+    {
+        return str_repeat(' ', $length - $i) . substr($line, 0, $i);
     }
 
     /**
@@ -205,7 +166,7 @@ class Animation extends DynamicTerminalObject
         $lines       = $this->parse($this->artFile($this->art));
         $line_method = $this->getLineMethod($direction);
 
-        $keyframes = $this->$type($lines, count($lines), $line_method);
+        $keyframes   = $this->$type($lines, count($lines), $line_method);
 
         $this->animate($keyframes);
     }
@@ -221,7 +182,7 @@ class Animation extends DynamicTerminalObject
      */
     protected function enter($lines, $line_count, $line_method)
     {
-        $keyframes   = [array_fill(0, $line_count, '')];
+        $keyframes = [array_fill(0, $line_count, '')];
 
         for ($i = 1; $i < $line_count; $i++) {
             $keyframes[] = $this->$line_method($lines, $line_count, $i);
@@ -243,12 +204,7 @@ class Animation extends DynamicTerminalObject
      */
     protected function leave($lines, $line_count, $line_method)
     {
-        $keyframes = [];
-
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
-        $keyframes[] = $lines;
+        $keyframes = array_fill(0, 4, $lines);
 
         for ($i = $line_count - 1; $i >= 0; $i--) {
             $keyframes[] = $this->$line_method($lines, $line_count, $i);

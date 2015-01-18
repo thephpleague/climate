@@ -114,4 +114,9 @@ trait ExitToRightFrames {
         $this->shouldWrite("\e[m\r\e[K\e[0m", 5);
     }
 
+    protected function enterRightFrame1()
+    {
+        $this->shouldWrite("\e[m\e[0m", 6);
+    }
+
 }

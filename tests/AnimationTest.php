@@ -122,9 +122,12 @@ class AnimationTest extends TestBase
         $this->exitLeftFrame2();
         $this->exitLeftFrame1();
         $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4', $this->getSleeper(10))->enterFromLeft();
+        $this->cli->animation('4', $this->getSleeper(13))->enterFromLeft();
     }
 
     /** @test */
@@ -155,8 +158,7 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_enter_from_right()
     {
-
-        $this->exitRightFrameEnd9();
+        $this->enterRightFrame1();
         $this->exitRightFrameEnd8();
         $this->exitRightFrameEnd7();
         $this->exitRightFrameEnd6();
@@ -172,7 +174,7 @@ class AnimationTest extends TestBase
 
         $this->exitRightFrame(0);
         $this->exitRightFrame(0);
-        $this->fullArtExitRight();
+        $this->exitRightFrame(0);
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(84))->enterFromRight();
