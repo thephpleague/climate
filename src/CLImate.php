@@ -2,8 +2,9 @@
 
 namespace League\CLImate;
 
+use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
-use League\CLImate\Settings\Manager;
+use League\CLImate\Settings\Manager as SettingsManager;
 use League\CLImate\TerminalObject\Router\Router;
 use League\CLImate\Util\Output;
 use League\CLImate\Util\UtilFactory;
@@ -66,13 +67,16 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
- * @method mixed padding(integer $length = 0, string $char = '.'')
+ * @method mixed padding(integer $length = 0, string $char = '.')
  * @method mixed input(string $prompt, Reader $reader = null)
  * @method mixed confirm(string $prompt, Reader $reader = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
  *
  * @method \League\CLImate\CLImate addArt(string $dir)
+ *
+ * @method string description()
+ * @method string usage()
  */
 class CLImate
 {
@@ -98,6 +102,13 @@ class CLImate
     protected $settings;
 
     /**
+     * An instance of the Argument Manager class
+     *
+     * @var \League\CLImate\Argument\Manager $arguments
+     */
+    public $arguments;
+
+    /**
      * An instance of the Output class
      *
      * @var \League\CLImate\Util\Output $output
@@ -116,6 +127,7 @@ class CLImate
         $this->setStyle();
         $this->setRouter();
         $this->setSettingsManager();
+        $this->setArgumentManager();
         $this->setOutput();
         $this->setUtil();
     }
@@ -145,9 +157,19 @@ class CLImate
      *
      * @param \League\CLImate\Settings\Manager $manager
      */
-    public function setSettingsManager(Manager $manager = null)
+    public function setSettingsManager(SettingsManager $manager = null)
     {
-        $this->settings = $manager ?: new Manager();
+        $this->settings = $manager ?: new SettingsManager();
+    }
+
+    /**
+     * Set the arguments property
+     *
+     * @param \League\CLImate\Argument\Manager $manager
+     */
+    public function setArgumentManager(ArgumentManager $manager = null)
+    {
+        $this->arguments = $manager ?: new ArgumentManager();
     }
 
     /**
@@ -298,6 +320,14 @@ class CLImate
             }
         } elseif ($this->settings->exists($name)) {
             $this->settings->add($name, reset($arguments));
+        // Handle passthroughs to the arguments manager.
+        } elseif (in_array($name, ['description', 'usage'])) {
+            // The usage() method needs the CLImate object for output.
+            if ($name == 'usage') {
+                array_unshift($arguments, $this);
+            }
+
+            call_user_func_array([$this->arguments, $name], $arguments);
         } else {
             // If we can't find it at this point, let's fail gracefully
             $this->out(reset($arguments));
