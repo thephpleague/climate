@@ -152,4 +152,30 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(84))->exitToRight();
     }
 
+    /** @test */
+    public function it_can_enter_from_right()
+    {
+
+        $this->exitRightFrameEnd9();
+        $this->exitRightFrameEnd8();
+        $this->exitRightFrameEnd7();
+        $this->exitRightFrameEnd6();
+        $this->exitRightFrameEnd5();
+        $this->exitRightFrameEnd4();
+        $this->exitRightFrameEnd3();
+        $this->exitRightFrameEnd2();
+        $this->exitRightFrameEnd1();
+
+        for ($i = 71; $i >= 0; $i--) {
+            $this->exitRightFrame($i);
+        }
+
+        $this->exitRightFrame(0);
+        $this->exitRightFrame(0);
+        $this->fullArtExitRight();
+
+        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->animation('4', $this->getSleeper(84))->enterFromRight();
+    }
+
 }
