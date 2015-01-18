@@ -57,39 +57,23 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
-     * Animate the art exiting to the top of the screen
+     * Animate the art exiting the screen
+     *
+     * @param string $direction top|bottom|right|left
      */
     public function exitTo($direction)
     {
-        $this->animate($this->getDirectionKeyframes($direction));
+        $this->animate($this->exitKeyframes($direction));
     }
 
+    /**
+     * Animate the art entering the screen
+     *
+     * @param string $direction top|bottom|right|left
+     */
     public function enterFrom($direction)
     {
-        $this->animate(array_reverse($this->getDirectionKeyframes($direction)));
-    }
-
-    protected function getDirectionKeyframes($direction)
-    {
-        $direction_method = strtolower($direction) . 'Keyframes';
-
-        if (method_exists($this, $direction_method)) {
-            return $this->$direction_method();
-        }
-
-        $mapping = [
-            'exitHorizontalKeyframes' => ['left', 'right'],
-            'exitVerticalKeyFrames'   => ['top', 'bottom'],
-        ];
-
-        foreach ($mapping as $method => $directions) {
-            if (in_array($direction, $directions)) {
-                return $this->$method($direction);
-            }
-        }
-
-        // Fail gracefully, simply return an array
-        return [];
+        $this->animate(array_reverse($this->exitKeyframes($direction)));
     }
 
     /**
@@ -100,24 +84,68 @@ class Animation extends DynamicTerminalObject
         $this->sleeper = $sleeper ?: new Sleeper();
     }
 
-    protected function rightKeyframes()
-    {
-        return $this->exitHorizontalKeyframes('right', $this->util->width());
-    }
-
     protected function getLineMethod($direction)
     {
-        return 'exit' . ucwords(strtolower($direction)) . 'Line';
+        return 'current' . ucwords(strtolower($direction)) . 'Line';
     }
 
-    protected function exitHorizontalKeyframes($direction, $width = null)
+    protected function adjustLines($lines, $direction)
+    {
+        $adjust_method = 'adjust' . ucwords(strtolower($direction))  . 'Lines';
+
+        if (method_exists($this, $adjust_method)) {
+            return $this->$adjust_method($lines);
+        }
+
+        return $lines;
+    }
+
+    protected function adjustRightLines($lines)
+    {
+        return $this->padArray($lines, $this->util->width());
+    }
+
+    protected function adjustLeftLines($lines)
+    {
+        return $this->padArray($lines, $this->maxStrLen($lines));
+    }
+
+    protected function getDirectionKeyframes($direction, $lines, $line_method)
+    {
+        $mapping = [
+            'exitHorizontalKeyframes' => ['left', 'right'],
+            'exitVerticalKeyFrames'   => ['top', 'bottom'],
+        ];
+
+        foreach ($mapping as $method => $directions) {
+            if (in_array($direction, $directions)) {
+                return $this->$method($lines, $line_method);
+            }
+        }
+
+        // Fail gracefully, simply return an array
+        return [];
+    }
+
+    protected function exitKeyframes($direction)
     {
         $lines       = $this->parse($this->artFile($this->art));
-        $length      = $width ?: $this->maxStrLen($lines);
-        $lines       = $this->padArray($lines, $length);
+        $lines       = $this->adjustLines($lines, $direction);
         $line_method = $this->getLineMethod($direction);
 
+        $direction_keyframes = $this->getDirectionKeyframes($direction, $lines, $line_method);
+
         $keyframes   = array_fill(0, 4, $lines);
+        $keyframes   = array_merge($keyframes, $direction_keyframes);
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        return $keyframes;
+    }
+
+    protected function exitHorizontalKeyframes($lines, $line_method)
+    {
+        $keyframes = [];
+        $length    = strlen($lines[0]);
 
         for ($i = $length; $i > 0; $i--) {
             $current_frame = [];
@@ -128,34 +156,27 @@ class Animation extends DynamicTerminalObject
             $keyframes[] = $current_frame;
         }
 
-        $keyframes[] = array_fill(0, count($lines), '');
-
         return $keyframes;
     }
 
-    protected function exitVerticalKeyFrames($direction)
+    protected function exitVerticalKeyFrames($lines, $line_method)
     {
-        $lines       = $this->parse($this->artFile($this->art));
-        $line_count  = count($lines);
-        $line_method = $this->getLineMethod($direction);
-
-        $keyframes   = array_fill(0, 4, $lines);
+        $keyframes  = [];
+        $line_count = count($lines);
 
         for ($i = $line_count - 1; $i >= 0; $i--) {
             $keyframes[] = $this->$line_method($lines, $line_count, $i);
         }
 
-        $keyframes[] = array_fill(0, $line_count, '');
-
         return $keyframes;
     }
 
-    protected function exitLeftLine($line, $i, $length)
+    protected function currentLeftLine($line, $i, $length)
     {
         return substr($line, -$i);
     }
 
-    protected function exitRightLine($line, $i, $length)
+    protected function currentRightLine($line, $i, $length)
     {
         return str_repeat(' ', $length - $i) . substr($line, 0, $i);
     }
@@ -169,7 +190,7 @@ class Animation extends DynamicTerminalObject
      *
      * @return array
      */
-    protected function exitTopLine($lines, $total_lines, $current)
+    protected function currentTopLine($lines, $total_lines, $current)
     {
         $keyframe = array_slice($lines, -$current, $current);
 
@@ -185,7 +206,7 @@ class Animation extends DynamicTerminalObject
      *
      * @return array
      */
-    protected function exitBottomLine($lines, $total_lines, $current)
+    protected function currentBottomLine($lines, $total_lines, $current)
     {
         $keyframe = array_fill(0, $total_lines - $current, '');
 
