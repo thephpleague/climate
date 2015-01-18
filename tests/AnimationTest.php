@@ -39,7 +39,25 @@ class AnimationTest extends TestBase
         $this->exitTopFrame6();
         $this->exitTopFrame6();
 
-        $this->cli->animation('404', $this->getSleeper(11))->exitToTop();
+        $this->cli->animation('404', $this->getSleeper(11))->exitTo('top');
+    }
+
+    /** @test */
+    public function it_can_enter_from_top()
+    {
+        $this->emptyFrame();
+        $this->exitTopFrame6();
+        $this->exitTopFrame5();
+        $this->exitTopFrame4();
+        $this->exitTopFrame3();
+        $this->exitTopFrame2();
+        $this->exitTopFrame1();
+        $this->fullArtExitTopPlus();
+        $this->fullArtExitTopPlus();
+        $this->fullArtExitTopPlus();
+        $this->fullArtExitTopPlus();
+
+        $this->cli->animation('404', $this->getSleeper(11))->enterFrom('top');
     }
 
     /** @test */
@@ -57,41 +75,32 @@ class AnimationTest extends TestBase
         $this->exitBottomFrame6();
         $this->exitBottomFrame6();
 
-        $this->cli->animation('404', $this->getSleeper(11))->exitToBottom();
+        $this->cli->animation('404', $this->getSleeper(11))->exitTo('bottom');
     }
 
     /** @test */
     public function it_can_enter_from_bottom()
     {
         $this->emptyFrame();
+        $this->exitBottomFrame6();
         $this->exitBottomFrame5();
         $this->exitBottomFrame4();
         $this->exitBottomFrame3();
         $this->exitBottomFrame2();
         $this->exitBottomFrame1();
         $this->fullArtExitBottomPlus();
+        $this->fullArtExitBottomPlus();
+        $this->fullArtExitBottomPlus();
+        $this->fullArtExitBottomPlus();
 
-        $this->cli->animation('404', $this->getSleeper(7))->enterFromBottom();
-    }
-
-    /** @test */
-    public function it_can_enter_from_top()
-    {
-        $this->emptyFrame();
-        $this->exitTopFrame5();
-        $this->exitTopFrame4();
-        $this->exitTopFrame3();
-        $this->exitTopFrame2();
-        $this->exitTopFrame1();
-        $this->fullArtExitTopPlus();
-
-        $this->cli->animation('404', $this->getSleeper(7))->enterFromTop();
+        $this->cli->animation('404', $this->getSleeper(11))->enterFrom('bottom');
     }
 
     /** @test */
     public function it_can_exit_to_left()
     {
         $this->fullArtExitLeft();
+        $this->fullArtExitLeftPlus();
         $this->fullArtExitLeftPlus();
         $this->fullArtExitLeftPlus();
         $this->fullArtExitLeftPlus();
@@ -106,7 +115,7 @@ class AnimationTest extends TestBase
         $this->exitLeftFrame9();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4', $this->getSleeper(13))->exitToLeft();
+        $this->cli->animation('4', $this->getSleeper(14))->exitTo('left');
     }
 
     /** @test */
@@ -125,15 +134,17 @@ class AnimationTest extends TestBase
         $this->fullArtExitLeftPlus();
         $this->fullArtExitLeftPlus();
         $this->fullArtExitLeftPlus();
+        $this->fullArtExitLeftPlus();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4', $this->getSleeper(13))->enterFromLeft();
+        $this->cli->animation('4', $this->getSleeper(14))->enterFrom('left');
     }
 
     /** @test */
     public function it_can_exit_to_right()
     {
         $this->fullArtExitRight();
+        $this->exitRightFrame(0);
         $this->exitRightFrame(0);
         $this->exitRightFrame(0);
 
@@ -152,7 +163,7 @@ class AnimationTest extends TestBase
         $this->exitRightFrameEnd9();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4', $this->getSleeper(84))->exitToRight();
+        $this->cli->animation('4', $this->getSleeper(85))->exitTo('right');
     }
 
     /** @test */
@@ -175,9 +186,10 @@ class AnimationTest extends TestBase
         $this->exitRightFrame(0);
         $this->exitRightFrame(0);
         $this->exitRightFrame(0);
+        $this->exitRightFrame(0);
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4', $this->getSleeper(84))->enterFromRight();
+        $this->cli->animation('4', $this->getSleeper(85))->enterFrom('right');
     }
 
 }

@@ -59,53 +59,37 @@ class Animation extends DynamicTerminalObject
     /**
      * Animate the art exiting to the top of the screen
      */
-    public function exitToTop()
+    public function exitTo($direction)
     {
-        $this->fromStatic('leave', 'top');
+        $this->animate($this->getDirectionKeyframes($direction));
     }
 
-    /**
-     * Animate the art entering from the top of the screen
-     */
-    public function enterFromTop()
+    public function enterFrom($direction)
     {
-        $this->fromStatic('enter', 'top');
+        $this->animate(array_reverse($this->getDirectionKeyframes($direction)));
     }
 
-    /**
-     * Animate the art exiting to the bottom of the screen
-     */
-    public function exitToBottom()
+    protected function getDirectionKeyframes($direction)
     {
-        $this->fromStatic('leave', 'bottom');
-    }
+        $direction_method = strtolower($direction) . 'Keyframes';
 
-    /**
-     * Animate the art entering from the bottom of the screen
-     */
-    public function enterFromBottom()
-    {
-        $this->fromStatic('enter', 'bottom');
-    }
+        if (method_exists($this, $direction_method)) {
+            return $this->$direction_method();
+        }
 
-    public function exitToLeft()
-    {
-        $this->animate($this->exitHorizontalKeyframes('left'));
-    }
+        $mapping = [
+            'exitHorizontalKeyframes' => ['left', 'right'],
+            'exitVerticalKeyFrames'   => ['top', 'bottom'],
+        ];
 
-    public function enterFromLeft()
-    {
-        $this->animate(array_reverse($this->exitHorizontalKeyframes('left')));
-    }
+        foreach ($mapping as $method => $directions) {
+            if (in_array($direction, $directions)) {
+                return $this->$method($direction);
+            }
+        }
 
-    public function exitToRight()
-    {
-        $this->animate($this->exitToRightKeyframes());
-    }
-
-    public function enterFromRight()
-    {
-        $this->animate(array_reverse($this->exitToRightKeyframes()));
+        // Fail gracefully, simply return an array
+        return [];
     }
 
     /**
@@ -116,20 +100,24 @@ class Animation extends DynamicTerminalObject
         $this->sleeper = $sleeper ?: new Sleeper();
     }
 
-    protected function exitToRightKeyframes()
+    protected function rightKeyframes()
     {
         return $this->exitHorizontalKeyframes('right', $this->util->width());
     }
 
+    protected function getLineMethod($direction)
+    {
+        return 'exit' . ucwords(strtolower($direction)) . 'Line';
+    }
+
     protected function exitHorizontalKeyframes($direction, $width = null)
     {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $width ?: $this->maxStrLen($lines);
-        $lines  = $this->padArray($lines, $length);
+        $lines       = $this->parse($this->artFile($this->art));
+        $length      = $width ?: $this->maxStrLen($lines);
+        $lines       = $this->padArray($lines, $length);
+        $line_method = $this->getLineMethod($direction);
 
-        $line_method = 'exit' . ucwords($direction) . 'Line';
-
-        $keyframes = array_fill(0, 3, $lines);
+        $keyframes   = array_fill(0, 4, $lines);
 
         for ($i = $length; $i > 0; $i--) {
             $current_frame = [];
@@ -145,6 +133,23 @@ class Animation extends DynamicTerminalObject
         return $keyframes;
     }
 
+    protected function exitVerticalKeyFrames($direction)
+    {
+        $lines       = $this->parse($this->artFile($this->art));
+        $line_count  = count($lines);
+        $line_method = $this->getLineMethod($direction);
+
+        $keyframes   = array_fill(0, 4, $lines);
+
+        for ($i = $line_count - 1; $i >= 0; $i--) {
+            $keyframes[] = $this->$line_method($lines, $line_count, $i);
+        }
+
+        $keyframes[] = array_fill(0, $line_count, '');
+
+        return $keyframes;
+    }
+
     protected function exitLeftLine($line, $i, $length)
     {
         return substr($line, -$i);
@@ -156,83 +161,6 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
-     * Create an animation from static art
-     *
-     * @param string $type Accepts enter|leave
-     * @param string $direction Accepts top|bottom
-     */
-    protected function fromStatic($type, $direction)
-    {
-        $lines       = $this->parse($this->artFile($this->art));
-        $line_method = $this->getLineMethod($direction);
-
-        $keyframes   = $this->$type($lines, count($lines), $line_method);
-
-        $this->animate($keyframes);
-    }
-
-    /**
-     * Create the entrance animation
-     *
-     * @param array $lines
-     * @param integer $line_count
-     * @param string $line_method
-     *
-     * @return array
-     */
-    protected function enter($lines, $line_count, $line_method)
-    {
-        $keyframes = [array_fill(0, $line_count, '')];
-
-        for ($i = 1; $i < $line_count; $i++) {
-            $keyframes[] = $this->$line_method($lines, $line_count, $i);
-        }
-
-        $keyframes[] = $lines;
-
-        return $keyframes;
-    }
-
-    /**
-     * Create the exit animation
-     *
-     * @param array $lines
-     * @param integer $line_count
-     * @param string $line_method
-     *
-     * @return array
-     */
-    protected function leave($lines, $line_count, $line_method)
-    {
-        $keyframes = array_fill(0, 4, $lines);
-
-        for ($i = $line_count - 1; $i >= 0; $i--) {
-            $keyframes[] = $this->$line_method($lines, $line_count, $i);
-        }
-
-        $keyframes[] = array_fill(0, $line_count, '');
-
-        return $keyframes;
-    }
-
-    /**
-     * Retrieve the corresponding line helper method
-     *
-     * @param string $direction Accepts top|bottom
-     *
-     * @return string
-     */
-    protected function getLineMethod($direction)
-    {
-        $map = [
-            'bottom' => 'top',
-            'top'    => 'bottom',
-        ];
-
-        return 'get' . ucwords($map[$direction]) . 'Lines';
-    }
-
-    /**
      * Slice off X number of lines from the bottom and fill the rest with empty strings
      *
      * @param array $lines
@@ -241,7 +169,7 @@ class Animation extends DynamicTerminalObject
      *
      * @return array
      */
-    protected function getBottomLines($lines, $total_lines, $current)
+    protected function exitTopLine($lines, $total_lines, $current)
     {
         $keyframe = array_slice($lines, -$current, $current);
 
@@ -257,7 +185,7 @@ class Animation extends DynamicTerminalObject
      *
      * @return array
      */
-    protected function getTopLines($lines, $total_lines, $current)
+    protected function exitBottomLine($lines, $total_lines, $current)
     {
         $keyframe = array_fill(0, $total_lines - $current, '');
 
