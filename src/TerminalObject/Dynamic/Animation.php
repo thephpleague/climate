@@ -84,12 +84,26 @@ class Animation extends DynamicTerminalObject
         $this->sleeper = $sleeper ?: new Sleeper();
     }
 
+    /**
+     * Get the line parser for the direction
+     *
+     * @param string $direction
+     * @return string
+     */
     protected function getLineMethod($direction)
     {
         return 'current' . ucwords(strtolower($direction)) . 'Line';
     }
 
-    protected function adjustLines($lines, $direction)
+    /**
+     * Adjust the array of lines if necessary
+     *
+     * @param array $lines
+     * @param string $direction
+     *
+     * @return array
+     */
+    protected function adjustLines(array $lines, $direction)
     {
         $adjust_method = 'adjust' . ucwords(strtolower($direction))  . 'Lines';
 
@@ -100,17 +114,38 @@ class Animation extends DynamicTerminalObject
         return $lines;
     }
 
-    protected function adjustRightLines($lines)
+    /**
+     * Pad the array of lines for "right" animation
+     *
+     * @param array $lines
+     * @return array
+     */
+    protected function adjustRightLines(array $lines)
     {
         return $this->padArray($lines, $this->util->width());
     }
 
-    protected function adjustLeftLines($lines)
+    /**
+     * Pad the array of lines for "left" animation
+     *
+     * @param array $lines
+     * @return array
+     */
+    protected function adjustLeftLines(array $lines)
     {
         return $this->padArray($lines, $this->maxStrLen($lines));
     }
 
-    protected function getDirectionKeyframes($direction, $lines, $line_method)
+    /**
+     * Get the keyframes appropriate for the animation direction
+     *
+     * @param string $direction
+     * @param array $lines
+     * @param string $line_method
+     *
+     * @return array
+     */
+    protected function getDirectionKeyframes($direction, array $lines, $line_method)
     {
         $mapping = [
             'exitHorizontalKeyframes' => ['left', 'right'],
@@ -127,6 +162,13 @@ class Animation extends DynamicTerminalObject
         return [];
     }
 
+    /**
+     * Get the exit keyframes for the desired directino
+     *
+     * @param string $direction
+     *
+     * @return array
+     */
     protected function exitKeyframes($direction)
     {
         $lines       = $this->parse($this->artFile($this->art));
