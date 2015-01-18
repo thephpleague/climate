@@ -177,7 +177,7 @@ class CLImate
      */
     public function forceAnsiOn()
     {
-        $this->util->system->forceAnsiOn();
+        $this->util->system->forceAnsi();
 
         return $this;
     }
@@ -189,7 +189,7 @@ class CLImate
      */
     public function forceAnsiOff()
     {
-        $this->util->system->forceAnsiOff();
+        $this->util->system->forceAnsi(false);
 
         return $this;
     }

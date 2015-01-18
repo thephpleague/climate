@@ -6,14 +6,14 @@ abstract class System
 {
     protected $force_ansi;
 
-    public function forceAnsiOn()
+    /**
+     * Force ansi on or off
+     *
+     * @param bool $force
+     */
+    public function forceAnsi($force = true)
     {
-        $this->force_ansi = true;
-    }
-
-    public function forceAnsiOff()
-    {
-        $this->force_ansi = false;
+        $this->force_ansi = $force;
     }
 
     /**
