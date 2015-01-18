@@ -59,7 +59,7 @@ class Animation extends DynamicTerminalObject
     /**
      * Scroll the art
      *
-     * @param string $direction
+     * @param string $direction up|down|right|left
      */
     public function scroll($direction = 'right')
     {
@@ -68,6 +68,8 @@ class Animation extends DynamicTerminalObject
             'right'  => 'left',
             'top'    => 'bottom',
             'bottom' => 'top',
+            'up'     => 'bottom',
+            'down'   => 'top',
         ];
 
         if (!array_key_exists($direction, $mapping)) {
@@ -75,7 +77,7 @@ class Animation extends DynamicTerminalObject
         }
 
         $keyframes   = $this->enterKeyframes($mapping[$direction]);
-        $keyframes   = array_merge($keyframes, $this->exitKeyframes($direction));
+        $keyframes   = array_merge($keyframes, $this->exitKeyframes($mapping[$mapping[$direction]]));
         $keyframes   = array_unique($keyframes, SORT_REGULAR);
         $keyframes[] = reset($keyframes);
 
