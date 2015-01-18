@@ -19,7 +19,7 @@ class Sleeper
      */
     public function speed($percentage)
     {
-        if (is_numeric($percentage)) {
+        if (is_numeric($percentage) && $percentage > 0) {
             $this->speed *= (100 / $percentage);
         }
 
