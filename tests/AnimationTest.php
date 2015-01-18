@@ -15,8 +15,15 @@ class AnimationTest extends TestBase
         $this->shouldWrite("\e[m\e[0m", 6);
     }
 
-    /** @test */
+    protected function getSleeper($count)
+    {
+        $sleeper = Mockery::mock('League\CLImate\TerminalObject\Helper\Sleeper');
+        $sleeper->shouldReceive('sleep')->times($count);
 
+        return $sleeper;
+    }
+
+    /** @test */
     public function it_can_exit_to_top()
     {
         $this->fullArtExitTop();
@@ -31,11 +38,10 @@ class AnimationTest extends TestBase
         $this->exitTopFrame6();
         $this->exitTopFrame6();
 
-        $this->cli->animation('404')->exitToTop();
+        $this->cli->animation('404', $this->getSleeper(11))->exitToTop();
     }
 
     /** @test */
-
     public function it_can_exit_to_bottom()
     {
         $this->fullArtExitBottom();
@@ -50,11 +56,10 @@ class AnimationTest extends TestBase
         $this->exitBottomFrame6();
         $this->exitBottomFrame6();
 
-        $this->cli->animation('404')->exitToBottom();
+        $this->cli->animation('404', $this->getSleeper(11))->exitToBottom();
     }
 
     /** @test */
-
     public function it_can_enter_from_bottom()
     {
         $this->emptyFrame();
@@ -65,11 +70,10 @@ class AnimationTest extends TestBase
         $this->exitBottomFrame1();
         $this->fullArtExitBottomPlus();
 
-        $this->cli->animation('404')->enterFromBottom();
+        $this->cli->animation('404', $this->getSleeper(7))->enterFromBottom();
     }
 
     /** @test */
-
     public function it_can_enter_from_top()
     {
         $this->emptyFrame();
@@ -80,11 +84,10 @@ class AnimationTest extends TestBase
         $this->exitTopFrame1();
         $this->fullArtExitTopPlus();
 
-        $this->cli->animation('404')->enterFromTop();
+        $this->cli->animation('404', $this->getSleeper(7))->enterFromTop();
     }
 
     /** @test */
-
     public function it_can_exit_to_left()
     {
         $this->fullArtExitLeft();
@@ -102,11 +105,10 @@ class AnimationTest extends TestBase
         $this->exitLeftFrame9();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4')->exitToLeft();
+        $this->cli->animation('4', $this->getSleeper(13))->exitToLeft();
     }
 
     /** @test */
-
     public function it_can_enter_from_left()
     {
         $this->emptyFrame();
@@ -121,7 +123,7 @@ class AnimationTest extends TestBase
         $this->fullArtExitLeftPlus();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('4')->enterFromLeft();
+        $this->cli->animation('4', $this->getSleeper(10))->enterFromLeft();
     }
 
 }

@@ -4,39 +4,47 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\TerminalObject\Helper\Art;
 use League\CLImate\TerminalObject\Helper\StringLength;
+use League\CLImate\TerminalObject\Helper\Sleeper;
 
 class Animation extends DynamicTerminalObject
 {
     use Art, StringLength;
 
     /**
-     * The speed at which the animation should be run
-     *
-     * @var integer $speed
+     * @var \League\CLImate\TerminalObject\Helper\Sleeper $sleeper
      */
-    protected $speed = 1;
+    protected $sleeper;
 
-    public function __construct($art)
+    public function __construct($art, Sleeper $sleeper = null)
     {
         // Add the default art directory
         $this->addDir(__DIR__ . '/../../ASCII');
         $this->addDir(__DIR__ . '/../../ASCII/animations');
 
+        $this->setSleeper($sleeper);
+
         $this->art = $art;
     }
 
     /**
-     * Assign the speed of the animation
+     * @param \League\CLImate\TerminalObject\Helper\Sleeper $sleeper
+     */
+    protected function setSleeper($sleeper)
+    {
+        $this->sleeper = $sleeper ?: new Sleeper();
+    }
+
+    /**
+     * Set the speed of the animation based on a percentage
+     * (50% slower, 200% faster, etc)
      *
-     * @param integer $percentage
+     * @param int|float $percentage
      *
      * @return \League\CLImate\TerminalObject\Dynamic\Animation
      */
     public function speed($percentage)
     {
-        if (is_numeric($percentage)) {
-            $this->speed = 100 / $percentage;
-        }
+        $this->sleeper->speed($percentage);
 
         return $this;
     }
@@ -78,6 +86,27 @@ class Animation extends DynamicTerminalObject
         }
 
         $keyframes[] = array_fill(0, count($lines), '');
+
+        $this->animate($keyframes);
+    }
+
+    public function enterFromLeft()
+    {
+        $lines  = $this->parse($this->artFile($this->art));
+        $length = $this->maxStrLen($lines);
+        $lines  = $this->padArray($lines, $length);
+
+        $keyframes   = [];
+        $keyframes[] = array_fill(0, count($lines), '');
+
+        for ($i = 1; $i <= $length; $i++) {
+            $current_frame = [];
+            foreach ($lines as $line) {
+                $current_frame[] = substr($line, -$i);
+            }
+
+            $keyframes[] = $current_frame;
+        }
 
         $this->animate($keyframes);
     }
@@ -128,27 +157,6 @@ class Animation extends DynamicTerminalObject
         }
 
         $keyframes[] = array_fill(0, count($lines), '');
-
-        $this->animate($keyframes);
-    }
-
-    public function enterFromLeft()
-    {
-        $lines  = $this->parse($this->artFile($this->art));
-        $length = $this->maxStrLen($lines);
-        $lines  = $this->padArray($lines, $length);
-
-        $keyframes   = [];
-        $keyframes[] = array_fill(0, count($lines), '');
-
-        for ($i = 1; $i <= $length; $i++) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = substr($line, -$i);
-            }
-
-            $keyframes[] = $current_frame;
-        }
 
         $this->animate($keyframes);
     }
@@ -311,7 +319,7 @@ class Animation extends DynamicTerminalObject
 
         foreach ($keyframes as $lines) {
             $this->writeKeyFrame($lines, $count);
-            $this->sleep();
+            $this->sleeper->sleep();
             $count = count($lines);
         }
     }
@@ -359,14 +367,6 @@ class Animation extends DynamicTerminalObject
         $content .= $line;
 
         return $content;
-    }
-
-    /**
-     * Sleep between frames to create the animation effect
-     */
-    protected function sleep()
-    {
-        usleep(50000 * $this->speed);
     }
 
 }
