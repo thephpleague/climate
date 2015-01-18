@@ -57,6 +57,32 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
+     * Scroll the art
+     *
+     * @param string $direction
+     */
+    public function scroll($direction = 'right')
+    {
+        $mapping = [
+            'left'   => 'right',
+            'right'  => 'left',
+            'top'    => 'bottom',
+            'bottom' => 'top',
+        ];
+
+        if (!array_key_exists($direction, $mapping)) {
+            return false;
+        }
+
+        $keyframes   = $this->enterKeyframes($mapping[$direction]);
+        $keyframes   = array_merge($keyframes, $this->exitKeyframes($direction));
+        $keyframes   = array_unique($keyframes, SORT_REGULAR);
+        $keyframes[] = reset($keyframes);
+
+        $this->animate($keyframes);
+    }
+
+    /**
      * Animate the art exiting the screen
      *
      * @param string $direction top|bottom|right|left
@@ -73,7 +99,7 @@ class Animation extends DynamicTerminalObject
      */
     public function enterFrom($direction)
     {
-        $this->animate(array_reverse($this->exitKeyframes($direction)));
+        $this->animate($this->enterKeyframes($direction));
     }
 
     /**
@@ -163,7 +189,19 @@ class Animation extends DynamicTerminalObject
     }
 
     /**
-     * Get the exit keyframes for the desired directino
+     * Get the enter keyframes for the desired direction
+     *
+     * @param string $direction
+     *
+     * @return array
+     */
+    protected function enterKeyframes($direction)
+    {
+        return array_reverse($this->exitKeyframes($direction));
+    }
+
+    /**
+     * Get the exit keyframes for the desired direction
      *
      * @param string $direction
      *
@@ -184,7 +222,15 @@ class Animation extends DynamicTerminalObject
         return $keyframes;
     }
 
-    protected function exitHorizontalKeyframes($lines, $line_method)
+    /**
+     * Create horizontal exit animation keyframes for the art
+     *
+     * @param array $lines
+     * @param string $line_method
+     *
+     * @return array
+     */
+    protected function exitHorizontalKeyframes(array $lines, $line_method)
     {
         $keyframes = [];
         $length    = strlen($lines[0]);
@@ -201,7 +247,15 @@ class Animation extends DynamicTerminalObject
         return $keyframes;
     }
 
-    protected function exitVerticalKeyFrames($lines, $line_method)
+    /**
+     * Create vertical exit animation keyframes for the art
+     *
+     * @param array $lines
+     * @param string $line_method
+     *
+     * @return array
+     */
+    protected function exitVerticalKeyFrames(array $lines, $line_method)
     {
         $keyframes  = [];
         $line_count = count($lines);
@@ -213,14 +267,33 @@ class Animation extends DynamicTerminalObject
         return $keyframes;
     }
 
-    protected function currentLeftLine($line, $i, $length)
+    /**
+     * Get the current line as it is exiting left
+     *
+     * @param string $line
+     * @param int $frame_number
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function currentLeftLine($line, $frame_number, $length)
     {
-        return substr($line, -$i);
+        return substr($line, -$frame_number);
     }
 
-    protected function currentRightLine($line, $i, $length)
+
+    /**
+     * Get the current line as it is exiting right
+     *
+     * @param string $line
+     * @param int $frame_number
+     * @param int $length
+     *
+     * @return string
+     */
+    protected function currentRightLine($line, $frame_number, $length)
     {
-        return str_repeat(' ', $length - $i) . substr($line, 0, $i);
+        return str_repeat(' ', $length - $frame_number) . substr($line, 0, $frame_number);
     }
 
     /**
