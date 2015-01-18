@@ -171,6 +171,30 @@ class CLImate
     }
 
     /**
+     * Force ansi support on
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function forceAnsiOn()
+    {
+        $this->util->system->forceAnsiOn();
+
+        return $this;
+    }
+
+    /**
+     * Force ansi support off
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function forceAnsiOff()
+    {
+        $this->util->system->forceAnsiOff();
+
+        return $this;
+    }
+
+    /**
      * Check if we have valid output
      *
      * @param  mixed   $output

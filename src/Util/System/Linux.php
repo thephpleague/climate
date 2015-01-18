@@ -43,8 +43,7 @@ class Linux extends System
      *
      * @return bool
      */
-
-    public function hasAnsiSupport()
+    protected function systemHasAnsiSupport()
     {
         return (function_exists('posix_isatty') && @posix_isatty(STDOUT));
     }
