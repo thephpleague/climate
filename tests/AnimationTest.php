@@ -4,11 +4,12 @@ require_once 'TestBase.php';
 require_once 'Animation/ExitToTopFrames.php';
 require_once 'Animation/ExitToBottomFrames.php';
 require_once 'Animation/ExitToLeftFrames.php';
+require_once 'Animation/ExitToRightFrames.php';
 
 class AnimationTest extends TestBase
 {
 
-    use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames;
+    use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames, ExitToRightFrames;
 
     protected function emptyFrame()
     {
@@ -124,6 +125,31 @@ class AnimationTest extends TestBase
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(10))->enterFromLeft();
+    }
+
+    /** @test */
+    public function it_can_exit_to_right()
+    {
+        $this->fullArtExitRight();
+        $this->exitRightFrame(0);
+        $this->exitRightFrame(0);
+
+        for ($i = 0; $i <= 71; $i++) {
+            $this->exitRightFrame($i);
+        }
+
+        $this->exitRightFrameEnd1();
+        $this->exitRightFrameEnd2();
+        $this->exitRightFrameEnd3();
+        $this->exitRightFrameEnd4();
+        $this->exitRightFrameEnd5();
+        $this->exitRightFrameEnd6();
+        $this->exitRightFrameEnd7();
+        $this->exitRightFrameEnd8();
+        $this->exitRightFrameEnd9();
+
+        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->animation('4', $this->getSleeper(84))->exitToRight();
     }
 
 }

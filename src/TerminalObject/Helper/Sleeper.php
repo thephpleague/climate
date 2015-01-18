@@ -15,6 +15,7 @@ class Sleeper
      * Set the speed based on a percentage (50% slower, 200% faster, etc)
      *
      * @param int|float $percentage
+     *
      * @return float
      */
     public function speed($percentage)
