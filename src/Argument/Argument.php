@@ -434,6 +434,6 @@ class Argument
             $compareBBy = $b->prefix();
         }
 
-        return ($compareABy < $compareBBy) ? -1 : 1;
+        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
     }
 }
