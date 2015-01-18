@@ -19,7 +19,6 @@ class Animation extends DynamicTerminalObject
     {
         // Add the default art directory
         $this->addDir(__DIR__ . '/../../ASCII');
-        $this->addDir(__DIR__ . '/../../ASCII/animations');
 
         $this->setSleeper($sleeper);
 
