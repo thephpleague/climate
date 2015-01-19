@@ -237,15 +237,31 @@ class Animation extends DynamicTerminalObject
         $length    = strlen($lines[0]);
 
         for ($i = $length; $i > 0; $i--) {
-            $current_frame = [];
-            foreach ($lines as $line) {
-                $current_frame[] = $this->$line_method($line, $i, $length);
-            }
-
-            $keyframes[] = $current_frame;
+            $keyframes[] = $this->getHorizontalKeyframe($lines, $i, $line_method, $length);
         }
 
         return $keyframes;
+    }
+
+    /**
+     * Get the keyframe for a horizontal animation
+     *
+     * @param array $lines
+     * @param int $frame_number
+     * @param string $line_method
+     * @param int $length
+     *
+     * @return array
+     */
+    protected function getHorizontalKeyframe(array $lines, $frame_number, $line_method, $length)
+    {
+        $keyframe = [];
+
+        foreach ($lines as $line) {
+            $keyframe[] = $this->$line_method($line, $frame_number, $length);
+        }
+
+        return $keyframe;
     }
 
     /**
