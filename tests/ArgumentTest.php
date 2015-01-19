@@ -20,7 +20,7 @@ class ArgumentTest extends TestBase
     }
 
     /** @test */
-    public function it_throws_an_exception_when_building_Arguments_from_an_unknown_type()
+    public function it_throws_an_exception_when_building_arguments_from_an_unknown_type()
     {
         $this->setExpectedException(
             'Exception',
@@ -93,15 +93,16 @@ class ArgumentTest extends TestBase
         $this->shouldWrite("\e[mTest Description\e[0m");
         $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mUsage: test-script [-b both-prefixes, --both both-prefixes] [-d, --defined] [--long only-long-prefix] [-r required] [-s only-short-prefix] [-v default-value (default: test)] [no-prefix]\e[0m");
-        $this->shouldWrite("\e[m\e[0m");
 
+        $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mRequired Arguments:\e[0m");
+
         $this->shouldWrite("\e[m\t\e[0m");
         $this->shouldWrite("\e[m-r required\e[0m");
         $this->shouldWrite("\e[m\t\t\e[0m");
         $this->shouldWrite("\e[mRequired\e[0m");
-        $this->shouldWrite("\e[m\e[0m");
 
+        $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mOptional Arguments:\e[0m");
 
         $this->shouldWrite("\e[m\t\e[0m");
@@ -209,7 +210,7 @@ class ArgumentTest extends TestBase
     }
 
     /** @test */
-    public function it_throws_an_exception_when_require_arguments_are_not_defined()
+    public function it_throws_an_exception_when_required_arguments_are_not_defined()
     {
         $this->setExpectedException(
             'Exception',

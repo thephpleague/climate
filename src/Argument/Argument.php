@@ -95,8 +95,7 @@ class Argument
         $definedOnly = false,
         $castTo = 'string',
         $defaultValue = null
-    )
-    {
+    ) {
         $this->setName($name);
         $this->setPrefix($prefix);
         $this->setLongPrefix($longPrefix);
@@ -227,7 +226,7 @@ class Argument
     }
 
     /**
-     * Determine whether or not an argument is required or not.
+     * Determine whether or not an argument is required.
      *
      * @return bool
      */
@@ -360,7 +359,7 @@ class Argument
      * Build an argument's summary for use in a usage statement.
      *
      * For example, "-u username, --user username", "--force", or
-     * "-c count = 7".
+     * "-c count (default: 7)".
      *
      * @return string
      */
@@ -409,6 +408,7 @@ class Argument
     /**
      * Compare two arguments by their short and long prefixes.
      *
+     * @see usort()
      * @param Argument $a
      * @param Argument $b
      * @return int
