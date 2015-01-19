@@ -90,7 +90,7 @@ class Manager
     }
 
     /**
-     * Determine if an argument has ben defined on the command line.
+     * Determine if an argument has been defined on the command line.
      *
      * This can be useful for making sure an argument is present on the command
      * line before parse()'ing them into argument objects.
@@ -265,7 +265,7 @@ class Manager
 
             // Look for the argument in our defined $arguments and assign their
             // value.
-            foreach ($this->all() as $argument) {
+            foreach ($this->findWithPrefix() as $argument) {
                 if (in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
                     // Arguments are given the value true if they only need to
                     // be defined on the command line to be set.
@@ -294,9 +294,9 @@ class Manager
      */
     protected function parseNonPrefixedArguments(array $argv = null)
     {
-        // Parse all non prefixed argument next. Assume that all command line
-        // arguments that weren't assigned to prefixed arguments belong to
-        // non-prefixed arguments, in the order they were defined upstream.
+        // Assume that all command line arguments that weren't assigned to
+        // prefixed arguments belong to non-prefixed arguments, in the order
+        // they were defined upstream.
         //
         // Determine which command line arguments weren't set.
         $commandArguments = $this->getCommandAndArguments($argv)['arguments'];
@@ -343,6 +343,7 @@ class Manager
      * If $required is false then retrieve optional arguments instead.
      *
      * @param bool $required
+     * @param bool $hasPrefix
      * @return Argument[]
      */
     protected function findRequired($required = true, $hasPrefix = true)
@@ -351,11 +352,8 @@ class Manager
 
         foreach ($this->all() as $argument) {
             if (
-                (
-                    ($required && $argument->isRequired()) || (!$required && !$argument->isRequired())
-                ) && (
-                    ($hasPrefix && $argument->hasPrefix()) || (!$hasPrefix && !$argument->hasPrefix())
-                )
+                (($required && $argument->isRequired()) || (!$required && !$argument->isRequired()))
+                && (($hasPrefix && $argument->hasPrefix()) || (!$hasPrefix && !$argument->hasPrefix()))
             ) {
                 $arguments[] = $argument;
             }
