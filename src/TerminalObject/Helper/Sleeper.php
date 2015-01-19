@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Helper;
 
-class Sleeper
+class Sleeper implements SleeperInterface
 {
     /**
      * The default length of the sleep

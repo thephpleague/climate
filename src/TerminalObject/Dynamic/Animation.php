@@ -106,7 +106,7 @@ class Animation extends DynamicTerminalObject
     /**
      * @param \League\CLImate\TerminalObject\Helper\Sleeper $sleeper
      */
-    protected function setSleeper($sleeper)
+    protected function setSleeper($sleeper = null)
     {
         $this->sleeper = $sleeper ?: new Sleeper();
     }
