@@ -154,7 +154,7 @@ class Manager
      * @param CLImate $climate
      * @param array $argv
      */
-    public function usage(CLImate $climate = null, array $argv = null)
+    public function usage(CLImate $climate, array $argv = null)
     {
         $command = $this->getCommandAndArguments($argv)['command'];
         $required = $this->findRequired();
@@ -162,24 +162,17 @@ class Manager
         $withPrefix = $this->findWithPrefix();
         $withoutPrefix = $this->findWithPrefix(false);
 
-        // Build an argument summary for the usage statement.
-        $argumentSummary = [];
-
-        // Print the arguments without prefixes at the end of the usage
-        // statement.
-        foreach (array_merge($withPrefix, $withoutPrefix) as $argument) {
-            /** @var Argument $argument */
-            $argumentSummary[] = "[{$argument->buildSummary()}]";
-        }
-
         // Print the description if it's defined.
         if ($this->description) {
             $climate->out($this->description);
             $climate->br();
         }
 
-        // Print the usage statement.
-        $climate->out("Usage: {$command} " . implode(' ', $argumentSummary));
+        // Print the usage statement with the arguments without a prefix at the
+        // end.
+        $climate->out(
+            "Usage: {$command} " . $this->buildShortSummary(array_merge($withPrefix, $withoutPrefix))
+        );
 
         // Print required argument details.
         if (count($required) > 0) {
@@ -218,22 +211,36 @@ class Manager
      */
     public function parse(array $argv = null)
     {
-        $this->parsePrefixedArguments($argv);
-        $this->parseNonPrefixedArguments($argv);
+        $cliArguments = $this->getCommandAndArguments($argv)['arguments'];
+        $unParsedArguments = $this->parsePrefixedArguments($cliArguments);
+        $this->parseNonPrefixedArguments($unParsedArguments);
 
         // After parsing find out which arguments were required but not defined
         // on the command line.
         $missingArguments = $this->findMissing();
 
         if (count($missingArguments) > 0) {
-            $arguments = [];
-
-            foreach ($missingArguments as $argument) {
-                $arguments[] = "[{$argument->buildSummary()}]";
-            }
-
-            throw new \Exception('The following arguments are required: ' . implode(', ', $arguments) . '.');
+            throw new \Exception(
+                'The following arguments are required: ' . $this->buildShortSummary($missingArguments) . '.'
+            );
         }
+    }
+
+    /**
+     * Build a short summary of a list of arguments.
+     *
+     * @param Argument[] $arguments
+     * @return string
+     */
+    protected function buildShortSummary(array $arguments = [])
+    {
+        $summaries = [];
+
+        foreach ($arguments as $argument) {
+            $summaries[] = "[{$argument->buildSummary()}]";
+        }
+
+        return implode(' ', $summaries);
     }
 
     /**
@@ -242,97 +249,67 @@ class Manager
      * Prefixed arguments are arguments with a prefix (-) or a long prefix (--)
      * on the command line.
      *
+     * Return the arguments passed on the command line that didn't match up with
+     * prefixed arguments so they can be assigned to non-prefixed arguments.
+     *
      * @param array $argv
+     * @return array
      */
-    protected function parsePrefixedArguments(array $argv = null)
+    protected function parsePrefixedArguments(array $argv = [])
     {
-        $commandArguments = $this->getCommandAndArguments($argv)['arguments'];
-
-        foreach ($commandArguments as $commandArgument) {
+        foreach ($argv as $key => $cliArgument) {
             // Look for arguments defined in the "key=value" format.
-            if (strpos($commandArgument, '=') !== false) {
-                list ($name, $value) = explode('=', $commandArgument, 2);
+            if (strpos($cliArgument, '=') !== false) {
+                list ($name, $value) = explode('=', $cliArgument, 2);
 
                 // If the argument isn't in "key=value" format then assume it's in
                 // "key value" format and define the value after we've found the
                 // matching CLImate argument.
             } else {
-                $name = $commandArgument;
+                $name = $cliArgument;
                 $value = null;
             }
-
-            array_shift($commandArguments);
 
             // Look for the argument in our defined $arguments and assign their
             // value.
             foreach ($this->findWithPrefix() as $argument) {
                 if (in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
+                    // We found an argument key, so take it out of the array.
+                    unset($argv[$key]);
+
                     // Arguments are given the value true if they only need to
                     // be defined on the command line to be set.
                     if ($argument->definedOnly()) {
                         $value = true;
-
+                    } elseif (is_null($value)) {
                         // If the value wasn't previously defined in "key=value"
                         // format then define it from the next command argument.
-                    } elseif (is_null($value)) {
-                        $value = $commandArguments[0];
+                        $value = $argv[$key + 1];
+                        unset($argv[$key + 1]);
                     }
 
                     $argument->setValue($value);
                 }
             }
         }
+
+        // Send un-parsed arguments back upstream.
+        return array_values($argv);
     }
 
     /**
-     * Parse command line options into non-prefixed CLImate arguments.
+     * Parse unset command line options into non-prefixed CLImate arguments.
      *
      * Non-prefixed arguments are parsed after the prefixed arguments on the
      * command line, in the order that they're defined in the script.
      *
-     * @param array $argv
+     * @param array $unParsedArguments
      */
-    protected function parseNonPrefixedArguments(array $argv = null)
+    protected function parseNonPrefixedArguments(array $unParsedArguments = [])
     {
-        // Assume that all command line arguments that weren't assigned to
-        // prefixed arguments belong to non-prefixed arguments, in the order
-        // they were defined upstream.
-        //
-        // Determine which command line arguments weren't set.
-        $commandArguments = $this->getCommandAndArguments($argv)['arguments'];
-
-        foreach ($commandArguments as $key => $commandArgument) {
-            foreach ($this->findWithPrefix() as $argument) {
-                // Build different combinations of argument key and value to
-                // search for the CLI argument in.
-                $searchIn = [
-                    $argument->value(),
-                ];
-
-                if ($argument->prefix()) {
-                    $searchIn[] = "-{$argument->prefix()}";
-                    $searchIn[] = "-{$argument->prefix()}={$argument->value()}";
-                }
-
-                if ($argument->longPrefix()) {
-                    $searchIn[] = "--{$argument->longPrefix()}";
-                    $searchIn[] = "--{$argument->longPrefix()}={$argument->value()}";
-                }
-
-                if (in_array($commandArgument, $searchIn, true)) {
-                    unset($commandArguments[$key]);
-                    continue;
-                }
-            }
-        }
-
-        $unassignedCommandArguments = array_values($commandArguments);
-
-        // Assign unset command line arguments to non-prefixed CLImate
-        // arguments.
         foreach ($this->findWithPrefix(false) as $key => $argument) {
-            if (isset($unassignedCommandArguments[$key])) {
-                $argument->setValue($unassignedCommandArguments[$key]);
+            if (isset($unParsedArguments[$key])) {
+                $argument->setValue($unParsedArguments[$key]);
             }
         }
     }

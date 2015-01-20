@@ -195,7 +195,20 @@ class ArgumentTest extends TestBase
             ],
         ]);
 
-        $argv = ['test-script', '-s', 'foo', '--long', 'bar', '-b=both', '-d', '--both-equals=both_equals', 'no_prefix_value'];
+        $argv = [
+            'test-script',
+            '-s',
+            'foo',
+            '--long',
+            'bar',
+            '-b=both',
+            '-d',
+            '--both-equals=both_equals',
+            'no_prefix_value',
+            '-unknown',
+            'after_non_prefixed'
+        ];
+
         $this->cli->arguments->parse($argv);
         $processed = $this->cli->arguments->toArray();
 
@@ -214,7 +227,7 @@ class ArgumentTest extends TestBase
     {
         $this->setExpectedException(
             'Exception',
-            'The following arguments are required: [-r required-value], [-r1 required-value-1].'
+            'The following arguments are required: [-r required-value] [-r1 required-value-1].'
         );
 
         $this->cli->arguments->add([
