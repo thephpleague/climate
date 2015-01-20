@@ -70,6 +70,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed padding(integer $length = 0, string $char = '.')
  * @method mixed input(string $prompt, Reader $reader = null)
  * @method mixed confirm(string $prompt, Reader $reader = null)
+ * @method mixed animation(string $art, Sleeper $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
  *
@@ -190,6 +191,30 @@ class CLImate
     public function setUtil(UtilFactory $util = null)
     {
         $this->util = $util ?: new UtilFactory();
+    }
+
+    /**
+     * Force ansi support on
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function forceAnsiOn()
+    {
+        $this->util->system->forceAnsi();
+
+        return $this;
+    }
+
+    /**
+     * Force ansi support off
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function forceAnsiOff()
+    {
+        $this->util->system->forceAnsi(false);
+
+        return $this;
     }
 
     /**

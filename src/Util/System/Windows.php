@@ -67,8 +67,7 @@ class Windows extends System
      *
      * @return bool
      */
-
-    public function hasAnsiSupport()
+    protected function systemHasAnsiSupport()
     {
         return (getenv('ANSICON') === true || getenv('ConEmuANSI') === 'ON');
     }

@@ -58,11 +58,32 @@ trait StringLength
      *
      * @return string
      */
-    protected function pad($str, $final_length)
+    protected function pad($str, $final_length, $padding_side = 'right')
     {
         $padding = $final_length - $this->lengthWithoutTags($str);
 
+        if ($padding_side == 'left') {
+            return str_repeat(' ', $padding) . $str;
+        }
+
         return $str . str_repeat(' ', $padding);
+    }
+
+    /**
+     * Apply padding to an array of strings
+     *
+     * @param  array $arr
+     * @param  integer $final_length
+     *
+     * @return array
+     */
+    protected function padArray($arr, $final_length, $padding_side = 'right')
+    {
+        foreach ($arr as $key => $value) {
+            $arr[$key] = $this->pad($value, $final_length, $padding_side);
+        }
+
+        return $arr;
     }
 
     /**

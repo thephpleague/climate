@@ -64,4 +64,32 @@ class AnsiTest extends TestBase
         $this->assertInstanceOf('League\CLImate\Decorator\Parser\NonAnsi', $parser);
     }
 
+    /** @test */
+
+    public function it_will_force_ansi_on_a_non_ansi_system()
+    {
+        $system = new League\CLImate\Util\System\Windows();
+        $util   = new \League\CLImate\Util\UtilFactory($system);
+        $this->cli->setUtil($util);
+        $this->cli->forceAnsiOn();
+
+        $this->shouldWrite("\e[m\e[32mI am green\e[0m\e[0m");
+
+        $this->cli->out("<green>I am green</green>");
+    }
+
+    /** @test */
+
+    public function it_will_force_ansi_off_on_an_ansi_system()
+    {
+        $system = new League\CLImate\Util\System\Linux();
+        $util   = new \League\CLImate\Util\UtilFactory($system);
+        $this->cli->setUtil($util);
+        $this->cli->forceAnsiOff();
+
+        $this->shouldWrite("I am green");
+
+        $this->cli->out("<green>I am green</green>");
+    }
+
 }

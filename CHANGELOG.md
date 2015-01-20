@@ -1,3 +1,9 @@
+## 2.6.1 - 2015-01-18
+
+### Fixed
+
+- Added `forceAnsiOn` and `forceAnsiOff` methods to address systems that were not identified correctly
+
 ## 2.6.0 - 2015-01-07
 
 ### Added
