@@ -56,6 +56,7 @@ class Router
      *
      * @param string $name
      * @param mixed  $arguments
+     * @return null|\League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface
      */
     public function execute($name, $arguments)
     {
@@ -86,7 +87,7 @@ class Router
      *
      * @param string $name
      *
-     * @return \League\CLImate\TerminalObject\Router\RouterInterface
+     * @return \League\CLImate\TerminalObject\Router\RouterInterface|null
      */
     protected function getRouter($name)
     {

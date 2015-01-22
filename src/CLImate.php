@@ -66,14 +66,14 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
- * @method mixed padding(integer $length = 0, string $char = '.'')
- * @method mixed input(string $prompt, Reader $reader = null)
- * @method mixed confirm(string $prompt, Reader $reader = null)
- * @method mixed animation(string $art, Sleeper $sleeper = null)
+ * @method mixed padding(integer $length = 0, string $char = '.')
+ * @method mixed input(string $prompt, Util\Reader\ReaderInterface $reader = null)
+ * @method mixed confirm(string $prompt, Util\Reader\ReaderInterface $reader = null)
+ * @method mixed animation(string $art, TerminalObject\Helper\SleeperInterface $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
  *
- * @method \League\CLImate\CLImate addArt(string $dir)
+ * @method CLImate addArt(string $dir)
  */
 class CLImate
 {
@@ -266,6 +266,7 @@ class CLImate
      *
      * @param string $name
      * @param array $search
+     * @return string
      */
     protected function searchForStyleMethods($name, $search)
     {
@@ -334,6 +335,7 @@ class CLImate
      *
      * @param string $requested_method
      * @param array  $arguments
+     * @return $this
      *
      * List of many of the possible method being called here
      * documented at the top of this class.

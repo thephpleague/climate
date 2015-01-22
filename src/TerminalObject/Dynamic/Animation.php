@@ -58,7 +58,8 @@ class Animation extends DynamicTerminalObject
     /**
      * Scroll the art
      *
-     * @param string $direction up|down|right|left
+     * @param string $direction
+     * @return bool
      */
     public function scroll($direction = 'right')
     {

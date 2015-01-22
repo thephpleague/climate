@@ -63,6 +63,7 @@ class Progress extends DynamicTerminalObject
      *
      * @param integer $current
      * @param mixed   $label
+     * @throws \Exception
      */
     public function current($current, $label = null)
     {
@@ -180,6 +181,7 @@ class Progress extends DynamicTerminalObject
      * Format the percentage so it looks pretty
      *
      * @param integer $percentage
+     * @return float
      */
     protected function percentageFormatted($percentage)
     {
@@ -190,6 +192,7 @@ class Progress extends DynamicTerminalObject
      * Format the label so it is positioned correctly
      *
      * @param string $label
+     * @return string
      */
     protected function labelFormatted($label)
     {

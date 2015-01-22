@@ -26,7 +26,7 @@ abstract class BasicTerminalObject implements BasicTerminalObjectInterface
     /**
      * Get the parser for the current object
      *
-     * @return \League\CLImate\Decorator\Parser
+     * @return \League\CLImate\Decorator\Parser\Parser
      */
     public function getParser()
     {

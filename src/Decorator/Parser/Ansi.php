@@ -20,9 +20,9 @@ class Ansi extends Parser
     /**
      * Get the string that begins the style
      *
+     * @param string $codes
      * @return string
      */
-
     protected function start($codes = null)
     {
         $codes = $codes ?: $this->currentCode();
@@ -34,9 +34,9 @@ class Ansi extends Parser
     /**
      * Get the string that ends the style
      *
+     * @param string $codes
      * @return string
      */
-
     protected function end($codes = null)
     {
         if (empty($codes)) {

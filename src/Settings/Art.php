@@ -6,7 +6,7 @@ class Art implements SettingsInterface
 {
     /**
      * An array of valid art directories
-     *  @var array $dirs
+     *  @var array[] $dirs
      */
     public $dirs = [];
 
