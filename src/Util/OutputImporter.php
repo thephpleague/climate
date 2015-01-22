@@ -13,6 +13,8 @@ trait OutputImporter
 
     /**
      * Sets the $output property
+     *
+     * @param Output $output
      */
     public function output(Output $output)
     {

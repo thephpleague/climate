@@ -23,7 +23,8 @@ class BasicRouter extends BaseRouter implements RouterInterface
     /**
      * Execute a basic terminal object
      *
-     * @param League\CLImate\TerminalObject $obj
+     * @param \League\CLImate\TerminalObject\Basic\BasicTerminalObject $obj
+     * @return void
      */
     public function execute($obj)
     {

@@ -38,7 +38,7 @@ trait Art
     /**
      * Import the Art setting (any directories the user added)
      *
-     * @param array $setting
+     * @param \League\CLImate\Settings\Art $setting
      */
     public function importSettingArt($setting)
     {
@@ -68,7 +68,7 @@ trait Art
      * Find a valid art path
      *
      * @param string $art
-     * @return string
+     * @return array
      */
     protected function artDir($art)
     {

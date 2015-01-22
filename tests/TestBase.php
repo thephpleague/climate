@@ -8,6 +8,9 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public $reader;
 
+    /**
+     * @var League\CLImate\Util\System\System $util
+     */
     public $util;
 
     public function setUp()

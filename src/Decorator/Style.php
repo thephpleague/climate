@@ -16,7 +16,7 @@ class Style
     /**
      * An array of Decorator objects
      *
-     * @var array $style
+     * @var Component\DecoratorInterface[] $style
      */
     protected $style = [];
 
@@ -119,7 +119,7 @@ class Style
      *
      * @param \League\CLImate\Util\System\System $system
      *
-     * @return Parser
+     * @return \League\CLImate\Decorator\Parser\Parser
      */
     public function parser(System $system)
     {
@@ -199,6 +199,7 @@ class Style
      * Convert the array of codes to integers
      *
      * @param array $codes
+     * @return array
      */
     protected function convertToCodes(array $codes)
     {

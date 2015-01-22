@@ -213,8 +213,8 @@ class Table extends BasicTerminalObject
     /**
      * Determine the width of the columns without tags
      *
-     * @param mixed  $key
-     * @param string $column
+     * @param array  $current_width
+     * @param string $str
      *
      * @return integer
      */

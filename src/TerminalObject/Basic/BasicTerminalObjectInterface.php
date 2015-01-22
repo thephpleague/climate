@@ -9,6 +9,7 @@ interface BasicTerminalObjectInterface
     public function settings();
 
     /**
+     * @param $setting
      * @return void
      */
     public function importSetting( $setting );
