@@ -22,6 +22,7 @@ class Padding extends DynamicTerminalObject
     /**
      * If they pass in a padding character, set the char
      *
+     * @param int $length
      * @param string $char
      */
     public function __construct($length = null, $char = null)

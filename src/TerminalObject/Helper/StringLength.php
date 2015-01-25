@@ -53,8 +53,9 @@ trait StringLength
     /**
      * Apply padding to a string
      *
-     * @param  string $str
-     * @param  integer $final_length
+     * @param string $str
+     * @param string $final_length
+     * @param string $padding_side
      *
      * @return string
      */
@@ -74,6 +75,7 @@ trait StringLength
      *
      * @param  array $arr
      * @param  integer $final_length
+     * @param string $padding_side
      *
      * @return array
      */
@@ -90,6 +92,7 @@ trait StringLength
      * Find the max string length in an array
      *
      * @param array $arr
+     * @return int
      */
     protected function maxStrLen(array $arr)
     {
@@ -100,6 +103,7 @@ trait StringLength
      * Get an array of the string lengths from an array of strings
      *
      * @param array $arr
+     * @return array
      */
     protected function arrayOfStrLens(array $arr)
     {

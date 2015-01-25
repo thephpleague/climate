@@ -23,9 +23,9 @@ class DynamicRouter extends BaseRouter implements RouterInterface
     /**
      * Execute a dynamic terminal object using given arguments
      *
-     * @param \League\CLImate\TerminalObject\Dynamic $obj
+     * @param OutputImporter $obj
      *
-     * @return \League\CLImate\TerminalObject\Dynamic
+     * @return \League\CLImate\TerminalObject\Dynamic\DynamicTerminalObject
      */
     public function execute($obj)
     {

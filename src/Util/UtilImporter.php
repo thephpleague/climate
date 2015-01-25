@@ -13,6 +13,8 @@ trait UtilImporter
 
     /**
      * Sets the $util property
+     *
+     * @param UtilFactory $util
      */
     public function util(UtilFactory $util)
     {

@@ -14,6 +14,7 @@ class ProgressTest extends TestBase
 
     /**
      * @param integer $length
+     * @return string
      */
     private function repeat($length)
     {

@@ -11,7 +11,9 @@ class TestBase extends PHPUnit_Framework_TestCase
     /** @var League\CLImate\Util\Reader\Stdin|Mockery\MockInterface */
     public $reader;
 
-    /** @var League\CLImate\Util\UtilFactory */
+    /**
+     * @var League\CLImate\Util\System\System $util
+     */
     public $util;
 
     public function setUp()

@@ -114,7 +114,7 @@ class Columns extends BasicTerminalObject
      * Get the row of data
      *
      * @param integer $key
-     * @param integer $column_width
+     * @param array $column_widths
      *
      * @return string
      */

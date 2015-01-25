@@ -17,7 +17,7 @@ trait SettingsImporter
     /**
      * Import the setting into the class
      *
-     * @param League\CLImate\Settings $setting
+     * @param \League\CLImate\Settings\SettingsInterface $setting
      */
     public function importSetting($setting)
     {

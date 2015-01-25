@@ -157,6 +157,7 @@ class Input extends DynamicTerminalObject
      * Apply some string manipulation functions for normalization
      *
      * @param string|array $var
+     * @return array
      */
     protected function levelPlayingField($var)
     {
