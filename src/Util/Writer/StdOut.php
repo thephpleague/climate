@@ -11,7 +11,7 @@ class StdOut implements WriterInterface
      */
     public function write($content)
     {
-        fwrite(STDOUT, $content);
+        fwrite(\STDOUT, $content);
     }
 
 }
