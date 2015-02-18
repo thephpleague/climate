@@ -352,8 +352,7 @@ class CLImate
 
         if (strlen($name)) {
             // If we have something left, let's try and route it to the appropriate place
-            $result = $this->routeRemainingMethod($name, $arguments);
-            if ($result) {
+            if ($result = $this->routeRemainingMethod($name, $arguments)) {
                 return $result;
             }
         } elseif ($this->hasOutput($output)) {
