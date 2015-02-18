@@ -27,7 +27,7 @@ class Padding extends DynamicTerminalObject
      */
     public function __construct($length = null, $char = null)
     {
-        if ($length) {
+        if ($length !== null) {
             $this->length($length);
         }
 
