@@ -335,7 +335,8 @@ class CLImate
      *
      * @param string $requested_method
      * @param array  $arguments
-     * @return $this
+     *
+     * @return \League\CLImate\CLImate|\League\CLImate\TerminalObject\Dynamic\DynamicTerminalObject
      *
      * List of many of the possible method being called here
      * documented at the top of this class.
