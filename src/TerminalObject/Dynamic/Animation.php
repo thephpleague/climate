@@ -290,11 +290,10 @@ class Animation extends DynamicTerminalObject
      *
      * @param string $line
      * @param int $frame_number
-     * @param int $length
      *
      * @return string
      */
-    protected function currentLeftLine($line, $frame_number, $length)
+    protected function currentLeftLine($line, $frame_number)
     {
         return substr($line, -$frame_number);
     }
