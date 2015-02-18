@@ -57,6 +57,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed error(string $str = null)
  *
  * @method mixed out(string $str)
+ * @method mixed inline(string $str)
  * @method mixed table(array $data)
  * @method mixed json(mixed $var)
  * @method mixed br($count = 1)
