@@ -43,7 +43,7 @@ class ConfirmTest extends TestBase
 
         $input = $this->cli->confirm('Keep going?', $this->reader);
 
-        $response = $input->confirmed();
+        $input->confirmed();
     }
 
 }
