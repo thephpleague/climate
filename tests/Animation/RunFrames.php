@@ -2,6 +2,8 @@
 
 trait RunFrames {
 
+    abstract protected function shouldWrite($content, $count = 1);
+
     protected function runFrames1()
     {
          $this->shouldWrite("\e[m __          __\e[0m");

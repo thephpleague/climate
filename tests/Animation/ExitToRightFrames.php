@@ -2,6 +2,8 @@
 
 trait ExitToRightFrames {
 
+    abstract protected function shouldWrite($content, $count = 1);
+
     protected function fullArtExitRight()
     {
         $repeat = 71;

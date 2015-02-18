@@ -2,6 +2,8 @@
 
 trait ExitToBottomFrames {
 
+    abstract protected function shouldWrite($content, $count = 1);
+
     protected function fullArtExitBottom()
     {
         $this->shouldWrite("\e[m  _  _    ___  _  _\e[0m");
