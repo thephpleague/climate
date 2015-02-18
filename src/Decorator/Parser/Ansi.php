@@ -34,7 +34,7 @@ class Ansi extends Parser
     /**
      * Get the string that ends the style
      *
-     * @param string $codes
+     * @param string|array $codes
      * @return string
      */
     protected function end($codes = null)
