@@ -114,11 +114,11 @@ class CLImate
 
     public function __construct()
     {
-        $this->setStyle();
-        $this->setRouter();
-        $this->setSettingsManager();
-        $this->setOutput();
-        $this->setUtil();
+        $this->setStyle(new Style());
+        $this->setRouter(new Router());
+        $this->setSettingsManager(new Manager());
+        $this->setOutput(new Output());
+        $this->setUtil(new UtilFactory());
     }
 
     /**
@@ -126,9 +126,9 @@ class CLImate
      *
      * @param \League\CLImate\Decorator\Style $style
      */
-    public function setStyle(Style $style = null)
+    public function setStyle(Style $style)
     {
-        $this->style = $style ?: new Style();
+        $this->style = $style;
     }
 
     /**
@@ -136,9 +136,9 @@ class CLImate
      *
      * @param \League\CLImate\TerminalObject\Router\Router $router
      */
-    public function setRouter(Router $router = null)
+    public function setRouter(Router $router)
     {
-        $this->router = $router ?: new Router();
+        $this->router = $router;
     }
 
     /**
@@ -146,9 +146,9 @@ class CLImate
      *
      * @param \League\CLImate\Settings\Manager $manager
      */
-    public function setSettingsManager(Manager $manager = null)
+    public function setSettingsManager(Manager $manager)
     {
-        $this->settings = $manager ?: new Manager();
+        $this->settings = $manager;
     }
 
     /**
@@ -156,9 +156,9 @@ class CLImate
      *
      * @param \League\CLImate\Util\Output $output
      */
-    public function setOutput(Output $output = null)
+    public function setOutput(Output $output)
     {
-        $this->output = $output ?: new Output();
+        $this->output = $output;
     }
 
     /**
@@ -166,9 +166,9 @@ class CLImate
      *
      * @param \League\CLImate\Util\UtilFactory $util
      */
-    public function setUtil(UtilFactory $util = null)
+    public function setUtil(UtilFactory $util)
     {
-        $this->util = $util ?: new UtilFactory();
+        $this->util = $util;
     }
 
     /**
