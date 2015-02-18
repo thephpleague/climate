@@ -18,7 +18,7 @@ interface RouterInterface
 
     /**
      * @param $obj
-     * @return null|\League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface
+     * @return null|\League\CLImate\TerminalObject\Dynamic\DynamicTerminalObject
      */
     public function execute($obj);
 
