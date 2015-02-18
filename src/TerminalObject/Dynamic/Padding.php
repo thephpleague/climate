@@ -5,7 +5,7 @@ namespace League\CLImate\TerminalObject\Dynamic;
 class Padding extends DynamicTerminalObject
 {
     /**
-     * The length that lines should be padded too
+     * The length that lines should be padded to
      *
      * @var integer $length
      */
