@@ -69,7 +69,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed padding(integer $length = 0, string $char = '.')
  * @method mixed input(string $prompt, Util\Reader\ReaderInterface $reader = null)
  * @method mixed confirm(string $prompt, Util\Reader\ReaderInterface $reader = null)
- * @method mixed animation(string $art, TerminalObject\Helper\SleeperInterface $sleeper = null)
+ * @method mixed animation(string $art, TerminalObject\Helper\Sleeper $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
  *
