@@ -4,3 +4,4 @@ composer.lock
 .DS_Store
 node_modules
 functional
+build
