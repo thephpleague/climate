@@ -339,7 +339,7 @@ class AnimationTest extends TestBase
         $this->runFrames5();
 
         $this->cli->addArt(__DIR__ . '/art');
-        $this->cli->animation('work-it')->run();
+        $this->cli->animation('work-it', $this->getSleeper(5))->run();
     }
 
 }

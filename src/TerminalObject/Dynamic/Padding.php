@@ -5,7 +5,7 @@ namespace League\CLImate\TerminalObject\Dynamic;
 class Padding extends DynamicTerminalObject
 {
     /**
-     * The length that lines should be padded too
+     * The length that lines should be padded to
      *
      * @var integer $length
      */
@@ -27,7 +27,7 @@ class Padding extends DynamicTerminalObject
      */
     public function __construct($length = null, $char = null)
     {
-        if ($length) {
+        if ($length !== null) {
             $this->length($length);
         }
 

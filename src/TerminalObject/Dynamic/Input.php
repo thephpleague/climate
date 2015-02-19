@@ -134,7 +134,25 @@ class Input extends DynamicTerminalObject
             return '';
         }
 
+        $this->acceptable = array_map([$this, 'acceptableItemFormatted'], $this->acceptable);
+
         return '[' . implode('/', $this->acceptable) . ']';
+    }
+
+    /**
+     * Format the acceptable item depending on whether it is the default or not
+     *
+     * @param string $item
+     *
+     * @return string
+     */
+    protected function acceptableItemFormatted($item)
+    {
+        if ($item == $this->default) {
+            return '<bold>' . $item . '</bold>';
+        }
+
+        return $item;
     }
 
     /**

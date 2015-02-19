@@ -39,7 +39,7 @@ class Progress extends DynamicTerminalObject
      */
     public function __construct($total = null)
     {
-        if ($total) {
+        if ($total !== null) {
             $this->total($total);
         }
     }

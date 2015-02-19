@@ -2,6 +2,8 @@
 
 trait ExitToLeftFrames {
 
+    abstract protected function shouldWrite($content, $count = 1);
+
     protected function fullArtExitLeft()
     {
         $this->shouldWrite("\e[m  _  _   \e[0m");

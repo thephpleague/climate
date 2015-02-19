@@ -11,6 +11,11 @@ class Clear extends BasicTerminalObject
      */
     public function result()
     {
-        return "\e[2J";
+        return "\e[H\e[2J";
+    }
+
+    public function sameLine()
+    {
+        return true;
     }
 }

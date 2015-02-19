@@ -68,6 +68,7 @@ trait Art
      * Find a valid art path
      *
      * @param string $art
+     *
      * @return array
      */
     protected function artDir($art)
@@ -79,6 +80,7 @@ trait Art
      * Find a valid art path
      *
      * @param string $art
+     *
      * @return string
      */
     protected function artFile($art)
@@ -88,19 +90,28 @@ trait Art
         return reset($files);
     }
 
+    /**
+     * Find a set of files in the current art directories
+     * based on a pattern
+     *
+     * @param string $art
+     * @param string $pattern
+     *
+     * @return array
+     */
     protected function fileSearch($art, $pattern)
     {
         foreach ($this->art_dirs as $dir) {
             // Look for anything that has the $art filename
-            $paths  = glob($dir . '/' . $art . $pattern);
+            $paths = glob($dir . '/' . $art . $pattern);
 
             // If we've got one, no need to look any further
             if (!empty($paths)) {
-                break;
+                return $paths;
             }
         }
 
-        return $paths;
+        return [];
     }
 
     /**

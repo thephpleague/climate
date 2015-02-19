@@ -2,6 +2,8 @@
 
 trait ExitToTopFrames {
 
+    abstract protected function shouldWrite($content, $count = 1);
+
     protected function fullArtExitTop()
     {
         $this->shouldWrite("\e[m  _  _    ___  _  _\e[0m");

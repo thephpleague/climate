@@ -58,6 +58,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed error(string $str = null)
  *
  * @method mixed out(string $str)
+ * @method mixed inline(string $str)
  * @method mixed table(array $data)
  * @method mixed json(mixed $var)
  * @method mixed br($count = 1)
@@ -70,7 +71,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed padding(integer $length = 0, string $char = '.')
  * @method mixed input(string $prompt, Util\Reader\ReaderInterface $reader = null)
  * @method mixed confirm(string $prompt, Util\Reader\ReaderInterface $reader = null)
- * @method mixed animation(string $art, TerminalObject\Helper\SleeperInterface $sleeper = null)
+ * @method mixed animation(string $art, TerminalObject\Helper\Sleeper $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
  *
@@ -125,12 +126,12 @@ class CLImate
 
     public function __construct()
     {
-        $this->setStyle();
-        $this->setRouter();
-        $this->setSettingsManager();
-        $this->setArgumentManager();
-        $this->setOutput();
-        $this->setUtil();
+        $this->setStyle(new Style());
+        $this->setRouter(new Router());
+        $this->setSettingsManager(new SettingsManager());
+        $this->setArgumentManager(new ArgumentManager());
+        $this->setOutput(new Output());
+        $this->setUtil(new UtilFactory());
     }
 
     /**
@@ -138,9 +139,9 @@ class CLImate
      *
      * @param \League\CLImate\Decorator\Style $style
      */
-    public function setStyle(Style $style = null)
+    public function setStyle(Style $style)
     {
-        $this->style = $style ?: new Style();
+        $this->style = $style;
     }
 
     /**
@@ -148,9 +149,9 @@ class CLImate
      *
      * @param \League\CLImate\TerminalObject\Router\Router $router
      */
-    public function setRouter(Router $router = null)
+    public function setRouter(Router $router)
     {
-        $this->router = $router ?: new Router();
+        $this->router = $router;
     }
 
     /**
@@ -158,9 +159,9 @@ class CLImate
      *
      * @param \League\CLImate\Settings\Manager $manager
      */
-    public function setSettingsManager(SettingsManager $manager = null)
+    public function setSettingsManager(SettingsManager $manager)
     {
-        $this->settings = $manager ?: new SettingsManager();
+        $this->settings = $manager;
     }
 
     /**
@@ -168,9 +169,9 @@ class CLImate
      *
      * @param \League\CLImate\Argument\Manager $manager
      */
-    public function setArgumentManager(ArgumentManager $manager = null)
+    public function setArgumentManager(ArgumentManager $manager)
     {
-        $this->arguments = $manager ?: new ArgumentManager();
+        $this->arguments = $manager;
     }
 
     /**
@@ -178,9 +179,9 @@ class CLImate
      *
      * @param \League\CLImate\Util\Output $output
      */
-    public function setOutput(Output $output = null)
+    public function setOutput(Output $output)
     {
-        $this->output = $output ?: new Output();
+        $this->output = $output;
     }
 
     /**
@@ -188,9 +189,9 @@ class CLImate
      *
      * @param \League\CLImate\Util\UtilFactory $util
      */
-    public function setUtil(UtilFactory $util = null)
+    public function setUtil(UtilFactory $util)
     {
-        $this->util = $util ?: new UtilFactory();
+        $this->util = $util;
     }
 
     /**
@@ -365,7 +366,8 @@ class CLImate
      *
      * @param string $requested_method
      * @param array  $arguments
-     * @return $this
+     *
+     * @return \League\CLImate\CLImate|\League\CLImate\TerminalObject\Dynamic\DynamicTerminalObject
      *
      * List of many of the possible method being called here
      * documented at the top of this class.
@@ -382,8 +384,7 @@ class CLImate
 
         if (strlen($name)) {
             // If we have something left, let's try and route it to the appropriate place
-            $result = $this->routeRemainingMethod($name, $arguments);
-            if ($result) {
+            if ($result = $this->routeRemainingMethod($name, $arguments)) {
                 return $result;
             }
         } elseif ($this->hasOutput($output)) {

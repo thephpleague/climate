@@ -51,8 +51,9 @@ class Columns extends BasicTerminalObject
         $this->data    = $this->setData();
         $column_widths = $this->getColumnWidths();
         $output        = [];
+        $count         = count(reset($this->data));
 
-        for ($i = 0; $i < count(reset($this->data)); $i++) {
+        for ($i = 0; $i < $count; $i++) {
             $output[] = $this->getRow($i, $column_widths);
         }
 
@@ -167,7 +168,7 @@ class Columns extends BasicTerminalObject
      */
     protected function setColumnCount($column_width)
     {
-        $this->column_count = floor($this->util->width() / $column_width);
+        $this->column_count = (int) floor($this->util->width() / $column_width);
     }
 
     /**

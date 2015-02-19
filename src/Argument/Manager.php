@@ -262,9 +262,9 @@ class Manager
             if (strpos($cliArgument, '=') !== false) {
                 list ($name, $value) = explode('=', $cliArgument, 2);
 
-                // If the argument isn't in "key=value" format then assume it's in
-                // "key value" format and define the value after we've found the
-                // matching CLImate argument.
+            // If the argument isn't in "key=value" format then assume it's in
+            // "key value" format and define the value after we've found the
+            // matching CLImate argument.
             } else {
                 $name = $cliArgument;
                 $value = null;
