@@ -334,29 +334,49 @@ class Manager
     {
         // Look for the argument in our defined $arguments and assign their
         // value.
-        foreach ($this->filter->withPrefix() as $argument) {
-            if (!in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
-                continue;
-            }
-
-            // We found an argument key, so take it out of the array.
-            unset($argv[$key]);
-
-            // Arguments are given the value true if they only need to
-            // be defined on the command line to be set.
-            if ($argument->definedOnly()) {
-                $value = true;
-            } elseif (is_null($value)) {
-                // If the value wasn't previously defined in "key=value"
-                // format then define it from the next command argument.
-                $value = $argv[++$key];
-                unset($argv[$key]);
-            }
-
-            $argument->setValue($value);
+        if (!($argument = $this->findPrefixedArgument($name))) {
+            return $argv;
         }
 
+        // We found an argument key, so take it out of the array.
+        unset($argv[$key]);
+
+        // Arguments are given the value true if they only need to
+        // be defined on the command line to be set.
+        if ($argument->definedOnly()) {
+            $argument->setValue(true);
+            return $argv;
+        }
+
+        if (is_null($value)) {
+            // If the value wasn't previously defined in "key=value"
+            // format then define it from the next command argument.
+            $argument->setValue($argv[++$key]);
+            unset($argv[$key]);
+            return $argv;
+        }
+
+        $argument->setValue($value);
+
         return $argv;
+    }
+
+    /**
+     * Search for argument in defined prefix arguments
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    protected function findPrefixedArgument($name)
+    {
+        foreach ($this->filter->withPrefix() as $argument) {
+            if (in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
+                return $argument;
+            }
+        }
+
+        return false;
     }
 
     /**
