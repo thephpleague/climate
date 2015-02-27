@@ -6,7 +6,12 @@ class Filter {
 
     protected $arguments = [];
 
-    public function setArguments($arguments)
+    /**
+     * Set the available arguments
+     *
+     * @param array $arguments
+     */
+    public function setArguments(array $arguments)
     {
         $this->arguments = $arguments;
     }
