@@ -2,8 +2,9 @@
 
 namespace League\CLImate;
 
+use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
-use League\CLImate\Settings\Manager;
+use League\CLImate\Settings\Manager as SettingsManager;
 use League\CLImate\TerminalObject\Router\Router;
 use League\CLImate\Util\Output;
 use League\CLImate\Util\UtilFactory;
@@ -75,6 +76,9 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed clear()
  *
  * @method CLImate addArt(string $dir)
+ *
+ * @method string description()
+ * @method string usage()
  */
 class CLImate
 {
@@ -100,6 +104,13 @@ class CLImate
     protected $settings;
 
     /**
+     * An instance of the Argument Manager class
+     *
+     * @var \League\CLImate\Argument\Manager $arguments
+     */
+    public $arguments;
+
+    /**
      * An instance of the Output class
      *
      * @var \League\CLImate\Util\Output $output
@@ -117,7 +128,8 @@ class CLImate
     {
         $this->setStyle(new Style());
         $this->setRouter(new Router());
-        $this->setSettingsManager(new Manager());
+        $this->setSettingsManager(new SettingsManager());
+        $this->setArgumentManager(new ArgumentManager());
         $this->setOutput(new Output());
         $this->setUtil(new UtilFactory());
     }
@@ -147,9 +159,19 @@ class CLImate
      *
      * @param \League\CLImate\Settings\Manager $manager
      */
-    public function setSettingsManager(Manager $manager)
+    public function setSettingsManager(SettingsManager $manager)
     {
         $this->settings = $manager;
+    }
+
+    /**
+     * Set the arguments property
+     *
+     * @param \League\CLImate\Argument\Manager $manager
+     */
+    public function setArgumentManager(ArgumentManager $manager)
+    {
+        $this->arguments = $manager;
     }
 
     /**
@@ -325,6 +347,14 @@ class CLImate
             }
         } elseif ($this->settings->exists($name)) {
             $this->settings->add($name, reset($arguments));
+        // Handle passthroughs to the arguments manager.
+        } elseif (in_array($name, ['description', 'usage'])) {
+            // The usage() method needs the CLImate object for output.
+            if ($name == 'usage') {
+                array_unshift($arguments, $this);
+            }
+
+            call_user_func_array([$this->arguments, $name], $arguments);
         } else {
             // If we can't find it at this point, let's fail gracefully
             $this->out(reset($arguments));

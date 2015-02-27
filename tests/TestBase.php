@@ -2,10 +2,13 @@
 
 class TestBase extends PHPUnit_Framework_TestCase
 {
+    /** @var League\CLImate\CLImate */
     public $cli;
 
+    /** @var League\CLImate\Util\Output|Mockery\MockInterface */
     public $output;
 
+    /** @var League\CLImate\Util\Reader\Stdin|Mockery\MockInterface */
     public $reader;
 
     /**
