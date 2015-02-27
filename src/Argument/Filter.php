@@ -162,10 +162,23 @@ class Filter {
      */
     public function compareByPrefix(Argument $a, Argument $b)
     {
-        $compareABy = $a->longPrefix() ?: $a->prefix() ?: '';
-        $compareBBy = $b->longPrefix() ?: $b->prefix() ?: '';
+        if ($this->prefixCompareString($a) < $this->prefixCompareString($b)) {
+            return -1;
+        }
 
-        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
+        return 1;
+    }
+
+    /**
+     * Prep the prefix string for comparison
+     *
+     * @param Argument $argument
+     *
+     * @return string
+     */
+    protected function prefixCompareString(Argument $argument)
+    {
+        return strtolower($argument->longPrefix() ?: $argument->prefix() ?: '');
     }
 
 }
