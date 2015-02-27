@@ -78,57 +78,48 @@ class Argument
      * Build a new command argument.
      *
      * @param string $name
-     * @param string $prefix
-     * @param string $longPrefix
-     * @param string $description
-     * @param bool $required
-     * @param bool $definedOnly
-     * @param string $castTo
-     * @param string $defaultValue
      */
-    public function __construct(
-        $name,
-        $prefix = null,
-        $longPrefix = null,
-        $description = null,
-        $required = false,
-        $definedOnly = false,
-        $castTo = 'string',
-        $defaultValue = null
-    ) {
+    public function __construct($name)
+    {
         $this->setName($name);
-        $this->setPrefix($prefix);
-        $this->setLongPrefix($longPrefix);
-        $this->setDescription($description);
-        $this->setRequired($required);
-        $this->setDefinedOnly($definedOnly);
-        $this->setCastTo($castTo);
-        $this->setDefaultValue($defaultValue);
-
-        if ($defaultValue) {
-            $this->setValue($defaultValue);
-        }
     }
 
     /**
      * Build a new command argument from an array.
      *
      * @param string $name
-     * @param array $argument
+     * @param array $params
+     *
      * @return Argument
      */
-    public static function createFromArray($name, array $argument)
+    public static function createFromArray($name, array $params)
     {
-        return new Argument(
-            $name,
-            isset($argument['prefix']) ? $argument['prefix'] : null,
-            isset($argument['longPrefix']) ? $argument['longPrefix'] : null,
-            isset($argument['description']) ? $argument['description'] : null,
-            isset($argument['required']) ? $argument['required'] : false,
-            isset($argument['definedOnly']) ? $argument['definedOnly'] : false,
-            isset($argument['castTo']) ? $argument['castTo'] : 'string',
-            isset($argument['defaultValue']) ? $argument['defaultValue'] : null
-        );
+        $allowed = [
+                    'prefix',
+                    'longPrefix',
+                    'description',
+                    'required',
+                    'definedOnly',
+                    'castTo',
+                    'defaultValue',
+                ];
+
+        $argument = new Argument($name);
+
+        foreach ($allowed as $key) {
+            if (!array_key_exists($key, $params)) {
+                continue;
+            }
+
+            $method = 'set' . ucwords($key);
+            $argument->{$method}($params[$key]);
+        }
+
+        if ($argument->defaultValue()) {
+            $argument->setValue($argument->defaultValue());
+        }
+
+        return $argument;
     }
 
     /**
@@ -289,7 +280,8 @@ class Argument
     {
         if (!in_array($castTo, ['string', 'int', 'float', 'bool'])) {
             throw new \Exception(
-                "An argument may only be cast to the data type 'string', 'int', 'float', or 'bool'."
+                "An argument may only be cast to the data type "
+                . "'string', 'int', 'float', or 'bool'."
             );
         }
 
@@ -365,33 +357,8 @@ class Argument
      */
     public function buildSummary()
     {
-        $printedName = false;
-        $summary = '';
-
-        // Print the short prefix first.
-        if ($this->prefix()) {
-            $summary .= "-{$this->prefix()}";
-
-            if (!$this->definedOnly()) {
-                $summary .= " {$this->name()}";
-                $printedName = true;
-            }
-        }
-
-        // Separate the short prefix and the long prefix.
-        if ($this->prefix() && $this->longPrefix()) {
-            $summary .= ', ';
-        }
-
-        // Print the long prefix.
-        if ($this->longPrefix()) {
-            $summary .= "--{$this->longPrefix()}";
-
-            if (!$this->definedOnly()) {
-                $summary .= " {$this->name()}";
-                $printedName = true;
-            }
-        }
+        $summary     = $this->buildPrefixSummary();
+        $printedName = strstr($summary, ' ' . $this->name);
 
         // Print the argument name if it's not printed yet.
         if (!$printedName && !$this->definedOnly()) {
@@ -403,5 +370,27 @@ class Argument
         }
 
         return $summary;
+    }
+
+    protected function buildPrefixSummary()
+    {
+        $prefixes = [$this->prefix(), $this->longPrefix()];
+        $summary  = [];
+
+        foreach ($prefixes as $key => $prefix) {
+            if (!$prefix) {
+                continue;
+            }
+
+            $sub = str_repeat('-', $key + 1) . $prefix;
+
+            if (!$this->definedOnly()) {
+                $sub .= " {$this->name()}";
+            }
+
+            $summary[] = $sub;
+        }
+
+        return implode(', ', $summary);
     }
 }
