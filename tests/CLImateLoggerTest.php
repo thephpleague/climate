@@ -7,58 +7,67 @@ class CLImateLoggerTest extends TestBase
     /**
      * @var \League\CLImate\CLImateLogger
      */
-    public $logger = null;
+    public $cli = null;
 
     public function setUp()
     {
         parent::setUp();
-        $this->logger = new \League\CLImate\CLImateLogger();
-        $this->logger->setOutput($this->output);
-        $this->logger->setUtil($this->util);
+        $this->cli = new League\CLImate\CLImateLogger();
+        $this->cli->setOutput($this->output);
+        $this->cli->setUtil($this->util);
     }
 
     public function testEmergency()
     {
-        return $this->logger->emergency("Testing emergency");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->emergency("Testing emergency");
     }
 
     public function testAlert()
     {
-        return $this->logger->alert("Testing alert");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->alert("Testing alert");
     }
 
     public function testCritical()
     {
-        return $this->logger->critical("Testing critical");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->critical("Testing critical");
     }
 
     public function testError()
     {
-        return $this->logger->error("Testing error");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->error("Testing error");
     }
 
     public function testWarning()
     {
-        return $this->logger->warning("Testing warning");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->warning("Testing warning");
     }
 
     public function testNotice()
     {
-        return $this->logger->notice("Testing notice");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->notice("Testing notice");
     }
 
     public function testInfo()
     {
-        return $this->logger->info("Testing info");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->info("Testing info");
     }
 
     public function testDebug()
     {
-        return $this->logger->debug("Testing debug");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->debug("Testing debug");
     }
 
     public function testLog()
     {
-        return $this->logger->log("critical", "Testing log");
+        $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
+        $this->cli->log("critical", "Testing log");
     }
 }
