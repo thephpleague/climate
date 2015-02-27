@@ -366,7 +366,7 @@ class Manager
      *
      * @param string $name
      *
-     * @return bool
+     * @return Argument|false
      */
     protected function findPrefixedArgument($name)
     {
