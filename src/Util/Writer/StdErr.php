@@ -9,7 +9,6 @@ class StdErr implements WriterInterface
      *
      * @param  string $content
      */
-
     public function write($content)
     {
         fwrite(\STDERR, $content);
