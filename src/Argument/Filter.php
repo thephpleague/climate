@@ -4,6 +4,87 @@ namespace League\CLImate\Argument;
 
 class Filter {
 
+    protected $arguments = [];
+
+    public function setArguments($arguments)
+    {
+        $this->arguments = $arguments;
+    }
+
+    /**
+     * Retrieve optional arguments
+     *
+     * @return Argument[]
+     */
+    public function optional()
+    {
+        return $this->filterArguments(['hasPrefix', 'isOptional']);
+    }
+
+    /**
+     * Retrieve required arguments
+     *
+     * @return Argument[]
+     */
+    public function required()
+    {
+        return $this->filterArguments(['hasPrefix', 'isRequired']);
+    }
+
+    /**
+     * Retrieve arguments with prefix
+     *
+     * @return Argument[]
+     */
+    public function withPrefix()
+    {
+        return $this->filterArguments(['hasPrefix']);
+    }
+
+    /**
+     * Retrieve arguments without prefix
+     *
+     * @return Argument[]
+     */
+    public function withoutPrefix()
+    {
+        return $this->filterArguments(['noPrefix']);
+    }
+
+    /**
+     * Find all required arguments that don't have values after parsing.
+     *
+     * These arguments weren't defined on the command line.
+     *
+     * @return Argument[]
+     */
+    public function missing()
+    {
+        return $this->filterArguments(['isRequired', 'noValue']);
+    }
+
+    /**
+     * Filter defined arguments as to whether they are required or not
+     *
+     * @param string[] $filters
+     *
+     * @return Argument[]
+     */
+    protected function filterArguments($filters = [])
+    {
+        $arguments = $this->arguments;
+
+        foreach ($filters as $filter) {
+            $arguments = array_filter($arguments, [$this, $filter]);
+        }
+
+        if (in_array('hasPrefix', $filters)) {
+            usort($arguments, [$this, 'compareByPrefix']);
+        }
+
+        return array_values($arguments);
+    }
+
     /**
      * Determine whether an argument as a prefix
      *
@@ -11,7 +92,7 @@ class Filter {
      *
      * @return bool
      */
-    public function noPrefix($argument)
+    protected function noPrefix($argument)
     {
         return !$argument->hasPrefix();
     }
@@ -23,7 +104,7 @@ class Filter {
      *
      * @return bool
      */
-    public function hasPrefix($argument)
+    protected function hasPrefix($argument)
     {
         return $argument->hasPrefix();
     }
@@ -35,7 +116,7 @@ class Filter {
      *
      * @return bool
      */
-    public function isRequired($argument)
+    protected function isRequired($argument)
     {
         return $argument->isRequired();
     }
@@ -47,7 +128,7 @@ class Filter {
      *
      * @return bool
      */
-    public function isOptional($argument)
+    protected function isOptional($argument)
     {
         return !$argument->isRequired();
     }
@@ -59,9 +140,27 @@ class Filter {
      *
      * @return bool
      */
-    public function noValue($argument)
+    protected function noValue($argument)
     {
         return is_null($argument->value());
+    }
+
+    /**
+     * Compare two arguments by their short and long prefixes.
+     *
+     * @see usort()
+     *
+     * @param Argument $a
+     * @param Argument $b
+     *
+     * @return int
+     */
+    public function compareByPrefix(Argument $a, Argument $b)
+    {
+        $compareABy = $a->longPrefix() ?: $a->prefix() ?: '';
+        $compareBBy = $b->longPrefix() ?: $b->prefix() ?: '';
+
+        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
     }
 
 }

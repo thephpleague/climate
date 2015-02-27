@@ -189,6 +189,8 @@ class Manager
      */
     public function usage(CLImate $climate, array $argv = null)
     {
+        $this->filter->setArguments($this->all());
+
         // Print the description if it's defined.
         if ($this->description) {
             $climate->out($this->description)->br();
@@ -198,12 +200,12 @@ class Manager
         // end.
         $climate->out(
             "Usage: {$this->getCommand($argv)} "
-            . $this->buildShortSummary(array_merge($this->getWithPrefix(), $this->getWithoutPrefix()))
+            . $this->buildShortSummary(array_merge($this->filter->withPrefix(), $this->filter->withoutPrefix()))
         );
 
         // Print argument details.
-        $this->printArguments($climate, $this->getRequired(), 'required');
-        $this->printArguments($climate, $this->getOptional(), 'optional');
+        $this->printArguments($climate, $this->filter->required(), 'required');
+        $this->printArguments($climate, $this->filter->optional(), 'optional');
     }
 
     /**
@@ -238,6 +240,8 @@ class Manager
      */
     public function parse(array $argv = null)
     {
+        $this->filter->setArguments($this->all());
+
         $cliArguments      = $this->getArguments($argv);
         $unParsedArguments = $this->parsePrefixedArguments($cliArguments);
 
@@ -245,7 +249,7 @@ class Manager
 
         // After parsing find out which arguments were required but not
         // defined on the command line.
-        $missingArguments = $this->findMissing();
+        $missingArguments = $this->filter->missing();
 
         if (count($missingArguments) > 0) {
             throw new \Exception(
@@ -330,7 +334,7 @@ class Manager
     {
         // Look for the argument in our defined $arguments and assign their
         // value.
-        foreach ($this->getWithPrefix() as $argument) {
+        foreach ($this->filter->withPrefix() as $argument) {
             if (!in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
                 continue;
             }
@@ -365,85 +369,11 @@ class Manager
      */
     protected function parseNonPrefixedArguments(array $unParsedArguments = [])
     {
-        foreach ($this->getWithoutPrefix() as $key => $argument) {
+        foreach ($this->filter->withoutPrefix() as $key => $argument) {
             if (isset($unParsedArguments[$key])) {
                 $argument->setValue($unParsedArguments[$key]);
             }
         }
-    }
-
-    /**
-     * Retrieve optional arguments
-     *
-     * @return Argument[]
-     */
-    protected function getOptional()
-    {
-        return $this->filterDefinedArguments(['hasPrefix', 'isOptional']);
-    }
-
-    /**
-     * Retrieve required arguments
-     *
-     * @return Argument[]
-     */
-    protected function getRequired()
-    {
-        return $this->filterDefinedArguments(['hasPrefix', 'isRequired']);
-    }
-
-    /**
-     * Retrieve arguments with prefix
-     *
-     * @return Argument[]
-     */
-    protected function getWithPrefix()
-    {
-        return $this->filterDefinedArguments(['hasPrefix']);
-    }
-
-    /**
-     * Retrieve arguments without prefix
-     *
-     * @return Argument[]
-     */
-    protected function getWithoutPrefix()
-    {
-        return $this->filterDefinedArguments(['noPrefix']);
-    }
-
-    /**
-     * Filter defined arguments as to whether they are required or not
-     *
-     * @param bool $required
-     *
-     * @return Argument[]
-     */
-    protected function filterDefinedArguments($filters = [])
-    {
-        $arguments = $this->all();
-
-        foreach ($filters as $filter) {
-            $arguments = array_filter($arguments, [$this->filter, $filter]);
-        }
-
-        if (in_array('hasPrefix', $filters)) {
-            usort($arguments, [$this, 'compareByPrefix']);
-        }
-
-        return array_values($arguments);
-    }
-
-    /**
-     * Find all required arguments that don't have values after parsing.
-     *
-     * These arguments weren't defined on the command line.
-     *
-     * @return Argument[]
-     */
-    protected function findMissing()
-    {
-        return $this->filterDefinedArguments(['isRequired', 'noValue']);
     }
 
     /**
@@ -487,23 +417,5 @@ class Manager
         $command   = array_shift($arguments);
 
         return compact('arguments', 'command');
-    }
-
-    /**
-     * Compare two arguments by their short and long prefixes.
-     *
-     * @see usort()
-     *
-     * @param Argument $a
-     * @param Argument $b
-     *
-     * @return int
-     */
-    public static function compareByPrefix(Argument $a, Argument $b)
-    {
-        $compareABy = $a->longPrefix() ?: $a->prefix() ?: '';
-        $compareBBy = $b->longPrefix() ?: $b->prefix() ?: '';
-
-        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
     }
 }
