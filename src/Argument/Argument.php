@@ -328,20 +328,21 @@ class Argument
     {
         switch ($this->castTo) {
             case 'string':
-                $value = (string) $value;
+                $this->value = (string) $value;
                 break;
             case 'int':
-                $value = (int) $value;
+                $this->value = (int) $value;
                 break;
             case 'float':
-                $value = (float) $value;
+                $this->value = (float) $value;
                 break;
             case 'bool':
-                $value = (bool) $value;
+                $this->value = (bool) $value;
+                break;
+            default:
+                $this->value = $value;
                 break;
         }
-
-        $this->value = $value;
     }
 
     /**
