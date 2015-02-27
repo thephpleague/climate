@@ -104,15 +104,12 @@ class Argument
                     'defaultValue',
                 ];
 
+        $params   = array_intersect_key($params, array_flip($allowed));
         $argument = new Argument($name);
 
-        foreach ($allowed as $key) {
-            if (!array_key_exists($key, $params)) {
-                continue;
-            }
-
+        foreach ($params as $key => $value) {
             $method = 'set' . ucwords($key);
-            $argument->{$method}($params[$key]);
+            $argument->{$method}($value);
         }
 
         if ($argument->defaultValue()) {
