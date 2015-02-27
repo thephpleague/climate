@@ -9,7 +9,7 @@ class CLImateLogger extends CLImate implements LoggerInterface
     public function __construct()
     {
         parent::__construct();
-        $this->style->addCommand('emergency', 'red', 'bold');
+        $this->style->addCommand('emergency', array('red', 'bold'));
         $this->style->addCommand('alert', 'red');
         $this->style->addCommand('critical', 'red');
         $this->style->addCommand('error', 'light_magenta');
