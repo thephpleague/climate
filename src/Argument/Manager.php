@@ -287,7 +287,7 @@ class Manager
         foreach ($argv as $key => $cliArgument) {
             list($name, $value) = $this->getNameAndValue($cliArgument);
 
-            $argv = $this->setArgumentValue($argv, $key, $name, $value);
+            $argv = $this->setPrefixedArgumentValue($argv, $key, $name, $value);
         }
 
         // Send un-parsed arguments back upstream.
@@ -324,7 +324,7 @@ class Manager
      *
      * @return array The new $argv
      */
-    protected function setArgumentValue($argv, $key, $name, $value)
+    protected function setPrefixedArgumentValue($argv, $key, $name, $value)
     {
         // Look for the argument in our defined $arguments and assign their
         // value.
