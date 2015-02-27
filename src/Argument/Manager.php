@@ -240,15 +240,17 @@ class Manager
     {
         $cliArguments      = $this->getArguments($argv);
         $unParsedArguments = $this->parsePrefixedArguments($cliArguments);
+
         $this->parseNonPrefixedArguments($unParsedArguments);
 
-        // After parsing find out which arguments were required but not defined
-        // on the command line.
+        // After parsing find out which arguments were required but not
+        // defined on the command line.
         $missingArguments = $this->findMissing();
 
         if (count($missingArguments) > 0) {
             throw new \Exception(
-                'The following arguments are required: ' . $this->buildShortSummary($missingArguments) . '.'
+                'The following arguments are required: '
+                . $this->buildShortSummary($missingArguments) . '.'
             );
         }
     }
