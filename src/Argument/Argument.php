@@ -404,36 +404,4 @@ class Argument
 
         return $summary;
     }
-
-    /**
-     * Compare two arguments by their short and long prefixes.
-     *
-     * @see usort()
-     * @param Argument $a
-     * @param Argument $b
-     * @return int
-     */
-    public static function compareByPrefix(Argument $a, Argument $b)
-    {
-        $compareABy = '';
-        $compareBBy = '';
-
-        if ($a->longPrefix()) {
-            $compareABy = $a->longPrefix();
-        }
-
-        if ($a->prefix()) {
-            $compareABy = $a->prefix();
-        }
-
-        if ($b->longPrefix()) {
-            $compareBBy = $b->longPrefix();
-        }
-
-        if ($b->prefix()) {
-            $compareBBy = $b->prefix();
-        }
-
-        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
-    }
 }

@@ -16,9 +16,21 @@ class Manager
     /**
      * A program's description.
      *
-     * @var string
+     * @var string $description
      */
     protected $description;
+
+    /**
+     * Filter class to find various types of arguments
+     *
+     * @var League\CLImate\Argument\Filter $filter
+     */
+    protected $filter;
+
+    public function __construct()
+    {
+        $this->filter = new Filter();
+    }
 
     /**
      * Add an argument.
@@ -177,49 +189,43 @@ class Manager
      */
     public function usage(CLImate $climate, array $argv = null)
     {
-        $command = $this->getCommand($argv);
-        $required = $this->findRequired();
-        $optional = $this->findRequired(false);
-        $withPrefix = $this->findWithPrefix();
-        $withoutPrefix = $this->findWithPrefix(false);
-
         // Print the description if it's defined.
         if ($this->description) {
-            $climate->out($this->description);
-            $climate->br();
+            $climate->out($this->description)->br();
         }
 
         // Print the usage statement with the arguments without a prefix at the
         // end.
         $climate->out(
-            "Usage: {$command} " . $this->buildShortSummary(array_merge($withPrefix, $withoutPrefix))
+            "Usage: {$this->getCommand($argv)} "
+            . $this->buildShortSummary(array_merge($this->getWithPrefix(), $this->getWithoutPrefix()))
         );
 
-        // Print required argument details.
-        if (count($required) > 0) {
-            $climate->br();
-            $climate->out("Required Arguments:");
+        // Print argument details.
+        $this->printArguments($climate, $this->getRequired(), 'required');
+        $this->printArguments($climate, $this->getOptional(), 'optional');
+    }
 
-            foreach ($required as $argument) {
-                $climate->tab()->out($argument->buildSummary());
-
-                if ($argument->description()) {
-                    $climate->tab(2)->out($argument->description());
-                }
-            }
+    /**
+     * Print out the argument list
+     *
+     * @param CLImate $climate
+     * @param array $arguments
+     * @param string $type
+     */
+    protected function printArguments(CLImate $climate, $arguments, $type)
+    {
+        if (count($arguments) == 0) {
+            return;
         }
 
-        // Print optional argument details.
-        if (count($optional) > 0) {
-            $climate->br();
-            $climate->out("Optional Arguments:");
+        $climate->br()->out(ucwords($type) . " Arguments:");
 
-            foreach ($optional as $argument) {
-                $climate->tab()->out($argument->buildSummary());
+        foreach ($arguments as $argument) {
+            $climate->tab()->out($argument->buildSummary());
 
-                if ($argument->description()) {
-                    $climate->tab(2)->out($argument->description());
-                }
+            if ($argument->description()) {
+                $climate->tab(2)->out($argument->description());
             }
         }
     }
@@ -293,7 +299,7 @@ class Manager
 
             // Look for the argument in our defined $arguments and assign their
             // value.
-            foreach ($this->findWithPrefix() as $argument) {
+            foreach ($this->getWithPrefix() as $argument) {
                 if (in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
                     // We found an argument key, so take it out of the array.
                     unset($argv[$key]);
@@ -328,7 +334,7 @@ class Manager
      */
     protected function parseNonPrefixedArguments(array $unParsedArguments = [])
     {
-        foreach ($this->findWithPrefix(false) as $key => $argument) {
+        foreach ($this->getWithoutPrefix() as $key => $argument) {
             if (isset($unParsedArguments[$key])) {
                 $argument->setValue($unParsedArguments[$key]);
             }
@@ -336,58 +342,65 @@ class Manager
     }
 
     /**
-     * Retrieve all required arguments.
+     * Retrieve optional arguments
      *
-     * If $required is false then retrieve optional arguments instead.
-     *
-     * @param bool $required
-     * @param bool $hasPrefix
      * @return Argument[]
      */
-    protected function findRequired($required = true, $hasPrefix = true)
+    protected function getOptional()
     {
-        $arguments = [];
-
-        foreach ($this->all() as $argument) {
-            if (
-                (($required && $argument->isRequired()) || (!$required && !$argument->isRequired()))
-                && (($hasPrefix && $argument->hasPrefix()) || (!$hasPrefix && !$argument->hasPrefix()))
-            ) {
-                $arguments[] = $argument;
-            }
-        }
-
-        usort($arguments, ['League\CLImate\Argument\Argument', 'compareByPrefix']);
-
-        return $arguments;
+        return $this->filterDefinedArguments(['hasPrefix', 'isOptional']);
     }
 
     /**
-     * Retrieve all arguments with either short or long prefixes defined.
+     * Retrieve required arguments
      *
-     * If $withPrefix is false then retrieve arguments with no prefix defined.
-     *
-     * @param bool $withPrefix
      * @return Argument[]
      */
-    public function findWithPrefix($withPrefix = true)
+    protected function getRequired()
     {
-        $arguments = [];
+        return $this->filterDefinedArguments(['hasPrefix', 'isRequired']);
+    }
 
-        foreach ($this->all() as $argument) {
-            if (
-                ($withPrefix && $argument->hasPrefix())
-                || (!$withPrefix && !$argument->hasPrefix())
-            ) {
-                $arguments[] = $argument;
-            }
+    /**
+     * Retrieve arguments with prefix
+     *
+     * @return Argument[]
+     */
+    protected function getWithPrefix()
+    {
+        return $this->filterDefinedArguments(['hasPrefix']);
+    }
+
+    /**
+     * Retrieve arguments without prefix
+     *
+     * @return Argument[]
+     */
+    protected function getWithoutPrefix()
+    {
+        return $this->filterDefinedArguments(['noPrefix']);
+    }
+
+    /**
+     * Filter defined arguments as to whether they are required or not
+     *
+     * @param bool $required
+     *
+     * @return Argument[]
+     */
+    protected function filterDefinedArguments($filters = [])
+    {
+        $arguments = $this->all();
+
+        foreach ($filters as $filter) {
+            $arguments = array_filter($arguments, [$this->filter, $filter]);
         }
 
-        if ($withPrefix) {
-            usort($arguments, ['League\CLImate\Argument\Argument', 'compareByPrefix']);
+        if (in_array('hasPrefix', $filters)) {
+            usort($arguments, [$this, 'compareByPrefix']);
         }
 
-        return $arguments;
+        return array_values($arguments);
     }
 
     /**
@@ -399,15 +412,7 @@ class Manager
      */
     protected function findMissing()
     {
-        $missingArguments = [];
-
-        foreach ($this->all() as $argument) {
-            if ($argument->isRequired() && is_null($argument->value())) {
-                $missingArguments[] = $argument;
-            }
-        }
-
-        return $missingArguments;
+        return $this->filterDefinedArguments(['isRequired', 'noValue']);
     }
 
     /**
@@ -448,11 +453,26 @@ class Manager
         }
 
         $arguments = $argv;
-        $command = array_shift($arguments);
+        $command   = array_shift($arguments);
 
-        return [
-            'command' => $command,
-            'arguments' => $arguments,
-        ];
+        return compact('arguments', 'command');
+    }
+
+    /**
+     * Compare two arguments by their short and long prefixes.
+     *
+     * @see usort()
+     *
+     * @param Argument $a
+     * @param Argument $b
+     *
+     * @return int
+     */
+    public static function compareByPrefix(Argument $a, Argument $b)
+    {
+        $compareABy = $a->longPrefix() ?: $a->prefix() ?: '';
+        $compareBBy = $b->longPrefix() ?: $b->prefix() ?: '';
+
+        return (strtolower($compareABy) < strtolower($compareBBy)) ? -1 : 1;
     }
 }
