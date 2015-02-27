@@ -372,6 +372,11 @@ class Argument
         return $summary;
     }
 
+    /**
+     * Builds the summary for any prefixed arguments
+     *
+     * @return string
+     */
     protected function buildPrefixSummary()
     {
         $prefixes = [$this->prefix(), $this->longPrefix()];
