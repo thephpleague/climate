@@ -238,7 +238,7 @@ class Manager
      */
     public function parse(array $argv = null)
     {
-        $cliArguments = $this->getArguments($argv);
+        $cliArguments      = $this->getArguments($argv);
         $unParsedArguments = $this->parsePrefixedArguments($cliArguments);
         $this->parseNonPrefixedArguments($unParsedArguments);
 
@@ -285,43 +285,72 @@ class Manager
     protected function parsePrefixedArguments(array $argv = [])
     {
         foreach ($argv as $key => $cliArgument) {
-            // Look for arguments defined in the "key=value" format.
-            if (strpos($cliArgument, '=') !== false) {
-                list ($name, $value) = explode('=', $cliArgument, 2);
+            list($name, $value) = $this->getNameAndValue($cliArgument);
 
-                // If the argument isn't in "key=value" format then assume it's in
-                // "key value" format and define the value after we've found the
-                // matching CLImate argument.
-            } else {
-                $name = $cliArgument;
-                $value = null;
-            }
-
-            // Look for the argument in our defined $arguments and assign their
-            // value.
-            foreach ($this->getWithPrefix() as $argument) {
-                if (in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
-                    // We found an argument key, so take it out of the array.
-                    unset($argv[$key]);
-
-                    // Arguments are given the value true if they only need to
-                    // be defined on the command line to be set.
-                    if ($argument->definedOnly()) {
-                        $value = true;
-                    } elseif (is_null($value)) {
-                        // If the value wasn't previously defined in "key=value"
-                        // format then define it from the next command argument.
-                        $value = $argv[$key + 1];
-                        unset($argv[$key + 1]);
-                    }
-
-                    $argument->setValue($value);
-                }
-            }
+            $argv = $this->setArgumentValue($argv, $key, $name, $value);
         }
 
         // Send un-parsed arguments back upstream.
         return array_values($argv);
+    }
+
+    /**
+     * Parse the name and value of the argument passed in
+     *
+     * @param string $cliArgument
+     * @return string[] [$name, $value]
+     */
+    protected function getNameAndValue($cliArgument)
+    {
+        // Look for arguments defined in the "key=value" format.
+        if (strpos($cliArgument, '=') !== false) {
+            return explode('=', $cliArgument, 2);
+        }
+
+        // If the argument isn't in "key=value" format then assume it's in
+        // "key value" format and define the value after we've found the
+        // matching CLImate argument.
+        return [$cliArgument, null];
+    }
+
+    /**
+     * Set the an argument's value and remove applicable
+     * arguments from array
+     *
+     * @param array $argv
+     * @param int $key
+     * @param string $name
+     * @param string|null $value
+     *
+     * @return array The new $argv
+     */
+    protected function setArgumentValue($argv, $key, $name, $value)
+    {
+        // Look for the argument in our defined $arguments and assign their
+        // value.
+        foreach ($this->getWithPrefix() as $argument) {
+            if (!in_array($name, ["-{$argument->prefix()}", "--{$argument->longPrefix()}"])) {
+                continue;
+            }
+
+            // We found an argument key, so take it out of the array.
+            unset($argv[$key]);
+
+            // Arguments are given the value true if they only need to
+            // be defined on the command line to be set.
+            if ($argument->definedOnly()) {
+                $value = true;
+            } elseif (is_null($value)) {
+                // If the value wasn't previously defined in "key=value"
+                // format then define it from the next command argument.
+                $value = $argv[++$key];
+                unset($argv[$key]);
+            }
+
+            $argument->setValue($value);
+        }
+
+        return $argv;
     }
 
     /**
