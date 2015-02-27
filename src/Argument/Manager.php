@@ -97,6 +97,7 @@ class Manager
      *
      * @param string $name
      * @param array $argv
+     *
      * @return bool
      */
     public function defined($name, array $argv = null)
@@ -107,14 +108,34 @@ class Manager
         }
 
         $argument = $this->arguments[$name];
-        $commandArguments = $this->getCommandAndArguments($argv)['arguments'];
+        $command_arguments = $this->getArguments($argv);
 
-        foreach ($commandArguments as $commandArgument) {
-            if ($argument->prefix() && strpos($commandArgument, "-{$argument->prefix()}") === 0) {
+        foreach ($command_arguments as $command_argument) {
+            if ($this->isArgument($argument, $command_argument)) {
                 return true;
             }
+        }
 
-            if ($argument->longPrefix() && strpos($commandArgument, "--{$argument->longPrefix()}") === 0) {
+        return false;
+    }
+
+    /**
+     * Check if the defined argument matches the command argument.
+     *
+     * @param Argument $argument
+     * @param string $command_argument
+     *
+     * @return bool
+     */
+    protected function isArgument($argument, $command_argument)
+    {
+        $possibilities = [
+            $argument->prefix()     => "-{$argument->prefix()}",
+            $argument->longPrefix() => "--{$argument->longPrefix()}",
+        ];
+
+        foreach ($possibilities as $key => $search) {
+            if ($key && strpos($command_argument, $search) === 0) {
                 return true;
             }
         }
@@ -156,7 +177,7 @@ class Manager
      */
     public function usage(CLImate $climate, array $argv = null)
     {
-        $command = $this->getCommandAndArguments($argv)['command'];
+        $command = $this->getCommand($argv);
         $required = $this->findRequired();
         $optional = $this->findRequired(false);
         $withPrefix = $this->findWithPrefix();
@@ -211,7 +232,7 @@ class Manager
      */
     public function parse(array $argv = null)
     {
-        $cliArguments = $this->getCommandAndArguments($argv)['arguments'];
+        $cliArguments = $this->getArguments($argv);
         $unParsedArguments = $this->parsePrefixedArguments($cliArguments);
         $this->parseNonPrefixedArguments($unParsedArguments);
 
@@ -387,6 +408,30 @@ class Manager
         }
 
         return $missingArguments;
+    }
+
+    /**
+     * Get the command name.
+     *
+     * @param array $argv
+     *
+     * @return array
+     */
+    protected function getCommand(array $argv = null)
+    {
+        return $this->getCommandAndArguments($argv)['command'];
+    }
+
+    /**
+     * Get the passed arguments.
+     *
+     * @param array $argv
+     *
+     * @return array
+     */
+    protected function getArguments(array $argv = null)
+    {
+        return $this->getCommandAndArguments($argv)['arguments'];
     }
 
     /**
