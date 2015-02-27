@@ -9,8 +9,8 @@ php:
   - hhvm
 
 before_script:
-  - composer self-update
-  - composer install --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer install --no-interaction
 
 script:
   - if [ "$TRAVIS_PHP_VERSION" == 7 ]; then vendor/bin/phpunit; fi
