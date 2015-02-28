@@ -216,6 +216,30 @@ class CLImate
     }
 
     /**
+     * Output the program's usage statement
+     *
+     * @param array $argv
+     */
+    public function usage(array $argv = null)
+    {
+        return $this->arguments->usage($this, $argv);
+    }
+
+    /**
+     * Set the program's description
+     *
+     * @param string $description
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function description($description)
+    {
+        $this->arguments->description($description);
+
+        return $this;
+    }
+
+    /**
      * Check if we have valid output
      *
      * @param  mixed   $output
@@ -345,13 +369,6 @@ class CLImate
         } elseif ($this->settings->exists($name)) {
             $this->settings->add($name, reset($arguments));
         // Handle passthroughs to the arguments manager.
-        } elseif (in_array($name, ['description', 'usage'])) {
-            // The usage() method needs the CLImate object for output.
-            if ($name == 'usage') {
-                array_unshift($arguments, $this);
-            }
-
-            call_user_func_array([$this->arguments, $name], $arguments);
         } else {
             // If we can't find it at this point, let's fail gracefully
             $this->out(reset($arguments));
