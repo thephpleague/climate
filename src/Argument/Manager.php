@@ -343,7 +343,7 @@ class Manager
 
         // Arguments are given the value true if they only need to
         // be defined on the command line to be set.
-        if ($argument->definedOnly()) {
+        if ($argument->noValue()) {
             $argument->setValue(true);
             return $argv;
         }

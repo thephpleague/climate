@@ -60,7 +60,7 @@ class ArgumentTest extends TestBase
     public function it_casts_to_bool_when_defined_only()
     {
         $argument = Argument::createFromArray('invalid-cast-type', [
-            'definedOnly' => true,
+            'noValue' => true,
         ]);
 
         $this->assertEquals('bool', $argument->castTo());
@@ -133,35 +133,35 @@ class ArgumentTest extends TestBase
         $this->cli->description('Test Description');
         $this->cli->arguments->add([
             'only-short-prefix' => [
-                'prefix' => 's',
+                'prefix'      => 's',
                 'description' => 'Only short prefix',
             ],
             'only-long-prefix' => [
-                'longPrefix' => 'long',
+                'longPrefix'  => 'long',
                 'description' => 'Only long prefix',
             ],
             'both-prefixes' => [
-                'prefix' => 'b',
-                'longPrefix' => 'both',
+                'prefix'      => 'b',
+                'longPrefix'  => 'both',
                 'description' => 'Both short and long prefixes',
             ],
             'no-prefix' => [
                 'description' => 'Not defined by a prefix',
             ],
             'defined-only' => [
-                'prefix' => 'd',
-                'longPrefix' => 'defined',
+                'prefix'      => 'd',
+                'longPrefix'  => 'defined',
                 'description' => 'True when defined',
-                'definedOnly' => true,
+                'noValue'     => true,
             ],
             'required' => [
-                'prefix' => 'r',
+                'prefix'      => 'r',
                 'description' => 'Required',
-                'required' => true,
+                'required'    => true,
             ],
             'default-value' => [
-                'prefix' => 'v',
-                'description' => 'Has a default value',
+                'prefix'       => 'v',
+                'description'  => 'Has a default value',
                 'defaultValue' => 'test',
             ],
         ]);
@@ -181,7 +181,7 @@ class ArgumentTest extends TestBase
                 'longPrefix' => 'long',
             ],
             'both-prefixes' => [
-                'prefix' => 'b',
+                'prefix'     => 'b',
                 'longPrefix' => 'both',
             ],
             'both-equals' => [
@@ -189,9 +189,9 @@ class ArgumentTest extends TestBase
             ],
             'no-prefix' => [],
             'defined-only' => [
-                'prefix' => 'd',
+                'prefix'     => 'd',
                 'longPrefix' => 'defined',
-                'definedOnly' => true,
+                'noValue'    => true,
             ],
         ]);
 
@@ -232,11 +232,11 @@ class ArgumentTest extends TestBase
 
         $this->cli->arguments->add([
             'required-value' => [
-                'prefix' => 'r',
+                'prefix'   => 'r',
                 'required' => true,
             ],
             'required-value-1' => [
-                'prefix' => 'r1',
+                'prefix'   => 'r1',
                 'required' => true,
             ],
             'optional-value' => [

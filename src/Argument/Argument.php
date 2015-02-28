@@ -49,7 +49,7 @@ class Argument
      *
      * @var bool
      */
-    protected $definedOnly = false;
+    protected $noValue = false;
 
     /**
      * Which data type to cast an argument's value to.
@@ -99,7 +99,7 @@ class Argument
                     'longPrefix',
                     'description',
                     'required',
-                    'definedOnly',
+                    'noValue',
                     'castTo',
                     'defaultValue',
                 ];
@@ -239,20 +239,20 @@ class Argument
      *
      * @return bool
      */
-    public function definedOnly()
+    public function noValue()
     {
-        return $this->definedOnly;
+        return $this->noValue;
     }
 
     /**
      * Set whether or not an argument only needs to be defined to have a value.
      *
-     * @param bool $definedOnly
+     * @param bool $noValue
      */
-    protected function setDefinedOnly($definedOnly)
+    protected function setNoValue($noValue)
     {
         $this->setCastTo('bool');
-        $this->definedOnly = (bool) $definedOnly;
+        $this->noValue = (bool) $noValue;
     }
 
     /**
@@ -282,7 +282,7 @@ class Argument
             );
         }
 
-        $this->castTo = $this->definedOnly() ? 'bool' : $castTo;
+        $this->castTo = $this->noValue() ? 'bool' : $castTo;
     }
 
     /**
@@ -359,7 +359,7 @@ class Argument
         $printedName = strstr($summary, ' ' . $this->name);
 
         // Print the argument name if it's not printed yet.
-        if (!$printedName && !$this->definedOnly()) {
+        if (!$printedName && !$this->noValue()) {
             $summary .= $this->name();
         }
 
@@ -387,7 +387,7 @@ class Argument
 
             $sub = str_repeat('-', $key + 1) . $prefix;
 
-            if (!$this->definedOnly()) {
+            if (!$this->noValue()) {
                 $sub .= " {$this->name()}";
             }
 
