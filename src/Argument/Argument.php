@@ -94,18 +94,8 @@ class Argument
      */
     public static function createFromArray($name, array $params)
     {
-        $allowed = [
-                    'prefix',
-                    'longPrefix',
-                    'description',
-                    'required',
-                    'noValue',
-                    'castTo',
-                    'defaultValue',
-                ];
-
-        $params   = array_intersect_key($params, array_flip($allowed));
         $argument = new Argument($name);
+        $params   = self::getSettableArgumentParams($params);
 
         foreach ($params as $key => $value) {
             $method = 'set' . ucwords($key);
@@ -117,6 +107,28 @@ class Argument
         }
 
         return $argument;
+    }
+
+    /**
+     * Get argument params based on settable properties
+     *
+     * @param array $params
+     *
+     * @return array
+     */
+    protected static function getSettableArgumentParams(array $params)
+    {
+        $allowed = [
+                    'prefix',
+                    'longPrefix',
+                    'description',
+                    'required',
+                    'noValue',
+                    'castTo',
+                    'defaultValue',
+                ];
+
+        return array_intersect_key($params, array_flip($allowed));
     }
 
     /**
