@@ -166,8 +166,8 @@ class ArgumentTest extends TestBase
             ],
         ]);
 
-        $argv = ['test-script'];
-        $this->cli->usage($argv);
+        $command = 'test-script';
+        $this->cli->usage([$command]);
     }
 
     /** @test */
