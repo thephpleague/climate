@@ -338,23 +338,48 @@ class Argument
      */
     public function setValue($value)
     {
-        switch ($this->castTo) {
-            case 'string':
-                $this->value = (string) $value;
-                break;
-            case 'int':
-                $this->value = (int) $value;
-                break;
-            case 'float':
-                $this->value = (float) $value;
-                break;
-            case 'bool':
-                $this->value = (bool) $value;
-                break;
-            default:
-                $this->value = $value;
-                break;
-        }
+        $cast_method = 'castTo' . ucwords($this->castTo);
+        $this->value = $this->{$cast_method}($value);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return string
+     */
+    protected function castToString($value)
+    {
+        return (string) $value;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return int
+     */
+    protected function castToInt($value)
+    {
+        return (int) $value;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return float
+     */
+    protected function castToFloat($value)
+    {
+        return (float) $value;
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return bool
+     */
+    protected function castToBool($value)
+    {
+        return (bool) $value;
     }
 
     /**
