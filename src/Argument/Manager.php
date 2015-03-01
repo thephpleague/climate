@@ -352,7 +352,7 @@ class Manager
      *
      * @param array $argv
      *
-     * @return array
+     * @return string
      */
     protected function getCommand(array $argv = null)
     {
@@ -364,7 +364,7 @@ class Manager
      *
      * @param array $argv
      *
-     * @return array
+     * @return string
      */
     protected function getArguments(array $argv = null)
     {
