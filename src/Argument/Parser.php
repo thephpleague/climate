@@ -7,14 +7,14 @@ class Parser {
     /**
      * Filter class to find various types of arguments
      *
-     * @var League\CLImate\Argument\Filter $filter
+     * @var \League\CLImate\Argument\Filter $filter
      */
     protected $filter;
 
     /**
      * Summary builder class
      *
-     * @var League\CLImate\Argument\Summary $summary
+     * @var \League\CLImate\Argument\Summary $summary
      */
     protected $summary;
 
@@ -79,7 +79,7 @@ class Parser {
      *
      * @param array $argv
      *
-     * @return string
+     * @return array
      */
     public function arguments(array $argv = null)
     {

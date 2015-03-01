@@ -30,14 +30,14 @@ class Manager
     /**
      * Summary builder class
      *
-     * @var League\CLImate\Argument\Summary $summary
+     * @var \League\CLImate\Argument\Summary $summary
      */
     protected $summary;
 
     /**
      * Argument parser class
      *
-     * @var League\CLImate\Argument\Parser $parser
+     * @var \League\CLImate\Argument\Parser $parser
      */
     protected $parser;
 
