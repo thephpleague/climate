@@ -125,7 +125,7 @@ class CLImate
     {
         $this->setStyle(new Style());
         $this->setRouter(new Router());
-        $this->setSettingsManager(new Manager());
+        $this->setSettingsManager(new SettingsManager());
         $this->setOutput(new Output());
         $this->setUtil(new UtilFactory());
         $this->setArgumentManager(new ArgumentManager());
@@ -156,7 +156,7 @@ class CLImate
      *
      * @param \League\CLImate\Settings\Manager $manager
      */
-    public function setSettingsManager(Manager $manager)
+    public function setSettingsManager(SettingsManager $manager)
     {
         $this->settings = $manager;
     }
