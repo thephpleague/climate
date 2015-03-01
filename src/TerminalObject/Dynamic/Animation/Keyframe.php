@@ -13,6 +13,7 @@ class Keyframe
     /**
      * Get the enter keyframes for the desired direction
      *
+     * @param array $lines
      * @param string $direction
      *
      * @return array
@@ -25,6 +26,7 @@ class Keyframe
     /**
      * Get the exit keyframes for the desired direction
      *
+     * @param array $lines
      * @param string $direction
      *
      * @return array
