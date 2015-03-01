@@ -86,6 +86,16 @@ class Output
     }
 
     /**
+     * Add a default writer
+     *
+     * @param string|array $keys
+     */
+    public function addDefault($keys)
+    {
+        $this->default = array_merge($this->default, $this->getWriters($keys));
+    }
+
+    /**
      * Register a writer to be used just once
      *
      * @param string|array $keys

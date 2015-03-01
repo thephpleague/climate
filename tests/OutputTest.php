@@ -31,6 +31,20 @@ class OutputTest extends TestBase
     }
 
     /** @test */
+    public function it_can_default_to_a_writer()
+    {
+        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error->shouldReceive('write')->once()->with("Oh, hey there.");
+
+        $output = new League\CLImate\Util\Output();
+
+        $output->add('error', $error);
+        $output->defaultTo('error');
+
+        $output->sameLine()->write('Oh, hey there.');
+    }
+
+    /** @test */
     public function it_can_default_to_multiple_writers()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -44,6 +58,25 @@ class OutputTest extends TestBase
         $output->add('out', $out);
         $output->add('error', $error);
         $output->defaultTo(['out', 'error']);
+
+        $output->sameLine()->write('Oh, hey there.');
+    }
+
+    /** @test */
+    public function it_can_add_a_default()
+    {
+        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out->shouldReceive('write')->once()->with("Oh, hey there.");
+
+        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error->shouldReceive('write')->once()->with("Oh, hey there.");
+
+        $output = new League\CLImate\Util\Output();
+
+        $output->add('out', $out);
+        $output->add('error', $error);
+        $output->defaultTo('out');
+        $output->addDefault('error');
 
         $output->sameLine()->write('Oh, hey there.');
     }

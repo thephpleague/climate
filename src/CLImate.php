@@ -112,7 +112,7 @@ class CLImate
      *
      * @var \League\CLImate\Util\Output $output
      */
-    protected $output;
+    public $output;
 
     /**
      * An instance of the Util Factory
@@ -211,6 +211,20 @@ class CLImate
     public function forceAnsiOff()
     {
         $this->util->system->forceAnsi(false);
+
+        return $this;
+    }
+
+    /**
+     * Write line to writer once
+     *
+     * @param string|array $writer
+     *
+     * @return \League\CLImate\CLImate
+     */
+    public function to($writer)
+    {
+        $this->output->once($writer);
 
         return $this;
     }

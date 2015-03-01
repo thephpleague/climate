@@ -9,7 +9,9 @@ class BufferTest extends TestBase
     public function it_can_buffer_content()
     {
         $buffer = new League\CLImate\Util\Writer\Buffer;
-        $output = new League\CLImate\Util\Output($buffer);
+        $output = new League\CLImate\Util\Output();
+        $output->add('buffer', $buffer);
+        $output->defaultTo('buffer');
 
         $output->write("Oh, you're still here.");
 
@@ -20,7 +22,9 @@ class BufferTest extends TestBase
     public function it_can_buffer_content_without_a_new_line()
     {
         $buffer = new League\CLImate\Util\Writer\Buffer;
-        $output = new League\CLImate\Util\Output($buffer);
+        $output = new League\CLImate\Util\Output();
+        $output->add('buffer', $buffer);
+        $output->defaultTo('buffer');
 
         $output->sameLine()->write("Oh, you're still here.");
 
@@ -31,7 +35,9 @@ class BufferTest extends TestBase
     public function it_can_buffer_multiple_lines()
     {
         $buffer = new League\CLImate\Util\Writer\Buffer;
-        $output = new League\CLImate\Util\Output($buffer);
+        $output = new League\CLImate\Util\Output();
+        $output->add('buffer', $buffer);
+        $output->defaultTo('buffer');
 
         $output->write("Oh, you're still here.");
         $output->write("Also am I.");
@@ -43,7 +49,9 @@ class BufferTest extends TestBase
     public function it_can_clean_buffered_content()
     {
         $buffer = new League\CLImate\Util\Writer\Buffer;
-        $output = new League\CLImate\Util\Output($buffer);
+        $output = new League\CLImate\Util\Output();
+        $output->add('buffer', $buffer);
+        $output->defaultTo('buffer');
 
         $output->write("Oh, you're still here.");
         $buffer->clean();

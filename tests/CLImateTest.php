@@ -20,4 +20,16 @@ class CLImateTest extends TestBase
         $this->cli->out('This is a line.')->out('This is another line.');
     }
 
+    /** @test */
+    public function it_can_write_content_to_a_different_output()
+    {
+        $this->shouldWrite("\e[mThis is to the buffer.\e[0m");
+        $this->output->shouldReceive('defaultTo')->with('out')->once();
+        $this->output->shouldReceive('once')->with('buffer')->once();
+
+        // Just double check that this is the default output
+        $this->cli->output->defaultTo('out');
+        $this->cli->to('buffer')->out('This is to the buffer.');
+    }
+
 }
