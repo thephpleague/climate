@@ -83,12 +83,12 @@ class Summary {
     {
         // Print the description if it's defined.
         if ($this->description) {
-            $this->climate->out($this->description);
+            $this->climate->out($this->description)->br();
         }
 
         // Print the usage statement with the arguments without a prefix at the end.
-        $this->climate->sameLine()->out("Usage: {$this->command} ");
-        $this->climate->out($this->short($this->getOrderedArguments()));
+        $this->climate->out("Usage: {$this->command} "
+                            . $this->short($this->getOrderedArguments()));
 
         // Print argument details.
         foreach (['required', 'optional'] as $type) {
