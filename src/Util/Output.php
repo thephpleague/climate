@@ -147,9 +147,26 @@ class Output
     }
 
     /**
+     * Write the content using the provided writer
+     *
+     * @param  string $content
+     */
+    public function write($content)
+    {
+        if ($this->new_line) {
+            $content .= PHP_EOL;
+        }
+
+        foreach ($this->getCurrentWriters() as $writer) {
+            $writer->write($content);
+        }
+
+        $this->resetOneTimers();
+    }
+
+    /**
      * Resolve the writer(s) down to an array of WriterInterface classes
      *
-     * @throws \Exception If passing a non-valid writer
      * @param WriterInterface|array|string $writer
      *
      * @return array
@@ -168,6 +185,15 @@ class Output
             return $this->writers[$writer];
         }
 
+        $this->handleUnknownWriter($writer);
+    }
+
+    /**
+     * @param mixed $writer
+     * @throws \Exception For non-valid writer
+     */
+    protected function handleUnknownWriter($writer)
+    {
         // If we've gotten this far and don't know what it is,
         // let's at least try and give a helpful error message
         if (is_object($writer)) {
@@ -206,28 +232,24 @@ class Output
      */
     protected function getWriters($keys)
     {
-        return array_intersect_key($this->writers, array_flip(Helper::toArray($keys)));
+        $writers = array_flip(Helper::toArray($keys));
+
+        return Helper::flatten(array_intersect_key($this->writers, $writers));
     }
 
     /**
-     * Write the content using the provided writer
-     *
-     * @param  string $content
+     * @return WriterInterface[]
      */
-    public function write($content)
+    protected function getCurrentWriters()
     {
-        if ($this->new_line) {
-            $content .= PHP_EOL;
-        }
+        return $this->once ?: $this->default;
+    }
 
-        $writers = $this->once ?: $this->default;
-
-        foreach ($writers as $writer) {
-            foreach ($writer as $write) {
-                $write->write($content);
-            }
-        }
-
+    /**
+     * Reset anything only used for the current content being written
+     */
+    protected function resetOneTimers()
+    {
         // Reset new line flag for next time
         $this->new_line = true;
 
