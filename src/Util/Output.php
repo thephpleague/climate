@@ -110,6 +110,27 @@ class Output
     }
 
     /**
+     * Get a specific writer
+     *
+     * @throws \Exception if writer key doesn't exist
+     * @param string $writer
+     *
+     * @return WriterInterface|array
+     */
+    public function get($writer)
+    {
+        if (!array_key_exists($writer, $this->writers)) {
+            throw new \Exception('Unknown writer [' . $writer . ']');
+        }
+
+        if (count($this->writers[$writer]) == 1) {
+            return reset($this->writers[$writer]);
+        }
+
+        return $this->writers[$writer];
+    }
+
+    /**
      * Get the currently available writers
      *
      * @return array
@@ -128,7 +149,7 @@ class Output
     /**
      * Resolve the writer(s) down to an array of WriterInterface classes
      *
-     * @throws Exception If passing a non-valid writer
+     * @throws \Exception If passing a non-valid writer
      * @param WriterInterface|array|string $writer
      *
      * @return array

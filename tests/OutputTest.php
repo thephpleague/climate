@@ -201,4 +201,20 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Second time.');
     }
 
+    /** @test */
+    public function it_can_retrieve_a_writer()
+    {
+        $buffer = Mockery::mock('League\CLImate\Util\Writer\Buffer');
+        $buffer->shouldReceive('write')->once()->with('Oh, hey there.');
+        $buffer->shouldReceive('get')->once()->andReturn('Oh, hey there.');
+
+        $output = new League\CLImate\Util\Output();
+
+        $output->add('buffer', $buffer);
+        $output->defaultTo('buffer');
+
+        $output->sameLine()->write('Oh, hey there.');
+        $this->assertSame($output->get('buffer')->get(), 'Oh, hey there.');
+    }
+
 }
