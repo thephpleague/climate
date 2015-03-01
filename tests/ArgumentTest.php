@@ -92,7 +92,10 @@ class ArgumentTest extends TestBase
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[mTest Description\e[0m");
         $this->shouldWrite("\e[m\e[0m");
-        $this->shouldWrite("\e[mUsage: test-script [-b both-prefixes, --both both-prefixes] [-d, --defined] [--long only-long-prefix] [-r required] [-s only-short-prefix] [-v default-value (default: test)] [no-prefix]\e[0m");
+        $this->shouldWrite("\e[mUsage: test-script \e[0m");
+        $this->shouldWrite("\e[m[-b both-prefixes, --both both-prefixes] [-d, --defined] "
+                            . "[--long only-long-prefix] [-r required] [-s only-short-prefix] "
+                            . "[-v default-value (default: test)] [no-prefix]\e[0m");
 
         $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mRequired Arguments:\e[0m");

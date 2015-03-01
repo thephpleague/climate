@@ -27,9 +27,12 @@ class Manager
      */
     protected $filter;
 
+    protected $summary;
+
     public function __construct()
     {
-        $this->filter = new Filter();
+        $this->filter  = new Filter();
+        $this->summary = new Summary();
     }
 
     /**
@@ -189,47 +192,12 @@ class Manager
      */
     public function usage(CLImate $climate, array $argv = null)
     {
-        $this->filter->setArguments($this->all());
-
-        // Print the description if it's defined.
-        if ($this->description) {
-            $climate->out($this->description)->br();
-        }
-
-        // Print the usage statement with the arguments without a prefix at the
-        // end.
-        $climate->out(
-            "Usage: {$this->getCommand($argv)} "
-            . $this->buildShortSummary(array_merge($this->filter->withPrefix(), $this->filter->withoutPrefix()))
-        );
-
-        // Print argument details.
-        $this->printArguments($climate, $this->filter->required(), 'required');
-        $this->printArguments($climate, $this->filter->optional(), 'optional');
-    }
-
-    /**
-     * Print out the argument list
-     *
-     * @param CLImate $climate
-     * @param array $arguments
-     * @param string $type
-     */
-    protected function printArguments(CLImate $climate, $arguments, $type)
-    {
-        if (count($arguments) == 0) {
-            return;
-        }
-
-        $climate->br()->out(ucwords($type) . " Arguments:");
-
-        foreach ($arguments as $argument) {
-            $climate->tab()->out($argument->buildSummary());
-
-            if ($argument->description()) {
-                $climate->tab(2)->out($argument->description());
-            }
-        }
+        $this->summary
+                ->setClimate($climate)
+                ->setDescription($this->description)
+                ->setCommand($this->getCommand($argv))
+                ->setFilter($this->filter, $this->all())
+                ->output();
     }
 
     /**
@@ -254,26 +222,9 @@ class Manager
         if (count($missingArguments) > 0) {
             throw new \Exception(
                 'The following arguments are required: '
-                . $this->buildShortSummary($missingArguments) . '.'
+                . $this->summary->short($missingArguments) . '.'
             );
         }
-    }
-
-    /**
-     * Build a short summary of a list of arguments.
-     *
-     * @param Argument[] $arguments
-     * @return string
-     */
-    protected function buildShortSummary(array $arguments = [])
-    {
-        $summaries = [];
-
-        foreach ($arguments as $argument) {
-            $summaries[] = "[{$argument->buildSummary()}]";
-        }
-
-        return implode(' ', $summaries);
     }
 
     /**
