@@ -11,6 +11,7 @@ Styling:
 Terminal Objects:
     Overview: '/terminal-objects/overview/'
     Input: '/terminal-objects/input/'
+    Arguments: '/arguments/'
     Table: '/terminal-objects/table/'
     Columns: '/terminal-objects/columns/'
     Padding: '/terminal-objects/padding/'
