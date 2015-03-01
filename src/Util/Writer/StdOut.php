@@ -8,8 +8,6 @@ class StdOut implements WriterInterface
      * Write the content to the stream
      *
      * @param  string $content
-     *
-     * @return void
      */
     public function write($content)
     {
