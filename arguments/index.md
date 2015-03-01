@@ -39,6 +39,12 @@ $climate->arguments->add([
         'description' => 'Password',
         'required'    => true,
     ],
+    'iterations' => [
+        'prefix'      => 'i',
+        'longPrefix'  => 'iterations',
+        'description' => 'Number of iterations',
+        'castTo'      => 'int',
+    ],
     'verbose' => [
         'prefix'      => 'v',
         'longPrefix'  => 'verbose',
@@ -81,6 +87,16 @@ To simply check if an argument was was passed at all, you can use the `defined` 
 $climate->arguments->defined('verbose');
 ~~~
 
+## Adding a Description
+
+Sometimes it's helpful to add a short description of the script to help a user out. Easy enough:
+
+~~~php
+$climate->description('My CLI Script');
+~~~
+
+This comes in handy when printing...
+
 ## Usage Statements
 
 Printing a formatted usage statement is easy:
@@ -92,5 +108,19 @@ $climate->usage();
 would result in:
 
 ~~~
+My CLI Script
 
+Usage: my-script.php [--help] [-p password, --password password] [-u user, --user user (default: me_myself_i)] [-v, --verbose] [path]
+
+Required Arguments:
+    -p password, --password password
+        Password
+
+Optional Arguments:
+    --help
+        Prints a usage statement
+    -u user, --user user (default: me_myself_i)
+        Username
+    -v, --verbose
+        Verbose output
 ~~~
