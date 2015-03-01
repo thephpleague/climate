@@ -110,7 +110,7 @@ would result in:
 ~~~
 My CLI Script
 
-Usage: my-script.php [--help] [-p password, --password password] [-u user, --user user (default: me_myself_i)] [-v, --verbose] [path]
+Usage: functional/args.php [--help] [-i iterations, --iterations iterations] [-p password, --password password] [-u user, --user user (default: me_myself_i)] [-v, --verbose] [path]
 
 Required Arguments:
     -p password, --password password
@@ -119,6 +119,8 @@ Required Arguments:
 Optional Arguments:
     --help
         Prints a usage statement
+    -i iterations, --iterations iterations
+        Number of iterations
     -u user, --user user (default: me_myself_i)
         Username
     -v, --verbose
