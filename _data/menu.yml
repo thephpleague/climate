@@ -2,16 +2,18 @@ Getting Started:
     Introduction: '/'
     Installation: '/installation/'
     Basic Usage: '/basic-usage/'
+    Output: '/output/'
 Styling:
     Colors: '/styling/colors/'
     Formatting: '/styling/formatting/'
     Combinations: '/styling/combinations/'
     Commands: '/styling/commands/'
     Customizing: '/styling/customizing/'
+Arguments:
+    Overview: '/arguments/'
 Terminal Objects:
     Overview: '/terminal-objects/overview/'
     Input: '/terminal-objects/input/'
-    Arguments: '/arguments/'
     Table: '/terminal-objects/table/'
     Columns: '/terminal-objects/columns/'
     Padding: '/terminal-objects/padding/'
