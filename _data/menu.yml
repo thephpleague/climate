@@ -26,3 +26,4 @@ Terminal Objects:
     Tab: '/terminal-objects/tab/'
     Draw: '/terminal-objects/draw/'
     Clear: '/terminal-objects/clear/'
+    Animation: '/terminal-objects/animation/'
