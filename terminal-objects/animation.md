@@ -15,6 +15,8 @@ Just like [Draw](/terminal-objects/draw/), you can add custom ASCII art using th
 
 Valid directions are 'top', 'bottom', 'left', 'right'.
 
+<img alt="Oh, Hello Animation" src="/img/oh-hello-animation.gif" style="max-width:100%" />
+
 ## Enter From, Exit To
 
 ~~~php
