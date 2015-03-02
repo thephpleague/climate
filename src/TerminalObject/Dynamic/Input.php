@@ -211,12 +211,12 @@ class Input extends DynamicTerminalObject
      */
     protected function isAcceptableResponse($response)
     {
-        if (!$this->strict) {
-            $acceptable = $this->levelPlayingField((array) $this->acceptable);
-            $response         = $this->levelPlayingField($response);
-        } else {
-            $acceptable = $this->acceptable;
+        if ($this->strict) {
+            return in_array($response, $this->acceptable);
         }
+
+        $acceptable = $this->levelPlayingField($this->acceptable);
+        $response   = $this->levelPlayingField($response);
 
         return in_array($response, $acceptable);
     }
