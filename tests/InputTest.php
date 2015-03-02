@@ -85,6 +85,23 @@ class InputTest extends TestBase
     }
 
     /** @test */
+    public function it_will_display_acceptable_responses_with_same_format_if_input_fails()
+    {
+        $this->shouldReadAndReturn('Nothing.');
+        $this->shouldReadAndReturn('Stuff.');
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mSo what is up? [Everything./Stuff.] \e[0m", 2);
+
+        $input = $this->cli->input('So what is up?', $this->reader);
+
+        $input->accept(['Everything.', 'Stuff.'], true);
+
+        $response = $input->prompt();
+
+        $this->assertSame('Stuff.', $response);
+    }
+
+    /** @test */
     public function it_will_format_the_default_acceptable_response()
     {
         $this->shouldReadAndReturn('Stuff.');
