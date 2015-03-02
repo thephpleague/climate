@@ -1,3 +1,17 @@
+## 3.0.0 - 2015-03-01
+
+### Changed
+
+- Custom output writers are added simply via the `output` property on CLImate now, as opposed to the immense amount of scaffolding required before
+
+### Added
+
+- Argument parsing
+- StdErr output
+- Buffer output
+- `animate` method for running ASCII animations in the terminal. Because it's fun.
+- Input now bolds the default response if it exists
+
 ## 2.6.1 - 2015-01-18
 
 ### Fixed
