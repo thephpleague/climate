@@ -76,11 +76,34 @@ class Logger extends AbstractLogger
         $this->climate->{$level}($message);
 
         # Append any context information not used as placeholders
-        foreach ($context as $key => $val) {
-            $val = (string) $val;
-            $this->climate->tab()->{$level}("{$key}: {$val}");
-        }
+        $this->outputRecursiveContext($level, $context, 1);
 
         return $this;
+    }
+
+    /**
+     * Handle recursive arrays in the logging context.
+     *
+     * @param mixed  $level    The level of the log message
+     * @param array  $context  The array of context to output
+     * @param int    $indent   The current level of indentation to be used
+     *
+     * @return vvoid
+     */
+    protected function outputRecursiveContext($level, array $context, $indent)
+    {
+        foreach ($context as $key => $val) {
+            $this->climate->tab($indent);
+
+            $this->climate->{$level}()->inline("{$key}: ");
+
+            if (is_array($val)) {
+                $this->climate->{$level}("[");
+                $this->outputRecursiveContext($level, $val, $indent + 1);
+                $this->climate->tab($indent)->{$level}("]");
+            } else {
+                $this->climate->{$level}((string) $val);
+            }
+        }
     }
 }

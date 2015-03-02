@@ -95,8 +95,12 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     public function it_can_log_with_context()
     {
         $this->cli->shouldReceive("info")->once()->with("With context");
-        $this->cli->shouldReceive("tab")->once()->andReturn($this->cli);
-        $this->cli->shouldReceive("info")->once()->with("context: CONTEXT");
+
+        $this->cli->shouldReceive("tab")->with(1)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("context: ");
+        $this->cli->shouldReceive("info")->once()->with("CONTEXT");
+
         $this->logger->info("With context", [
             "context"   =>  "CONTEXT",
         ]);
@@ -122,11 +126,65 @@ class LoggerTest extends PHPUnit_Framework_TestCase
     public function it_can_log_with_placeholders_and_context()
     {
         $this->cli->shouldReceive("info")->once()->with("I am Spartacus!");
-        $this->cli->shouldReceive("tab")->once()->andReturn($this->cli);
-        $this->cli->shouldReceive("info")->once()->with("date: 2015-03-01");
+
+        $this->cli->shouldReceive("tab")->with(1)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("date: ");
+        $this->cli->shouldReceive("info")->once()->with("2015-03-01");
+
         $this->logger->info("I am {username}!", [
             "username"  =>  "Spartacus",
             "date"      =>  "2015-03-01",
+        ]);
+    }
+
+    /** @test */
+    public function it_can_log_with_recursive_output()
+    {
+        $this->cli->shouldReceive("info")->once()->with("INFO");
+
+        $this->cli->shouldReceive("tab")->with(1)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("data: ");
+        $this->cli->shouldReceive("info")->once()->with("[");
+
+        $this->cli->shouldReceive("tab")->with(2)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("field1: ");
+        $this->cli->shouldReceive("info")->once()->with("One");
+
+        $this->cli->shouldReceive("tab")->with(2)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("field2: ");
+        $this->cli->shouldReceive("info")->once()->with("Two");
+
+        $this->cli->shouldReceive("tab")->with(2)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("extra: ");
+        $this->cli->shouldReceive("info")->once()->with("[");
+
+        $this->cli->shouldReceive("tab")->with(3)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("0: ");
+        $this->cli->shouldReceive("info")->once()->with("Three");
+
+        $this->cli->shouldReceive("tab")->with(3)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("inline")->once()->with("1: ");
+        $this->cli->shouldReceive("info")->once()->with("Four");
+
+        $this->cli->shouldReceive("tab")->with(2)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->with("]");
+
+        $this->cli->shouldReceive("tab")->with(1)->once()->andReturn($this->cli);
+        $this->cli->shouldReceive("info")->once()->with("]");
+
+        $this->logger->info("INFO", [
+            "data"      =>  [
+                "field1"    =>  "One",
+                "field2"    =>  "Two",
+                "extra"     =>  ["Three", "Four"],
+            ],
         ]);
     }
 }
