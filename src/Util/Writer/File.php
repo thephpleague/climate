@@ -52,7 +52,14 @@ class File implements WriterInterface
      */
     public function write($content)
     {
-        gzwrite($this->getResource(), $content);
+        $resource = $this->getResource();
+        if ( $this->use_locking ) {
+            flock($resource, LOCK_EX);
+        }
+        gzwrite($resource, $content);
+        if ( $this->use_locking ) {
+            flock($resource, LOCK_UN);
+        }
     }
 
     public function _destruct()
