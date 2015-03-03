@@ -72,7 +72,7 @@ class File implements WriterInterface
         $this->close_locally = true;
 
         if (!is_writable($this->resource)) {
-            throw new \Exception("The resource {$this->resource} is not writable");
+            throw new \Exception("The resource [{$this->resource}] is not writable");
         }
 
         if (!($this->resource = $this->openResource())) {
