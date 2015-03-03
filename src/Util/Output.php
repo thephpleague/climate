@@ -41,6 +41,8 @@ class Output
      */
     protected $once;
 
+    protected $persist = false;
+
     public function __construct()
     {
         $this->add('out', new Writer\StdOut);
@@ -105,6 +107,24 @@ class Output
     public function once($keys)
     {
         $this->once = $this->getWriters($keys);
+
+        return $this;
+    }
+
+    /**
+     * Persist or un-persist one time writers (for multi-line output)
+     *
+     * @param bool $persist
+     *
+     * @return \League\CLImate\Util\Output
+     */
+    public function persist($persist = true)
+    {
+        $this->persist = (bool) $persist;
+
+        if (!$this->persist) {
+            $this->resetOneTimers();
+        }
 
         return $this;
     }
@@ -253,8 +273,10 @@ class Output
         // Reset new line flag for next time
         $this->new_line = true;
 
-        // Reset once since we only want to use it... once.
-        $this->once = null;
+        if (!$this->persist) {
+            // Reset once since we only want to use it... once.
+            $this->once = null;
+        }
     }
 
 }

@@ -34,6 +34,8 @@ class BasicRouter extends BaseRouter implements RouterInterface
             $results = [$results];
         }
 
+        $this->output->persist();
+
         foreach ($results as $result) {
             if ($obj->sameLine()) {
                 $this->output->sameLine();
@@ -41,5 +43,7 @@ class BasicRouter extends BaseRouter implements RouterInterface
 
             $this->output->write($obj->getParser()->apply($result));
         }
+
+        $this->output->persist(false);
     }
 }

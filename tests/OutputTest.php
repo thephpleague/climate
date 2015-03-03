@@ -202,6 +202,30 @@ class OutputTest extends TestBase
     }
 
     /** @test */
+    public function it_will_persist_writer_if_told_to()
+    {
+        $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
+        $out->shouldReceive('write')->once()->with('Second time.');
+
+        $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
+        $error->shouldReceive('write')->times(3)->with('First time.');
+
+        $output = new League\CLImate\Util\Output();
+
+        $output->add('out', $out);
+        $output->add('error', $error);
+        $output->defaultTo('out');
+
+        $output->persist();
+        $output->once('error')->sameLine()->write('First time.');
+        $output->sameLine()->write('First time.');
+        $output->sameLine()->write('First time.');
+        $output->persist(false);
+
+        $output->sameLine()->write('Second time.');
+    }
+
+    /** @test */
     public function it_can_retrieve_a_writer()
     {
         $buffer = Mockery::mock('League\CLImate\Util\Writer\Buffer');
