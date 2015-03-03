@@ -15,6 +15,7 @@ class File implements WriterInterface
     {
         $this->resource = $resource;
     }
+
     /**
      * Write the content to the stream
      *
