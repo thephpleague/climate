@@ -31,7 +31,7 @@ class File implements WriterInterface
 
     public function lock()
     {
-        $this->user_locking = true;
+        $this->use_locking = true;
 
         return $this;
     }
