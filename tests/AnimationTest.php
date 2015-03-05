@@ -25,19 +25,62 @@ class AnimationTest extends TestBase
         return $sleeper;
     }
 
+    protected function assertScrolledRight()
+    {
+        $this->assertEnteredFromLeft();
+        $this->assertExitedRight();
+    }
+
+    protected function assertEnteredFromLeft()
+    {
+        $this->emptyFrame();
+
+        for ($i = 8; $i >= 1; $i--) {
+            $this->{'exitLeftFrame' . $i}();
+        }
+
+        $this->fullArtExitLeftPlus();
+    }
+
+    protected function assertEnteredFromRight()
+    {
+        for ($i = 8; $i >= 1; $i--) {
+            $this->{'exitRightFrameEnd' . $i}();
+        }
+
+        for ($i = 71; $i >= 0; $i--) {
+            $this->exitRightFrame($i);
+        }
+    }
+
+    protected function assertExitedLeft()
+    {
+        for ($i = 1; $i <= 8; $i++) {
+            $this->{'exitLeftFrame' . $i}();
+        }
+    }
+
+    protected function assertExitedRight()
+    {
+        for ($i = 0; $i <= 71; $i++) {
+            $this->exitRightFrame($i);
+        }
+
+        for ($i = 1; $i <= 9; $i++) {
+            $this->{'exitRightFrameEnd' . $i}();
+        }
+    }
+
     /** @test */
     public function it_can_exit_to_top()
     {
         $this->fullArtExitTop();
-        $this->fullArtExitTopPlus();
-        $this->fullArtExitTopPlus();
-        $this->fullArtExitTopPlus();
-        $this->exitTopFrame1();
-        $this->exitTopFrame2();
-        $this->exitTopFrame3();
-        $this->exitTopFrame4();
-        $this->exitTopFrame5();
-        $this->exitTopFrame6();
+        $this->fullArtExitTopPlus(3);
+
+        for ($i = 1; $i <= 6; $i++) {
+            $this->{'exitTopFrame' . $i}();
+        }
+
         $this->exitTopFrame6();
 
         $this->cli->animation('404', $this->getSleeper(11))->exitTo('top');
@@ -47,16 +90,12 @@ class AnimationTest extends TestBase
     public function it_can_enter_from_top()
     {
         $this->emptyFrame();
-        $this->exitTopFrame6();
-        $this->exitTopFrame5();
-        $this->exitTopFrame4();
-        $this->exitTopFrame3();
-        $this->exitTopFrame2();
-        $this->exitTopFrame1();
-        $this->fullArtExitTopPlus();
-        $this->fullArtExitTopPlus();
-        $this->fullArtExitTopPlus();
-        $this->fullArtExitTopPlus();
+
+        for ($i = 6; $i >= 1; $i--) {
+            $this->{'exitTopFrame' . $i}();
+        }
+
+        $this->fullArtExitTopPlus(4);
 
         $this->cli->animation('404', $this->getSleeper(11))->enterFrom('top');
     }
@@ -65,15 +104,12 @@ class AnimationTest extends TestBase
     public function it_can_exit_to_bottom()
     {
         $this->fullArtExitBottom();
-        $this->fullArtExitBottomPlus();
-        $this->fullArtExitBottomPlus();
-        $this->fullArtExitBottomPlus();
-        $this->exitBottomFrame1();
-        $this->exitBottomFrame2();
-        $this->exitBottomFrame3();
-        $this->exitBottomFrame4();
-        $this->exitBottomFrame5();
-        $this->exitBottomFrame6();
+        $this->fullArtExitBottomPlus(3);
+
+        for ($i = 1; $i <= 6; $i++) {
+            $this->{'exitBottomFrame' . $i}();
+        }
+
         $this->exitBottomFrame6();
 
         $this->cli->animation('404', $this->getSleeper(11))->exitTo('bottom');
@@ -83,16 +119,12 @@ class AnimationTest extends TestBase
     public function it_can_enter_from_bottom()
     {
         $this->emptyFrame();
-        $this->exitBottomFrame6();
-        $this->exitBottomFrame5();
-        $this->exitBottomFrame4();
-        $this->exitBottomFrame3();
-        $this->exitBottomFrame2();
-        $this->exitBottomFrame1();
-        $this->fullArtExitBottomPlus();
-        $this->fullArtExitBottomPlus();
-        $this->fullArtExitBottomPlus();
-        $this->fullArtExitBottomPlus();
+
+        for ($i = 6; $i >= 1; $i--) {
+            $this->{'exitBottomFrame' . $i}();
+        }
+
+        $this->fullArtExitBottomPlus(4);
 
         $this->cli->animation('404', $this->getSleeper(11))->enterFrom('bottom');
     }
@@ -101,18 +133,8 @@ class AnimationTest extends TestBase
     public function it_can_exit_to_left()
     {
         $this->fullArtExitLeft();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->exitLeftFrame1();
-        $this->exitLeftFrame2();
-        $this->exitLeftFrame3();
-        $this->exitLeftFrame4();
-        $this->exitLeftFrame5();
-        $this->exitLeftFrame6();
-        $this->exitLeftFrame7();
-        $this->exitLeftFrame8();
+        $this->fullArtExitLeftPlus(4);
+        $this->assertExitedLeft();
         $this->exitLeftFrame9();
 
         $this->cli->addArt(__DIR__ . '/art');
@@ -122,20 +144,8 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_enter_from_left()
     {
-        $this->emptyFrame();
-        $this->exitLeftFrame8();
-        $this->exitLeftFrame7();
-        $this->exitLeftFrame6();
-        $this->exitLeftFrame5();
-        $this->exitLeftFrame4();
-        $this->exitLeftFrame3();
-        $this->exitLeftFrame2();
-        $this->exitLeftFrame1();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
-        $this->fullArtExitLeftPlus();
+        $this->assertEnteredFromLeft();
+        $this->fullArtExitLeftPlus(4);
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(14))->enterFrom('left');
@@ -145,23 +155,9 @@ class AnimationTest extends TestBase
     public function it_can_exit_to_right()
     {
         $this->fullArtExitRight();
-        $this->exitRightFrame(0);
-        $this->exitRightFrame(0);
-        $this->exitRightFrame(0);
+        $this->exitRightFrame(0, 3);
 
-        for ($i = 0; $i <= 71; $i++) {
-            $this->exitRightFrame($i);
-        }
-
-        $this->exitRightFrameEnd1();
-        $this->exitRightFrameEnd2();
-        $this->exitRightFrameEnd3();
-        $this->exitRightFrameEnd4();
-        $this->exitRightFrameEnd5();
-        $this->exitRightFrameEnd6();
-        $this->exitRightFrameEnd7();
-        $this->exitRightFrameEnd8();
-        $this->exitRightFrameEnd9();
+        $this->assertExitedRight();
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(85))->exitTo('right');
@@ -171,23 +167,8 @@ class AnimationTest extends TestBase
     public function it_can_enter_from_right()
     {
         $this->enterRightFrame1();
-        $this->exitRightFrameEnd8();
-        $this->exitRightFrameEnd7();
-        $this->exitRightFrameEnd6();
-        $this->exitRightFrameEnd5();
-        $this->exitRightFrameEnd4();
-        $this->exitRightFrameEnd3();
-        $this->exitRightFrameEnd2();
-        $this->exitRightFrameEnd1();
-
-        for ($i = 71; $i >= 0; $i--) {
-            $this->exitRightFrame($i);
-        }
-
-        $this->exitRightFrame(0);
-        $this->exitRightFrame(0);
-        $this->exitRightFrame(0);
-        $this->exitRightFrame(0);
+        $this->assertEnteredFromRight();
+        $this->exitRightFrame(0, 4);
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(85))->enterFrom('right');
@@ -196,30 +177,7 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_will_scroll_to_the_right_by_default()
     {
-        $this->emptyFrame();
-        $this->exitLeftFrame8();
-        $this->exitLeftFrame7();
-        $this->exitLeftFrame6();
-        $this->exitLeftFrame5();
-        $this->exitLeftFrame4();
-        $this->exitLeftFrame3();
-        $this->exitLeftFrame2();
-        $this->exitLeftFrame1();
-        $this->fullArtExitLeftPlus();
-
-        for ($i = 0; $i <= 71; $i++) {
-            $this->exitRightFrame($i);
-        }
-
-        $this->exitRightFrameEnd1();
-        $this->exitRightFrameEnd2();
-        $this->exitRightFrameEnd3();
-        $this->exitRightFrameEnd4();
-        $this->exitRightFrameEnd5();
-        $this->exitRightFrameEnd6();
-        $this->exitRightFrameEnd7();
-        $this->exitRightFrameEnd8();
-        $this->exitRightFrameEnd9();
+        $this->assertScrolledRight();
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(91))->scroll();
@@ -228,30 +186,7 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_scroll_to_the_right()
     {
-        $this->emptyFrame();
-        $this->exitLeftFrame8();
-        $this->exitLeftFrame7();
-        $this->exitLeftFrame6();
-        $this->exitLeftFrame5();
-        $this->exitLeftFrame4();
-        $this->exitLeftFrame3();
-        $this->exitLeftFrame2();
-        $this->exitLeftFrame1();
-        $this->fullArtExitLeftPlus();
-
-        for ($i = 0; $i <= 71; $i++) {
-            $this->exitRightFrame($i);
-        }
-
-        $this->exitRightFrameEnd1();
-        $this->exitRightFrameEnd2();
-        $this->exitRightFrameEnd3();
-        $this->exitRightFrameEnd4();
-        $this->exitRightFrameEnd5();
-        $this->exitRightFrameEnd6();
-        $this->exitRightFrameEnd7();
-        $this->exitRightFrameEnd8();
-        $this->exitRightFrameEnd9();
+        $this->assertScrolledRight();
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(91))->scroll('right');
@@ -262,28 +197,9 @@ class AnimationTest extends TestBase
     {
         $this->emptyFrame();
         $this->exitRightFrameEnd9();
-        $this->exitRightFrameEnd8();
-        $this->exitRightFrameEnd7();
-        $this->exitRightFrameEnd6();
-        $this->exitRightFrameEnd5();
-        $this->exitRightFrameEnd4();
-        $this->exitRightFrameEnd3();
-        $this->exitRightFrameEnd2();
-        $this->exitRightFrameEnd1();
-
-        for ($i = 71; $i >= 0; $i--) {
-            $this->exitRightFrame($i);
-        }
-
+        $this->assertEnteredFromRight();
         $this->fullArtExitLeftPlus();
-        $this->exitLeftFrame1();
-        $this->exitLeftFrame2();
-        $this->exitLeftFrame3();
-        $this->exitLeftFrame4();
-        $this->exitLeftFrame5();
-        $this->exitLeftFrame6();
-        $this->exitLeftFrame7();
-        $this->exitLeftFrame8();
+        $this->assertExitedLeft();
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(91))->scroll('left');
@@ -293,18 +209,16 @@ class AnimationTest extends TestBase
     public function it_can_scroll_up()
     {
         $this->emptyFrame();
-        $this->exitBottomFrame5();
-        $this->exitBottomFrame4();
-        $this->exitBottomFrame3();
-        $this->exitBottomFrame2();
-        $this->exitBottomFrame1();
+
+        for ($i = 5; $i >= 1; $i--) {
+            $this->{'exitBottomFrame' . $i}();
+        }
+
         $this->fullArtExitBottomPlus();
-        $this->exitTopFrame1();
-        $this->exitTopFrame2();
-        $this->exitTopFrame3();
-        $this->exitTopFrame4();
-        $this->exitTopFrame5();
-        $this->exitTopFrame6();
+
+        for ($i = 1; $i <= 6; $i++) {
+            $this->{'exitTopFrame' . $i}();
+        }
 
         $this->cli->animation('404', $this->getSleeper(13))->scroll('up');
     }
@@ -312,18 +226,16 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_scroll_down()
     {
-        $this->exitTopFrame6();
-        $this->exitTopFrame5();
-        $this->exitTopFrame4();
-        $this->exitTopFrame3();
-        $this->exitTopFrame2();
-        $this->exitTopFrame1();
+        for ($i = 6; $i >= 1; $i--) {
+            $this->{'exitTopFrame' . $i}();
+        }
+
         $this->fullArtExitBottomPlus();
-        $this->exitBottomFrame1();
-        $this->exitBottomFrame2();
-        $this->exitBottomFrame3();
-        $this->exitBottomFrame4();
-        $this->exitBottomFrame5();
+
+        for ($i = 1; $i <= 5; $i++) {
+            $this->{'exitBottomFrame' . $i}();
+        }
+
         $this->emptyFrame();
 
         $this->cli->animation('404', $this->getSleeper(13))->scroll('down');
@@ -332,11 +244,9 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_run_a_directory_animation()
     {
-        $this->runFrames1();
-        $this->runFrames2();
-        $this->runFrames3();
-        $this->runFrames4();
-        $this->runFrames5();
+        for ($i = 1; $i <= 5; $i++) {
+            $this->{'runFrames' . $i}();
+        }
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('work-it', $this->getSleeper(5))->run();
