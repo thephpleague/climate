@@ -33,10 +33,48 @@ class ArgumentTest extends TestBase
     public function provide_cast_types_and_values()
     {
         return [
-            'to string' => ['string', 'a string',],
-            'to int' => ['int', '1234',],
-            'to float' => ['float', '12.34',],
+            'to string'  => ['string', 'a string',],
+            'to int'     => ['int', '1234',],
+            'to float'   => ['float', '12.34',],
             'to boolean' => ['bool', '1'],
+        ];
+    }
+
+    protected function getFullArguments()
+    {
+        return [
+            'only-short-prefix' => [
+                'prefix'      => 's',
+                'description' => 'Only short prefix',
+            ],
+            'only-long-prefix' => [
+                'longPrefix'  => 'long',
+                'description' => 'Only long prefix',
+            ],
+            'both-prefixes' => [
+                'prefix'      => 'b',
+                'longPrefix'  => 'both',
+                'description' => 'Both short and long prefixes',
+            ],
+            'no-prefix' => [
+                'description' => 'Not defined by a prefix',
+            ],
+            'defined-only' => [
+                'prefix'      => 'd',
+                'longPrefix'  => 'defined',
+                'description' => 'True when defined',
+                'noValue'     => true,
+            ],
+            'required' => [
+                'prefix'      => 'r',
+                'description' => 'Required',
+                'required'    => true,
+            ],
+            'default-value' => [
+                'prefix'       => 'v',
+                'description'  => 'Has a default value',
+                'defaultValue' => 'test',
+            ],
         ];
     }
 
@@ -135,40 +173,7 @@ class ArgumentTest extends TestBase
         $this->shouldHavePersisted(31);
 
         $this->cli->description('Test Description');
-        $this->cli->arguments->add([
-            'only-short-prefix' => [
-                'prefix'      => 's',
-                'description' => 'Only short prefix',
-            ],
-            'only-long-prefix' => [
-                'longPrefix'  => 'long',
-                'description' => 'Only long prefix',
-            ],
-            'both-prefixes' => [
-                'prefix'      => 'b',
-                'longPrefix'  => 'both',
-                'description' => 'Both short and long prefixes',
-            ],
-            'no-prefix' => [
-                'description' => 'Not defined by a prefix',
-            ],
-            'defined-only' => [
-                'prefix'      => 'd',
-                'longPrefix'  => 'defined',
-                'description' => 'True when defined',
-                'noValue'     => true,
-            ],
-            'required' => [
-                'prefix'      => 'r',
-                'description' => 'Required',
-                'required'    => true,
-            ],
-            'default-value' => [
-                'prefix'       => 'v',
-                'description'  => 'Has a default value',
-                'defaultValue' => 'test',
-            ],
-        ]);
+        $this->cli->arguments->add($this->getFullArguments());
 
         $command = 'test-script';
         $this->cli->usage([$command]);
