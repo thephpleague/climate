@@ -15,6 +15,9 @@ class Animation extends DynamicTerminalObject
      */
     protected $sleeper;
 
+    /**
+     * @var \League\CLImate\TerminalObject\Dynamic\Animation\Keyframe $keyframes
+     */
     protected $keyframes;
 
     public function __construct($art, Sleeper $sleeper = null, Keyframe $keyframes = null)
@@ -68,14 +71,7 @@ class Animation extends DynamicTerminalObject
     {
         $this->setupKeyframes();
 
-        $mapping = [
-            'left'   => 'right',
-            'right'  => 'left',
-            'top'    => 'bottom',
-            'bottom' => 'top',
-            'up'     => 'bottom',
-            'down'   => 'top',
-        ];
+        $mapping = $this->getScrollDirectionMapping();
 
         if (!array_key_exists($direction, $mapping)) {
             return false;
@@ -85,12 +81,7 @@ class Animation extends DynamicTerminalObject
         $enter_from  = $mapping[$direction];
         $exit_to     = $mapping[$enter_from];
 
-        $keyframes   = $this->keyframes->enterFrom($lines, $enter_from);
-        $keyframes   = array_merge($keyframes, $this->keyframes->exitTo($lines, $exit_to));
-        $keyframes   = array_unique($keyframes, SORT_REGULAR);
-        $keyframes[] = reset($keyframes);
-
-        $this->animate($keyframes);
+        $this->animate($this->keyframes->scroll($lines, $enter_from, $exit_to));
     }
 
     /**
@@ -115,6 +106,18 @@ class Animation extends DynamicTerminalObject
         $this->setupKeyframes();
 
         $this->animate($this->keyframes->enterFrom($this->getLines(), $direction));
+    }
+
+    protected function getScrollDirectionMapping()
+    {
+        return [
+            'left'   => 'right',
+            'right'  => 'left',
+            'top'    => 'bottom',
+            'bottom' => 'top',
+            'up'     => 'bottom',
+            'down'   => 'top',
+        ];
     }
 
     protected function getLines()

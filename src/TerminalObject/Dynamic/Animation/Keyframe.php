@@ -46,6 +46,25 @@ class Keyframe
     }
 
     /**
+     * Get scroll keyframes
+     *
+     * @param array $lines
+     * @param string $enter_from
+     * @param string $exit_to
+     *
+     * @return array
+     */
+    public function scroll($lines, $enter_from, $exit_to)
+    {
+        $keyframes   = $this->enterFrom($lines, $enter_from);
+        $keyframes   = array_merge($keyframes, $this->exitTo($lines, $exit_to));
+        $keyframes   = array_unique($keyframes, SORT_REGULAR);
+        $keyframes[] = reset($keyframes);
+
+        return $keyframes;
+    }
+
+    /**
      * Get the line parser for the direction
      *
      * @param string $direction
