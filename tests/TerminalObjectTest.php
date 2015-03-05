@@ -10,6 +10,8 @@ class TerminalObjectTest extends TestBase
     {
         $this->shouldWrite("\e[mHey there.\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->somethingThatDoesntExist('Hey there.');
     }
 
@@ -19,6 +21,8 @@ class TerminalObjectTest extends TestBase
 
         $this->shouldWrite("\e[31m### Flank me! ###\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->red()->flank('Flank me!');
     }
 
@@ -26,6 +30,8 @@ class TerminalObjectTest extends TestBase
     public function it_can_chain_a_background_color_and_terminal_object()
     {
         $this->shouldWrite("\e[41m### Flank me! ###\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->backgroundRed()->flank('Flank me!');
     }
@@ -35,6 +41,8 @@ class TerminalObjectTest extends TestBase
     {
         $this->shouldWrite("\e[31m### Flank me! ###\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->redFlank('Flank me!');
     }
 
@@ -42,6 +50,8 @@ class TerminalObjectTest extends TestBase
     public function it_can_combine_a_background_color_and_terminal_object()
     {
         $this->shouldWrite("\e[41m### Flank me! ###\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->backgroundRedFlank('Flank me!');
     }
@@ -51,6 +61,8 @@ class TerminalObjectTest extends TestBase
     {
         $this->shouldWrite("\e[5m### Flank me! ###\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->blink()->flank('Flank me!');
     }
 
@@ -58,6 +70,8 @@ class TerminalObjectTest extends TestBase
     public function it_can_combine_a_format_and_terminal_object()
     {
         $this->shouldWrite("\e[5m### Flank me! ###\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->blinkFlank('Flank me!');
     }
@@ -67,6 +81,8 @@ class TerminalObjectTest extends TestBase
     {
         $this->shouldWrite("\e[4;5m### Flank me! ###\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->blinkUnderlineFlank('Flank me!');
     }
 
@@ -75,6 +91,8 @@ class TerminalObjectTest extends TestBase
     {
         $this->shouldWrite("\e[31;41m### Flank me! ###\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->redBackgroundRedFlank('Flank me!');
     }
 
@@ -82,6 +100,8 @@ class TerminalObjectTest extends TestBase
     public function it_can_combine_a_format_and_foreground_and_background_color_and_terminal_object()
     {
         $this->shouldWrite("\e[5;31;41m### Flank me! ###\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->blinkRedBackgroundRedFlank('Flank me!');
     }

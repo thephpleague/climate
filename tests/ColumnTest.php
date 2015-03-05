@@ -11,6 +11,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
         $this->shouldWrite("\e[mthat      this      also\e[0m");
         $this->shouldWrite("\e[mother     too       this is much longer\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->columns([
                         'this',
@@ -42,6 +43,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mand\e[0m");
         $this->shouldWrite("\e[malso\e[0m");
         $this->shouldWrite("\e[mthis is much longer\e[0m");
+        $this->shouldHavePersisted(2);
 
         $this->cli->columns([
                         'this',
@@ -74,6 +76,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
         $this->shouldWrite("\e[mthat      this      also\e[0m");
         $this->shouldWrite("\e[mother     too       this is much longeø\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->columns([
                         'this',
@@ -96,6 +99,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mthree     third one\e[0m");
         $this->shouldWrite("\e[mfour      fourth one\e[0m");
         $this->shouldWrite("\e[mfive      fifth one\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->columns([
                         'one' => 'first one',
@@ -114,6 +118,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mthree     third one      third third column\e[0m");
         $this->shouldWrite("\e[mfour      fourth one     fourth third column\e[0m");
         $this->shouldWrite("\e[mfive      fifth one      fifth third column\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->columns([
                         ['one', 'first one', 'first third column'],
@@ -132,6 +137,7 @@ class ColumnTest extends TestBase
         $this->shouldWrite("\e[mthree     third one      third third column\e[0m");
         $this->shouldWrite("\e[mfour      fourth one     fourth third column     also this one\e[0m");
         $this->shouldWrite("\e[mfive      fifth one      fifth third column\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->columns([
                         ['one', 'first one', 'first third column'],

@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Decorator\Parser;
 
+use League\CLImate\Util\Helper;
+
 class Ansi extends Parser
 {
     /**
@@ -42,9 +44,8 @@ class Ansi extends Parser
         if (empty($codes)) {
             $codes = [0];
         } else {
-            if (!is_array($codes)) {
-                $codes = [$codes];
-            }
+            $codes = Helper::toArray($codes);
+
             // Reset everything back to normal up front
             array_unshift($codes, 0);
         }
@@ -152,9 +153,7 @@ class Ansi extends Parser
             return $codes;
         }
 
-        if (!is_array($codes)) {
-            $codes = [$codes];
-        }
+        $codes = Helper::toArray($codes);
 
         // Sort for the sake of consistency and testability
         sort($codes);

@@ -63,6 +63,22 @@ class TestBase extends PHPUnit_Framework_TestCase
         $this->output->shouldReceive('sameLine')->andReturn($this->output);
     }
 
+    protected function shouldHavePersisted($times = 1)
+    {
+        $this->shouldStartPersisting($times);
+        $this->shouldStopPersisting($times);
+    }
+
+    protected function shouldStartPersisting($times = 1)
+    {
+        $this->output->shouldReceive('persist')->withNoArgs()->times($times)->andReturn($this->output);
+    }
+
+    protected function shouldStopPersisting($times = 1)
+    {
+        $this->output->shouldReceive('persist')->with(false)->times($times)->andReturn($this->output);
+    }
+
     /** @test */
     public function it_does_nothing()
     {

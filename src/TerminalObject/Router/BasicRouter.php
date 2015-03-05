@@ -2,6 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
+use League\CLImate\Util\Helper;
 use League\CLImate\Util\OutputImporter;
 
 class BasicRouter extends BaseRouter implements RouterInterface
@@ -28,11 +29,7 @@ class BasicRouter extends BaseRouter implements RouterInterface
      */
     public function execute($obj)
     {
-        $results = $obj->result();
-
-        if (!is_array($results)) {
-            $results = [$results];
-        }
+        $results = Helper::toArray($obj->result());
 
         $this->output->persist();
 

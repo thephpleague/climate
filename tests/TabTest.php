@@ -11,6 +11,8 @@ class TabTest extends TestBase
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[m\t\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->tab();
     }
 
@@ -20,6 +22,8 @@ class TabTest extends TestBase
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[m\t\e[0m");
         $this->shouldWrite("\e[mThis is indented.\e[0m");
+
+        $this->shouldHavePersisted(2);
 
         $this->cli->tab()->out('This is indented.');
     }
@@ -31,6 +35,8 @@ class TabTest extends TestBase
         $this->shouldWrite("\e[m\t\t\t\e[0m");
         $this->shouldWrite("\e[mThis is really indented.\e[0m");
 
+        $this->shouldHavePersisted(2);
+
         $this->cli->tab(3)->out('This is really indented.');
     }
 
@@ -40,6 +46,8 @@ class TabTest extends TestBase
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[m\t\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->tab(-3);
     }
 
@@ -48,6 +56,8 @@ class TabTest extends TestBase
     {
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[m\t\t\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->tab(2.7);
     }

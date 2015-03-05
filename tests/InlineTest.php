@@ -18,6 +18,8 @@ class InlineTest extends TestBase
             $this->shouldWrite("\e[m" . $content . "\e[0m");
         }
 
+        $this->shouldHavePersisted(2);
+
         foreach ($should_be as $content) {
             $this->cli->inline($content);
         }

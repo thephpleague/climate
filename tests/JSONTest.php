@@ -16,6 +16,7 @@ class JSONTest extends TestBase
                 ], JSON_PRETTY_PRINT );
 
         $this->shouldWrite("\e[m" . $should_be . "\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->json((object) [
                     'cell1' => 'Cell 1',
@@ -42,6 +43,7 @@ class JSONTest extends TestBase
         $should_be = str_replace('Cell 4', "\e[5mCell 4\e[0m", $should_be);
 
         $this->shouldWrite("\e[m" . $should_be . "\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->json((object) [
                     'cell1' => 'Cell 1',

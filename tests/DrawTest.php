@@ -13,6 +13,7 @@ class DrawTest extends TestBase
         $this->shouldWrite("\e[m   \ \/  \/ /| |  | |  _  /|  <  \___ \\\e[0m");
         $this->shouldWrite("\e[m    \  /\  / | |__| | | \ \| . \ ____) |\e[0m");
         $this->shouldWrite("\e[m     \/  \/   \____/|_|  \_\_|\_\_____/\e[0m");
+        $this->shouldHavePersisted();
     }
 
     /** @test */
@@ -35,6 +36,7 @@ class DrawTest extends TestBase
         $this->shouldWrite("\e[m|    \"\"\"\"\"\" |\e[0m");
         $this->shouldWrite("\e[m'-.__   __.-'\e[0m");
         $this->shouldWrite("\e[m     \"\"\"\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->draw('bender');
     }
@@ -48,6 +50,7 @@ class DrawTest extends TestBase
         $this->shouldWrite("\e[m |__   _| | | |__   _|\e[0m");
         $this->shouldWrite("\e[m    | | | |_| |  | |\e[0m");
         $this->shouldWrite("\e[m    |_|  \___/   |_|\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->draw('something-that-doesnt-exist');
     }

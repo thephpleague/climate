@@ -14,6 +14,7 @@ class DumpTest extends TestBase
         ];
 
         $this->shouldWrite("\e[m" . implode("\n", $should_be) . "\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->dump('This thing');
     }

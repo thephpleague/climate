@@ -3,6 +3,7 @@
 namespace League\CLImate\Decorator;
 
 use League\CLImate\Decorator\Parser\ParserFactory;
+use League\CLImate\Util\Helper;
 use League\CLImate\Util\System\System;
 
 /**
@@ -136,13 +137,7 @@ class Style
         $full_current = [];
 
         foreach ($this->style as $style) {
-            $current = $style->current();
-
-            if (!is_array($current)) {
-                $current = [$current];
-            }
-
-            $full_current = array_merge($full_current, $current);
+            $full_current = array_merge($full_current, Helper::toArray($style->current()));
         }
 
         $full_current = array_filter($full_current);

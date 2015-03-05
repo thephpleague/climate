@@ -29,6 +29,8 @@ class AnsiTest extends TestBase
 
         $this->shouldWrite("\e[m\e[32mI am green\e[0m\e[0m");
 
+        $this->shouldHavePersisted();
+
         $router->execute($obj);
     }
 
@@ -48,6 +50,8 @@ class AnsiTest extends TestBase
         $obj->shouldReceive('getParser')->once()->andReturn($parser);
 
         $this->shouldWrite("I am not green");
+
+        $this->shouldHavePersisted();
 
         $router->execute($obj);
     }
@@ -74,6 +78,7 @@ class AnsiTest extends TestBase
         $this->cli->forceAnsiOn();
 
         $this->shouldWrite("\e[m\e[32mI am green\e[0m\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->out("<green>I am green</green>");
     }
@@ -88,6 +93,7 @@ class AnsiTest extends TestBase
         $this->cli->forceAnsiOff();
 
         $this->shouldWrite("I am green");
+        $this->shouldHavePersisted();
 
         $this->cli->out("<green>I am green</green>");
     }

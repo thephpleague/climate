@@ -132,6 +132,7 @@ class ArgumentTest extends TestBase
         $this->shouldWrite("\e[m-v default-value (default: test)\e[0m");
         $this->shouldWrite("\e[m\t\t\e[0m");
         $this->shouldWrite("\e[mHas a default value\e[0m");
+        $this->shouldHavePersisted(31);
 
         $this->cli->description('Test Description');
         $this->cli->arguments->add([

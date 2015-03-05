@@ -154,6 +154,8 @@ class ProgressTest extends TestBase
         $this->shouldWrite("\e[31m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
         $this->shouldWrite("\e[mand back to normal\e[0m");
 
+        $this->shouldHavePersisted();
+
         $progress = $this->cli->redProgress(10);
 
         for ($i = 0; $i <= 10; $i++) {

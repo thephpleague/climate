@@ -12,6 +12,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->table([
                 [
                     'Cell 1',
@@ -32,6 +34,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->table([
                 (object) [
                     'cell1' => 'Cell 1',
@@ -50,6 +54,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m=====================================\e[0m");
         $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->table([
                 [
@@ -70,6 +76,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[31m| Cell 1 | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[31m-------------------------------------\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->redTable([
                 [
                     'cell1' => 'Cell 1',
@@ -88,6 +96,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m=====================================\e[0m");
         $this->shouldWrite("\e[m| Cell \e[31m1\e[0m | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->table([
                 [
@@ -108,6 +118,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m| Cell Ω | Cell 2 | Cell 3 | Cell 4 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
 
+        $this->shouldHavePersisted();
+
         $this->cli->table([
                 [
                     'cell1' => 'Cell Ω',
@@ -126,6 +138,8 @@ class TableTest extends TestBase
         $this->shouldWrite("\e[m=====================================\e[0m");
         $this->shouldWrite("\e[m| Cell 1 | Cell 2 | Cell 3 | Cell 3 |\e[0m");
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
 
         $this->cli->table([
                 [

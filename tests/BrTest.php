@@ -9,6 +9,7 @@ class BrTest extends TestBase
     public function it_can_output_a_line_break()
     {
         $this->shouldWrite("\e[m\e[0m");
+        $this->shouldHavePersisted();
 
         $this->cli->br();
     }
@@ -18,6 +19,7 @@ class BrTest extends TestBase
     {
         $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mThis is a line further down.\e[0m");
+        $this->shouldHavePersisted(2);
 
         $this->cli->br()->out('This is a line further down.');
     }
@@ -27,6 +29,7 @@ class BrTest extends TestBase
     {
         $this->shouldWrite("\e[m\e[0m", 3);
         $this->shouldWrite("\e[mThis is a line further down.\e[0m");
+        $this->shouldHavePersisted(2);
 
         $this->cli->br(3)->out('This is a line further down.');
     }
@@ -36,6 +39,7 @@ class BrTest extends TestBase
     {
         $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mThis is a line further down.\e[0m");
+        $this->shouldHavePersisted(2);
 
         $this->cli->br(-3)->out('This is a line further down.');
     }
@@ -45,6 +49,7 @@ class BrTest extends TestBase
     {
         $this->shouldWrite("\e[m\e[0m", 4);
         $this->shouldWrite("\e[mThis is a line further down.\e[0m");
+        $this->shouldHavePersisted(2);
 
         $this->cli->br(4.2)->out('This is a line further down.');
     }
