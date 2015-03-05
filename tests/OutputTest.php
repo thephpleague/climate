@@ -134,10 +134,10 @@ class OutputTest extends TestBase
         $output->add('mixed-combo', ['out', $error]);
 
         $available = [
-            'out'   => get_class($out),
-            'error' => get_class($error),
+            'out'    => get_class($out),
+            'error'  => get_class($error),
             'buffer' => get_class($buffer),
-            'combo' => [
+            'combo'  => [
                 get_class($out),
                 get_class($buffer),
             ],
