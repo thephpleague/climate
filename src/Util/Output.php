@@ -193,19 +193,51 @@ class Output
      */
     protected function resolve($writer)
     {
-        if (is_array($writer)) {
-            return Helper::flatten(array_map([$this, 'resolve'], $writer));
+        $resolver = 'resolve' . ucwords(gettype($writer)) . 'Writer';
+
+        if (method_exists($this, $resolver) && $resolved = $this->{$resolver}($writer)) {
+            return $resolved;
         }
 
+        $this->handleUnknownWriter($writer);
+    }
+
+    /**
+     * @param array $writer
+     *
+     * @return array
+     */
+    protected function resolveArrayWriter($writer)
+    {
+        return Helper::flatten(array_map([$this, 'resolve'], $writer));
+    }
+
+    /**
+     * @param object $writer
+     *
+     * @return WriterInterface|false
+     */
+    protected function resolveObjectWriter($writer)
+    {
         if ($writer instanceof WriterInterface) {
             return $writer;
         }
 
+        return false;
+    }
+
+    /**
+     * @param string $writer
+     *
+     * @return array|false
+     */
+    protected function resolveStringWriter($writer)
+    {
         if (is_string($writer) && array_key_exists($writer, $this->writers)) {
             return $this->writers[$writer];
         }
 
-        $this->handleUnknownWriter($writer);
+        return false;
     }
 
     /**
