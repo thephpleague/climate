@@ -45,7 +45,7 @@ class FileTest extends TestBase
     public function it_will_yell_when_a_non_writable_resource_is_passed()
     {
         $this->file->chmod(0477);
-        $this->setExpectedException('Exception', 'The resource [' . $this->file->url() . '] is not writable');
+        $this->setExpectedException('Exception');
 
         $file   = new League\CLImate\Util\Writer\File($this->file->url());
         $output = new League\CLImate\Util\Output();
