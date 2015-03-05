@@ -27,6 +27,10 @@ class TestBase extends PHPUnit_Framework_TestCase
         $this->cli = new League\CLImate\CLImate();
         $this->cli->setOutput($this->output);
         $this->cli->setUtil($this->util);
+
+        if (method_exists($this, 'internalSetup')) {
+            $this->internalSetup();
+        }
     }
 
     public function tearDown()
@@ -42,7 +46,7 @@ class TestBase extends PHPUnit_Framework_TestCase
      */
     protected function shouldWrite($content, $count = 1)
     {
-        $this->output->shouldReceive('write')->times($count)->with($content);
+        return $this->output->shouldReceive('write')->times($count)->with($content);
     }
 
     /**
