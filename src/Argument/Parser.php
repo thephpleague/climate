@@ -100,10 +100,8 @@ class Parser {
      */
     protected function prefixedArguments(array $argv = [])
     {
-        foreach ($argv as $key => $cliArgument) {
-            list($name, $value) = $this->getNameAndValue($cliArgument);
-
-            $argv = $this->setPrefixedArgumentValue($argv, $key, $name, $value);
+        foreach ($argv as $key => $passed_argument) {
+            $argv = $this->trySettingArgumentValue($argv, $key, $passed_argument);
         }
 
         // Send un-parsed arguments back upstream.
@@ -147,7 +145,7 @@ class Parser {
     }
 
     /**
-     * Set the an argument's value and remove applicable
+     * Attempt to set the an argument's value and remove applicable
      * arguments from array
      *
      * @param array $argv
@@ -157,10 +155,12 @@ class Parser {
      *
      * @return array The new $argv
      */
-    protected function setPrefixedArgumentValue($argv, $key, $name, $value)
+    protected function trySettingArgumentValue($argv, $key, $passed_argument)
     {
-        // Look for the argument in our defined $arguments and assign their
-        // value.
+        list($name, $value) = $this->getNameAndValue($passed_argument);
+
+        // Look for the argument in our defined $arguments
+        // and assign their value.
         if (!($argument = $this->findPrefixedArgument($name))) {
             return $argv;
         }
@@ -168,6 +168,21 @@ class Parser {
         // We found an argument key, so take it out of the array.
         unset($argv[$key]);
 
+        return $this->setArgumentValue($argv, $argument, $key, $value);
+    }
+
+    /**
+     * Set the argument's value
+     *
+     * @param array $argv
+     * @param Argument $argument
+     * @param int $key
+     * @param string|null $value
+     *
+     * @return array The new $argv
+     */
+    protected function setArgumentValue($argv, $argument, $key, $value)
+    {
         // Arguments are given the value true if they only need to
         // be defined on the command line to be set.
         if ($argument->noValue()) {
