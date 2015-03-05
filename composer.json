@@ -17,7 +17,7 @@
     "require-dev": {
         "phpunit/phpunit": "4.1.*",
         "mockery/mockery": "dev-master",
-        "mikey179/vfsStream": "~1.4"
+        "mikey179/vfsStream": "dev-master"
     },
     "autoload": {
         "psr-4": {
