@@ -150,8 +150,7 @@ class Parser {
      *
      * @param array $argv
      * @param int $key
-     * @param string $name
-     * @param string|null $value
+     * @param string $passed_argument
      *
      * @return array The new $argv
      */
