@@ -36,4 +36,16 @@ class Helper {
         return $flattened;
     }
 
+    /**
+     * Convert a string to snake case
+     *
+     * @param string $str
+     *
+     * @return string
+     */
+    public static function snakeCase($str)
+    {
+        return strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $str));
+    }
+
 }

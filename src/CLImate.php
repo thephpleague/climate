@@ -6,6 +6,7 @@ use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Settings\Manager as SettingsManager;
 use League\CLImate\TerminalObject\Router\Router;
+use League\CLImate\Util\Helper;
 use League\CLImate\Util\Output;
 use League\CLImate\Util\UtilFactory;
 
@@ -402,13 +403,11 @@ class CLImate
      */
     public function __call($requested_method, $arguments)
     {
-        // Convert to snake case
-        $name   = strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $requested_method));
+        // Apply any style methods that we can find first
+        $name = $this->applyStyleMethods(Helper::snakeCase($requested_method));
 
         // The first argument is the string|array|object we want to echo out
         $output = reset($arguments);
-
-        $name   = $this->applyStyleMethods($name);
 
         if (strlen($name)) {
             // If we have something left, let's try and route it to the appropriate place
