@@ -25,6 +25,30 @@ class Linux extends System
     }
 
     /**
+     * Determine if system has access to bash commands
+     *
+     * @return bool
+     */
+    public function canAccessBash()
+    {
+        return (rtrim($this->exec("/usr/bin/env bash -c 'echo OK'")) === 'OK');
+    }
+
+    /**
+     * Display a hidden response prompt and return the response
+     *
+     * @param string $prompt
+     *
+     * @return string
+     */
+    public function hiddenResponsePrompt($prompt)
+    {
+        $bash_command = 'read -s -p "' . $prompt . '" response && echo $response';
+
+        return rtrim($this->exec("/usr/bin/env bash -c '{$bash_command}'"));
+    }
+
+    /**
      * Determine if dimension is numeric and return it
      *
      * @param integer|string|null $dimension

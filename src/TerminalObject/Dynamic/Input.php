@@ -50,6 +50,13 @@ class Input extends DynamicTerminalObject
      */
     protected $reader;
 
+    /**
+     * Whether or not we should print out the user's response as they type it
+     *
+     * @var bool
+     */
+    protected $hide_response = false;
+
     public function __construct($prompt, ReaderInterface $reader = null)
     {
         $this->prompt = $prompt;
@@ -64,6 +71,10 @@ class Input extends DynamicTerminalObject
     public function prompt()
     {
         $prompt_str = $this->parser->apply($this->promptFormatted());
+
+        if ($this->hide_response) {
+            return $this->util->system->hiddenResponsePrompt($prompt_str);
+        }
 
         $this->output->sameLine()->write($prompt_str);
 
@@ -121,6 +132,20 @@ class Input extends DynamicTerminalObject
         $this->default = $default;
 
         return $this;
+    }
+
+    /**
+     * Hide the user's response
+     *
+     * @throws \Exception if it does not have access to bash
+     */
+    public function hideResponse()
+    {
+        if (!$this->util->system->canAccessBash()) {
+            throw new \Exception('Cannot access bash, unable to hide response.');
+        }
+
+        $this->hide_response = true;
     }
 
     /**
