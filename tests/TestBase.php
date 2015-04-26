@@ -14,6 +14,8 @@ class TestBase extends PHPUnit_Framework_TestCase
     /** @var League\CLImate\Util\UtilFactory */
     public $util;
 
+    protected $record_it = false;
+
     public function setUp()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
@@ -46,6 +48,10 @@ class TestBase extends PHPUnit_Framework_TestCase
      */
     protected function shouldWrite($content, $count = 1)
     {
+        if ($this->record_it) {
+            file_put_contents('test-log', $content, FILE_APPEND);
+        }
+
         return $this->output->shouldReceive('write')->times($count)->with($content);
     }
 

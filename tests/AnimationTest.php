@@ -14,7 +14,19 @@ class AnimationTest extends TestBase
 
     protected function emptyFrame()
     {
-        $this->shouldWrite("\e[m\e[0m", 6);
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+        $this->shouldWrite("\e[m\e[0m")->ordered();
+    }
+
+    protected function blankLines($count = 1)
+    {
+        for ($i = 1; $i <= $count; $i++) {
+            $this->shouldWrite("\e[m\r\e[K\e[0m")->ordered();
+        }
     }
 
     protected function getSleeper($count)
@@ -194,10 +206,10 @@ class AnimationTest extends TestBase
     public function it_can_scroll_to_the_left()
     {
         $this->emptyFrame();
-        $this->exitRightFrameEnd9();
         $this->assertEnteredFromRight();
         $this->fullArtExitLeftPlus();
         $this->assertExitedLeft();
+        $this->exitRightFrameEnd9();
 
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('4', $this->getSleeper(91))->scroll('left');
@@ -220,13 +232,13 @@ class AnimationTest extends TestBase
     /** @test */
     public function it_can_scroll_down()
     {
-        $this->runDesc('exitTopFrame', 6);
+        $this->emptyFrame();
+
+        $this->runDesc('exitTopFrame', 5);
 
         $this->fullArtExitBottomPlus();
 
-        $this->runAsc('exitBottomFrame', 5);
-
-        $this->emptyFrame();
+        $this->runAsc('exitBottomFrame', 6);
 
         $this->cli->animation('404', $this->getSleeper(13))->scroll('down');
     }
