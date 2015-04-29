@@ -10,15 +10,16 @@ class Checkboxes extends InputAbstract
     /**
      * The options to choose from
      *
-     * @var array $options
+     * @var Checkboxes $checkboxes
      */
-    protected $options = [];
+    protected $checkboxes;
 
     public function __construct($prompt, array $options, ReaderInterface $reader = null)
     {
         $this->prompt  = $prompt;
-        $this->options = $this->buildOptions($options);
         $this->reader  = $reader ?: new Stdin();
+
+        $this->checkboxes = $this->buildCheckboxes($options);
     }
 
     /**
@@ -30,66 +31,21 @@ class Checkboxes extends InputAbstract
     {
         $this->output->write($this->parser->apply($this->promptFormatted()));
 
-        $this->writeOptions();
+        $this->writeCheckboxes();
 
-        return $this->getChecked();
+        return $this->checkboxes->getCheckedValues();
     }
 
     /**
-     * Retrieve the checked options
-     *
-     * @return array
-     */
-    protected function getChecked()
-    {
-        $checked = array_filter($this->options, [$this, 'isChecked']);
-
-        return array_map([$this, 'getValue'], $checked);
-    }
-
-    /**
-     * Determine whether the option is checked
-     *
-     * @param Checkbox $option
-     *
-     * @return bool
-     */
-    protected function isChecked($option)
-    {
-        return $option->isChecked();
-    }
-
-    /**
-     * Retrieve the option's value
-     *
-     * @param Checkbox $option
-     *
-     * @return mixed
-     */
-    protected function getValue($option)
-    {
-        return $option->getValue();
-    }
-
-    /**
-     * Build out the array of options
+     * Build out the checkboxes
      *
      * @param array $options
      *
-     * @return array
+     * @return CheckboxGroup
      */
-    protected function buildOptions(array $options)
+    protected function buildCheckboxes(array $options)
     {
-        $result = [];
-
-        foreach ($options as $key => $option) {
-            $result[] = new Checkbox($option, $key);
-        }
-
-        $result[0]->setFirst()->setCurrent();
-        $result[count($result) - 1]->setLast();
-
-        return $result;
+        return new CheckboxGroup($options);
     }
 
     /**
@@ -103,11 +59,11 @@ class Checkboxes extends InputAbstract
     }
 
     /**
-     * Output the options and listen for any keystrokes
+     * Output the checkboxes and listen for any keystrokes
      */
-    protected function writeOptions()
+    protected function writeCheckboxes()
     {
-        $this->updateOptionsView();
+        $this->updateCheckboxView();
 
         $this->util->system->exec('stty -icanon');
         $this->output->sameLine()->write($this->util->cursor->hide());
@@ -132,12 +88,12 @@ class Checkboxes extends InputAbstract
                 break 2; // Break the while loop as well
 
                 case ' ':
-                    $this->toggleCurrent();
+                    $this->checkboxes->toggleCurrent();
                 break;
             }
 
             $this->moveCursorToTop();
-            $this->updateOptionsView();
+            $this->updateCheckboxView();
         }
     }
 
@@ -146,7 +102,7 @@ class Checkboxes extends InputAbstract
      */
     protected function moveCursorToTop()
     {
-        $this->output->sameLine()->write($this->util->cursor->up(count($this->options) - 1));
+        $this->output->sameLine()->write($this->util->cursor->up($this->checkboxes->count() - 1));
         $this->output->sameLine()->write($this->util->cursor->startOfCurrentLine());
     }
 
@@ -158,127 +114,26 @@ class Checkboxes extends InputAbstract
         switch ($this->reader->char(2)) {
             // Up arrow
             case '[A':
-                $this->setCurrent('previous');
+                $this->checkboxes->setCurrent('previous');
             break;
 
             // Down arrow
             case '[B':
-                $this->setCurrent('next');
+                $this->checkboxes->setCurrent('next');
             break;
         }
     }
 
     /**
-     * Toggle the current option's checked status
+     * Re-write the checkboxes based on the current objects
      */
-    protected function toggleCurrent()
+    protected function updateCheckboxView()
     {
-        list($option, $key) = $this->getCurrent();
+        $this->checkboxes->util($this->util);
+        $this->checkboxes->output($this->output);
+        $this->checkboxes->parser($this->parser);
 
-        $option->setChecked(!$option->isChecked());
-    }
-
-    /**
-     * Get the currently selected option
-     *
-     * @return array
-     */
-    protected function getCurrent()
-    {
-        foreach ($this->options as $key => $option) {
-            if ($option->isCurrent()) {
-                return [$option, $key];
-            }
-        }
-    }
-
-    /**
-     * Set the newly selected option based on the direction
-     *
-     * @param string $direction 'previous' or 'next'
-     */
-    protected function setCurrent($direction)
-    {
-        list($option, $key) = $this->getCurrent();
-
-        $option->setCurrent(false);
-
-        $new_key = $this->getCurrentKey($direction, $option, $key);
-
-        $this->options[$new_key]->setCurrent();
-    }
-
-    /**
-     * Retrieve the correct current key
-     *
-     * @param string $direction 'previous' or 'next'
-     * @param Checkbox $option
-     * @param int $key
-     *
-     * @return int
-     */
-    protected function getCurrentKey($direction, $option, $key)
-    {
-        $method = 'get' . ucwords($direction). 'Key';
-
-        return $this->{$method}($option, $key);
-    }
-
-    /**
-     * @param Checkbox $option
-     * @param int $key
-     *
-     * @return int
-     */
-    protected function getPreviousKey($option, $key)
-    {
-        if ($option->isFirst()) {
-            return count($this->options) - 1;
-        }
-
-        return --$key;
-    }
-
-    /**
-     * @param Checkbox $option
-     * @param int $key
-     *
-     * @return int
-     */
-    protected function getNextKey($option, $key)
-    {
-        if ($option->isLast()) {
-            return 0;
-        }
-
-        return ++$key;
-    }
-
-    /**
-     * Re-write the options based on the current objects
-     */
-    protected function updateOptionsView()
-    {
-        foreach ($this->options as $option) {
-            $this->writeOption($option);
-        }
-    }
-
-    /**
-     * @param Checkbox $option
-     */
-    protected function writeOption($option)
-    {
-        $option->util($this->util);
-
-        $formatted = $this->parser->apply((string) $option);
-
-        if ($option->isLast()) {
-            $this->output->sameLine()->write($formatted);
-            return;
-        }
-
-        $this->output->write($formatted);
+        $this->checkboxes->write();
     }
 
 }
