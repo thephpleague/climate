@@ -8,16 +8,46 @@ class Checkbox
 {
     use UtilImporter;
 
+    /**
+     * The value of the checkbox
+     *
+     * @var string|int|bool $value
+     */
     protected $value;
 
+    /**
+     * The label for the checkbox
+     *
+     * @var string|int $label
+     */
     protected $label;
 
+    /**
+     * Whether the checkbox is checked
+     *
+     * @var bool $checked
+     */
     protected $checked = false;
 
+    /**
+     * Whether pointer is currently pointing at the checkbox
+     *
+     * @var bool $current
+     */
     protected $current = false;
 
+    /**
+     * Whether the checkbox is the first in the group
+     *
+     * @var bool $first
+     */
     protected $first = false;
 
+    /**
+     * Whether the checkbox is the last in the group
+     *
+     * @var bool $last
+     */
     protected $last = false;
 
     public function __construct($label, $value)
@@ -26,40 +56,45 @@ class Checkbox
         $this->label = $label;
     }
 
-    protected function checkbox($checked)
-    {
-        if ($checked) {
-            return html_entity_decode("&#x25CF;");
-        }
-
-        return html_entity_decode("&#x25CB;");
-    }
-
-    protected function pointer()
-    {
-        return html_entity_decode("&#x276F;");
-    }
-
+    /**
+     * @return bool
+     */
     public function isCurrent()
     {
         return $this->current;
     }
 
+    /**
+     * @return bool
+     */
     public function isChecked()
     {
         return $this->checked;
     }
 
+    /**
+     * @return bool
+     */
     public function isFirst()
     {
         return $this->first;
     }
 
+    /**
+     * @return bool
+     */
     public function isLast()
     {
         return $this->last;
     }
 
+    /**
+     * Set whether the pointer is currently pointing at this checkbox
+     *
+     * @param bool $current
+     *
+     * @return Checkbox
+     */
     public function setCurrent($current = true)
     {
         $this->current = $current;
@@ -67,6 +102,13 @@ class Checkbox
         return $this;
     }
 
+    /**
+     * Set whether the checkbox is currently checked
+     *
+     * @param bool $checked
+     *
+     * @return Checkbox
+     */
     public function setChecked($checked = true)
     {
         $this->checked = $checked;
@@ -74,6 +116,9 @@ class Checkbox
         return $this;
     }
 
+    /**
+     * @return Checkbox
+     */
     public function setFirst()
     {
         $this->first = true;
@@ -81,6 +126,9 @@ class Checkbox
         return $this;
     }
 
+    /**
+     * @return Checkbox
+     */
     public function setLast()
     {
         $this->last = true;
@@ -88,6 +136,9 @@ class Checkbox
         return $this;
     }
 
+    /**
+     * @return string|int|bool
+     */
     public function getValue()
     {
         return $this->value;
@@ -114,6 +165,32 @@ class Checkbox
         }
 
         return $line;
+    }
+
+    /**
+     * Get the checkbox symbol
+     *
+     * @param bool $checked
+     *
+     * @return string
+     */
+    protected function checkbox($checked)
+    {
+        if ($checked) {
+            return html_entity_decode("&#x25CF;");
+        }
+
+        return html_entity_decode("&#x25CB;");
+    }
+
+    /**
+     * Get the pointer symbol
+     *
+     * @return string
+     */
+    protected function pointer()
+    {
+        return html_entity_decode("&#x276F;");
     }
 
 }

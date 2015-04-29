@@ -48,11 +48,21 @@ class Cursor
         return "\e[K";
     }
 
+    /**
+     * Get the style for hiding the cursor
+     *
+     * @return string
+     */
     public function hide()
     {
         return "\e[?25l";
     }
 
+    /**
+     * Get the style for returning the cursor to its default
+     *
+     * @return string
+     */
     public function defaultStyle()
     {
         return "\e[?25h";

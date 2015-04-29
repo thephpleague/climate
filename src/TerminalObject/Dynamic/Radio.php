@@ -4,6 +4,9 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 class Radio extends Checkboxes
 {
+    /**
+     * Toggle the currently selected option, uncheck all of the others
+     */
     protected function toggleCurrent()
     {
         list($option, $option_key) = $this->getCurrent();
@@ -19,6 +22,11 @@ class Radio extends Checkboxes
         }
     }
 
+    /**
+     * Get the checked option
+     *
+     * @return string|bool|int
+     */
     protected function getChecked()
     {
         if ($checked = reset(array_filter($this->options, [$this, 'isChecked']))) {

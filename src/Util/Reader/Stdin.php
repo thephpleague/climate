@@ -16,6 +16,13 @@ class Stdin implements ReaderInterface
         return $response;
     }
 
+    /**
+     * Read one character
+     *
+     * @param int $count
+     *
+     * @return string
+     */
     public function char($count = 1)
     {
         return fread(STDIN, $count);

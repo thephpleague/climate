@@ -17,7 +17,7 @@ class Checkboxes extends InputAbstract
     public function __construct($prompt, array $options, ReaderInterface $reader = null)
     {
         $this->prompt  = $prompt;
-        $this->options = $this->formatOptions($options);
+        $this->options = $this->buildOptions($options);
         $this->reader  = $reader ?: new Stdin();
     }
 
@@ -30,11 +30,16 @@ class Checkboxes extends InputAbstract
     {
         $this->output->write($this->parser->apply($this->promptFormatted()));
 
-        $this->writeCheckboxes();
+        $this->writeOptions();
 
         return $this->getChecked();
     }
 
+    /**
+     * Retrieve the checked options
+     *
+     * @return array
+     */
     protected function getChecked()
     {
         $checked = array_filter($this->options, [$this, 'isChecked']);
@@ -42,42 +47,79 @@ class Checkboxes extends InputAbstract
         return array_map([$this, 'getValue'], $checked);
     }
 
+    /**
+     * Determine whether the option is checked
+     *
+     * @param Checkbox $option
+     *
+     * @return bool
+     */
     protected function isChecked($option)
     {
         return $option->isChecked();
     }
 
+    /**
+     * Retrieve the option's value
+     *
+     * @param Checkbox $option
+     *
+     * @return mixed
+     */
     protected function getValue($option)
     {
         return $option->getValue();
     }
 
-    protected function formatOptions(array $options)
+    /**
+     * Build out the array of options
+     *
+     * @param array $options
+     *
+     * @return array
+     */
+    protected function buildOptions(array $options)
     {
-        $formatted = [];
+        $result = [];
 
         foreach ($options as $key => $option) {
-            $formatted[] = new Checkbox($option, $key);
+            $result[] = new Checkbox($option, $key);
         }
 
-        $formatted[0]->setFirst()->setCurrent();
-        $formatted[count($formatted) - 1]->setLast();
+        $result[0]->setFirst()->setCurrent();
+        $result[count($result) - 1]->setLast();
 
-        return $formatted;
+        return $result;
     }
 
+    /**
+     * Format the prompt string
+     *
+     * @return string
+     */
     protected function promptFormatted()
     {
         return $this->prompt . ' (use <space> to select)';
     }
 
-    protected function writeCheckboxes()
+    /**
+     * Output the options and listen for any keystrokes
+     */
+    protected function writeOptions()
     {
         $this->updateOptionsView();
 
         $this->util->system->exec('stty -icanon');
         $this->output->sameLine()->write($this->util->cursor->hide());
 
+        $this->listenForInput();
+    }
+
+    /**
+     * Listen for input and act on it
+     */
+    protected function listenForInput()
+    {
         while ($char = $this->reader->char(1)) {
             switch ($char) {
                 case "\e":
@@ -99,12 +141,18 @@ class Checkboxes extends InputAbstract
         }
     }
 
+    /**
+     * Move the cursor to the top of the option list
+     */
     protected function moveCursorToTop()
     {
         $this->output->sameLine()->write($this->util->cursor->up(count($this->options) - 1));
         $this->output->sameLine()->write($this->util->cursor->startOfCurrentLine());
     }
 
+    /**
+     * Handle any ANSI characters
+     */
     protected function handleAnsi()
     {
         switch ($this->reader->char(2)) {
@@ -120,6 +168,9 @@ class Checkboxes extends InputAbstract
         }
     }
 
+    /**
+     * Toggle the current option's checked status
+     */
     protected function toggleCurrent()
     {
         list($option, $key) = $this->getCurrent();
@@ -127,6 +178,11 @@ class Checkboxes extends InputAbstract
         $option->setChecked(!$option->isChecked());
     }
 
+    /**
+     * Get the currently selected option
+     *
+     * @return array
+     */
     protected function getCurrent()
     {
         foreach ($this->options as $key => $option) {
@@ -136,6 +192,11 @@ class Checkboxes extends InputAbstract
         }
     }
 
+    /**
+     * Set the newly selected option based on the direction
+     *
+     * @param string $direction 'previous' or 'next'
+     */
     protected function setCurrent($direction)
     {
         list($option, $key) = $this->getCurrent();
@@ -147,6 +208,15 @@ class Checkboxes extends InputAbstract
         $this->options[$new_key]->setCurrent();
     }
 
+    /**
+     * Retrieve the correct current key
+     *
+     * @param string $direction 'previous' or 'next'
+     * @param Checkbox $option
+     * @param int $key
+     *
+     * @return int
+     */
     protected function getCurrentKey($direction, $option, $key)
     {
         $method = 'get' . ucwords($direction). 'Key';
@@ -154,6 +224,12 @@ class Checkboxes extends InputAbstract
         return $this->{$method}($option, $key);
     }
 
+    /**
+     * @param Checkbox $option
+     * @param int $key
+     *
+     * @return int
+     */
     protected function getPreviousKey($option, $key)
     {
         if ($option->isFirst()) {
@@ -163,6 +239,12 @@ class Checkboxes extends InputAbstract
         return --$key;
     }
 
+    /**
+     * @param Checkbox $option
+     * @param int $key
+     *
+     * @return int
+     */
     protected function getNextKey($option, $key)
     {
         if ($option->isLast()) {
@@ -172,6 +254,9 @@ class Checkboxes extends InputAbstract
         return ++$key;
     }
 
+    /**
+     * Re-write the options based on the current objects
+     */
     protected function updateOptionsView()
     {
         foreach ($this->options as $option) {
@@ -179,6 +264,9 @@ class Checkboxes extends InputAbstract
         }
     }
 
+    /**
+     * @param Checkbox $option
+     */
     protected function writeOption($option)
     {
         $option->util($this->util);
