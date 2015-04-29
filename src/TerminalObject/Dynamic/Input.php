@@ -64,11 +64,7 @@ class Input extends InputAbstract
 
         $this->output->sameLine()->write($prompt_str);
 
-        $response = $this->reader->line();
-
-        if (strlen($response) == 0 && strlen($this->default)) {
-            $response = $this->default;
-        }
+        $response = $this->valueOrDefault($this->reader->line());
 
         if ($this->isValidResponse($response)) {
             return $response;
@@ -132,6 +128,23 @@ class Input extends InputAbstract
         }
 
         $this->hide_response = true;
+    }
+
+    /**
+     * If no response was given and there is a default, return it,
+     * otherwise return response
+     *
+     * @param string $response
+     *
+     * @return string
+     */
+    protected function valueOrDefault($response)
+    {
+        if (strlen($response) == 0 && strlen($this->default)) {
+            return $this->default;
+        }
+
+        return $response;
     }
 
     /**
