@@ -7,7 +7,9 @@ permalink: /terminal-objects/input/
 Input
 ==============
 
-You can create a user prompt via the `input` method to get information from the user:
+There are several ways you can get information from a user: [a basic input](#basic-input), [confirmation](#confirmation), [password](#password), [checkboxes](#checkboxes), and [radio buttons](#radio-buttons).
+
+## Basic Input
 
 ~~~php
 $input = $climate->input('How you doin?');
@@ -15,9 +17,9 @@ $input = $climate->input('How you doin?');
 $response = $input->prompt();
 ~~~
 
-## Acceptable Answers
+### Acceptable Answers
 
-### Via an Array
+#### Via an Array
 
 If you only want to accept certain answers from the user, you can specify those using the `accept` method. Simply pass an array in:
 
@@ -51,7 +53,7 @@ $response = $input->prompt();
 // 'fine' or 'ok' will cause a re-prompt
 ~~~
 
-### Via a Closure
+#### Via a Closure
 
 You can also pass a closure into the `accept` method:
 
@@ -65,7 +67,7 @@ $input->accept(function($response) {
 $response = $input->prompt();
 ~~~
 
-## Default Response
+### Default Response
 
 You can specify a default response for when the user simply presses `enter` without typing anything in:
 
@@ -90,4 +92,27 @@ if ($input->confirmed()) {
 } else {
     // Don't do your thing
 }
+~~~
+
+## Password
+
+<p class="message-notice">Please note that the password method only works in non-Windows environments as of right now.</p>
+
+The `password` method is exactly the same as the `input` method, it simply hides the text the user is typing.
+
+~~~php
+$input    = $climate->password('Please enter password:');
+$password = $input->prompt();
+~~~
+
+## Checkboxes
+
+<p class="message-notice">Please note that the checkboxes method only works in non-Windows environments as of right now.</p>
+
+You can present the user with a set of interactive checkboxes, you will get an array back with the checked responses (an empty array in the case of no checked responses).
+
+~~~php
+$options  = ['Ice Cream', 'Mixed Tape', 'Teddy Bear'];
+$input    = $climate->checkboxes('Please send me all of the following:');
+$response = $input->prompt();
 ~~~
