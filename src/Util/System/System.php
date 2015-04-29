@@ -79,7 +79,7 @@ abstract class System
      *
      * @return string|array
      */
-    protected function exec($command, $full = false)
+    public function exec($command, $full = false)
     {
         if ($full) {
             exec($command, $output);

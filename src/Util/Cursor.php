@@ -7,13 +7,25 @@ class Cursor
     /**
      * Move the cursor up in the terminal x number of lines.
      *
-     * @param int $number_of_lines
+     * @param int $lines
      *
      * @return string
      */
-    public function up($number_of_lines = 1)
+    public function up($lines = 1)
     {
-        return "\e[{$number_of_lines}A";
+        return "\e[{$lines}A";
+    }
+
+    /**
+     * Move the cursor left in the terminal x number of columns.
+     *
+     * @param int $cols
+     *
+     * @return string
+     */
+    public function left($cols = 1)
+    {
+        return "\e[{$cols}D";
     }
 
     /**
@@ -34,5 +46,15 @@ class Cursor
     public function deleteCurrentLine()
     {
         return "\e[K";
+    }
+
+    public function hide()
+    {
+        return "\e[?25l";
+    }
+
+    public function defaultStyle()
+    {
+        return "\e[?25h";
     }
 }

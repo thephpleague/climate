@@ -5,15 +5,8 @@ namespace League\CLImate\TerminalObject\Dynamic;
 use League\CLImate\Util\Reader\ReaderInterface;
 use League\CLImate\Util\Reader\Stdin;
 
-class Input extends DynamicTerminalObject
+class Input extends InputAbstract
 {
-    /**
-     * The prompt text
-     *
-     * @var string $prompt
-     */
-    protected $prompt;
-
     /**
      * An array of acceptable responses
      *
@@ -42,13 +35,6 @@ class Input extends DynamicTerminalObject
      * @var string
      */
     protected $default = '';
-
-    /**
-     * An instance of ReaderInterface
-     *
-     * @var \League\CLImate\Util\Reader\ReaderInterface $reader
-     */
-    protected $reader;
 
     /**
      * Whether or not we should print out the user's response as they type it

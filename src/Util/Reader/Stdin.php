@@ -16,4 +16,9 @@ class Stdin implements ReaderInterface
         return $response;
     }
 
+    public function char($count = 1)
+    {
+        return fread(STDIN, $count);
+    }
+
 }
