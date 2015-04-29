@@ -2,11 +2,13 @@
 
 namespace League\CLImate\TerminalObject\Dynamic\Checkbox;
 
+use League\CLImate\Decorator\Parser\ParserImporter;
+use League\CLImate\TerminalObject\Helper\StringLength;
 use League\CLImate\Util\UtilImporter;
 
 class Checkbox
 {
-    use UtilImporter;
+    use StringLength, ParserImporter, UtilImporter;
 
     /**
      * The value of the checkbox
@@ -155,13 +157,15 @@ class Checkbox
         $line = implode(' ', $line);
 
         if ($this->first) {
-            $line = "\e[0m" . $line;
+            $line = "\e[m" . $line;
         }
 
-        $line .= str_repeat(' ', strlen($line));
+        $padding = $this->util->system->width() - $this->lengthWithoutTags($line);
+
+        $line .= str_repeat(' ', $padding);
 
         if ($this->last) {
-            return $line . '<hidden>' . $this->util->cursor->left(10);
+            return $line . $this->util->cursor->left(10) . '<hidden>';
         }
 
         return $line;

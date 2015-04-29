@@ -66,6 +66,16 @@ class TestBase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Helper for reader mock
+     *
+     * @param string $response
+     */
+    protected function shouldReadCharAndReturn($response, $char_count = 1)
+    {
+        $this->reader->shouldReceive('char')->with($char_count)->once()->andReturn($response);
+    }
+
+    /**
      * Helper for same line output mock
      */
     protected function shouldReceiveSameLine()

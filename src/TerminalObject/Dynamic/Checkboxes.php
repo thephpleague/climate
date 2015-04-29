@@ -102,8 +102,10 @@ class Checkboxes extends InputAbstract
      */
     protected function moveCursorToTop()
     {
-        $this->output->sameLine()->write($this->util->cursor->up($this->checkboxes->count() - 1));
-        $this->output->sameLine()->write($this->util->cursor->startOfCurrentLine());
+        $output = $this->util->cursor->up($this->checkboxes->count() - 1);
+        $output .= $this->util->cursor->startOfCurrentLine();
+
+        $this->output->sameLine()->write($output);
     }
 
     /**

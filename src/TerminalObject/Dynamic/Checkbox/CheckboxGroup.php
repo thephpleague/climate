@@ -38,7 +38,7 @@ class CheckboxGroup
      */
     public function getCheckedValues()
     {
-        return array_map([$this, 'getValue'], $this->getChecked());
+        return array_values(array_map([$this, 'getValue'], $this->getChecked()));
     }
 
     /**
@@ -177,6 +177,7 @@ class CheckboxGroup
     protected function writeCheckbox($checkbox)
     {
         $checkbox->util($this->util);
+        $checkbox->parser($this->parser);
 
         $parsed = $this->parser->apply((string) $checkbox);
 
