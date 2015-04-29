@@ -10,7 +10,7 @@ class Checkboxes extends InputAbstract
     /**
      * The options to choose from
      *
-     * @var Checkboxes $checkboxes
+     * @var Checkbox\CheckboxGroup $checkboxes
      */
     protected $checkboxes;
 
@@ -41,11 +41,11 @@ class Checkboxes extends InputAbstract
      *
      * @param array $options
      *
-     * @return CheckboxGroup
+     * @return Checkbox\CheckboxGroup
      */
     protected function buildCheckboxes(array $options)
     {
-        return new CheckboxGroup($options);
+        return new Checkbox\CheckboxGroup($options);
     }
 
     /**

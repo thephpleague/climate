@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\TerminalObject\Dynamic;
+namespace League\CLImate\TerminalObject\Dynamic\Checkbox;
 
 use League\CLImate\Decorator\Parser\ParserImporter;
 use League\CLImate\Util\OutputImporter;
