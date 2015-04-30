@@ -1,3 +1,11 @@
+## 3.1.0 - 2015-04-30
+
+### Added
+- `password` prompt
+- `checkboxes` prompt
+- `radio` prompt
+- 'file' as output option
+
 ## 3.0.0 - 2015-03-01
 
 ### Changed
