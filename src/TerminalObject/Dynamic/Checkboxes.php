@@ -77,24 +77,40 @@ class Checkboxes extends InputAbstract
     protected function listenForInput()
     {
         while ($char = $this->reader->char(1)) {
-            switch ($char) {
-                case "\e":
-                    $this->handleAnsi();
-                break;
-
-                case "\n":
-                    $this->output->sameLine()->write($this->util->cursor->defaultStyle());
-                    $this->output->sameLine()->write("\e[0m");
-                break 2; // Break the while loop as well
-
-                case ' ':
-                    $this->checkboxes->toggleCurrent();
+            if ($break = $this->handleCharacter($char)) {
                 break;
             }
 
             $this->moveCursorToTop();
             $this->updateCheckboxView();
         }
+    }
+
+    /**
+     * Take the appropriate action based on the input character
+     *
+     * @param string $char
+     *
+     * @return bool
+     */
+    protected function handleCharacter($char)
+    {
+        switch ($char) {
+            case "\n":
+                $this->output->sameLine()->write($this->util->cursor->defaultStyle());
+                $this->output->sameLine()->write("\e[0m");
+            return true; // Break the while loop as well
+
+            case "\e":
+                $this->handleAnsi();
+            break;
+
+            case ' ':
+                $this->checkboxes->toggleCurrent();
+            break;
+        }
+
+        return false;
     }
 
     /**
