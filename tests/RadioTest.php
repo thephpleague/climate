@@ -33,7 +33,7 @@ class RadioTest extends TestBase
         $this->shouldReadCharAndReturn("\n");
 
         $this->shouldWrite("\e[mCurrent mood: (use <space> to select)\e[0m");
-        $this->shouldWrite("\e[m\e[m❯ ○ Happy" . str_repeat(' ', 68) . "\e[0m");
+        $this->shouldWrite("\e[m\e[m❯ ○ Happy" . str_repeat(' ', 71) . "\e[0m");
         $this->shouldWrite("\e[m  ○ Sad" . str_repeat(' ', 73) . "\e[0m");
         $this->shouldReceiveSameLine();
         $this->shouldWrite("\e[m  ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m");
@@ -44,12 +44,12 @@ class RadioTest extends TestBase
         $this->shouldReceiveSameLine();
         $this->shouldWrite("\e[2A\r", 4);
 
-        $this->shouldWrite("\e[m\e[m❯ ● Happy" . str_repeat(' ', 68) . "\e[0m");
+        $this->shouldWrite("\e[m\e[m❯ ● Happy" . str_repeat(' ', 71) . "\e[0m");
         $this->shouldWrite("\e[m  ○ Sad" . str_repeat(' ', 73) . "\e[0m", 3);
         $this->shouldReceiveSameLine();
         $this->shouldWrite("\e[m  ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m", 2);
 
-        $this->shouldWrite("\e[m\e[m  ● Happy" . str_repeat(' ', 68) . "\e[0m", 2);
+        $this->shouldWrite("\e[m\e[m  ● Happy" . str_repeat(' ', 71) . "\e[0m", 2);
         $this->shouldWrite("\e[m❯ ○ Sad" . str_repeat(' ', 73) . "\e[0m");
         $this->shouldReceiveSameLine();
 
@@ -57,7 +57,7 @@ class RadioTest extends TestBase
         $this->shouldWrite("\e[m❯ ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m");
 
         $this->shouldReceiveSameLine();
-        $this->shouldWrite("\e[m\e[m  ○ Happy" . str_repeat(' ', 68) . "\e[0m");
+        $this->shouldWrite("\e[m\e[m  ○ Happy" . str_repeat(' ', 71) . "\e[0m");
         $this->shouldWrite("\e[m❯ ● Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m");
 
         $this->shouldShowCursor();
