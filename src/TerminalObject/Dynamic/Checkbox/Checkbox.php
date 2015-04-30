@@ -148,27 +148,47 @@ class Checkbox
 
     public function __toString()
     {
-        $line = [
+        if ($this->isFirst()) {
+            return "\e[m" . $this->buildCheckboxString();
+        }
+
+        if ($this->isLast()) {
+            return $this->buildCheckboxString() . $this->util->cursor->left(10) . '<hidden>';
+        }
+
+        return $this->buildCheckboxString();
+    }
+
+    /**
+     * Build out basic checkbox string based on current options
+     *
+     * @return string
+     */
+    protected function buildCheckboxString()
+    {
+        $parts = [
             ($this->isCurrent()) ? $this->pointer() : ' ',
             $this->checkbox($this->isChecked()),
             $this->label,
         ];
 
-        $line = implode(' ', $line);
+        $line = implode(' ', $parts);
 
-        if ($this->first) {
-            $line = "\e[m" . $line;
-        }
+        return $line . $this->getPaddingString($line);
+    }
 
-        $padding = $this->util->system->width() - $this->lengthWithoutTags($line);
+    /**
+     * Get the padding string based on the length of the terminal/line
+     *
+     * @param string $line
+     *
+     * @return string
+     */
+    protected function getPaddingString($line)
+    {
+        $length = $this->util->system->width() - $this->lengthWithoutTags($line);
 
-        $line .= str_repeat(' ', $padding);
-
-        if ($this->last) {
-            return $line . $this->util->cursor->left(10) . '<hidden>';
-        }
-
-        return $line;
+        return str_repeat(' ', $length);
     }
 
     /**
