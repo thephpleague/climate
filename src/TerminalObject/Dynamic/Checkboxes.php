@@ -77,7 +77,7 @@ class Checkboxes extends InputAbstract
     protected function listenForInput()
     {
         while ($char = $this->reader->char(1)) {
-            if ($break = $this->handleCharacter($char)) {
+            if ($this->handleCharacter($char)) {
                 break;
             }
 
@@ -87,7 +87,8 @@ class Checkboxes extends InputAbstract
     }
 
     /**
-     * Take the appropriate action based on the input character
+     * Take the appropriate action based on the input character,
+     * returns whether to stop listening or not
      *
      * @param string $char
      *
