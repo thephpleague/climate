@@ -96,8 +96,6 @@ if ($input->confirmed()) {
 
 ## Password
 
-<p class="message-notice">Please note the password method only works in <strong>non-Windows</strong> environments as of right now.</p>
-
 The `password` method is exactly the same as the `input` method, it simply hides the text the user is typing.
 
 ~~~php
