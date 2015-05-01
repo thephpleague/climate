@@ -6,8 +6,8 @@ class Password extends Input
 {
     public function prompt()
     {
-        $this->hideResponse();
+        $this->writePrompt();
 
-        return parent::prompt();
+        return $this->reader->hidden();
     }
 }

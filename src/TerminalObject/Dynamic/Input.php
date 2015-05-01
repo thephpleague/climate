@@ -36,13 +36,6 @@ class Input extends InputAbstract
      */
     protected $default = '';
 
-    /**
-     * Whether or not we should print out the user's response as they type it
-     *
-     * @var bool
-     */
-    protected $hide_response = false;
-
     public function __construct($prompt, ReaderInterface $reader = null)
     {
         $this->prompt = $prompt;
@@ -56,13 +49,7 @@ class Input extends InputAbstract
      */
     public function prompt()
     {
-        $prompt_str = $this->parser->apply($this->promptFormatted());
-
-        if ($this->hide_response) {
-            return $this->util->system->hiddenResponsePrompt($prompt_str);
-        }
-
-        $this->output->sameLine()->write($prompt_str);
+        $this->writePrompt();
 
         $response = $this->valueOrDefault($this->reader->line());
 
@@ -117,17 +104,13 @@ class Input extends InputAbstract
     }
 
     /**
-     * Hide the user's response
-     *
-     * @throws \Exception if it does not have access to bash
+     * Write out the formatted prompt
      */
-    public function hideResponse()
+    protected function writePrompt()
     {
-        if (!$this->util->system->canAccessBash()) {
-            throw new \Exception('Cannot access bash, unable to hide response.');
-        }
+        $prompt = $this->parser->apply($this->promptFormatted());
 
-        $this->hide_response = true;
+        $this->output->sameLine()->write($prompt);
     }
 
     /**

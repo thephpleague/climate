@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Util\Reader;
 
+use Seld\CliPrompt\CliPrompt;
+
 class Stdin implements ReaderInterface
 {
     /**
@@ -26,6 +28,16 @@ class Stdin implements ReaderInterface
     public function char($count = 1)
     {
         return fread(STDIN, $count);
+    }
+
+    /**
+     * Read the line, but hide what the user is typing
+     *
+     * @return string
+     */
+    public function hidden()
+    {
+        return CliPrompt::hiddenPrompt();
     }
 
 }
