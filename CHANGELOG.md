@@ -1,4 +1,7 @@
-## 3.1.0 - 2015-04-30
+## 3.1.1 - 2015-05-01
+
+### Fixed
+- Windows support added for `password` thanks to @Seldaek and [seld/cli-prompt](https://packagist.org/packages/seld/cli-prompt)
 
 ### Added
 - `password` prompt
