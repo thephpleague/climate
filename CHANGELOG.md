@@ -3,6 +3,8 @@
 ### Fixed
 - Windows support added for `password` thanks to @Seldaek and [seld/cli-prompt](https://packagist.org/packages/seld/cli-prompt)
 
+## 3.1.0 - 2015-04-30
+
 ### Added
 - `password` prompt
 - `checkboxes` prompt
