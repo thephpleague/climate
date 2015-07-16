@@ -9,4 +9,8 @@ interface ReaderInterface
      */
     public function line();
 
+    /**
+     * @return string
+     */
+    public function multiLine();
 }
