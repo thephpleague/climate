@@ -76,6 +76,16 @@ class TestBase extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Helper for reader mock
+     * 
+     * @param string $response
+     */
+    protected function shouldReadMultipleLinesAndReturn($response)
+    {
+        $this->reader->shouldReceive('multiLine')->once()->andReturn($response);
+    }
+
+    /**
      * Helper for same line output mock
      */
     protected function shouldReceiveSameLine()

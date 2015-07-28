@@ -171,4 +171,35 @@ class InputTest extends TestBase
         $this->assertSame('Not much.', $response);
     }
 
+    /** @test */
+    public function it_will_accept_multiple_lines()
+    {
+        $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\x04");
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[m>>> \e[0m");
+
+        $input = $this->cli->input('>>>', $this->reader);
+        $input->multiLine();
+        $response = $input->prompt();
+    }
+
+    /** @test */
+    public function it_will_read_after_eof()
+    {
+        $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\x04");
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[m>>> \e[0m");
+
+        $input = $this->cli->input('>>>', $this->reader);
+        $input->multiLine();
+        $response = $input->prompt();
+
+        $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\nAgain\x04");
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[m>>> \e[0m");
+
+        $input = $this->cli->input('>>>', $this->reader);
+        $input->multiLine();
+        $response = $input->prompt();
+    }
 }

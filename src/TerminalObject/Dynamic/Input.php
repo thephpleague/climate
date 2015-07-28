@@ -22,6 +22,15 @@ class Input extends InputAbstract
     protected $strict = false;
 
     /**
+     * Whether to accept multiple lines of input
+     *
+     * Terminated by ^D
+     *
+     * @var boolean $multiLine
+     */
+    protected $multiLine = false;
+
+    /**
      * Whether we should display the acceptable responses to the user
      *
      * @var boolean $show_acceptable
@@ -51,7 +60,7 @@ class Input extends InputAbstract
     {
         $this->writePrompt();
 
-        $response = $this->valueOrDefault($this->reader->line());
+        $response = $this->valueOrDefault($this->getUserInput());
 
         if ($this->isValidResponse($response)) {
             return $response;
@@ -101,6 +110,25 @@ class Input extends InputAbstract
         $this->default = $default;
 
         return $this;
+    }
+
+    public function multiLine()
+    {
+        $this->multiLine = true;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    protected function getUserInput()
+    {
+        if ($this->multiLine) {
+            return $this->reader->multiLine();
+        }
+
+        return $this->reader->line();
     }
 
     /**
