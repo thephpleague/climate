@@ -177,7 +177,6 @@ class InputTest extends TestBase
         $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\x04");
         $this->shouldReceiveSameLine();
         $this->shouldWrite("\e[m>>> \e[0m");
-
         $input = $this->cli->input('>>>', $this->reader);
         $input->multiLine();
         $response = $input->prompt();

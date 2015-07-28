@@ -112,6 +112,11 @@ class Input extends InputAbstract
         return $this;
     }
 
+    /**
+     * Set multiline input to true
+     *
+     * @return \League\CLImate\TerminalObject\Dynamic\Input
+     */
     public function multiLine()
     {
         $this->multiLine = true;
