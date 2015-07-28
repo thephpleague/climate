@@ -90,12 +90,7 @@ class Progress extends DynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
-        $current_percentage = $this->percentageFormatted($current / $this->total);
-
-        if ($this->shouldRedraw($current_percentage, $label)) {
-            $progress_bar = $this->getProgressBar($current, $label);
-            $this->output->write($this->parser->apply($progress_bar));
-        }
+        $this->drawProgressBar($current, $label);
 
         $this->current            = $current;
         $this->current_percentage = $current_percentage;
@@ -111,6 +106,20 @@ class Progress extends DynamicTerminalObject
     public function advance($increment = 1, $label = null)
     {
         $this->current($this->current + $increment, $label);
+    }
+
+    /**
+     * Draw the progress bar, if necessary
+     *
+     * @param string $current
+     * @param string $label
+     */
+    protected function drawProgressBar($current, $label)
+    {
+        if ($this->shouldRedraw($current, $label)) {
+            $progress_bar = $this->getProgressBar($current, $label);
+            $this->output->write($this->parser->apply($progress_bar));
+        }
     }
 
     /**
@@ -226,8 +235,10 @@ class Progress extends DynamicTerminalObject
      *
      * @return boolean
      */
-    protected function shouldRedraw($percentage, $label)
+    protected function shouldRedraw($current, $label)
     {
+        $percentage = $this->percentageFormatted($current / $this->total);
+
         return ($percentage != $this->current_percentage || $label != $this->label);
     }
 }
