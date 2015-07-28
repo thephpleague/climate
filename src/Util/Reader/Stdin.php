@@ -7,7 +7,7 @@ use Seld\CliPrompt\CliPrompt;
 class Stdin implements ReaderInterface
 {
     protected $stdIn = false;
-    
+
     /**
      * Read the line typed in by the user
      *
@@ -15,21 +15,17 @@ class Stdin implements ReaderInterface
      */
     public function line()
     {
-        $response = trim(fgets($this->getStdIn(), 1024));
-
-        return $response;
+        return trim(fgets($this->getStdIn(), 1024));
     }
 
     /**
      * Read from STDIN until EOF (^D) is reached
-     * 
+     *
      * @return string
      */
     public function multiLine()
     {
-        $response = trim(stream_get_contents($this->getStdIn()));
-        
-        return $response;
+        return trim(stream_get_contents($this->getStdIn()));
     }
 
     /**
@@ -56,9 +52,9 @@ class Stdin implements ReaderInterface
 
     /**
      * Return a valid STDIN, even if it previously EOF'ed
-     * 
+     *
      * Lazily re-opens STDIN after hitting an EOF
-     * 
+     *
      * @return resource
      * @throws \Exception
      */
@@ -67,21 +63,21 @@ class Stdin implements ReaderInterface
         if ($this->stdIn && !feof($this->stdIn)) {
             return $this->stdIn;
         }
-        
+
         try {
             if ($this->stdIn !== false) {
                 fclose($this->stdIn);
             }
-            
+
             $this->stdIn = fopen('php://stdin', 'r');
 
             if (!$this->stdIn) {
-                throw new \Exception("Unable to read from STDIN");
+                throw new \Exception('Unable to read from STDIN');
             }
         } catch (\Error $e) {
-            throw new \Exception("Unable to read from STDIN", 0, $e);
+            throw new \Exception('Unable to read from STDIN', 0, $e);
         }
-        
+
         return $this->stdIn;
     }
 }
