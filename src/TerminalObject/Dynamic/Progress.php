@@ -21,9 +21,9 @@ class Progress extends DynamicTerminalObject
     /**
      * The current percentage displayed
      *
-     * @var string $currentPercentage
+     * @var string $current_percentage
      */
-    protected $currentPercentage = '';
+    protected $current_percentage = '';
 
     /**
      * The string length of the bar when at 100%
@@ -90,15 +90,16 @@ class Progress extends DynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
-        $currentPercentage = $this->percentageFormatted($current / $this->total);
-        if ($currentPercentage != $this->currentPercentage || $label != $this->label) {
+        $current_percentage = $this->percentageFormatted($current / $this->total);
+
+        if ($this->shouldRedraw($current_percentage, $label)) {
             $progress_bar = $this->getProgressBar($current, $label);
             $this->output->write($this->parser->apply($progress_bar));
         }
 
-        $this->current = $current;
-        $this->currentPercentage = $currentPercentage;
-        $this->label = $label;
+        $this->current            = $current;
+        $this->current_percentage = $current_percentage;
+        $this->label              = $label;
     }
 
     /**
@@ -215,5 +216,18 @@ class Progress extends DynamicTerminalObject
     protected function labelFormatted($label)
     {
         return "\n" . $this->util->cursor->startOfCurrentLine() . $this->util->cursor->deleteCurrentLine() . $label;
+    }
+
+    /**
+     * Determine whether the progress bar has changed and we need to redrew
+     *
+     * @param string $percentage
+     * @param string $label
+     *
+     * @return boolean
+     */
+    protected function shouldRedraw($percentage, $label)
+    {
+        return ($percentage != $this->current_percentage || $label != $this->label);
     }
 }
