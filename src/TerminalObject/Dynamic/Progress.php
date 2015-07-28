@@ -19,6 +19,13 @@ class Progress extends DynamicTerminalObject
     protected $current = 0;
 
     /**
+     * The current percentage displayed
+     *
+     * @var string $currentPercentage
+     */
+    protected $currentPercentage = '';
+
+    /**
      * The string length of the bar when at 100%
      *
      * @var integer $bar_str_len
@@ -31,6 +38,13 @@ class Progress extends DynamicTerminalObject
      * @var boolean $first_line
      */
     protected $first_line = true;
+
+    /**
+     * Current status bar label
+     *
+     * @var string $label
+     */
+    protected $label;
 
     /**
      * If they pass in a total, set the total
@@ -76,11 +90,15 @@ class Progress extends DynamicTerminalObject
             throw new \Exception('The current is greater than the total.');
         }
 
-        $progress_bar = $this->getProgressBar($current, $label);
-
-        $this->output->write($this->parser->apply($progress_bar));
+        $currentPercentage = $this->percentageFormatted($current / $this->total);
+        if ($currentPercentage != $this->currentPercentage || $label != $this->label) {
+            $progress_bar = $this->getProgressBar($current, $label);
+            $this->output->write($this->parser->apply($progress_bar));
+        }
 
         $this->current = $current;
+        $this->currentPercentage = $currentPercentage;
+        $this->label = $label;
     }
 
     /**
