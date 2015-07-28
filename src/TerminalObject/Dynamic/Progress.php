@@ -92,9 +92,8 @@ class Progress extends DynamicTerminalObject
 
         $this->drawProgressBar($current, $label);
 
-        $this->current            = $current;
-        $this->current_percentage = $current_percentage;
-        $this->label              = $label;
+        $this->current = $current;
+        $this->label   = $label;
     }
 
     /**
@@ -116,10 +115,14 @@ class Progress extends DynamicTerminalObject
      */
     protected function drawProgressBar($current, $label)
     {
-        if ($this->shouldRedraw($current, $label)) {
+        $percentage = $this->percentageFormatted($current / $this->total);
+
+        if ($this->shouldRedraw($percentage, $label)) {
             $progress_bar = $this->getProgressBar($current, $label);
             $this->output->write($this->parser->apply($progress_bar));
         }
+
+        $this->current_percentage = $percentage;
     }
 
     /**
@@ -230,15 +233,13 @@ class Progress extends DynamicTerminalObject
     /**
      * Determine whether the progress bar has changed and we need to redrew
      *
-     * @param string $current
+     * @param string $percentage
      * @param string $label
      *
      * @return boolean
      */
-    protected function shouldRedraw($current, $label)
+    protected function shouldRedraw($percentage, $label)
     {
-        $percentage = $this->percentageFormatted($current / $this->total);
-
         return ($percentage != $this->current_percentage || $label != $this->label);
     }
 }
