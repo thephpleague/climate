@@ -230,7 +230,7 @@ class Progress extends DynamicTerminalObject
     /**
      * Determine whether the progress bar has changed and we need to redrew
      *
-     * @param string $percentage
+     * @param string $current
      * @param string $label
      *
      * @return boolean
