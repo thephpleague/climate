@@ -1,6 +1,11 @@
 <?php
 
-class TestBase extends PHPUnit_Framework_TestCase
+namespace League\CLImate\Tests;
+
+use League\CLImate\CLImate;
+use Mockery;
+
+class TestBase extends \PHPUnit_Framework_TestCase
 {
     public static $functions;
 
@@ -30,7 +35,7 @@ class TestBase extends PHPUnit_Framework_TestCase
         $this->output = Mockery::mock('League\CLImate\Util\Output');
         $this->reader = Mockery::mock('League\CLImate\Util\Reader\Stdin');
 
-        $this->cli = new League\CLImate\CLImate();
+        $this->cli = new CLImate();
         $this->cli->setOutput($this->output);
         $this->cli->setUtil($this->util);
 

@@ -1,9 +1,11 @@
 <?php
 
+namespace League\CLImate\Tests;
+
 require_once __DIR__ . '/../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
-require_once 'TestBase.php';
 require_once 'FileGlobalMock.php';
 
+use League\CLImate\Util\Output;
 use org\bovigo\vfs\vfsStream;
 
 class FileTest extends TestBase
@@ -31,7 +33,7 @@ class FileTest extends TestBase
                         ->with($this->file->url(), 'a')
                         ->andReturn(fopen($this->file->url(), 'a'));
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -45,7 +47,7 @@ class FileTest extends TestBase
     {
         $resource = fopen($this->file->url(), 'a');
         $file     = $this->getFileMock($resource);
-        $output   = new League\CLImate\Util\Output();
+        $output   = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -70,7 +72,7 @@ class FileTest extends TestBase
 
         $file->lock();
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -95,7 +97,7 @@ class FileTest extends TestBase
 
         // $file->gzipped();
 
-        // $output = new League\CLImate\Util\Output();
+        // $output = new Output;
         // $output->add('file', $file);
         // $output->defaultTo('file');
 
@@ -111,7 +113,7 @@ class FileTest extends TestBase
         $this->setExpectedException('Exception');
 
         $file   = $this->getFileMock($this->file->url());
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -124,7 +126,7 @@ class FileTest extends TestBase
         $this->setExpectedException('Exception', 'The resource [something-that-doesnt-exist] is not writable');
 
         $file   = $this->getFileMock('something-that-doesnt-exist');
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -143,7 +145,7 @@ class FileTest extends TestBase
                         ->with($this->file->url(), 'a')
                         ->andReturn(false);
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('file', $file);
         $output->defaultTo('file');
 

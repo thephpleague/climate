@@ -1,6 +1,9 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
+
+use League\CLImate\Util\Output;
+use Mockery;
 
 class OutputTest extends TestBase
 {
@@ -10,7 +13,7 @@ class OutputTest extends TestBase
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
         $out->shouldReceive('write')->once()->with("Oh, hey there.\n");
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('out', $out);
         $output->defaultTo('out');
 
@@ -23,7 +26,7 @@ class OutputTest extends TestBase
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
         $out->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
         $output->add('out', $out);
         $output->defaultTo('out');
 
@@ -36,7 +39,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('error', $error);
         $output->defaultTo('error');
@@ -53,7 +56,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -71,7 +74,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with("Oh, hey there.");
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -90,7 +93,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with('Oh, hey there.');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('combo', [$out, $error]);
         $output->defaultTo('combo');
@@ -107,7 +110,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with('Oh, hey there.');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -124,7 +127,7 @@ class OutputTest extends TestBase
         $error  = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $buffer = Mockery::mock('League\CLImate\Util\Writer\Buffer');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -158,7 +161,7 @@ class OutputTest extends TestBase
     public function it_will_yell_if_writer_does_not_implement_writer_interface()
     {
         $out    = Mockery::mock('League\CLImate\Util\Writer\Wat');
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $this->setExpectedException(
             'Exception',
@@ -171,7 +174,7 @@ class OutputTest extends TestBase
     /** @test */
     public function it_will_yell_if_trying_to_add_a_non_existent_nested_writer_key()
     {
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $this->setExpectedException(
             'Exception',
@@ -190,7 +193,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->once()->with('First time.');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -210,7 +213,7 @@ class OutputTest extends TestBase
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
         $error->shouldReceive('write')->times(3)->with('First time.');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('out', $out);
         $output->add('error', $error);
@@ -232,7 +235,7 @@ class OutputTest extends TestBase
         $buffer->shouldReceive('write')->once()->with('Oh, hey there.');
         $buffer->shouldReceive('get')->once()->andReturn('Oh, hey there.');
 
-        $output = new League\CLImate\Util\Output();
+        $output = new Output;
 
         $output->add('buffer', $buffer);
         $output->defaultTo('buffer');

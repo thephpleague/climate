@@ -1,11 +1,8 @@
 <?php
 
-require_once 'TestBase.php';
-require_once 'Animation/ExitToTopFrames.php';
-require_once 'Animation/ExitToBottomFrames.php';
-require_once 'Animation/ExitToLeftFrames.php';
-require_once 'Animation/ExitToRightFrames.php';
-require_once 'Animation/RunFrames.php';
+namespace League\CLImate\Tests;
+
+use Mockery;
 
 class AnimationTest extends TestBase
 {

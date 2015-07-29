@@ -1,6 +1,6 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
 
 use League\CLImate\Argument\Argument;
 
@@ -27,7 +27,7 @@ class ArgumentTest extends TestBase
             'Please provide an argument name or object.'
         );
 
-        $this->cli->arguments->add(new stdClass);
+        $this->cli->arguments->add(new \stdClass);
     }
 
     public function provide_cast_types_and_values()

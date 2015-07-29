@@ -1,6 +1,8 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
+
+use Mockery;
 
 class LinuxTest extends TestBase
 {

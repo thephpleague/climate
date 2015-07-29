@@ -1,6 +1,6 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
 
 class RadioTest extends TestBase
 {

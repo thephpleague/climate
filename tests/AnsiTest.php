@@ -1,13 +1,17 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
 
-use League\CLImate\TerminalObject\Router\BasicRouter;
+use League\CLImate\Decorator\Parser\Ansi;
+use League\CLImate\Decorator\Parser\NonAnsi;
+use League\CLImate\Decorator\Parser\ParserFactory;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Decorator\Tags;
-use League\CLImate\Decorator\Parser\NonAnsi;
-use League\CLImate\Decorator\Parser\Ansi;
-use League\CLImate\Decorator\Parser\ParserFactory;
+use League\CLImate\TerminalObject\Router\BasicRouter;
+use League\CLImate\Util\System\Linux;
+use League\CLImate\Util\System\Windows;
+use League\CLImate\Util\UtilFactory;
+use Mockery;
 
 class AnsiTest extends TestBase
 {
@@ -72,8 +76,8 @@ class AnsiTest extends TestBase
 
     public function it_will_force_ansi_on_a_non_ansi_system()
     {
-        $system = new League\CLImate\Util\System\Windows();
-        $util   = new \League\CLImate\Util\UtilFactory($system);
+        $system = new Windows();
+        $util   = new UtilFactory($system);
         $this->cli->setUtil($util);
         $this->cli->forceAnsiOn();
 
@@ -87,8 +91,8 @@ class AnsiTest extends TestBase
 
     public function it_will_force_ansi_off_on_an_ansi_system()
     {
-        $system = new League\CLImate\Util\System\Linux();
-        $util   = new \League\CLImate\Util\UtilFactory($system);
+        $system = new Linux();
+        $util   = new UtilFactory($system);
         $this->cli->setUtil($util);
         $this->cli->forceAnsiOff();
 

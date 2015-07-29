@@ -24,5 +24,10 @@
         "psr-4": {
             "League\\CLImate\\": "src/"
         }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "League\\CLImate\\Tests\\": "tests/"
+        }
     }
 }

@@ -1,12 +1,13 @@
 <?php
 
-require_once 'TestBase.php';
+namespace League\CLImate\Tests;
+
+use Mockery;
 
 class WindowsTest extends TestBase
 {
 
     /** @test */
-
     public function it_can_get_the_width()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows')
@@ -19,7 +20,6 @@ class WindowsTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_return_null_if_width_is_not_numeric()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows')
@@ -32,7 +32,6 @@ class WindowsTest extends TestBase
     }
 
     /** @test */
-
     public function it_can_get_the_height()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows')
@@ -45,7 +44,6 @@ class WindowsTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_return_null_if_height_is_not_numeric()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows')

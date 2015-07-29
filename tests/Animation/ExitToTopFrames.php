@@ -1,5 +1,7 @@
 <?php
 
+namespace League\CLImate\Tests;
+
 trait ExitToTopFrames {
 
     abstract protected function shouldWrite($content, $count = 1);

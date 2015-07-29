@@ -2,9 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Helper;
 
-require_once('TestBase.php');
-
-use TestBase;
+use League\CLImate\Tests\TestBase;
 
 function usleep($microseconds) {
     return TestBase::$functions->usleep($microseconds);

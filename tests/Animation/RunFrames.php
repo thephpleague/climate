@@ -1,5 +1,7 @@
 <?php
 
+namespace League\CLImate\Tests;
+
 trait RunFrames {
 
     abstract protected function shouldWrite($content, $count = 1);

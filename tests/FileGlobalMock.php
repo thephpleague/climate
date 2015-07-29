@@ -2,9 +2,7 @@
 
 namespace League\CLImate\Util\Writer;
 
-require_once('TestBase.php');
-
-use TestBase;
+use League\CLImate\Tests\TestBase;
 
 function fopen($resource, $mode) {
     return TestBase::$functions->fopen($resource, $mode);
