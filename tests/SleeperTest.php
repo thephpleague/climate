@@ -1,6 +1,7 @@
 <?php
 
 require_once 'TestBase.php';
+require_once 'SleeperGlobalMock.php';
 
 class SleeperTest extends TestBase
 {
@@ -9,9 +10,13 @@ class SleeperTest extends TestBase
     {
         $sleeper = new League\CLImate\TerminalObject\Helper\Sleeper();
 
-        $speed = $sleeper->speed(50);
+        $sleeper->speed(50);
 
-        $this->assertEquals(100000, $speed);
+        self::$functions->shouldReceive('usleep')
+                        ->once()
+                        ->with(100000);
+
+        $sleeper->sleep();
     }
 
     /** @test */
@@ -19,9 +24,13 @@ class SleeperTest extends TestBase
     {
         $sleeper = new League\CLImate\TerminalObject\Helper\Sleeper();
 
-        $speed = $sleeper->speed(200);
+        $sleeper->speed(200);
 
-        $this->assertEquals(25000, $speed);
+        self::$functions->shouldReceive('usleep')
+                        ->once()
+                        ->with(25000);
+
+        $sleeper->sleep();
     }
 
     /** @test */
@@ -29,9 +38,13 @@ class SleeperTest extends TestBase
     {
         $sleeper = new League\CLImate\TerminalObject\Helper\Sleeper();
 
-        $speed = $sleeper->speed(0);
+        $sleeper->speed(0);
 
-        $this->assertEquals(50000, $speed);
+        self::$functions->shouldReceive('usleep')
+                        ->once()
+                        ->with(50000);
+
+        $sleeper->sleep();
     }
 
 }
