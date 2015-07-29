@@ -2,6 +2,8 @@
 
 class TestBase extends PHPUnit_Framework_TestCase
 {
+    public static $functions;
+
     /** @var League\CLImate\CLImate */
     public $cli;
 
@@ -18,6 +20,8 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
+        self::$functions = Mockery::mock();
+
         $system = Mockery::mock('League\CLImate\Util\System\Linux');
         $system->shouldReceive('hasAnsiSupport')->andReturn(true);
         $system->shouldReceive('width')->andReturn(80);
@@ -77,7 +81,7 @@ class TestBase extends PHPUnit_Framework_TestCase
 
     /**
      * Helper for reader mock
-     * 
+     *
      * @param string $response
      */
     protected function shouldReadMultipleLinesAndReturn($response)

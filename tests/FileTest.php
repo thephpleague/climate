@@ -2,6 +2,7 @@
 
 require_once __DIR__ . '/../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
 require_once 'TestBase.php';
+require_once 'FileGlobalMock.php';
 
 use org\bovigo\vfs\vfsStream;
 
@@ -28,6 +29,11 @@ class FileTest extends TestBase
     public function it_can_write_to_a_file()
     {
         $file = $this->getFileMock($this->file->url());
+
+        self::$functions->shouldReceive('fopen')
+                        ->with($this->file->url(), 'a')
+                        ->andReturn(fopen($this->file->url(), 'a'));
+
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');
