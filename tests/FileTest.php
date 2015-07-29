@@ -18,11 +18,7 @@ class FileTest extends TestBase
 
     protected function getFileMock()
     {
-        $file_class = 'League\CLImate\Util\Writer\File[setLockState]';
-        $file       = \Mockery::mock($file_class, func_get_args())
-                                ->shouldAllowMockingProtectedMethods();
-
-        return $file;
+        return \Mockery::mock('League\CLImate\Util\Writer\File', func_get_args())->makePartial();
     }
 
     /** @test */
@@ -31,6 +27,7 @@ class FileTest extends TestBase
         $file = $this->getFileMock($this->file->url());
 
         self::$functions->shouldReceive('fopen')
+                        ->once()
                         ->with($this->file->url(), 'a')
                         ->andReturn(fopen($this->file->url(), 'a'));
 
@@ -63,8 +60,13 @@ class FileTest extends TestBase
         $resource = fopen($this->file->url(), 'a');
         $file     = $this->getFileMock($resource);
 
-        $file->shouldReceive('setLockState')->once()->with($resource, LOCK_EX);
-        $file->shouldReceive('setLockState')->once()->with($resource, LOCK_UN);
+        self::$functions->shouldReceive('flock')
+                        ->once()
+                        ->with($resource, LOCK_EX);
+
+        self::$functions->shouldReceive('flock')
+                        ->once()
+                        ->with($resource, LOCK_UN);
 
         $file->lock();
 
@@ -80,18 +82,26 @@ class FileTest extends TestBase
     /** @test */
     public function it_can_write_to_a_gzipped_file()
     {
-        $resource = fopen($this->file->url(), 'a');
-        $file     = $this->getFileMock($resource);
+        // $file = $this->getFileMock($this->file->url());
 
-        $file->gzipped();
+        // self::$functions->shouldReceive('gzopen')
+        //                 ->once()
+        //                 ->with($this->file->url(), 'a')
+        //                 ->andReturn('file resource');
 
-        $output = new League\CLImate\Util\Output();
-        $output->add('file', $file);
-        $output->defaultTo('file');
+        // self::$functions->shouldReceive('gzwrite')
+        //                 ->once()
+        //                 ->with('file resource', "Oh, you're still here.");
 
-        $output->write("Oh, you're still here.");
+        // $file->gzipped();
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        // $output = new League\CLImate\Util\Output();
+        // $output->add('file', $file);
+        // $output->defaultTo('file');
+
+        // $output->write("Oh, you're still here.");
+
+        // $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
     }
 
     /** @test */
@@ -114,6 +124,25 @@ class FileTest extends TestBase
         $this->setExpectedException('Exception', 'The resource [something-that-doesnt-exist] is not writable');
 
         $file   = $this->getFileMock('something-that-doesnt-exist');
+        $output = new League\CLImate\Util\Output();
+        $output->add('file', $file);
+        $output->defaultTo('file');
+
+        $output->write("Oh, you're still here.");
+    }
+
+    /** @test */
+    public function it_will_yell_when_it_failed_to_open_a_resource()
+    {
+        $this->setExpectedException('Exception', 'The resource could not be opened');
+
+        $file = $this->getFileMock($this->file->url());
+
+        self::$functions->shouldReceive('fopen')
+                        ->once()
+                        ->with($this->file->url(), 'a')
+                        ->andReturn(false);
+
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');

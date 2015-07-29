@@ -53,39 +53,14 @@ class File implements WriterInterface
         $resource = $this->getResource();
 
         if ($this->use_locking) {
-            $this->lockFile($resource);
+            flock($resource, LOCK_EX);
         }
 
         gzwrite($resource, $content);
 
         if ($this->use_locking) {
-            $this->unlockFile($resource);
+            flock($resource, LOCK_UN);
         }
-    }
-
-    /**
-     * @param resource $resource
-     */
-    protected function lockFile($resource)
-    {
-        $this->setLockState($resource, LOCK_EX);
-    }
-
-    /**
-     * @param resource $resource
-     */
-    protected function unlockFile($resource)
-    {
-        $this->setLockState($resource, LOCK_UN);
-    }
-
-    /**
-     * @param resource $resource
-     * @param int $state
-     */
-    protected function setLockState($resource, $state)
-    {
-        flock($resource, $state);
     }
 
     protected function getResource()
