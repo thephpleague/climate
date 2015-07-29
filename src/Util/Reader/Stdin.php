@@ -65,19 +65,29 @@ class Stdin implements ReaderInterface
         }
 
         try {
-            if ($this->stdIn !== false) {
-                fclose($this->stdIn);
-            }
-
-            $this->stdIn = fopen('php://stdin', 'r');
-
-            if (!$this->stdIn) {
-                throw new \Exception('Unable to read from STDIN');
-            }
+            $this->setStdIn();
         } catch (\Error $e) {
             throw new \Exception('Unable to read from STDIN', 0, $e);
         }
 
         return $this->stdIn;
+    }
+
+    /**
+     * Attempt to set the stdin property
+     *
+     * @throws \Exception
+     */
+    protected function setStdIn()
+    {
+        if ($this->stdIn !== false) {
+            fclose($this->stdIn);
+        }
+
+        $this->stdIn = fopen('php://stdin', 'r');
+
+        if (!$this->stdIn) {
+            throw new \Exception('Unable to read from STDIN');
+        }
     }
 }
