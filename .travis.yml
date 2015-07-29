@@ -1,5 +1,4 @@
 language: php
-sudo: if [ "$TRAVIS_PHP_VERSION" != 7 ]; then false; fi
 
 php:
   - 5.4
