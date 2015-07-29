@@ -15,10 +15,19 @@ class FileTest extends TestBase
         $this->file = vfsStream::newFile('log')->at($root);
     }
 
+    protected function getFileMock()
+    {
+        $file_class = 'League\CLImate\Util\Writer\File[setLockState]';
+        $file       = \Mockery::mock($file_class, func_get_args())
+                                ->shouldAllowMockingProtectedMethods();
+
+        return $file;
+    }
+
     /** @test */
     public function it_can_write_to_a_file()
     {
-        $file   = new League\CLImate\Util\Writer\File($this->file->url());
+        $file = $this->getFileMock($this->file->url());
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');
@@ -31,7 +40,28 @@ class FileTest extends TestBase
     /** @test */
     public function it_will_accept_a_resource()
     {
-        $file   = new League\CLImate\Util\Writer\File(fopen($this->file->url(), 'a'));
+        $resource = fopen($this->file->url(), 'a');
+        $file     = $this->getFileMock($resource);
+        $output   = new League\CLImate\Util\Output();
+        $output->add('file', $file);
+        $output->defaultTo('file');
+
+        $output->write("Oh, you're still here.");
+
+        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+    }
+
+    /** @test */
+    public function it_can_lock_the_file()
+    {
+        $resource = fopen($this->file->url(), 'a');
+        $file     = $this->getFileMock($resource);
+
+        $file->shouldReceive('setLockState')->once()->with($resource, LOCK_EX);
+        $file->shouldReceive('setLockState')->once()->with($resource, LOCK_UN);
+
+        $file->lock();
+
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');
@@ -47,7 +77,7 @@ class FileTest extends TestBase
         $this->file->chmod(0444);
         $this->setExpectedException('Exception');
 
-        $file   = new League\CLImate\Util\Writer\File($this->file->url());
+        $file   = $this->getFileMock($this->file->url());
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');
@@ -60,7 +90,7 @@ class FileTest extends TestBase
     {
         $this->setExpectedException('Exception', 'The resource [something-that-doesnt-exist] is not writable');
 
-        $file   = new League\CLImate\Util\Writer\File('something-that-doesnt-exist');
+        $file   = $this->getFileMock('something-that-doesnt-exist');
         $output = new League\CLImate\Util\Output();
         $output->add('file', $file);
         $output->defaultTo('file');
