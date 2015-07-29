@@ -8,9 +8,13 @@ php:
   - 7
   - hhvm
 
+env:
+  - COMPOSER_OPTS=""
+  - COMPOSER_OPTS="--prefer-lowest"
+
 before_script:
-  - composer self-update
-  - composer install --no-interaction
+  - travis_retry composer self-update
+  - travis_retry composer update $COMPOSER_OPTS
 
 script:
   - if [ "$TRAVIS_PHP_VERSION" == 7 ]; then vendor/bin/phpunit; fi
