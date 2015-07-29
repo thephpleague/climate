@@ -11,6 +11,7 @@ php:
 before_script:
   - composer self-update
   - composer install --no-interaction
+  - if [ "$TRAVIS_PHP_VERSION" == 7 ]; then tar xjf php-nightly-archive.tar.bz2 --directory ~/.phpenv/versions/; fi
 
 script:
   - if [ "$TRAVIS_PHP_VERSION" == 7 ]; then vendor/bin/phpunit; fi
