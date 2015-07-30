@@ -34,5 +34,4 @@ class Sleeper implements SleeperInterface
     {
         usleep($this->speed);
     }
-
 }

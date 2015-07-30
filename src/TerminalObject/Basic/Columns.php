@@ -178,7 +178,7 @@ class Columns extends BasicTerminalObject
      */
     protected function setColumnCountViaArray($items)
     {
-        $counts = array_map(function($arr) {
+        $counts = array_map(function ($arr) {
             return count($arr);
         }, $items);
 

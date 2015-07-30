@@ -6,7 +6,6 @@ use League\CLImate\Decorator\Component\Command;
 
 class CommandTest extends TestBase
 {
-
     /** @test */
     public function it_can_add_a_command()
     {
@@ -51,5 +50,4 @@ class CommandTest extends TestBase
         $command = new Command();
         $this->assertFalse($command->set('wat'));
     }
-
 }

@@ -4,7 +4,6 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 class Radio extends Checkboxes
 {
-
     /**
      * Build out the checkboxes
      *

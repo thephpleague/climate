@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class ClearTest extends TestBase
 {
-
     /** @test */
     public function it_can_clear_the_terminal()
     {
@@ -13,5 +12,4 @@ class ClearTest extends TestBase
         $this->shouldHavePersisted();
         $this->cli->clear();
     }
-
 }

@@ -7,7 +7,6 @@ use League\CLImate\Decorator\Tags;
 
 class ParserFactory
 {
-
     /**
      * Get an instance of the appropriate Parser class
      *

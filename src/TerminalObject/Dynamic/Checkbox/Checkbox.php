@@ -216,5 +216,4 @@ class Checkbox
     {
         return html_entity_decode("&#x276F;");
     }
-
 }

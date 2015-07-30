@@ -109,5 +109,4 @@ trait StringLength
     {
         return array_map([$this, 'lengthWithoutTags'], $arr);
     }
-
 }

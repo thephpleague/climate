@@ -6,7 +6,6 @@ use Mockery;
 
 class AnimationTest extends TestBase
 {
-
     use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames, ExitToRightFrames, RunFrames;
 
     protected function emptyFrame()
@@ -248,5 +247,4 @@ class AnimationTest extends TestBase
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('work-it', $this->getSleeper(5))->run();
     }
-
 }

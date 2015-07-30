@@ -131,5 +131,4 @@ class ColumnTest extends TestBase
 
         $this->cli->columns($columns);
     }
-
 }

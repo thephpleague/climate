@@ -35,5 +35,4 @@ class BorderTest extends TestBase
         $this->shouldHavePersisted();
         $this->cli->border('-*-', 50);
     }
-
 }

@@ -42,5 +42,4 @@ abstract class BasicTerminalObject implements BasicTerminalObjectInterface
     {
         return false;
     }
-
 }

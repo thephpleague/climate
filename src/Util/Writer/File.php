@@ -2,7 +2,6 @@
 
 namespace League\CLImate\Util\Writer;
 
-
 class File implements WriterInterface
 {
     /** @var resource|string */

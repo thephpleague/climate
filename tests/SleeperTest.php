@@ -49,5 +49,4 @@ class SleeperTest extends TestBase
 
         $sleeper->sleep();
     }
-
 }

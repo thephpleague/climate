@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class ConfirmTest extends TestBase
 {
-
     /** @test */
     public function it_will_return_true_for_y()
     {
@@ -45,5 +44,4 @@ class ConfirmTest extends TestBase
 
         $input->confirmed();
     }
-
 }

@@ -146,5 +146,4 @@ class CheckboxesTest extends TestBase
 
         $this->assertSame([], $response);
     }
-
 }

@@ -154,5 +154,4 @@ class Checkboxes extends InputAbstract
 
         $this->checkboxes->write();
     }
-
 }

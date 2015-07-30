@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class PasswordTest extends TestBase
 {
-
     /** @test */
     public function it_will_hide_the_user_response()
     {
@@ -18,5 +17,4 @@ class PasswordTest extends TestBase
 
         $this->assertSame($response, 'mypasswordyo');
     }
-
 }

@@ -210,5 +210,4 @@ class Animation extends DynamicTerminalObject
 
         return $content;
     }
-
 }

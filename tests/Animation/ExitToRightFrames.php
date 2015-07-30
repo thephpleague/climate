@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Tests;
 
-trait ExitToRightFrames {
-
+trait ExitToRightFrames
+{
     abstract protected function shouldWrite($content, $count = 1);
     abstract protected function blankLines($count = 1);
     abstract protected function emptyFrame();
@@ -146,5 +146,4 @@ trait ExitToRightFrames {
     {
         $this->emptyFrame();
     }
-
 }

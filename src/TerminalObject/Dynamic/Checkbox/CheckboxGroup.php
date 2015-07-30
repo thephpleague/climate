@@ -188,5 +188,4 @@ class CheckboxGroup
 
         $this->output->write($parsed);
     }
-
 }

@@ -7,7 +7,6 @@ namespace League\CLImate\TerminalObject\Basic;
  */
 class Tab extends Repeatable
 {
-
     /**
      * Check if this object requires a new line should be added after the output.
      *

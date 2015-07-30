@@ -2,19 +2,19 @@
 
 namespace League\CLImate\Tests;
 
-trait RunFrames {
-
+trait RunFrames
+{
     abstract protected function shouldWrite($content, $count = 1);
 
     protected function runFrames1()
     {
-         $this->shouldWrite("\e[m __          __\e[0m");
-         $this->shouldWrite("\e[m \ \        / /\e[0m");
-         $this->shouldWrite("\e[m  \ \  /\  / /\e[0m");
-         $this->shouldWrite("\e[m   \ \/  \/ /\e[0m");
-         $this->shouldWrite("\e[m    \  /\  /\e[0m");
-         $this->shouldWrite("\e[m     \/  \/\e[0m");
-         $this->shouldWrite("\e[m\e[0m");
+        $this->shouldWrite("\e[m __          __\e[0m");
+        $this->shouldWrite("\e[m \ \        / /\e[0m");
+        $this->shouldWrite("\e[m  \ \  /\  / /\e[0m");
+        $this->shouldWrite("\e[m   \ \/  \/ /\e[0m");
+        $this->shouldWrite("\e[m    \  /\  /\e[0m");
+        $this->shouldWrite("\e[m     \/  \/\e[0m");
+        $this->shouldWrite("\e[m\e[0m");
     }
 
     protected function runFrames2()
@@ -60,5 +60,4 @@ trait RunFrames {
         $this->shouldWrite("\e[m\r\e[K     \/  \/   \____/|_|  \_\_|\_\_____/\e[0m");
         $this->shouldWrite("\e[m\r\e[K\e[0m");
     }
-
 }

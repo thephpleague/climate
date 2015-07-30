@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class BrTest extends TestBase
 {
-
     /** @test */
     public function it_can_output_a_line_break()
     {
@@ -53,5 +52,4 @@ class BrTest extends TestBase
 
         $this->cli->br(4.2)->out('This is a line further down.');
     }
-
 }

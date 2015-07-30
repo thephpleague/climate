@@ -67,5 +67,4 @@ class StdinTest extends TestBase
 
         $this->assertSame('I hear', $response);
     }
-
 }

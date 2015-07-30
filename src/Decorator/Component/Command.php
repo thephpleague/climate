@@ -4,7 +4,6 @@ namespace League\CLImate\Decorator\Component;
 
 class Command extends BaseDecorator
 {
-
     /**
      * Commands that correspond to a color in the $colors property
      *
@@ -75,5 +74,4 @@ class Command extends BaseDecorator
         // to a property in another class
         return ($code = $this->get($val)) ? $code : false;
     }
-
 }

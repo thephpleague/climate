@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class InlineTest extends TestBase
 {
-
     /** @test */
     public function it_can_output_inline()
     {

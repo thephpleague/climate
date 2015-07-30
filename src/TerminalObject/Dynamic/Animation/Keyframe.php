@@ -262,5 +262,4 @@ class Keyframe
 
         return array_merge($keyframe, array_slice($lines, 0, $current));
     }
-
 }

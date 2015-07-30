@@ -7,7 +7,6 @@ use League\CLImate\Util\Writer\Buffer;
 
 class BufferTest extends TestBase
 {
-
     /** @test */
     public function it_can_buffer_content()
     {

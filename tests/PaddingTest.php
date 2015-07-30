@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class PaddingTest extends TestBase
 {
-
     /** @test */
     public function it_can_wrap_a_line()
     {
@@ -59,6 +58,4 @@ class PaddingTest extends TestBase
 
         $padding->label('Pad odd')->result('extra');
     }
-
-
 }

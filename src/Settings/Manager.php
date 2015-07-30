@@ -81,5 +81,4 @@ class Manager
     {
         return ucwords(str_replace('add_', '', $name));
     }
-
 }

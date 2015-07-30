@@ -4,7 +4,6 @@ namespace League\CLImate\Decorator\Component;
 
 class Color extends BaseDecorator
 {
-
     /**
      * The available colors
      *
@@ -98,5 +97,4 @@ class Color extends BaseDecorator
 
         return false;
     }
-
 }

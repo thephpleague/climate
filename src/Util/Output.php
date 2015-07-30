@@ -310,5 +310,4 @@ class Output
             $this->once = null;
         }
     }
-
 }

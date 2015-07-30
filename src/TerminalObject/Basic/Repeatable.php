@@ -15,5 +15,4 @@ abstract class Repeatable extends BasicTerminalObject
     {
         $this->count = (int) round(max((int) $count, 1));
     }
-
 }

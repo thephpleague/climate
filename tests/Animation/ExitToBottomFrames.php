@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Tests;
 
-trait ExitToBottomFrames {
-
+trait ExitToBottomFrames
+{
     abstract protected function shouldWrite($content, $count = 1);
     abstract protected function blankLines($count = 1);
 
@@ -78,5 +78,4 @@ trait ExitToBottomFrames {
         $this->shouldWrite("\e[m\e[6A\r\e[K\e[0m")->ordered();
         $this->blankLines(5);
     }
-
 }

@@ -4,8 +4,8 @@ namespace League\CLImate\Argument;
 
 use League\CLImate\CLImate;
 
-class Summary {
-
+class Summary
+{
     /**
      * @var \League\CLImate\CLImate $climate
      */
@@ -208,5 +208,4 @@ class Summary {
 
         return implode(', ', $summary);
     }
-
 }

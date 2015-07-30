@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Util;
 
-class Helper {
-
+class Helper
+{
     /**
      * @param string|array $var
      *
@@ -29,7 +29,7 @@ class Helper {
     {
         $flattened = [];
 
-        array_walk_recursive($arr, function($a) use (&$flattened) {
+        array_walk_recursive($arr, function ($a) use (&$flattened) {
             $flattened[] = $a;
         });
 
@@ -47,5 +47,4 @@ class Helper {
     {
         return strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $str));
     }
-
 }

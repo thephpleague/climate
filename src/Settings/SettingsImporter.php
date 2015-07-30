@@ -28,7 +28,5 @@ trait SettingsImporter
         if (method_exists($this, $method)) {
             $this->$method($setting);
         }
-
     }
-
 }

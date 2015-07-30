@@ -111,5 +111,4 @@ class Router
 
         return $this;
     }
-
 }

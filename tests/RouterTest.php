@@ -6,7 +6,6 @@ use League\CLImate\TerminalObject\Router\Router;
 
 class RouterTest extends TestBase
 {
-
     /** @test */
     public function it_can_find_a_basic_object()
     {
@@ -30,5 +29,4 @@ class RouterTest extends TestBase
 
         $this->assertFalse($router->exists('NotAThingAtAll'));
     }
-
 }

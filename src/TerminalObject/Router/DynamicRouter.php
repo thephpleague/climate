@@ -33,5 +33,4 @@ class DynamicRouter extends BaseRouter implements RouterInterface
 
         return $obj;
     }
-
 }

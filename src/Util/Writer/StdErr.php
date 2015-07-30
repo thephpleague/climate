@@ -13,5 +13,4 @@ class StdErr implements WriterInterface
     {
         fwrite(\STDERR, $content);
     }
-
 }

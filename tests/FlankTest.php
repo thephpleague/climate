@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class FlankTest extends TestBase
 {
-
     /** @test */
     public function it_can_output_a_basic_flank()
     {
@@ -36,5 +35,4 @@ class FlankTest extends TestBase
         $this->shouldHavePersisted();
         $this->cli->flank('Flank me!', '-', 5);
     }
-
 }

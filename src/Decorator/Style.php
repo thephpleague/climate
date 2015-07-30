@@ -13,7 +13,6 @@ use League\CLImate\Util\System\System;
  */
 class Style
 {
-
     /**
      * An array of Decorator objects
      *
@@ -293,5 +292,4 @@ class Style
             $this->add($style, $key, $value);
         }
     }
-
 }

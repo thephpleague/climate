@@ -72,5 +72,4 @@ class RadioTest extends TestBase
 
         $this->assertSame('Thrilled', $response);
     }
-
 }

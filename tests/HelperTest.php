@@ -6,7 +6,6 @@ use League\CLImate\Util\Helper;
 
 class HelperTest extends TestBase
 {
-
     /** @test */
     public function it_can_convert_a_string_to_an_array()
     {

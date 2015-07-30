@@ -4,7 +4,6 @@ namespace League\CLImate\Decorator\Component;
 
 class Format extends BaseDecorator
 {
-
     /**
      * The available formatting options
      *
@@ -87,5 +86,4 @@ class Format extends BaseDecorator
 
         return false;
     }
-
 }

@@ -17,10 +17,10 @@ class Draw extends BasicTerminalObject
     }
 
     /**
-	 * Return the art
-	 *
-	 * @return array
-	 */
+     * Return the art
+     *
+     * @return array
+     */
     public function result()
     {
         $file = $this->artFile($this->art) ?: $this->artFile($this->default_art);

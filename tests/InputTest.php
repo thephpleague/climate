@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class InputTest extends TestBase
 {
-
     /** @test */
     public function it_can_prompt_for_basic_info()
     {

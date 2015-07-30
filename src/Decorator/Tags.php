@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Decorator;
 
-class Tags {
-
+class Tags
+{
     /**
      * Original keys passed in to build tags
      *
@@ -73,5 +73,4 @@ class Tags {
             $this->tags["<\\/{$tag}>"] = $code;
         }
     }
-
 }

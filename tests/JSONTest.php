@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class JSONTest extends TestBase
 {
-
     /** @test */
     public function it_can_output_an_object_as_json()
     {
@@ -13,7 +12,7 @@ class JSONTest extends TestBase
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
                     'cell4' => 'Cell 4',
-                ], JSON_PRETTY_PRINT );
+                ], JSON_PRETTY_PRINT);
 
         $this->shouldWrite("\e[m" . $should_be . "\e[0m");
         $this->shouldHavePersisted();
@@ -38,7 +37,7 @@ class JSONTest extends TestBase
                     'cell2' => 'Cell 2',
                     'cell3' => 'Cell 3',
                     'cell4' => 'Cell 4',
-                ], JSON_PRETTY_PRINT );
+                ], JSON_PRETTY_PRINT);
 
         $should_be = str_replace('Cell 4', "\e[5mCell 4\e[0m", $should_be);
 
@@ -52,5 +51,4 @@ class JSONTest extends TestBase
                     'cell4' => '<blink>Cell 4</blink>',
                 ]);
     }
-
 }

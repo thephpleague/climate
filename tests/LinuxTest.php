@@ -6,7 +6,6 @@ use Mockery;
 
 class LinuxTest extends TestBase
 {
-
     /** @test */
     public function it_can_get_the_width()
     {
@@ -54,5 +53,4 @@ class LinuxTest extends TestBase
 
         $this->assertNull($system->height());
     }
-
 }

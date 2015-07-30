@@ -20,5 +20,4 @@ trait UtilImporter
     {
         $this->util = $util;
     }
-
 }

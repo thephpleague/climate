@@ -279,5 +279,4 @@ class ArgumentTest extends TestBase
         $this->assertFalse($this->cli->arguments->defined('another-argument', $argv));
         $this->assertFalse($this->cli->arguments->defined('nonexistent', $argv));
     }
-
 }

@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Argument;
 
-class Parser {
-
+class Parser
+{
     /**
      * Filter class to find various types of arguments
      *
@@ -238,5 +238,4 @@ class Parser {
 
         return compact('arguments', 'command');
     }
-
 }

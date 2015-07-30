@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class TabTest extends TestBase
 {
-
     /** @test */
     public function it_can_output_a_tab()
     {
@@ -61,5 +60,4 @@ class TabTest extends TestBase
 
         $this->cli->tab(2.7);
     }
-
 }

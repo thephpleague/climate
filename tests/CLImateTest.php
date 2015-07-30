@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class CLImateTest extends TestBase
 {
-
     /** @test */
     public function it_can_echo_out_a_string()
     {
@@ -34,5 +33,4 @@ class CLImateTest extends TestBase
         $this->cli->output->defaultTo('out');
         $this->cli->to('buffer')->out('This is to the buffer.');
     }
-
 }

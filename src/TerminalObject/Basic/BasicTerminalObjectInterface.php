@@ -12,11 +12,10 @@ interface BasicTerminalObjectInterface
      * @param $setting
      * @return void
      */
-    public function importSetting( $setting );
+    public function importSetting($setting);
 
     /**
      * @return boolean
      */
     public function sameLine();
-
 }

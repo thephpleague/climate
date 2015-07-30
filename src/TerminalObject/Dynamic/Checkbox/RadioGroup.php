@@ -4,7 +4,6 @@ namespace League\CLImate\TerminalObject\Dynamic\Checkbox;
 
 class RadioGroup extends CheckboxGroup
 {
-
     /**
      * Toggle the currently selected option, uncheck all of the others
      */
@@ -36,5 +35,4 @@ class RadioGroup extends CheckboxGroup
 
         return null;
     }
-
 }

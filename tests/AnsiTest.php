@@ -15,7 +15,6 @@ use Mockery;
 
 class AnsiTest extends TestBase
 {
-
     /** @test */
 
     public function it_can_output_with_ansi()
@@ -101,5 +100,4 @@ class AnsiTest extends TestBase
 
         $this->cli->out("<green>I am green</green>");
     }
-
 }

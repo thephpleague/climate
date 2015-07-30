@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class StyleTest extends TestBase
 {
-
     /** @test */
     public function it_can_use_a_foreground_color_method()
     {
@@ -126,9 +125,8 @@ class StyleTest extends TestBase
         $this->shouldWrite("\e[900mThis is the new color.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->style->addColor( 'new_custom_color', 900 );
+        $this->cli->style->addColor('new_custom_color', 900);
         $this->cli->newCustomColor('This is the new color.');
-
     }
 
     /** @test */
@@ -137,7 +135,7 @@ class StyleTest extends TestBase
         $this->shouldWrite("\e[mThis \e[900mis\e[0m the new color.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->style->addColor( 'new_custom_color', 900 );
+        $this->cli->style->addColor('new_custom_color', 900);
         $this->cli->out('This <new_custom_color>is</new_custom_color> the new color.');
     }
 
@@ -147,7 +145,7 @@ class StyleTest extends TestBase
         $this->shouldWrite("\e[910mThis is the new color.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->style->addColor( 'new_custom_color', 900 );
+        $this->cli->style->addColor('new_custom_color', 900);
         $this->cli->backgroundNewCustomColor()->out('This is the new color.');
     }
 
@@ -208,5 +206,4 @@ class StyleTest extends TestBase
         $this->cli->style->addCommand('holler', $command);
         $this->cli->out('This would go <holler>out</holler> to the console.');
     }
-
 }

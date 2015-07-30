@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class DrawTest extends TestBase
 {
-
     protected function drawWorks()
     {
         $this->shouldWrite("\e[m __          ______  _____  _  __ _____\e[0m");
@@ -77,5 +76,4 @@ class DrawTest extends TestBase
         $this->drawWorks();
         $this->cli->addArt(__DIR__ . '/art')->draw('works');
     }
-
 }

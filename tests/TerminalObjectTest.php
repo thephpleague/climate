@@ -4,7 +4,6 @@ namespace League\CLImate\Tests;
 
 class TerminalObjectTest extends TestBase
 {
-
     /** @test **/
     public function it_gracefully_handles_non_existent_objects()
     {
@@ -18,7 +17,6 @@ class TerminalObjectTest extends TestBase
     /** @test **/
     public function it_can_chain_a_foreground_color_and_terminal_object()
     {
-
         $this->shouldWrite("\e[31m### Flank me! ###\e[0m");
 
         $this->shouldHavePersisted();
@@ -105,5 +103,4 @@ class TerminalObjectTest extends TestBase
 
         $this->cli->blinkRedBackgroundRedFlank('Flank me!');
     }
-
 }

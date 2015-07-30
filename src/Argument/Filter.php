@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Argument;
 
-class Filter {
-
+class Filter
+{
     protected $arguments = [];
 
     /**
@@ -180,5 +180,4 @@ class Filter {
     {
         return strtolower($argument->longPrefix() ?: $argument->prefix() ?: '');
     }
-
 }

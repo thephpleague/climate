@@ -243,5 +243,4 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
         $this->assertSame($output->get('buffer')->get(), 'Oh, hey there.');
     }
-
 }
