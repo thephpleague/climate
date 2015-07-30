@@ -126,7 +126,7 @@ class InputTest extends TestBase
 
         $input = $this->cli->input('So what is up?', $this->reader);
 
-        $input->accept(function($response) {
+        $input->accept(function ($response) {
             return ($response == 'everything.');
         });
 
@@ -145,7 +145,7 @@ class InputTest extends TestBase
 
         $input = $this->cli->input('So what is up?', $this->reader);
 
-        $input->accept(function($response) {
+        $input->accept(function ($response) {
             return ($response == 'everything.');
         });
 
