@@ -205,7 +205,11 @@ class CLImate
      */
     public function extend($class_path, $key = null)
     {
-        $key = $key ?: end(explode('\\', $class_path));
+        if ($key === null) {
+            $key = explode('\\', $class_path);
+            $key = end($key);
+        }
+
         $key = Helper::snakeCase($key);
 
         $this->router->addExtension($key, $class_path);
