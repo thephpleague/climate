@@ -12,7 +12,7 @@ use League\CLImate\Util\UtilImporter;
  * contract, which is why it gets its own base class
  */
 
-abstract class DynamicTerminalObject
+abstract class DynamicTerminalObject implements DynamicTerminalObjectInterface
 {
     use SettingsImporter, ParserImporter, OutputImporter, UtilImporter;
 }

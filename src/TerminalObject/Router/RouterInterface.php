@@ -21,4 +21,9 @@ interface RouterInterface
      * @return null|\League\CLImate\TerminalObject\Dynamic\DynamicTerminalObject
      */
     public function execute($obj);
+
+    /**
+     * @return string
+     */
+    public function pathPrefix();
 }

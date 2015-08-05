@@ -40,6 +40,35 @@ class Router
     }
 
     /**
+     * Register a custom class with the router
+     *
+     * @param string $key
+     * @param string $class
+     *
+     * @throws \Exception if extension class does not exist
+     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
+     */
+    public function addExtension($key, $class)
+    {
+        if (!class_exists($class)) {
+            throw new \Exception('Class does not exist: ' . $class);
+        }
+
+        $basic   = 'League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface';
+        $dynamic = 'League\CLImate\TerminalObject\Dynamic\DynamicTerminalObjectInterface';
+
+        if (is_a($class, $basic, true)) {
+            return $this->basic->addExtension($key, $class);
+        }
+
+        if (is_a($class, $dynamic, true)) {
+            return $this->dynamic->addExtension($key, $class);
+        }
+
+        throw new \Exception('Class must implement either ' . $basic . ' or ' . $dynamic);
+    }
+
+    /**
      * Check if the name matches an existing terminal object
      *
      * @param string $name
