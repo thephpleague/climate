@@ -17,9 +17,16 @@ abstract class BaseRouter implements RouterInterface
         $this->extensions[$key] = $class;
     }
 
+    /**
+     * Get the full path for the class based on the key
+     *
+     * @param string $class
+     *
+     * @return string
+     */
     public function path($class)
     {
-        return $this->getExtension($class) ?: $this->getPath($this->shortName($class));;
+        return $this->getExtension($class) ?: $this->getPath($this->shortName($class));
     }
 
     /**
