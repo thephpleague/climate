@@ -85,6 +85,7 @@ class Router
      *
      * @param string $name
      * @param mixed  $arguments
+     *
      * @return null|\League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface
      */
     public function execute($name, $arguments)
