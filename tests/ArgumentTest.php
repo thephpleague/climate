@@ -126,6 +126,8 @@ class ArgumentTest extends TestBase
         //         Only long prefix
         //     -v default-value (default: test)
         //         Has a default value
+        //     no-prefix
+        //         Not defined by a prefix
 
         $this->output->shouldReceive("sameLine");
         $this->shouldWrite("\e[mTest Description\e[0m");
@@ -170,7 +172,12 @@ class ArgumentTest extends TestBase
         $this->shouldWrite("\e[m-v default-value (default: test)\e[0m");
         $this->shouldWrite("\e[m\t\t\e[0m");
         $this->shouldWrite("\e[mHas a default value\e[0m");
-        $this->shouldHavePersisted(31);
+
+        $this->shouldWrite("\e[m\t\e[0m");
+        $this->shouldWrite("\e[mno-prefix\e[0m");
+        $this->shouldWrite("\e[m\t\t\e[0m");
+        $this->shouldWrite("\e[mNot defined by a prefix\e[0m");
+        $this->shouldHavePersisted(35);
 
         $this->cli->description('Test Description');
         $this->cli->arguments->add($this->getFullArguments());

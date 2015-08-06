@@ -23,7 +23,7 @@ class Filter
      */
     public function optional()
     {
-        return $this->filterArguments(['hasPrefix', 'isOptional']);
+        return $this->filterArguments(['isOptional']);
     }
 
     /**
@@ -33,7 +33,7 @@ class Filter
      */
     public function required()
     {
-        return $this->filterArguments(['hasPrefix', 'isRequired']);
+        return $this->filterArguments(['isRequired']);
     }
 
     /**
