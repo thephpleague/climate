@@ -9,7 +9,7 @@ class Progress extends DynamicTerminalObject
      *
      * @var integer $total
      */
-    protected $total       = 0;
+    protected $total = 0;
 
     /**
      * The current item that the progress bar represents
@@ -166,7 +166,6 @@ class Progress extends DynamicTerminalObject
     {
         $percentage = $current / $this->total;
         $bar_length = round($this->getBarStrLen() * $percentage);
-        $label      = ($percentage < 1) ? $label : '';
 
         $bar        = $this->getBar($bar_length);
         $number     = $this->percentageFormatted($percentage);

@@ -90,7 +90,7 @@ class ProgressTest extends TestBase
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(70)} 70%\n\r\e[Kseventh\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(80)} 80%\n\r\e[Keighth\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(90)} 90%\n\r\e[Kninth\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\n\r\e[Ktenth\e[0m");
 
         $progress = $this->cli->progress(10);
 
@@ -217,7 +217,7 @@ class ProgressTest extends TestBase
         $this->shouldWrite('');
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kstart\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Knext\e[0m");
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\n\r\e[Kfinal\e[0m");
 
         $progress = $this->cli->progress()->total(10);
         $progress->advance(1, "start");
