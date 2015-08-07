@@ -148,8 +148,10 @@ class Router
             throw new \Exception('Class does not exist: ' . $class);
         }
 
-        if (!is_a($class, $this->basic_interface, $str_class)
-                && !is_a($class, $this->dynamic_interface, $str_class)) {
+        $valid_implementation = (is_a($class, $this->basic_interface, $str_class)
+                                    || is_a($class, $this->dynamic_interface, $str_class));
+
+        if (!$valid_implementation) {
             throw new \Exception('Class must implement either '
                                     . $this->basic_interface . ' or ' . $this->dynamic_interface);
         }
