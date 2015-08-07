@@ -190,7 +190,9 @@ class Router
     {
         if ($this->basic->exists($name)) {
             return $this->basic;
-        } elseif ($this->dynamic->exists($name)) {
+        }
+
+        if ($this->dynamic->exists($name)) {
             return $this->dynamic;
         }
     }
