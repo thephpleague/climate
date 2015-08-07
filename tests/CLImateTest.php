@@ -3,6 +3,7 @@
 namespace League\CLImate\Tests;
 
 use League\CLImate\Tests\CustomObject\BasicObject;
+use League\CLImate\Tests\CustomObject\BasicObjectArgument;
 
 class CLImateTest extends TestBase
 {
@@ -54,6 +55,16 @@ class CLImateTest extends TestBase
 
         $this->cli->extend(new BasicObject);
         $this->cli->basicObject();
+    }
+
+    /** @test */
+    public function it_can_be_extended_using_a_basic_object_with_argument_setter()
+    {
+        $this->shouldWrite("\e[mHey: This is the thing that will print to the console.\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->extend(new BasicObjectArgument);
+        $this->cli->basicObjectArgument('This is the thing that will print to the console.');
     }
 
     /** @test */

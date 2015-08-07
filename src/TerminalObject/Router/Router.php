@@ -125,7 +125,11 @@ class Router
         $obj = $router->path($name);
 
         if (is_string($obj)) {
-            return (new \ReflectionClass($obj))->newInstanceArgs($arguments);
+            $obj = (new \ReflectionClass($obj))->newInstanceArgs($arguments);
+        }
+
+        if (method_exists($obj, 'arguments')) {
+            call_user_func_array([$obj, 'arguments'], $arguments);
         }
 
         return $obj;
