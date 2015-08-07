@@ -5,6 +5,7 @@ namespace League\CLImate\TerminalObject\Router;
 use League\CLImate\Decorator\Parser\ParserImporter;
 use League\CLImate\Settings\Manager;
 use League\CLImate\Settings\SettingsImporter;
+use League\CLImate\Util\Helper;
 use League\CLImate\Util\OutputImporter;
 use League\CLImate\Util\UtilImporter;
 
@@ -33,6 +34,16 @@ class Router
      */
     protected $basic;
 
+    /**
+     * @var string $basic_interface
+     */
+    protected $basic_interface = 'League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface';
+
+    /**
+     * @var string $dynamic_interface
+     */
+    protected $dynamic_interface = 'League\CLImate\TerminalObject\Dynamic\DynamicTerminalObjectInterface';
+
     public function __construct(DynamicRouter $dynamic = null, BasicRouter $basic = null)
     {
         $this->dynamic = $dynamic ?: new DynamicRouter();
@@ -44,28 +55,18 @@ class Router
      *
      * @param string $key
      * @param string $class
-     *
-     * @throws \Exception if extension class does not exist
-     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
      */
     public function addExtension($key, $class)
     {
-        if (is_string($class) && !class_exists($class)) {
-            throw new \Exception('Class does not exist: ' . $class);
-        }
+        $key = $this->getExtensionKey($key, $class);
 
-        $basic   = 'League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface';
-        $dynamic = 'League\CLImate\TerminalObject\Dynamic\DynamicTerminalObjectInterface';
+        $this->validateExtension($class);
 
-        if (is_a($class, $basic, is_string($class))) {
+        if (is_a($class, $this->basic_interface, is_string($class))) {
             return $this->basic->addExtension($key, $class);
         }
 
-        if (is_a($class, $dynamic, is_string($class))) {
-            return $this->dynamic->addExtension($key, $class);
-        }
-
-        throw new \Exception('Class must implement either ' . $basic . ' or ' . $dynamic);
+        return $this->dynamic->addExtension($key, $class);
     }
 
     /**
@@ -109,6 +110,49 @@ class Router
         }
 
         return $router->execute($obj);
+    }
+
+    /**
+     * Determine the extension key based on the class
+     *
+     * @param string|null $key
+     * @param string|object $class
+     *
+     * @return string
+     */
+    protected function getExtensionKey($key, $class)
+    {
+        if ($key === null) {
+            $class_path = (is_string($class)) ? $class : get_class($class);
+
+            $key = explode('\\', $class_path);
+            $key = end($key);
+        }
+
+        return Helper::snakeCase($key);
+    }
+
+    /**
+     * Ensure that the extension is valid
+     *
+     * @param string|object $class
+     *
+     * @throws \Exception if extension class does not exist
+     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
+     */
+    protected function validateExtension($class)
+    {
+        $str_class = is_string($class);
+
+        if ($str_class && !class_exists($class)) {
+            throw new \Exception('Class does not exist: ' . $class);
+        }
+
+        if (!is_a($class, $this->basic_interface, $str_class)
+                && !is_a($class, $this->dynamic_interface, $str_class)) {
+            throw new \Exception('Class must implement either '
+                                    . $this->basic_interface . ' or ' . $this->dynamic_interface);
+        }
     }
 
     /**
