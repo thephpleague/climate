@@ -39,7 +39,9 @@ abstract class BaseRouter implements RouterInterface
      */
     public function exists($class)
     {
-        return class_exists($this->path($class));
+        $class = $this->path($class);
+
+        return (is_object($class) || class_exists($class));
     }
 
     /**

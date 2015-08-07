@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Tests\CustomObject\BasicObject;
+
 class CLImateTest extends TestBase
 {
     /** @test */
@@ -35,13 +37,23 @@ class CLImateTest extends TestBase
     }
 
     /** @test */
-    public function it_can_be_extended_using_a_basic_object()
+    public function it_can_be_extended_using_a_basic_object_as_string()
     {
         $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
         $this->shouldHavePersisted();
 
         $this->cli->extend('League\CLImate\Tests\CustomObject\Basic');
         $this->cli->basic('This is something my custom object is handling.');
+    }
+
+    /** @test */
+    public function it_can_be_extended_using_a_basic_object()
+    {
+        $this->shouldWrite("\e[mThis just outputs this.\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->extend(new BasicObject);
+        $this->cli->basicObject();
     }
 
     /** @test */

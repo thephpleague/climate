@@ -198,21 +198,23 @@ class CLImate
     /**
      * Extend CLImate with custom methods
      *
-     * @param string $class_path
+     * @param string|object $class
      * @param string $key Optional custom key instead of class name
      *
      * @return \League\CLImate\CLImate
      */
-    public function extend($class_path, $key = null)
+    public function extend($class, $key = null)
     {
         if ($key === null) {
+            $class_path = (is_string($class)) ? $class : get_class($class);
+
             $key = explode('\\', $class_path);
             $key = end($key);
         }
 
         $key = Helper::snakeCase($key);
 
-        $this->router->addExtension($key, $class_path);
+        $this->router->addExtension($key, $class);
 
         return $this;
     }

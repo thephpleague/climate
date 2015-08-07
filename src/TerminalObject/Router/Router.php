@@ -50,18 +50,18 @@ class Router
      */
     public function addExtension($key, $class)
     {
-        if (!class_exists($class)) {
+        if (is_string($class) && !class_exists($class)) {
             throw new \Exception('Class does not exist: ' . $class);
         }
 
         $basic   = 'League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface';
         $dynamic = 'League\CLImate\TerminalObject\Dynamic\DynamicTerminalObjectInterface';
 
-        if (is_a($class, $basic, true)) {
+        if (is_a($class, $basic, is_string($class))) {
             return $this->basic->addExtension($key, $class);
         }
 
-        if (is_a($class, $dynamic, true)) {
+        if (is_a($class, $dynamic, is_string($class))) {
             return $this->dynamic->addExtension($key, $class);
         }
 
@@ -94,8 +94,7 @@ class Router
 
         $router->output($this->output);
 
-        $reflection = new \ReflectionClass($router->path($name));
-        $obj        = $reflection->newInstanceArgs($arguments);
+        $obj = $this->getObject($router, $name, $arguments);
 
         $obj->parser($this->parser);
         $obj->util($this->util);
@@ -110,6 +109,26 @@ class Router
         }
 
         return $router->execute($obj);
+    }
+
+    /**
+     * Get the object whether it's a string or already instantiated
+     *
+     * @param \League\CLImate\TerminalObject\Router\RouterInterface $router
+     * @param string $name
+     * @param array $arguments
+     *
+     * @return \League\CLImate\TerminalObject\Dynamic\DynamicTerminalObjectInterface|\League\CLImate\TerminalObject\Basic\BasicTerminalObjectInterface
+     */
+    protected function getObject($router, $name, $arguments)
+    {
+        $obj = $router->path($name);
+
+        if (is_string($obj)) {
+            return (new \ReflectionClass($obj))->newInstanceArgs($arguments);
+        }
+
+        return $obj;
     }
 
     /**
