@@ -205,11 +205,7 @@ class CLImate
      */
     public function extend($class, $key = null)
     {
-        $classes = $this->getExtensionArray($class, $key);
-
-        foreach ($classes as $obj_key => $obj) {
-            $this->router->addExtension($obj_key, $obj);
-        }
+        $this->router->addExtension($key, $class);
 
         return $this;
     }
@@ -274,25 +270,6 @@ class CLImate
         $this->arguments->description($description);
 
         return $this;
-    }
-
-    /**
-     * Convert the given class and key to an array of classes
-     *
-     * @param string|object|array $class
-     * @param string $key Optional custom key instead of class name
-     *
-     * @return array
-     */
-    protected function getExtensionArray($class, $key)
-    {
-        if (is_array($class)) {
-            return $class;
-        }
-
-        $key = $key ?: 0;
-
-        return [$key => $class];
     }
 
     /**
