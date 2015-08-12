@@ -4,7 +4,8 @@ namespace League\CLImate\TerminalObject\Router;
 
 use League\CLImate\Util\Helper;
 
-class ExtensionCollection {
+class ExtensionCollection
+{
 
     /**
      * @var array collection
@@ -142,5 +143,4 @@ class ExtensionCollection {
 
         return 'dynamic';
     }
-
 }
