@@ -6,7 +6,6 @@ use League\CLImate\Util\Helper;
 
 class ExtensionCollection
 {
-
     /**
      * @var array collection
      */
