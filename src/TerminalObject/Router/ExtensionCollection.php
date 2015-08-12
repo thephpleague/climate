@@ -10,7 +10,7 @@ class ExtensionCollection
     /**
      * @var array collection
      */
-    protected $collection = ['basic' => [], 'dymanic' => []];
+    protected $collection = ['basic' => [], 'dynamic' => []];
 
     /**
      * @var string $basic_interface
