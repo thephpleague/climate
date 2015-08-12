@@ -122,7 +122,7 @@ class Router
      */
     protected function getExtensionKey($key, $class)
     {
-        if ($key === null) {
+        if ($key === null || !is_string($key)) {
             $class_path = (is_string($class)) ? $class : get_class($class);
 
             $key = explode('\\', $class_path);

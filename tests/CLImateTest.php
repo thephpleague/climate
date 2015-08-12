@@ -101,4 +101,24 @@ class CLImateTest extends TestBase
         $this->cli->extend('League\CLImate\Tests\CustomObject\Basic', 'myCustomMethod');
         $this->cli->myCustomMethod('This is something my custom object is handling.');
     }
+
+    /** @test */
+    public function it_will_accept_an_array_of_extensions()
+    {
+        $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
+        $this->shouldHavePersisted();
+
+        $extensions = [
+            'League\CLImate\Tests\CustomObject\Basic',
+            'League\CLImate\Tests\CustomObject\Dynamic',
+        ];
+
+        $this->cli->extend($extensions);
+
+        $this->cli->basic('This is something my custom object is handling.');
+
+        $obj = $this->cli->dynamic();
+
+        $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
+    }
 }
