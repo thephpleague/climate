@@ -142,11 +142,30 @@ class Router
      */
     protected function validateExtension($class)
     {
-        $str_class = is_string($class);
+        $this->validateClassExists($class);
+        $this->validateClassImplementation($class);
+    }
 
-        if ($str_class && !class_exists($class)) {
+    /**
+     * @param string|object $class
+     *
+     * @throws \Exception if extension class does not exist
+     */
+    protected function validateClassExists($class)
+    {
+        if (is_string($class) && !class_exists($class)) {
             throw new \Exception('Class does not exist: ' . $class);
         }
+    }
+
+    /**
+     * @param string|object $class
+     *
+     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
+     */
+    protected function validateClassImplementation($class)
+    {
+        $str_class = is_string($class);
 
         $valid_implementation = (is_a($class, $this->basic_interface, $str_class)
                                     || is_a($class, $this->dynamic_interface, $str_class));
