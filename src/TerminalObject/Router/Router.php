@@ -136,9 +136,6 @@ class Router
      * Ensure that the extension is valid
      *
      * @param string|object $class
-     *
-     * @throws \Exception if extension class does not exist
-     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
      */
     protected function validateExtension($class)
     {
