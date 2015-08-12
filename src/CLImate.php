@@ -205,12 +205,12 @@ class CLImate
      */
     public function extend($class, $key = null)
     {
-        if (is_array($class)) {
-            foreach ($class as $obj_key => $obj) {
-                $this->router->addExtension($obj_key, $obj);
-            }
-        } else {
-            $this->router->addExtension($key, $class);
+        if (!is_array($class)) {
+            $class = [$key ?: 0 => $class];
+        }
+
+        foreach ($class as $obj_key => $obj) {
+            $this->router->addExtension($obj_key, $obj);
         }
 
         return $this;

@@ -121,4 +121,24 @@ class CLImateTest extends TestBase
 
         $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
     }
+
+    /** @test */
+    public function it_will_accept_an_array_of_extensions_with_custom_keys()
+    {
+        $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
+        $this->shouldHavePersisted();
+
+        $extensions = [
+            'whatever'  => 'League\CLImate\Tests\CustomObject\Basic',
+            'something' => 'League\CLImate\Tests\CustomObject\Dynamic',
+        ];
+
+        $this->cli->extend($extensions);
+
+        $this->cli->whatever('This is something my custom object is handling.');
+
+        $obj = $this->cli->something();
+
+        $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
+    }
 }
