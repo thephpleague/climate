@@ -1,3 +1,14 @@
+## 3.2.0 - 2015-08-13
+
+### Added
+- Multi-line support for `input` method [https://github.com/thephpleague/climate/pull/67](https://github.com/thephpleague/climate/pull/67)
+- `extend` method for _much_ easier extending of CLImate
+
+### Fixed
+- Unnecessary progress bar re-drawing when the output hadn't changed [https://github.com/thephpleague/climate/pull/69](https://github.com/thephpleague/climate/pull/69)
+- Progress label no longer removed once progress reaches 100% 
+- Non-prefixed paramaters for `arguments` method now show in usage description [https://github.com/thephpleague/climate/issues/65](https://github.com/thephpleague/climate/issues/65)
+
 ## 3.1.1 - 2015-05-01
 
 ### Fixed
