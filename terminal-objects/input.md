@@ -17,6 +17,15 @@ $input = $climate->input('How you doin?');
 $response = $input->prompt();
 ~~~
 
+## Multi-line Input
+
+~~~php
+$input = $climate->input('>>>');
+$input->multiLine();
+
+$response = $input->prompt(); // Will wait for ^D before returning
+~~~
+
 ### Acceptable Answers
 
 #### Via an Array
