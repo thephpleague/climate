@@ -29,5 +29,8 @@
         "psr-4": {
             "League\\CLImate\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+        "test": "phpunit"
     }
 }
