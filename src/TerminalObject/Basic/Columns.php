@@ -124,7 +124,7 @@ class Columns extends BasicTerminalObject
         $row = [];
 
         for ($j = 0; $j < $this->column_count; $j++) {
-            if (array_key_exists($key, $this->data[$j])) {
+            if (isset($this->data[$j]) && array_key_exists($key, $this->data[$j])) {
                 $row[] = $this->pad($this->data[$j][$key], $column_widths[$j]);
             }
         }
@@ -155,6 +155,10 @@ class Columns extends BasicTerminalObject
         $column_widths = [];
 
         for ($i = 0; $i < $this->column_count; $i++) {
+            if (!isset($this->data[$i])) {
+                $column_widths[] = 0;
+                continue;
+            }
             $column_widths[] = $this->getColumnWidth($this->data[$i]);
         }
 

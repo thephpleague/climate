@@ -4,6 +4,13 @@ namespace League\CLImate\Tests;
 
 class ColumnTest extends TestBase
 {
+    protected function getSingleColumn()
+    {
+        return [
+            'this',
+        ];
+    }
+
     protected function getStandardColumns()
     {
         return [
@@ -50,6 +57,24 @@ class ColumnTest extends TestBase
         $this->shouldHavePersisted();
 
         $this->cli->columns($this->getStandardColumns());
+    }
+
+    /** @test */
+    public function it_can_output_a_single_item_in_one_column()
+    {
+        $this->shouldWrite("\e[mthis\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->columns($this->getSingleColumn(), 1);
+    }
+
+    /** @test */
+    public function it_can_output_less_items_than_columns()
+    {
+        $this->shouldWrite("\e[mthis\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->columns($this->getSingleColumn(), 2);
     }
 
     /** @test */
