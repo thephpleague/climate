@@ -33,6 +33,8 @@ class Checkboxes extends InputAbstract
 
         $this->writeCheckboxes();
 
+        $this->util->system->exec('stty sane');
+
         return $this->checkboxes->getCheckedValues();
     }
 

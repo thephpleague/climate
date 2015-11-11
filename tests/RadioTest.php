@@ -39,6 +39,7 @@ class RadioTest extends TestBase
         $this->shouldWrite("\e[m  ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m");
 
         $this->util->system->shouldReceive('exec')->with('stty -icanon');
+        $this->util->system->shouldReceive('exec')->with('stty sane');
         $this->shouldHideCursor();
 
         $this->shouldReceiveSameLine();
