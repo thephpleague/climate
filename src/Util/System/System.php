@@ -65,4 +65,17 @@ abstract class System
 
         return exec($command);
     }
+
+    /**
+     * Returns whether Stty is available or not
+     * @see https://github.com/symfony/console/blob/master/Helper/QuestionHelper.php#L449-L463
+     *
+     * @return bool
+     */
+    public function hasSttyAvailable()
+    {
+        exec('stty 2>&1', $output, $exitcode);
+
+        return $exitcode === 0;
+    }
 }
