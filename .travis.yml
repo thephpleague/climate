@@ -17,8 +17,7 @@ before_script:
   - travis_retry composer update $COMPOSER_OPTS
 
 script:
-  - if [ "$TRAVIS_PHP_VERSION" == 7 ]; then vendor/bin/phpunit; fi
-  - if [ "$TRAVIS_PHP_VERSION" != 7 ]; then vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover; fi
+  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
 after_script:
   - wget https://scrutinizer-ci.com/ocular.phar
