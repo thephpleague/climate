@@ -146,19 +146,6 @@ class Checkbox
         return $this->value;
     }
 
-    public function __toString()
-    {
-        if ($this->isFirst()) {
-            return "\e[m" . $this->buildCheckboxString();
-        }
-
-        if ($this->isLast()) {
-            return $this->buildCheckboxString() . $this->util->cursor->left(10) . '<hidden>';
-        }
-
-        return $this->buildCheckboxString();
-    }
-
     /**
      * Build out basic checkbox string based on current options
      *
@@ -215,5 +202,18 @@ class Checkbox
     protected function pointer()
     {
         return html_entity_decode("&#x276F;");
+    }
+
+    public function __toString()
+    {
+        if ($this->isFirst()) {
+            return $this->buildCheckboxString();
+        }
+
+        if ($this->isLast()) {
+            return $this->buildCheckboxString() . $this->util->cursor->left(10) . '<hidden>';
+        }
+
+        return $this->buildCheckboxString();
     }
 }
