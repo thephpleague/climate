@@ -112,10 +112,11 @@ class Padding extends DynamicTerminalObject
         $content = array_pop($lines);
 
         foreach ($lines as $line) {
-            $this->output->write($line);
+            $this->output->write($this->parser->apply($line));
         }
 
         $content = $this->padContent($content);
+        $content = $this->parser->apply($content);
 
         $this->output->sameLine();
         $this->output->write($content);
@@ -130,6 +131,6 @@ class Padding extends DynamicTerminalObject
      */
     public function result($content)
     {
-        $this->output->write(' ' . $content);
+        $this->output->write($this->parser->apply(' ' . $content));
     }
 }
