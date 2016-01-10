@@ -220,8 +220,51 @@ class ProgressTest extends TestBase
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\n\r\e[Kfinal\e[0m");
 
         $progress = $this->cli->progress()->total(10);
-        $progress->advance(1, "start");
-        $progress->advance(1, "next");
-        $progress->advance(8, "final");
+        $progress->advance(1, 'start');
+        $progress->advance(1, 'next');
+        $progress->advance(8, 'final');
+    }
+
+    /** @test */
+    public function it_will_force_a_redraw_if_specified()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(60)} 60%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(80)} 80%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $progress = $this->cli->progress()->total(5);
+
+        $progress->forceRedraw();
+
+        $items = [1, 2, 2, 3, 4, 5];
+
+        foreach ($items as $item) {
+            $progress->current($item);
+        }
+    }
+
+    /** @test */
+    public function it_will_not_force_a_redraw_if_disabled()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(60)} 60%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(80)} 80%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $progress = $this->cli->progress()->total(5);
+
+        $progress->forceRedraw(false);
+
+        $items = [1, 2, 2, 3, 4, 5];
+
+        foreach ($items as $item) {
+            $progress->current($item);
+        }
     }
 }

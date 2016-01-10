@@ -47,6 +47,13 @@ class Progress extends DynamicTerminalObject
     protected $label;
 
     /**
+     * Force a redraw every time
+     *
+     * @var boolean $force_redraw
+     */
+    protected $force_redraw = false;
+
+    /**
      * If they pass in a total, set the total
      *
      * @param integer $total
@@ -105,6 +112,19 @@ class Progress extends DynamicTerminalObject
     public function advance($increment = 1, $label = null)
     {
         $this->current($this->current + $increment, $label);
+    }
+
+    /**
+     * Force the progress bar to redraw every time regardless of whether it has changed or not
+     *
+     * @param boolean $force
+     * @return Progress
+     */
+    public function forceRedraw($force = true)
+    {
+        $this->force_redraw = !!$force;
+
+        return $this;
     }
 
     /**
@@ -239,6 +259,6 @@ class Progress extends DynamicTerminalObject
      */
     protected function shouldRedraw($percentage, $label)
     {
-        return ($percentage != $this->current_percentage || $label != $this->label);
+        return ($this->force_redraw || $percentage != $this->current_percentage || $label != $this->label);
     }
 }
