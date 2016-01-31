@@ -286,4 +286,30 @@ class ArgumentTest extends TestBase
         $this->assertFalse($this->cli->arguments->defined('another-argument', $argv));
         $this->assertFalse($this->cli->arguments->defined('nonexistent', $argv));
     }
+
+    /** @test */
+    public function it_can_grab_the_trailing_arguments()
+    {
+        $this->cli->arguments->add([
+            'argument' => [
+                'prefix' => 'a',
+            ],
+            'another-argument' => [
+                'prefix' => 'b',
+            ],
+            'long-argument' => [
+                'longPrefix' => 'c',
+            ],
+        ]);
+
+        $argv = ['test-script', '-a', 'foo', '--c=bar', '--', '-the', 'trailing', '--arguments=here'];
+
+        $this->cli->arguments->parse($argv);
+
+        $this->assertTrue($this->cli->arguments->defined('argument', $argv));
+        $this->assertTrue($this->cli->arguments->defined('long-argument', $argv));
+        $this->assertFalse($this->cli->arguments->defined('another-argument', $argv));
+        $this->assertFalse($this->cli->arguments->defined('nonexistent', $argv));
+        $this->assertSame($this->cli->arguments->trailing(), '-the trailing --arguments=here');
+    }
 }

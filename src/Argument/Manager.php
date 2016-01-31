@@ -225,4 +225,14 @@ class Manager
 
         $this->parser->parse($argv);
     }
+
+    /**
+     * Get the trailing arguments
+     *
+     * @return string|null
+     */
+    public function trailing()
+    {
+        return $this->parser->trailing();
+    }
 }
