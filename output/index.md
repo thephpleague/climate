@@ -74,7 +74,7 @@ $climate->addDefault(['error', 'buffer']);
 $climate->add('combo', [new LogWriter(), new TotallyCustomWriter()]);
 
 // Add a combo of two already registered writers
-$cliamte->add('another-combo', ['out', 'error']);
+$climate->add('another-combo', ['out', 'error']);
 ~~~
 
 ## Accessing Registered Writers
