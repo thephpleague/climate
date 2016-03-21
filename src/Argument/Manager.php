@@ -23,7 +23,7 @@ class Manager
     /**
      * Filter class to find various types of arguments
      *
-     * @var League\CLImate\Argument\Filter $filter
+     * @var \League\CLImate\Argument\Filter $filter
      */
     protected $filter;
 
