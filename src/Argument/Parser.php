@@ -222,10 +222,10 @@ class Parser
             return $argv;
         }
 
-        if (is_null($value)) {
+        if (is_null($value) && isset($argv[++$key])) {
             // If the value wasn't previously defined in "key=value"
             // format then define it from the next command argument.
-            $argument->setValue($argv[++$key]);
+            $argument->setValue($argv[$key]);
             unset($argv[$key]);
             return $argv;
         }
