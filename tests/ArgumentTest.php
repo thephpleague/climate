@@ -239,6 +239,27 @@ class ArgumentTest extends TestBase
     }
 
     /** @test */
+    public function it_will_get_a_default_value_for_a_long_prefix_with_no_value()
+    {
+        $this->cli->arguments->add([
+            'only-long-prefix' => [
+                'longPrefix' => 'long',
+                'defaultValue' => 'HEY',
+            ],
+        ]);
+
+        $argv = [
+            'test-script',
+            '--long',
+        ];
+
+        $this->cli->arguments->parse($argv);
+        $processed = $this->cli->arguments->toArray();
+
+        $this->assertEquals('HEY', $this->cli->arguments->get('only-long-prefix'));
+    }
+
+    /** @test */
     public function it_throws_an_exception_when_required_arguments_are_not_defined()
     {
         $this->setExpectedException(

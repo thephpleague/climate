@@ -223,6 +223,10 @@ class Parser
         }
 
         if (is_null($value)) {
+            if (count($argv) === 0) {
+                return $argv;
+            }
+
             // If the value wasn't previously defined in "key=value"
             // format then define it from the next command argument.
             $argument->setValue($argv[++$key]);
