@@ -102,8 +102,23 @@ trait Art
     protected function fileSearch($art, $pattern)
     {
         foreach ($this->art_dirs as $dir) {
-            // Look for anything that has the $art filename
-            $paths = glob($dir . '/' . $art . $pattern);
+            $directoryIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir));
+
+            $paths = array();
+            $regex = '~' . preg_quote($art) . $pattern . '~';
+
+            foreach ($directoryIterator as $file) {
+                if ($file->isDir()) {
+                    continue;
+                }
+
+                // Look for anything that has the $art filename
+                if (preg_match($regex, $file)) {
+                    $paths[] = $file->getPathname();
+                }
+            }
+
+            asort($paths);
 
             // If we've got one, no need to look any further
             if (!empty($paths)) {
