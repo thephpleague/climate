@@ -102,12 +102,12 @@ trait Art
     protected function fileSearch($art, $pattern)
     {
         foreach ($this->art_dirs as $dir) {
-            $directoryIterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir));
+            $directory_iterator = new \RecursiveIteratorIterator(new \RecursiveDirectoryIterator($dir));
 
-            $paths = array();
+            $paths = [];
             $regex = '~' . preg_quote($art) . $pattern . '~';
 
-            foreach ($directoryIterator as $file) {
+            foreach ($directory_iterator as $file) {
                 if ($file->isDir()) {
                     continue;
                 }
