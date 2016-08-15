@@ -79,6 +79,6 @@ class Manager
      */
     protected function getClassName($name)
     {
-        return ucwords(str_replace('add_', '', $name));
+        return mb_convert_case(str_replace('add_', '', $name), MB_CASE_TITLE);
     }
 }

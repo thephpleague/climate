@@ -121,7 +121,7 @@ class Summary
     public function argument(Argument $argument)
     {
         $summary     = $this->prefixedArguments($argument);
-        $printedName = strstr($summary, ' ' . $argument->name());
+        $printedName = mb_strstr($summary, ' ' . $argument->name());
 
         // Print the argument name if it's not printed yet.
         if (!$printedName && !$argument->noValue()) {
@@ -169,7 +169,7 @@ class Summary
             return;
         }
 
-        $this->climate->br()->out(ucwords($type) . ' Arguments:');
+        $this->climate->br()->out(mb_convert_case($type, MB_CASE_TITLE) . ' Arguments:');
 
         foreach ($arguments as $argument) {
             $this->climate->tab()->out($this->argument($argument));

@@ -136,7 +136,7 @@ class CheckboxGroup
      */
     protected function getCurrentKey($direction, $option, $key)
     {
-        $method = 'get' . ucwords($direction). 'Key';
+        $method = 'get' . mb_convert_case($direction, MB_CASE_TITLE). 'Key';
 
         return $this->{$method}($option, $key);
     }

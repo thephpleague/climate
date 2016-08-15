@@ -193,7 +193,7 @@ class Output
      */
     protected function resolve($writer)
     {
-        $resolver = 'resolve' . ucwords(gettype($writer)) . 'Writer';
+        $resolver = 'resolve' . mb_convert_case(gettype($writer), MB_CASE_TITLE) . 'Writer';
 
         if (method_exists($this, $resolver) && $resolved = $this->{$resolver}($writer)) {
             return $resolved;

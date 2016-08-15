@@ -11,11 +11,10 @@ class PaddingTest extends TestBase
         $padding   = $this->cli->padding();
 
         $content   = str_repeat('a', $max_width * 2);
-        $content   = substr($content, 0, ($max_width * 2) - 5);
-
+        $content   = mb_substr($content, 0, ($max_width * 2) - 5);
         $this->output->shouldReceive('sameLine');
-        $this->shouldWrite("\e[m" . substr($content, 0, $max_width) . "\e[0m");
-        $this->shouldWrite("\e[m" . substr($content, $max_width) . ".....\e[0m");
+        $this->shouldWrite("\e[m" . mb_substr($content, 0, $max_width) . "\e[0m");
+        $this->shouldWrite("\e[m" . mb_substr($content, $max_width) . ".....\e[0m");
         $this->shouldWrite("\e[m result\e[0m");
 
         $padding->label($content)->result('result');

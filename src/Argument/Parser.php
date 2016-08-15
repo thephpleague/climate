@@ -167,7 +167,7 @@ class Parser
     protected function getNameAndValue($cliArgument)
     {
         // Look for arguments defined in the "key=value" format.
-        if (strpos($cliArgument, '=') !== false) {
+        if (mb_strpos($cliArgument, '=') !== false) {
             return explode('=', $cliArgument, 2);
         }
 

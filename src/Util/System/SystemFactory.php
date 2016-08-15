@@ -35,7 +35,7 @@ class SystemFactory
 
     protected static function getSystem()
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+        if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) === 'WIN') {
             return new Windows();
         }
 

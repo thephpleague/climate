@@ -163,7 +163,7 @@ class Manager
         ];
 
         foreach ($possibilities as $key => $search) {
-            if ($key && strpos($command_argument, $search) === 0) {
+            if ($key && mb_strpos($command_argument, $search) === 0) {
                 return true;
             }
         }

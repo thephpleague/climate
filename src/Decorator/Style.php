@@ -249,7 +249,7 @@ class Style
      */
     protected function parseAddMethod($method)
     {
-        return strtolower(substr($method, 3, strlen($method)));
+        return mb_strtolower(mb_substr($method, 3, mb_strlen($method)));
     }
 
     /**
@@ -281,7 +281,7 @@ class Style
     public function __call($requested_method, $arguments)
     {
         // The only methods we are concerned about are 'add' methods
-        if (substr($requested_method, 0, 3) != 'add') {
+        if (mb_substr($requested_method, 0, 3) != 'add') {
             return false;
         }
 

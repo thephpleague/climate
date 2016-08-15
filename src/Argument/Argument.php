@@ -98,7 +98,7 @@ class Argument
         $params   = self::getSettableArgumentParams($params);
 
         foreach ($params as $key => $value) {
-            $method = 'set' . ucwords($key);
+            $method = 'set' . mb_convert_case($key, MB_CASE_TITLE);
             $argument->{$method}($value);
         }
 
@@ -338,7 +338,7 @@ class Argument
      */
     public function setValue($value)
     {
-        $cast_method = 'castTo' . ucwords($this->castTo);
+        $cast_method = 'castTo' . mb_convert_case($this->castTo, MB_CASE_TITLE);
         $this->value = $this->{$cast_method}($value);
     }
 
