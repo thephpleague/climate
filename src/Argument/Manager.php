@@ -59,7 +59,7 @@ class Manager implements ManagerInterface
         $this->filter  = $filter ?: new Filter();
         $this->summary = $summary ?: new Summary();
         $this->parser  = $parser ?: new Parser();
-        $this->creator = $creator ?: Argument::class;
+        $this->creator = $creator ?: 'League\CLImate\Argument\Argument';
         $reflection = new \ReflectionClass($this->creator);
         $implementsInterface = $reflection->implementsInterface(ArgumentInterface::class);
         if ($implementsInterface) {
