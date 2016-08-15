@@ -61,14 +61,14 @@ class Manager implements ManagerInterface
         $this->parser  = $parser ?: new Parser();
         $this->creator = $creator ?: 'League\CLImate\Argument\Argument';
         $reflection = new \ReflectionClass($this->creator);
-        $implementsInterface = $reflection->implementsInterface(ArgumentInterface::class);
+        $implementsInterface = $reflection->implementsInterface('\League\CLImate\Argument\ArgumentInterface');
         if ($implementsInterface) {
             $this->creator = $reflection->newInstanceWithoutConstructor();
         } else {
             throw new \InvalidArgumentException(sprintf(
                 'The given argument "%s" must be implements "%s".',
                 $this->creator,
-                ArgumentInterface::class
+                '\League\CLImate\Argument\ArgumentInterface'
             ));
         }
     }
