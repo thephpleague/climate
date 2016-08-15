@@ -89,10 +89,10 @@ class Padding extends DynamicTerminalObject
     {
         if (strlen($this->char) > 0) {
             $length = $this->getLength();
-            $padding_length = ceil($length / strlen($this->char));
+            $padding_length = ceil($length / mb_strlen($this->char));
 
             $padding = str_repeat($this->char, $padding_length);
-            $content .= substr($padding, 0, $length - strlen($content));
+            $content .= mb_substr($padding, 0, $length - mb_strlen($content));
         }
 
         return $content;
@@ -108,7 +108,12 @@ class Padding extends DynamicTerminalObject
     public function label($content)
     {
         // Handle long labels by splitting them across several lines
-        $lines   = str_split($content, $this->util->width());
+        $lines = [];
+        $stop = mb_strlen($content);
+        $width = $this->util->width();
+        for ($i = 0; $i < $stop; $i += $width) {
+            $lines[] = mb_substr($content, $i, $width);
+        }
         $content = array_pop($lines);
 
         foreach ($lines as $line) {

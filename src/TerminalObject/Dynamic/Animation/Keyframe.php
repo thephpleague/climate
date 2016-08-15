@@ -153,7 +153,7 @@ class Keyframe
     protected function exitHorizontalFrames(array $lines, $line_method)
     {
         $keyframes = [];
-        $length    = strlen($lines[0]);
+        $length    = mb_strlen($lines[0]);
 
         for ($i = $length; $i > 0; $i--) {
             $keyframes[] = $this->getHorizontalKeyframe($lines, $i, $line_method, $length);
@@ -213,7 +213,7 @@ class Keyframe
      */
     protected function currentLeftLine($line, $frame_number)
     {
-        return substr($line, -$frame_number);
+        return mb_substr($line, -$frame_number);
     }
 
 
@@ -228,7 +228,7 @@ class Keyframe
      */
     protected function currentRightLine($line, $frame_number, $length)
     {
-        return str_repeat(' ', $length - $frame_number) . substr($line, 0, $frame_number);
+        return str_repeat(' ', $length - $frame_number) . mb_substr($line, 0, $frame_number);
     }
 
     /**
