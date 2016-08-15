@@ -2,14 +2,12 @@
 
 namespace League\CLImate\Argument;
 
-class Filter
+class Filter implements FilterInterface
 {
     protected $arguments = [];
 
     /**
-     * Set the available arguments
-     *
-     * @param array $arguments
+     * {@inheritdoc}
      */
     public function setArguments(array $arguments)
     {
@@ -155,12 +153,12 @@ class Filter
      *
      * @see usort()
      *
-     * @param Argument $a
-     * @param Argument $b
+     * @param ArgumentInterface $a
+     * @param ArgumentInterface $b
      *
      * @return int
      */
-    public function compareByPrefix(Argument $a, Argument $b)
+    public function compareByPrefix(ArgumentInterface $a, ArgumentInterface $b)
     {
         if ($this->prefixCompareString($a) < $this->prefixCompareString($b)) {
             return -1;
@@ -172,11 +170,11 @@ class Filter
     /**
      * Prep the prefix string for comparison
      *
-     * @param Argument $argument
+     * @param ArgumentInterface $argument
      *
      * @return string
      */
-    protected function prefixCompareString(Argument $argument)
+    protected function prefixCompareString(ArgumentInterface $argument)
     {
         return strtolower($argument->longPrefix() ?: $argument->prefix() ?: '');
     }

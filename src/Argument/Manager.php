@@ -4,7 +4,7 @@ namespace League\CLImate\Argument;
 
 use League\CLImate\CLImate;
 
-class Manager
+class Manager implements ManagerInterface
 {
     /**
      * An array of arguments passed to the program.
@@ -23,37 +23,58 @@ class Manager
     /**
      * Filter class to find various types of arguments
      *
-     * @var \League\CLImate\Argument\Filter $filter
+     * @var FilterInterface $filter
      */
     protected $filter;
 
     /**
      * Summary builder class
      *
-     * @var \League\CLImate\Argument\Summary $summary
+     * @var SummaryInterface $summary
      */
     protected $summary;
 
     /**
      * Argument parser class
      *
-     * @var \League\CLImate\Argument\Parser $parser
+     * @var ParserInterface $parser
      */
     protected $parser;
 
-    public function __construct()
+    /**
+     * Argument creator class name
+     *
+     * @var ArgumentInterface $creator
+     */
+    protected $creator;
+
+    /**
+     * @param FilterInterface $filter
+     * @param SummaryInterface $summary
+     * @param ParserInterface $parser
+     * @param string $creator
+     */
+    public function __construct(FilterInterface $filter = null, SummaryInterface $summary = null, ParserInterface $parser = null, $creator = null)
     {
-        $this->filter  = new Filter();
-        $this->summary = new Summary();
-        $this->parser  = new Parser();
+        $this->filter  = $filter ?: new Filter();
+        $this->summary = $summary ?: new Summary();
+        $this->parser  = $parser ?: new Parser();
+        $this->creator = $creator ?: Argument::class;
+        $reflection = new \ReflectionClass($this->creator);
+        $implementsInterface = $reflection->implementsInterface(ArgumentInterface::class);
+        if ($implementsInterface) {
+            $this->creator = $reflection->newInstanceWithoutConstructor();
+        } else {
+            throw new \InvalidArgumentException(sprintf(
+                'The given argument "%s" must be implements "%s".',
+                $this->creator,
+                ArgumentInterface::class
+            ));
+        }
     }
 
     /**
-     * Add an argument.
-     *
-     * @throws \Exception if $argument isn't an array or Argument object.
-     * @param Argument|string|array $argument
-     * @param $options
+     * {@inheritdoc}
      */
     public function add($argument, array $options = [])
     {
@@ -63,10 +84,10 @@ class Manager
         }
 
         if (is_string($argument)) {
-            $argument = Argument::createFromArray($argument, $options);
+            $argument = $this->creator->createFromArray($argument, $options);
         }
 
-        if (!($argument instanceof Argument)) {
+        if (!($argument instanceof ArgumentInterface)) {
             throw new \Exception('Please provide an argument name or object.');
         }
 
@@ -86,10 +107,7 @@ class Manager
     }
 
     /**
-     * Determine if an argument exists.
-     *
-     * @param string $name
-     * @return bool
+     * {@inheritdoc}
      */
     public function exists($name)
     {
@@ -97,10 +115,7 @@ class Manager
     }
 
     /**
-     * Retrieve an argument's value.
-     *
-     * @param string $name
-     * @return string|int|float|bool|null
+     * {@inheritdoc}
      */
     public function get($name)
     {
@@ -108,9 +123,7 @@ class Manager
     }
 
     /**
-     * Retrieve all arguments.
-     *
-     * @return Argument[]
+     * {@inheritdoc}
      */
     public function all()
     {
@@ -188,9 +201,7 @@ class Manager
     }
 
     /**
-     * Set a program's description.
-     *
-     * @param string $description
+     * {@inheritdoc}
      */
     public function description($description)
     {
@@ -198,10 +209,7 @@ class Manager
     }
 
     /**
-     * Output a script's usage statement.
-     *
-     * @param CLImate $climate
-     * @param array $argv
+     * {@inheritdoc}
      */
     public function usage(CLImate $climate, array $argv = null)
     {

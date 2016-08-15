@@ -3,6 +3,7 @@
 namespace League\CLImate;
 
 use League\CLImate\Argument\Manager as ArgumentManager;
+use League\CLImate\Argument\ManagerInterface as ArgumentManagerInterface;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Settings\Manager as SettingsManager;
 use League\CLImate\TerminalObject\Router\Router;
@@ -125,14 +126,14 @@ class CLImate
      */
     protected $util;
 
-    public function __construct()
+    public function __construct(ArgumentManagerInterface $argument = null)
     {
         $this->setStyle(new Style());
         $this->setRouter(new Router());
         $this->setSettingsManager(new SettingsManager());
         $this->setOutput(new Output());
         $this->setUtil(new UtilFactory());
-        $this->setArgumentManager(new ArgumentManager());
+        $this->setArgumentManager($argument ?: new ArgumentManager());
     }
 
     /**
@@ -168,9 +169,9 @@ class CLImate
     /**
      * Set the arguments property
      *
-     * @param \League\CLImate\Argument\Manager $manager
+     * @param \League\CLImate\Argument\ManagerInterface $manager
      */
-    public function setArgumentManager(ArgumentManager $manager)
+    public function setArgumentManager(ArgumentManagerInterface $manager)
     {
         $this->arguments = $manager;
     }

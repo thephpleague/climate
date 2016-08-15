@@ -2,27 +2,30 @@
 
 namespace League\CLImate\Argument;
 
-class Parser
+class Parser implements ParserInterface
 {
     /**
      * Filter class to find various types of arguments
      *
-     * @var \League\CLImate\Argument\Filter $filter
+     * @var FilterInterface $filter
      */
     protected $filter;
 
     /**
      * Summary builder class
      *
-     * @var \League\CLImate\Argument\Summary $summary
+     * @var SummaryInterface $summary
      */
     protected $summary;
 
     protected $trailing;
 
-    public function __construct()
+    /**
+     * @param SummaryInterface $summary
+     */
+    public function __construct(SummaryInterface $summary = null)
     {
-        $this->summary = new Summary();
+        $this->summary = $summary ?: new Summary();
     }
 
     /**
@@ -31,7 +34,7 @@ class Parser
      *
      * @return \League\CLImate\Argument\Parser
      */
-    public function setFilter($filter, $arguments)
+    public function setFilter(FilterInterface $filter, $arguments)
     {
         $this->filter = $filter;
         $this->filter->setArguments($arguments);
@@ -40,10 +43,7 @@ class Parser
     }
 
     /**
-     * Parse command line arguments into CLImate arguments.
-     *
-     * @throws \Exception if required arguments aren't defined.
-     * @param array $argv
+     * {@inheritdoc}
      */
     public function parse(array $argv = null)
     {

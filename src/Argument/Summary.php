@@ -4,7 +4,7 @@ namespace League\CLImate\Argument;
 
 use League\CLImate\CLImate;
 
-class Summary
+class Summary implements SummaryInterface
 {
     /**
      * @var \League\CLImate\CLImate $climate
@@ -77,7 +77,7 @@ class Summary
     }
 
     /**
-     * Output the full summary for the program
+     * {@inheritdoc}
      */
     public function output()
     {
@@ -114,11 +114,11 @@ class Summary
      * For example, "-u username, --user username", "--force", or
      * "-c count (default: 7)".
      *
-     * @param Argument $argument
+     * @param ArgumentInterface $argument
      *
      * @return string
      */
-    public function argument(Argument $argument)
+    public function argument(ArgumentInterface $argument)
     {
         $summary     = $this->prefixedArguments($argument);
         $printedName = strstr($summary, ' ' . $argument->name());
@@ -138,11 +138,11 @@ class Summary
     /**
      * Build argument summary surrounded by brackets
      *
-     * @param Argument $argument
+     * @param ArgumentInterface $argument
      *
      * @return string
      */
-    protected function argumentBracketed(Argument $argument)
+    protected function argumentBracketed(ArgumentInterface $argument)
     {
         return '[' . $this->argument($argument) . ']';
     }
@@ -183,11 +183,11 @@ class Summary
     /**
      * Builds the summary for any prefixed arguments
      *
-     * @param Argument $argument
+     * @param ArgumentInterface $argument
      *
      * @return string
      */
-    protected function prefixedArguments(Argument $argument)
+    protected function prefixedArguments(ArgumentInterface $argument)
     {
         $prefixes = [$argument->prefix(), $argument->longPrefix()];
         $summary  = [];
