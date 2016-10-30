@@ -80,7 +80,7 @@ class ProgressTest extends TestBase
     public function it_can_output_a_progress_bar_with_current_labels()
     {
         $this->shouldWrite('');
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kfirst\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Ksecond\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(30)} 30%\n\r\e[Kthird\e[0m");
@@ -109,6 +109,29 @@ class ProgressTest extends TestBase
         ];
 
         for ($i = 0; $i <= 10; $i++) {
+            $progress->current($i, $labels[$i]);
+        }
+    }
+
+    /** @test */
+    public function it_can_output_a_progress_bar_with_current_optional_labels()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[K\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Ksecond\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(30)} 30%\n\r\e[Kthird\e[0m");
+
+        $progress = $this->cli->progress(10);
+
+        $labels = [
+            'zeroth',
+            '',
+            'second',
+            'third',
+        ];
+
+        for ($i = 0; $i <= 3; $i++) {
             $progress->current($i, $labels[$i]);
         }
     }
@@ -215,7 +238,7 @@ class ProgressTest extends TestBase
     public function it_can_output_a_progress_bar_using_increments_with_label()
     {
         $this->shouldWrite('');
-        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kstart\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kstart\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Knext\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\n\r\e[Kfinal\e[0m");
 
