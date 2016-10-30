@@ -80,6 +80,7 @@ class ProgressTest extends TestBase
     public function it_can_output_a_progress_bar_with_current_labels()
     {
         $this->shouldWrite('');
+        $this->shouldWrite('');
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(0)} 0%\n\r\e[Kzeroth\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kfirst\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Ksecond\e[0m");
@@ -214,6 +215,7 @@ class ProgressTest extends TestBase
     /** @test */
     public function it_can_output_a_progress_bar_using_increments_with_label()
     {
+        $this->shouldWrite('');
         $this->shouldWrite('');
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(10)} 10%\n\r\e[Kstart\e[0m");
         $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(20)} 20%\n\r\e[Knext\e[0m");
