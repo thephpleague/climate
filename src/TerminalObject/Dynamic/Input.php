@@ -174,9 +174,9 @@ class Input extends InputAbstract
             return '';
         }
 
-        $this->acceptable = array_map([$this, 'acceptableItemFormatted'], $this->acceptable);
+        $acceptable = array_map([$this, 'acceptableItemFormatted'], $this->acceptable);
 
-        return '[' . implode('/', $this->acceptable) . ']';
+        return '[' . implode('/', $acceptable) . ']';
     }
 
     /**
