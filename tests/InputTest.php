@@ -117,6 +117,23 @@ class InputTest extends TestBase
         $this->assertSame('Stuff.', $response);
     }
 
+     /** @test */
+    public function it_will_accept_the_default_acceptable_response()
+    {
+        $this->shouldReadAndReturn('');
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mSo what is up? [\e[1mEverything.\e[0m/Stuff.] \e[0m");
+
+        $input = $this->cli->input('So what is up?', $this->reader);
+
+        $input->accept(['Everything.', 'Stuff.'], true);
+        $input->defaultTo('Everything.');
+
+        $response = $input->prompt();
+
+        $this->assertSame('Everything.', $response);
+    }
+
     /** @test */
     public function it_will_accept_a_closure_as_an_acceptable_response()
     {
