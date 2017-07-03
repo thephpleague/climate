@@ -75,6 +75,11 @@ class ArgumentTest extends TestBase
                 'description'  => 'Has a default value',
                 'defaultValue' => 'test',
             ],
+            'default-value2' => [
+                'prefix'       => 'x',
+                'description'  => 'Has also a default value',
+                'defaultValue' => ['test2', 'test3'],
+            ],
         ];
     }
 
@@ -109,7 +114,7 @@ class ArgumentTest extends TestBase
     {
         // Test Description
         //
-        // Usage: test-script [-b both-prefixes, --both both-prefixes] [-d, --defined] [--long only-long-prefix] [-r required] [-s only-short-prefix] [-v default-value (default: test)] [no-prefix]
+        // Usage: test-script [-b both-prefixes, --both both-prefixes] [-d, --defined] [--long only-long-prefix] [-r required] [-s only-short-prefix] [-v default-value (default: test)] [-x default-value2 (defaults: test2, test3)] [no-prefix]
         //
         // Required Arguments:
         //     -r required
@@ -126,6 +131,8 @@ class ArgumentTest extends TestBase
         //         Only long prefix
         //     -v default-value (default: test)
         //         Has a default value
+        //     -x default-value2 (defaults: test2, test3)
+        //         Has also a default value
         //     no-prefix
         //         Not defined by a prefix
 
@@ -135,7 +142,7 @@ class ArgumentTest extends TestBase
         $this->shouldWrite("\e[mUsage: test-script "
                             . "[-b both-prefixes, --both both-prefixes] [-d, --defined] "
                             . "[--long only-long-prefix] [-r required] [-s only-short-prefix] "
-                            . "[-v default-value (default: test)] [no-prefix]\e[0m");
+                            . "[-v default-value (default: test)] [-x default-value2 (defaults: test2, test3)] [no-prefix]\e[0m");
 
         $this->shouldWrite("\e[m\e[0m");
         $this->shouldWrite("\e[mRequired Arguments:\e[0m");
@@ -174,10 +181,15 @@ class ArgumentTest extends TestBase
         $this->shouldWrite("\e[mHas a default value\e[0m");
 
         $this->shouldWrite("\e[m\t\e[0m");
+        $this->shouldWrite("\e[m-x default-value2 (defaults: test2, test3)\e[0m");
+        $this->shouldWrite("\e[m\t\t\e[0m");
+        $this->shouldWrite("\e[mHas also a default value\e[0m");
+
+        $this->shouldWrite("\e[m\t\e[0m");
         $this->shouldWrite("\e[mno-prefix\e[0m");
         $this->shouldWrite("\e[m\t\t\e[0m");
         $this->shouldWrite("\e[mNot defined by a prefix\e[0m");
-        $this->shouldHavePersisted(35);
+        $this->shouldHavePersisted(39);
 
         $this->cli->description('Test Description');
         $this->cli->arguments->add($this->getFullArguments());
@@ -213,6 +225,7 @@ class ArgumentTest extends TestBase
 
         $argv = [
             'test-script',
+            '-s=baz',
             '-s',
             'foo',
             '--long',
@@ -236,6 +249,7 @@ class ArgumentTest extends TestBase
         $this->assertEquals('no_prefix_value', $processed['no-prefix']);
         $this->assertTrue($processed['defined-only']);
         $this->assertEquals('foo', $this->cli->arguments->get('only-short-prefix'));
+        $this->assertEquals(['baz', 'foo'], $this->cli->arguments->getArray('only-short-prefix'));
     }
 
     /** @test */

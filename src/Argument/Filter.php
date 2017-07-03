@@ -147,7 +147,7 @@ class Filter
      */
     protected function noValue($argument)
     {
-        return is_null($argument->value());
+        return $argument->valueArray() == [];
     }
 
     /**

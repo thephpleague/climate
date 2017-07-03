@@ -128,8 +128,12 @@ class Summary
             $summary .= $argument->name();
         }
 
-        if ($argument->defaultValue()) {
-            $summary .= " (default: {$argument->defaultValue()})";
+        if ($defaults = $argument->defaultValue()) {
+            if (count($defaults) == 1) {
+                $summary .= " (default: {$defaults[0]})";
+            } else {
+                $summary .= ' (defaults: ' . implode(', ', $defaults) . ')';
+            }
         }
 
         return $summary;
