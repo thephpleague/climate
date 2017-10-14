@@ -3,9 +3,10 @@
 namespace League\CLImate\Tests;
 
 use League\CLImate\CLImate;
+use PHPUnit\Framework\TestCase;
 use Mockery;
 
-class TestBase extends \PHPUnit_Framework_TestCase
+class TestBase extends TestCase
 {
     public static $functions;
 
