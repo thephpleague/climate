@@ -5,6 +5,7 @@ namespace League\CLImate;
 use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Settings\Manager as SettingsManager;
+use League\CLImate\TerminalObject\Dynamic\Spinner;
 use League\CLImate\TerminalObject\Router\Router;
 use League\CLImate\Util\Helper;
 use League\CLImate\Util\Output;
@@ -69,6 +70,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed dump(mixed $var)
  * @method mixed flank(string $output, string $char = null, integer $length = null)
  * @method mixed progress(integer $total = null)
+ * @method Spinner spinner(string $label = null, string ...$characters = null)
  * @method mixed padding(integer $length = 0, string $char = '.')
  * @method mixed input(string $prompt, Util\Reader\ReaderInterface $reader = null)
  * @method mixed confirm(string $prompt, Util\Reader\ReaderInterface $reader = null)
