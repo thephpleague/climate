@@ -156,9 +156,12 @@ class Progress extends DynamicTerminalObject
     protected function getProgressBar($current, $label)
     {
         if ($this->first_line) {
-            // Drop down a line, we are about to
-            // re-write this line for the progress bar
+            // Drop down a line (or 2 if we have a label),
+            // we are about to re-write for the progress bar
             $this->output->write('');
+            if (strlen($label) > 0) {
+                $this->output->write('');
+            }
             $this->first_line = false;
         }
 
