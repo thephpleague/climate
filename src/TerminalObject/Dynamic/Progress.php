@@ -54,6 +54,13 @@ class Progress extends DynamicTerminalObject
     protected $force_redraw = false;
 
     /**
+     * If this progress bar ever displayed a label.
+     *
+     * @var boolean $has_label_line
+     */
+    protected $has_label_line = false;
+
+    /**
      * If they pass in a total, set the total
      *
      * @param integer $total
@@ -162,13 +169,18 @@ class Progress extends DynamicTerminalObject
             $this->first_line = false;
         }
 
-        // Move the cursor up one line and clear it to the end
-        $line_count    = (strlen($label) > 0) ? 2 : 1;
+        // Move the cursor up and clear it to the end
+        $line_count = $this->has_label_line ? 2 : 1;
 
         $progress_bar  = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();
         $progress_bar .= $this->util->cursor->deleteCurrentLine();
         $progress_bar .= $this->getProgressBarStr($current, $label);
+
+        // If this line has a label then set that this progress bar has a label line
+        if (strlen($label) > 0) {
+            $this->has_label_line = true;
+        }
 
         return $progress_bar;
     }
@@ -192,6 +204,10 @@ class Progress extends DynamicTerminalObject
 
         if ($label) {
             $label = $this->labelFormatted($label);
+        // If this line doesn't have a label, but we've had one before,
+        // then ensure the label line is cleared
+        } elseif ($this->has_label_line) {
+            $label = $this->labelFormatted('');
         }
 
         return trim("{$bar} {$number}{$label}");
