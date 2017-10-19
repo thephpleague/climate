@@ -87,6 +87,15 @@ trait Art
     {
         $files = $this->fileSearch($art, '.*');
 
+        if (count($files) === 0) {
+            $this->addDir(__DIR__ . '/../../ASCII');
+            $files = $this->fileSearch($this->default_art, '.*');
+        }
+
+        if (count($files) === 0) {
+            throw new \UnexpectedValueException("Unable to find an art file with the name '{$art}'");
+        }
+
         return reset($files);
     }
 

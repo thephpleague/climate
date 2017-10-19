@@ -247,4 +247,17 @@ class AnimationTest extends TestBase
         $this->cli->addArt(__DIR__ . '/art');
         $this->cli->animation('work-it', $this->getSleeper(5))->run();
     }
+
+
+    /** @test */
+    public function it_404s_when_it_gets_invalid_art()
+    {
+        $this->emptyFrame();
+
+        $this->runDesc('exitBottomFrame', 6);
+
+        $this->fullArtExitBottomPlus(4);
+
+        $this->cli->animation('does-not-exist', $this->getSleeper(11))->enterFrom('bottom');
+    }
 }
