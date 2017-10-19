@@ -20,6 +20,9 @@
         "mockery/mockery": "~0.9",
         "mikey179/vfsStream": "~1.4"
     },
+    "suggest": {
+        "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
+    },
     "autoload": {
         "psr-4": {
             "League\\CLImate\\": "src/"
