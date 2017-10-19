@@ -62,7 +62,7 @@ class CheckboxGroup
      */
     public function toggleCurrent()
     {
-        list($option, $key) = $this->getCurrent();
+        list($option) = $this->getCurrent();
 
         $option->setChecked(!$option->isChecked());
     }
