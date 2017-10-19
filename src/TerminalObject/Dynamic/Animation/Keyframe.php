@@ -72,7 +72,7 @@ class Keyframe
      */
     protected function getLineMethod($direction)
     {
-        return 'current' . ucwords(strtolower($direction)) . 'Line';
+        return 'current' . mb_convert_case(mb_strtolower($direction), MB_CASE_TITLE) . 'Line';
     }
 
     /**
@@ -85,7 +85,7 @@ class Keyframe
      */
     protected function adjustLines(array $lines, $direction)
     {
-        $adjust_method = 'adjust' . ucwords(strtolower($direction))  . 'Lines';
+        $adjust_method = 'adjust' . mb_convert_case(mb_strtolower($direction), MB_CASE_TITLE)  . 'Lines';
 
         if (method_exists($this, $adjust_method)) {
             return $this->$adjust_method($lines);
@@ -153,7 +153,7 @@ class Keyframe
     protected function exitHorizontalFrames(array $lines, $line_method)
     {
         $keyframes = [];
-        $length    = strlen($lines[0]);
+        $length    = mb_strlen($lines[0]);
 
         for ($i = $length; $i > 0; $i--) {
             $keyframes[] = $this->getHorizontalKeyframe($lines, $i, $line_method, $length);
@@ -213,7 +213,7 @@ class Keyframe
      */
     protected function currentLeftLine($line, $frame_number)
     {
-        return substr($line, -$frame_number);
+        return mb_substr($line, -$frame_number);
     }
 
 
@@ -228,7 +228,7 @@ class Keyframe
      */
     protected function currentRightLine($line, $frame_number, $length)
     {
-        return str_repeat(' ', $length - $frame_number) . substr($line, 0, $frame_number);
+        return str_repeat(' ', $length - $frame_number) . mb_substr($line, 0, $frame_number);
     }
 
     /**

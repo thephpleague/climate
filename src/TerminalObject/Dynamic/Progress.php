@@ -163,7 +163,7 @@ class Progress extends DynamicTerminalObject
         }
 
         // Move the cursor up one line and clear it to the end
-        $line_count    = (strlen($label) > 0) ? 2 : 1;
+        $line_count    = (mb_strlen($label) > 0) ? 2 : 1;
 
         $progress_bar  = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();

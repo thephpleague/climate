@@ -156,7 +156,7 @@ class Input extends InputAbstract
      */
     protected function valueOrDefault($response)
     {
-        if (strlen($response) == 0 && strlen($this->default)) {
+        if (mb_strlen($response) == 0 && mb_strlen($this->default)) {
             return $this->default;
         }
 
@@ -219,7 +219,7 @@ class Input extends InputAbstract
      */
     protected function levelPlayingField($var)
     {
-        $levelers = ['trim', 'strtolower'];
+        $levelers = ['trim', 'mb_strtolower'];
 
         foreach ($levelers as $leveler) {
             if (is_array($var)) {

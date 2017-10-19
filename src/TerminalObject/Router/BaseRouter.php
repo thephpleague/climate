@@ -82,7 +82,7 @@ abstract class BaseRouter implements RouterInterface
     protected function shortName($name)
     {
         $name = str_replace('_', ' ', $name);
-        $name = ucwords($name);
+        $name = mb_convert_case($name, MB_CASE_TITLE);
 
         return str_replace(' ', '', $name);
     }

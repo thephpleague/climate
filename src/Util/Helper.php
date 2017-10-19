@@ -45,6 +45,6 @@ class Helper
      */
     public static function snakeCase($str)
     {
-        return strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $str));
+        return mb_strtolower(preg_replace('/(.)([A-Z])/', '$1_$2', $str));
     }
 }

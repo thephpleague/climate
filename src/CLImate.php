@@ -286,7 +286,7 @@ class CLImate
         }
 
         // Check for type first to avoid errors with objects/arrays/etc
-        return ((is_string($output) || is_numeric($output)) && strlen($output) > 0);
+        return ((is_string($output) || is_numeric($output)) && mb_strlen($output) > 0);
     }
 
     /**
@@ -301,9 +301,9 @@ class CLImate
     protected function parseStyleMethod($method, $name)
     {
         // If the name starts with this method string...
-        if (substr($name, 0, strlen($method)) == $method) {
+        if (mb_substr($name, 0, mb_strlen($method)) == $method) {
             // ...remove the method name from the beginning of the string...
-            $name = substr($name, strlen($method));
+            $name = mb_substr($name, mb_strlen($method));
 
             // ...and trim off any of those underscores hanging around
             $name = ltrim($name, '_');
@@ -331,7 +331,7 @@ class CLImate
 
         // While we still have a name left and we keep finding methods,
         // loop through the possibilities
-        if (strlen($new_name) > 0 && $new_name != $name) {
+        if (mb_strlen($new_name) > 0 && $new_name != $name) {
             return $this->applyStyleMethods($new_name, $method_search);
         }
 
@@ -427,7 +427,7 @@ class CLImate
         // The first argument is the string|array|object we want to echo out
         $output = reset($arguments);
 
-        if (strlen($name)) {
+        if (mb_strlen($name)) {
             // If we have something left, let's try and route it to the appropriate place
             if ($result = $this->routeRemainingMethod($name, $arguments)) {
                 return $result;

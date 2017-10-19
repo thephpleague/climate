@@ -178,6 +178,6 @@ class Filter
      */
     protected function prefixCompareString(Argument $argument)
     {
-        return strtolower($argument->longPrefix() ?: $argument->prefix() ?: '');
+        return mb_strtolower($argument->longPrefix() ?: $argument->prefix() ?: '');
     }
 }
