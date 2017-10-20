@@ -47,7 +47,7 @@ class Windows extends System
      */
     protected function getDimensions()
     {
-        $output = $this->exec('mode', true);
+        $output = $this->exec('mode CON', true);
 
         if (!is_array($output)) {
             return [];
