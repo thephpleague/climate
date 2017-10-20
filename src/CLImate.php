@@ -277,6 +277,34 @@ class CLImate
     }
 
     /**
+     *  they pass in a total, set the total
+     *
+     * @param iterable $data Array or any other iterable object
+     * @param callable $callback
+     */
+    public function each($data, callable $callback = null)
+    {
+        if ($data instanceof \Countable || is_array($data)) {
+            $total = count($data);
+            if (!$total) {
+                return;
+            }
+
+            $progress = $this->progress($total);
+        } else {
+            $progress = $this->spinner();
+        }
+
+        foreach ($data as $key => $item) {
+            if ($callback) {
+                $callback($item, $key);
+            }
+
+            $progress->advance();
+        }
+    }
+
+    /**
      * Check if we have valid output
      *
      * @param  mixed   $output
