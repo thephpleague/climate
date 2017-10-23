@@ -290,4 +290,24 @@ class ProgressTest extends TestBase
             $progress->current($item);
         }
     }
+
+    /** @test */
+    public function it_can_self_manage_progress_bar_while_looping()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(10)} 10%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(30)} 30%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(60)} 60%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(70)} 70%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(80)} 80%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(90)} 90%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $this->cli->progress()->each(range(1, 10), function ($item) {
+            return true;
+        });
+    }
 }

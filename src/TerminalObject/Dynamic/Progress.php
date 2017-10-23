@@ -135,6 +135,24 @@ class Progress extends DynamicTerminalObject
     }
 
     /**
+     * Loop through the data and self manage the progress bar advancement
+     *
+     * @param mixed $data Array or any other iterable object
+     * @param callable $callback
+     */
+    public function each($data, callable $callback)
+    {
+        if (!$this->total) {
+            $this->total(count($data));
+        }
+
+        foreach ($data as $item) {
+            $callback($item);
+            $this->advance();
+        }
+    }
+
+    /**
      * Draw the progress bar, if necessary
      *
      * @param string $current
