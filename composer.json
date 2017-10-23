@@ -9,6 +9,11 @@
             "email": "hey@joe.codes",
             "homepage": "http://joe.codes/",
             "role": "Developer"
+        }, {
+            "name": "Craig Duncan",
+            "email": "git@duncanc.co.uk",
+            "homepage": "https://github.com/duncan3dc",
+            "role": "Developer"
         }
     ],
     "require": {
