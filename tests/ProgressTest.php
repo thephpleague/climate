@@ -291,23 +291,54 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
-    public function it_can_self_manage_progress_bar_while_looping()
+
+    public function testEach1()
     {
         $this->shouldWrite('');
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(10)} 10%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(30)} 30%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(40)} 40%\e[0m");
         $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(60)} 60%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(70)} 70%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(80)} 80%\e[0m");
-        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(90)} 90%\e[0m");
         $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
 
-        $this->cli->progress()->each(range(1, 10), function ($item) {
-            return true;
+        $this->cli->progress()->each([1, 2]);
+    }
+    public function testEach2()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $items = [];
+
+        $this->cli->progress()->each(["two", "one"], function ($item) use (&$items) {
+            $items[] = $item;
+        });
+
+        $this->assertSame(["two", "one"], $items);
+    }
+    public function testEach3()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(50)} 50%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(100)} 100%\e[0m");
+
+        $items = [];
+
+        $this->cli->progress()->each(["key2" => "two", "key1" => "one"], function ($item, $key) use (&$items) {
+            $items[$key] = $item;
+        });
+
+        $this->assertSame(["key2" => "two", "key1" => "one"], $items);
+    }
+    public function testEach4()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 20%\n\r\e[Kone\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(40)} 40%\n\r\e[Ktwo\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(60)} 60%\n\r\e[Kthree\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(80)} 80%\n\r\e[Kfour\e[0m");
+        $this->shouldWrite("\e[m\e[2A\r\e[K{$this->repeat(100)} 100%\n\r\e[Kfive\e[0m");
+
+        $this->cli->progress()->each(["one", "two", "three", "four", "five"], function ($item) {
+            return $item;
         });
     }
 }
