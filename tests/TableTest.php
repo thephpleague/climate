@@ -148,4 +148,20 @@ class TableTest extends TestBase
                 ],
             ]);
     }
+
+
+    public function testTableWithPrefix1()
+    {
+        $this->shouldWrite("\e[m\t-----------\e[0m");
+        $this->shouldWrite("\e[m\t| Field 1 |\e[0m");
+        $this->shouldWrite("\e[m\t===========\e[0m");
+        $this->shouldWrite("\e[m\t| Value 1 |\e[0m");
+        $this->shouldWrite("\e[m\t-----------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+            ["Field 1"   =>  "Value 1"],
+        ], "\t");
+    }
 }

@@ -50,9 +50,16 @@ class Table extends BasicTerminalObject
      */
     protected $rows           = [];
 
-    public function __construct(array $data)
+    /**
+     * @var string $pregix A string to be output before each row is output.
+     */
+    private $prefix = "";
+
+
+    public function __construct(array $data, $prefix = "")
     {
         $this->data = $data;
+        $this->prefix = $prefix;
     }
 
     /**
@@ -69,12 +76,25 @@ class Table extends BasicTerminalObject
         $this->buildHeaderRow();
 
         foreach ($this->data as $key => $columns) {
-            $this->rows[] = $this->buildRow($columns);
-            $this->rows[] = $this->border;
+            $this->addLine($this->buildRow($columns));
+            $this->addLine($this->border);
         }
 
         return $this->rows;
     }
+
+    /**
+     * Append a line to the output.
+     *
+     * @param string $line The line to output
+     *
+     * @return void
+     */
+    private function addLine($line)
+    {
+        $this->rows[] = $this->prefix . $line;
+    }
+
 
     /**
      * Determine the width of the table
@@ -103,14 +123,12 @@ class Table extends BasicTerminalObject
      */
     protected function buildHeaderRow()
     {
-        $header_row = $this->getHeaderRow();
+        $this->addLine($this->border);
 
+        $header_row = $this->getHeaderRow();
         if ($header_row) {
-            $this->rows[] = $this->border;
-            $this->rows[] = $this->buildRow($header_row);
-            $this->rows[] = (new Border())->char('=')->length($this->table_width)->result();
-        } else {
-            $this->rows[] = $this->border;
+            $this->addLine($this->buildRow($header_row));
+            $this->addLine((new Border)->char('=')->length($this->table_width)->result());
         }
     }
 
