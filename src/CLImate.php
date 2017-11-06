@@ -262,6 +262,11 @@ class CLImate
         $this->arguments->usage($this, $argv);
     }
 
+    public function command($name)
+    {
+        return new Command($name, $this);
+    }
+
     /**
      * Set the program's description
      *
