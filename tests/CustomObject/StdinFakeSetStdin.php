@@ -5,10 +5,10 @@ class StdinFakeSetStdin extends StdinFake
 {
     /**
      * Generate error exception
-     * @throws \Error
+     * @throws \Exception
      */
     protected function setStdIn()
     {
-        throw new \Error("error exception");
+        throw new \Exception("error exception");
     }
 }
