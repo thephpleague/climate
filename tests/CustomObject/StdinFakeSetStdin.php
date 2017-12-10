@@ -1,8 +1,6 @@
 <?php
 namespace League\CLImate\Tests\CustomObject;
 
-use Error;
-
 class StdinFakeSetStdin extends StdinFake
 {
     /**
@@ -11,6 +9,6 @@ class StdinFakeSetStdin extends StdinFake
      */
     protected function setStdIn()
     {
-        throw new Error("error exception");
+        throw new \Error("error exception");
     }
 }
