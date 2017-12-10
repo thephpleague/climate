@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Tests\CustomObject\StdinFake;
+use League\CLImate\Tests\CustomObject\StdinFakeSetStdin;
 use League\CLImate\Util\Reader\Stdin;
 
 require_once 'StdinGlobalMock.php';
@@ -67,4 +69,59 @@ class StdinTest extends TestBase
 
         $this->assertSame('I hear', $response);
     }
+
+    /** @test */
+    public function it_can_read_but_hide_typing_user()
+    {
+        $stdin = new Stdin;
+        $mock = \Mockery::mock('alias:Seld\CliPrompt\CliPrompt');
+        $mock->shouldReceive('hiddenPrompt')->once();
+        $stdin->hidden();
+    }
+
+    /** @test */
+    public function it_set_stdin_expect_exception()
+    {
+        $stdin = new Stdin;
+        $this->expectException(\Exception::class);
+        self::$functions->shouldReceive('fopen')
+            ->once()
+            ->with('php://stdin', 'r')
+            ->andReturn(false);
+        $stdin->line();
+    }
+
+    /** @test */
+    public function it_close_stdin()
+    {
+        $stdin = new StdinFake;
+        self::$functions->shouldReceive('fopen')
+            ->andReturn('resource');
+
+        $stdin->changeStdin(fopen('php://memory', 'r'));
+        $stdin->callSetSdinFake();
+    }
+
+    /** @test */
+    public function it_get_stdIn_return_if_feof_false()
+    {
+        $stdin = new StdinFake;
+        self::$functions->shouldReceive('fopen')
+            ->andReturn('resource');
+
+        self::$functions->shouldReceive('feof')
+            ->andReturn(false);
+
+        $stdin->changeStdin(fopen('php://memory', 'r'));
+        $stdin->callGetStdIn();
+    }
+
+    /** @test */
+    public function it_get_stdin_exception()
+    {
+        $stdin = new StdinFakeSetStdin;
+        $this->expectException(\Exception::class);
+        $stdin->callGetStdIn();
+    }
 }
+
