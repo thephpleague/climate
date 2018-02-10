@@ -66,7 +66,7 @@ class Stdin implements ReaderInterface
 
         try {
             $this->setStdIn();
-        } catch (\Error $e) {
+        } catch (\Exception $e) {
             throw new \Exception('Unable to read from STDIN', 0, $e);
         }
 
