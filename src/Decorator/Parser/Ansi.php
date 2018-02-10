@@ -125,7 +125,7 @@ class Ansi extends Parser
         // We will be replacing tags one at a time, can't pass this by reference
         $replace_count = 1;
 
-        if (strstr($tag, '/')) {
+        if (strpos($tag, '/')) {
             // We are closing out the tag, pop off the last element and get the codes that are left
             array_pop($history);
             $replace = $this->end($history);
@@ -149,7 +149,7 @@ class Ansi extends Parser
     protected function codeStr($codes)
     {
         // If we get something that is already a code string, just pass it back
-        if (!is_array($codes) && strstr($codes, ';')) {
+        if (!is_array($codes) && strpos($codes, ';')) {
             return $codes;
         }
 
