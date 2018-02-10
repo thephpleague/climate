@@ -3,61 +3,55 @@
 namespace League\CLImate\Tests\TerminalObject\Helper;
 
 use League\CLImate\TerminalObject\Helper\Sleeper;
-use League\CLImate\Tests\TestBase;
+use PHPUnit\Framework\TestCase;
 
-require_once 'SleeperGlobalMock.php';
-
-class SleeperTest extends TestBase
+class SleeperTest extends TestCase
 {
+    public function setUp(): void
+    {
+        if (\PHP_OS_FAMILY === "Windows") {
+            $this->markTestSkipped();
+        }
+    }
+
+
+    private function assertSleep($expected, $speed)
+    {
+        $sleeper = new Sleeper();
+
+        $sleeper->speed($speed);
+
+        $start = microtime(true);
+        $sleeper->sleep();
+        $result = (microtime(true) - $start) * 1000000;
+
+        $this->assertGreaterThan($expected * 0.9, $result);
+        $this->assertLessThan($expected * 1.1, $result);
+    }
+
+
     /**
      * @test
-     * @doesNotPerformAssertions
      */
     public function it_can_slow_down_the_sleeper_speed()
     {
-        $sleeper = new Sleeper();
-
-        $sleeper->speed(50);
-
-        self::$functions->shouldReceive('usleep')
-                        ->once()
-                        ->with(100000);
-
-        $sleeper->sleep();
+        $this->assertSleep(100000, 50);
     }
 
     /**
      * @test
-     * @doesNotPerformAssertions
      */
     public function it_can_speed_up_the_sleeper_speed()
     {
-        $sleeper = new Sleeper();
-
-        $sleeper->speed(200);
-
-        self::$functions->shouldReceive('usleep')
-                        ->once()
-                        ->with(25000);
-
-        $sleeper->sleep();
+        $this->assertSleep(25000, 200);
     }
 
     /**
      * @test
-     * @doesNotPerformAssertions
      */
     public function it_will_ignore_zero_percentages()
     {
-        $sleeper = new Sleeper();
-
-        $sleeper->speed(0);
-
-        self::$functions->shouldReceive('usleep')
-                        ->once()
-                        ->with(50000);
-
-        $sleeper->sleep();
+        $this->assertSleep(50000, 0);
     }
 
 

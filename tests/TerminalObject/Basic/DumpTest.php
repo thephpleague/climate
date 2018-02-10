@@ -3,8 +3,7 @@
 namespace League\CLImate\Tests\TerminalObject\Basic;
 
 use League\CLImate\Tests\TestBase;
-
-require_once 'VarDumpMock.php';
+use Mockery;
 
 class DumpTest extends TestBase
 {
@@ -14,7 +13,10 @@ class DumpTest extends TestBase
      */
     public function it_can_dump_a_variable()
     {
-        $this->shouldWrite("\e[mDUMPED: This thing\e[0m");
+        $this->output->shouldReceive("write")->once()->with(Mockery::on(function ($content) {
+            return (bool) strpos($content, "string(10) \"This thing\"");
+        }));
+
         $this->shouldHavePersisted();
 
         $this->cli->dump('This thing');
