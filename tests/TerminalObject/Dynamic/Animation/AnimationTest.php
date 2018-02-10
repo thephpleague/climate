@@ -2,6 +2,7 @@
 
 namespace League\CLImate\Tests\TerminalObject\Dynamic;
 
+use League\CLImate\TerminalObject\Helper\Sleeper;
 use League\CLImate\Tests\TestBase;
 use Mockery;
 
@@ -37,7 +38,7 @@ class AnimationTest extends TestBase
 
     protected function getSleeper($count)
     {
-        $sleeper = Mockery::mock('League\CLImate\TerminalObject\Helper\Sleeper');
+        $sleeper = Mockery::mock(Sleeper::class);
         $sleeper->shouldReceive('sleep')->times($count);
 
         return $sleeper;

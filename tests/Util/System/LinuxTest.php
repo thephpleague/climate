@@ -3,6 +3,7 @@
 namespace League\CLImate\Tests\Util\System;
 
 use League\CLImate\Tests\TestBase;
+use League\CLImate\Util\System\Linux;
 use Mockery;
 
 class LinuxTest extends TestBase
@@ -10,7 +11,7 @@ class LinuxTest extends TestBase
     /** @test */
     public function it_can_get_the_width()
     {
-        $system = Mockery::mock('League\CLImate\Util\System\Linux')
+        $system = Mockery::mock(Linux::class)
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
@@ -22,7 +23,7 @@ class LinuxTest extends TestBase
     /** @test */
     public function it_will_return_null_if_width_is_not_numeric()
     {
-        $system = Mockery::mock('League\CLImate\Util\System\Linux')
+        $system = Mockery::mock(Linux::class)
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
@@ -34,7 +35,7 @@ class LinuxTest extends TestBase
     /** @test */
     public function it_can_get_the_height()
     {
-        $system = Mockery::mock('League\CLImate\Util\System\Linux')
+        $system = Mockery::mock(Linux::class)
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
@@ -46,7 +47,7 @@ class LinuxTest extends TestBase
     /** @test */
     public function it_will_return_null_if_height_is_not_numeric()
     {
-        $system = Mockery::mock('League\CLImate\Util\System\Linux')
+        $system = Mockery::mock(Linux::class)
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 

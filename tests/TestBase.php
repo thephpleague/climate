@@ -3,6 +3,9 @@
 namespace League\CLImate\Tests;
 
 use League\CLImate\CLImate;
+use League\CLImate\Util\Output;
+use League\CLImate\Util\Reader\Stdin;
+use League\CLImate\Util\System\Linux;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
@@ -28,13 +31,13 @@ class TestBase extends TestCase
     {
         self::$functions = Mockery::mock();
 
-        $system = Mockery::mock('League\CLImate\Util\System\Linux');
+        $system = Mockery::mock(Linux::class);
         $system->shouldReceive('hasAnsiSupport')->andReturn(true);
         $system->shouldReceive('width')->andReturn(80);
 
         $this->util   = new \League\CLImate\Util\UtilFactory($system);
-        $this->output = Mockery::mock('League\CLImate\Util\Output');
-        $this->reader = Mockery::mock('League\CLImate\Util\Reader\Stdin');
+        $this->output = Mockery::mock(Output::class);
+        $this->reader = Mockery::mock(Stdin::class);
 
         $this->cli = new CLImate();
         $this->cli->setOutput($this->output);

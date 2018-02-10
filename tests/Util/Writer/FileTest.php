@@ -8,6 +8,7 @@ require_once 'FileGlobalMock.php';
 use League\CLImate\Exceptions\RuntimeException;
 use League\CLImate\Tests\TestBase;
 use League\CLImate\Util\Output;
+use League\CLImate\Util\Writer\File;
 use org\bovigo\vfs\vfsStream;
 
 class FileTest extends TestBase
@@ -23,7 +24,7 @@ class FileTest extends TestBase
 
     protected function getFileMock()
     {
-        return \Mockery::mock('League\CLImate\Util\Writer\File', func_get_args())->makePartial();
+        return \Mockery::mock(File::class, func_get_args())->makePartial();
     }
 
     /** @test */

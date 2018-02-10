@@ -4,8 +4,11 @@ namespace League\CLImate\Tests;
 
 use League\CLImate\Exceptions\InvalidArgumentException;
 use League\CLImate\Exceptions\UnexpectedValueException;
+use League\CLImate\Tests\CustomObject\Basic;
 use League\CLImate\Tests\CustomObject\BasicObject;
 use League\CLImate\Tests\CustomObject\BasicObjectArgument;
+use League\CLImate\Tests\CustomObject\Dummy;
+use League\CLImate\Tests\CustomObject\Dynamic;
 
 class CLImateTest extends TestBase
 {
@@ -57,7 +60,7 @@ class CLImateTest extends TestBase
         $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->extend('League\CLImate\Tests\CustomObject\Basic');
+        $this->cli->extend(Basic::class);
         $this->cli->basic('This is something my custom object is handling.');
     }
 
@@ -90,16 +93,16 @@ class CLImateTest extends TestBase
     /** @test */
     public function it_can_be_extended_using_a_dynamic_object()
     {
-        $this->cli->extend('League\CLImate\Tests\CustomObject\Dynamic');
+        $this->cli->extend(Dynamic::class);
         $obj = $this->cli->dynamic();
 
-        $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
+        $this->assertInstanceOf(Dynamic::class, $obj);
     }
 
     /** @test */
     public function it_will_yell_if_extending_and_class_doesnt_exist()
     {
-        $class = 'League\CLImate\Tests\CustomObject\NowhereToBeFound';
+        $class = "NoSuchClass";
         $this->expectException(UnexpectedValueException::class);
         $this->expectExceptionMessage("Class does not exist: {$class}");
         $this->cli->extend($class);
@@ -108,7 +111,7 @@ class CLImateTest extends TestBase
     /** @test */
     public function it_will_yell_if_it_doesnt_implement_proper_interfaces()
     {
-        $class = 'League\CLImate\Tests\CustomObject\Dummy';
+        $class = Dummy::class;
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Class must implement either");
         $this->cli->extend($class);
@@ -123,7 +126,7 @@ class CLImateTest extends TestBase
         $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->extend('League\CLImate\Tests\CustomObject\Basic', 'myCustomMethod');
+        $this->cli->extend(Basic::class, 'myCustomMethod');
         $this->cli->myCustomMethod('This is something my custom object is handling.');
     }
 
@@ -134,8 +137,8 @@ class CLImateTest extends TestBase
         $this->shouldHavePersisted();
 
         $extensions = [
-            'League\CLImate\Tests\CustomObject\Basic',
-            'League\CLImate\Tests\CustomObject\Dynamic',
+            Basic::class,
+            Dynamic::class,
         ];
 
         $this->cli->extend($extensions);
@@ -144,7 +147,7 @@ class CLImateTest extends TestBase
 
         $obj = $this->cli->dynamic();
 
-        $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
+        $this->assertInstanceOf(Dynamic::class, $obj);
     }
 
     /** @test */
@@ -154,8 +157,8 @@ class CLImateTest extends TestBase
         $this->shouldHavePersisted();
 
         $extensions = [
-            'whatever'  => 'League\CLImate\Tests\CustomObject\Basic',
-            'something' => 'League\CLImate\Tests\CustomObject\Dynamic',
+            'whatever'  => Basic::class,
+            'something' => Dynamic::class,
         ];
 
         $this->cli->extend($extensions);
@@ -164,6 +167,6 @@ class CLImateTest extends TestBase
 
         $obj = $this->cli->something();
 
-        $this->assertInstanceOf('League\CLImate\Tests\CustomObject\Dynamic', $obj);
+        $this->assertInstanceOf(Dynamic::class, $obj);
     }
 }
