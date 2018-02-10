@@ -3,8 +3,8 @@
 namespace League\CLImate\Tests;
 
 use League\CLImate\CLImate;
-use PHPUnit\Framework\TestCase;
 use Mockery;
+use PHPUnit\Framework\TestCase;
 
 class TestBase extends TestCase
 {
