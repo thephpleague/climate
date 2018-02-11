@@ -17,6 +17,7 @@
         }
     ],
     "require": {
+        "psr/log": "^1.0",
         "php": "^5.6|^7.0",
         "seld/cli-prompt": "^1.0"
     },

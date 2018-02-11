@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 3.4.0 - 2018-04-28
+
+### Added
+
+* [Logger] Added a Logger class to use CLImate as a PSR-3 logger.
+
+--------
+
 ## 3.3.0 - 2018-04-20
 
 ### Fixed
