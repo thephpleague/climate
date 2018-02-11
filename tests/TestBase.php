@@ -6,26 +6,26 @@ use League\CLImate\CLImate;
 use League\CLImate\Util\Output;
 use League\CLImate\Util\Reader\Stdin;
 use League\CLImate\Util\System\Linux;
+use League\CLImate\Util\UtilFactory;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
-class TestBase extends TestCase
+abstract class TestBase extends TestCase
 {
     public static $functions;
 
-    /** @var League\CLImate\CLImate */
+    /** @var CLImate */
     public $cli;
 
-    /** @var League\CLImate\Util\Output|Mockery\MockInterface */
+    /** @var Output|Mockery\MockInterface */
     public $output;
 
-    /** @var League\CLImate\Util\Reader\Stdin|Mockery\MockInterface */
+    /** @var Stdin|Mockery\MockInterface */
     public $reader;
 
-    /** @var League\CLImate\Util\UtilFactory */
+    /** @var UtilFactory */
     public $util;
 
-    protected $record_it = false;
 
     public function setUp(): void
     {
@@ -35,17 +35,13 @@ class TestBase extends TestCase
         $system->shouldReceive('hasAnsiSupport')->andReturn(true);
         $system->shouldReceive('width')->andReturn(80);
 
-        $this->util   = new \League\CLImate\Util\UtilFactory($system);
+        $this->util   = new UtilFactory($system);
         $this->output = Mockery::mock(Output::class);
         $this->reader = Mockery::mock(Stdin::class);
 
         $this->cli = new CLImate();
         $this->cli->setOutput($this->output);
         $this->cli->setUtil($this->util);
-
-        if (method_exists($this, 'internalSetup')) {
-            $this->internalSetup();
-        }
     }
 
     public function tearDown(): void
@@ -61,10 +57,6 @@ class TestBase extends TestCase
      */
     protected function shouldWrite($content, $count = 1)
     {
-        if ($this->record_it) {
-            file_put_contents('test-log', $content, FILE_APPEND);
-        }
-
         return $this->output->shouldReceive('write')->times($count)->with($content);
     }
 
@@ -120,14 +112,5 @@ class TestBase extends TestCase
     protected function shouldStopPersisting($times = 1)
     {
         $this->output->shouldReceive('persist')->with(false)->times($times)->andReturn($this->output);
-    }
-
-    /**
-     * @test
-     * @doesNotPerformAssertions
-     */
-    public function it_does_nothing()
-    {
-        // nada
     }
 }
