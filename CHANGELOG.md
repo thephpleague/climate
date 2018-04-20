@@ -1,6 +1,31 @@
 Changelog
 =========
 
+## 3.3.0 - 2018-04-20
+
+### Fixed
+
+* Ensure multibyte strings are supported everywhere.
+* Improved support for IDE assistance when using method chaining. [#102](https://github.com/thephpleague/climate/pull/102)
+* [Art] Improve handling of missing files. [#114](https://github.com/thephpleague/climate/issues/114)
+* [Input] Correct the usage of `defaultTo()` with `accept()`. [#104](https://github.com/thephpleague/climate/pull/104)
+* [Windows] Fixed the terminal width detection. [#64](https://github.com/thephpleague/climate/pull/64)
+
+### Added
+
+* [Table] Add support for a prefix argument for each row. [#51](https://github.com/thephpleague/climate/issues/51)
+* [Progress] Added an `each()` method. [#112](https://github.com/thephpleague/climate/pull/112)
+
+### Changed
+
+* [Support] Add support for PHP 7.2
+* [Support] Drop support for PHP 5.4
+* [Support] Drop support for PHP 5.5
+* [Support] Drop support for HHVM.
+* Suggest the symfony polyfill library is `ext-mbstring` is not available. [#110](https://github.com/thephpleague/climate/pull/110)
+
+--------
+
 ## 3.2.4 - 2016-10-30
 
 ### Fixed
