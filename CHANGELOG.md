@@ -1,3 +1,45 @@
+Changelog
+=========
+
+## 3.2.4 - 2016-10-30
+
+### Fixed
+
+* [Progres] Allow labels to be shown/hidden on each iteration. [#98](https://github.com/thephpleague/climate/pull/98)
+
+--------
+
+## 3.2.3 - 2016-10-17
+
+### Added
+
+* [Support] Added support for PHP 7.1
+
+--------
+
+## 3.2.2 - 2016-07-18
+
+### Fixed
+
+* [Art] Allow code to be used in a phar. [#86](https://github.com/thephpleague/climate/pull/86)
+
+--------
+
+## 3.2.1 - 2016-04-05
+
+### Added
+
+* [Arguments] Add a `trailing()` method to get any trailing arguments.
+* [Progress] Added a `forceRedraw()` method. [#72](https://github.com/thephpleague/climate/issues/72)
+
+### Fixed
+
+* [Checkbox] Don't cancel out the formatting for the first checkbox. [#77](https://github.com/thephpleague/climate/issues/77)
+* [Padding] Ensure formatting is handled. [#78](https://github.com/thephpleague/climate/issues/78)
+* [Columns] Prevent error when less items than columns are passed. [#75](https://github.com/thephpleague/climate/pull/75)
+
+--------
+
 ## 3.2.0 - 2015-08-13
 
 ### Added
