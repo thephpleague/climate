@@ -23,6 +23,6 @@ class Json extends BasicTerminalObject
      */
     public function result()
     {
-        return json_encode($this->data, JSON_PRETTY_PRINT);
+        return json_encode($this->data, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
     }
 }
