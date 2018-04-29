@@ -1,6 +1,14 @@
 Changelog
 =========
 
+## 3.4.1 - 2018-04-29
+
+### Fixed
+
+* [Json] Don't escape slashes when outputting JSON. [#121](https://github.com/thephpleague/climate/pull/121)
+
+--------
+
 ## 3.4.0 - 2018-04-28
 
 ### Added
