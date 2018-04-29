@@ -13,15 +13,20 @@ CLImate allows you to easily output colored text, special formats, and more.
 
 
 ## Installation
-Using [composer](https://packagist.org/packages/league/climate):
+
+The recommended method of installing this library is via [Composer](https://getcomposer.org/).
+
+Run the following command from your project root:
+
 ```bash
 $ composer require league/climate
 ```
 
 
-## Quick Example
+## Usage
+
 ```php
-require_once __DIR__ . "vendor/autoload.php";
+require_once __DIR__ . "/vendor/autoload.php";
 
 $climate = new \League\CLImate\CLImate;
 
@@ -35,4 +40,5 @@ _Read more at https://climate.thephpleague.com/_
 ## Credits
 
 This library was created by [Joe Tannenbaum](https://joe.codes/).  
-Much love to [Damian Makki](https://dribbble.com/damianmakki) for the logo.  
+It is currently maintained and developed by [Craig Duncan](https://twitter.com/duncan3dc).  
+Much love to [Damian Makki](https://dribbble.com/damianmakki) for the logo.    
