@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Argument;
 
-class Argument
+class Argument implements ArgumentInterface
 {
     /**
      * An argument's name.
@@ -85,12 +85,7 @@ class Argument
     }
 
     /**
-     * Build a new command argument from an array.
-     *
-     * @param string $name
-     * @param array $params
-     *
-     * @return Argument
+     * {@inheritdoc}
      */
     public static function createFromArray($name, array $params)
     {
