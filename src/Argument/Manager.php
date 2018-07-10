@@ -115,7 +115,7 @@ class Manager
      */
     public function getArray($name)
     {
-        return isset($this->arguments[$name]) ? $this->arguments[$name]->valueArray() : [];
+        return isset($this->arguments[$name]) ? $this->arguments[$name]->values() : [];
     }
 
     /**

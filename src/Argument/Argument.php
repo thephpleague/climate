@@ -330,13 +330,13 @@ class Argument
     }
 
     /**
-     * Retrieve an argument's value.
+     * Retrieve an argument's values.
      *
      * Argument values are type cast based on the value of $castTo.
      *
      * @return string[]|int[]|float[]|bool[]
      */
-    public function valueArray()
+    public function values()
     {
         if ($this->values) {
             return $this->values;
