@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Argument;
 
+use function is_array;
+
 class Argument
 {
     /**
@@ -310,7 +312,10 @@ class Argument
      */
     public function setDefaultValue($defaultValue)
     {
-        $this->defaultValue = (array) $defaultValue;
+        if (!is_array($defaultValue)) {
+            $defaultValue = [$defaultValue];
+        }
+        $this->defaultValue = $defaultValue;
     }
 
     /**
