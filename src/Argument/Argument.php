@@ -65,14 +65,14 @@ class Argument
      *
      * @var string
      */
-    protected $defaultValue;
+    protected $defaultValue = [];
 
     /**
      * An argument's value, after type casting.
      *
-     * @var string|int|float|bool
+     * @var string[]|int[]|float[]|bool[]
      */
-    protected $value;
+    protected $values = [];
 
     /**
      * Build a new command argument.
@@ -100,10 +100,6 @@ class Argument
         foreach ($params as $key => $value) {
             $method = 'set' . ucwords($key);
             $argument->{$method}($value);
-        }
-
-        if ($argument->defaultValue()) {
-            $argument->setValue($argument->defaultValue());
         }
 
         return $argument;
@@ -298,7 +294,7 @@ class Argument
     }
 
     /**
-     * Retrieve an argument's default value.
+     * Retrieve an argument's default values.
      *
      * @return string
      */
@@ -314,7 +310,7 @@ class Argument
      */
     public function setDefaultValue($defaultValue)
     {
-        $this->defaultValue = $defaultValue;
+        $this->defaultValue = (array) $defaultValue;
     }
 
     /**
@@ -326,7 +322,27 @@ class Argument
      */
     public function value()
     {
-        return $this->value;
+        if ($this->values) {
+            return end($this->values);
+        }
+        $cast_method = 'castTo' . ucwords($this->castTo);
+        return $this->{$cast_method}(current($this->defaultValue()));
+    }
+
+    /**
+     * Retrieve an argument's value.
+     *
+     * Argument values are type cast based on the value of $castTo.
+     *
+     * @return string[]|int[]|float[]|bool[]
+     */
+    public function valueArray()
+    {
+        if ($this->values) {
+            return $this->values;
+        }
+        $cast_method = 'castTo' . ucwords($this->castTo);
+        return array_map([$this, $cast_method], $this->defaultValue());
     }
 
     /**
@@ -339,7 +355,7 @@ class Argument
     public function setValue($value)
     {
         $cast_method = 'castTo' . ucwords($this->castTo);
-        $this->value = $this->{$cast_method}($value);
+        $this->values[] = $this->{$cast_method}($value);
     }
 
     /**

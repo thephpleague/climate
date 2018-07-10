@@ -108,6 +108,17 @@ class Manager
     }
 
     /**
+     * Retrieve an argument's all values as an array.
+     *
+     * @param string $name
+     * @return string[]|int[]|float[]|bool[]
+     */
+    public function getArray($name)
+    {
+        return isset($this->arguments[$name]) ? $this->arguments[$name]->valueArray() : [];
+    }
+
+    /**
      * Retrieve all arguments.
      *
      * @return Argument[]
