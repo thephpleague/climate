@@ -15,7 +15,7 @@ class Confirm extends Input
 
         $this->accept(['y', 'yes', 'n', 'no'], false);
 
-        $response = $this->prompt();
+        $response = \strtolower($this->prompt());
         return (substr($response, 0, 1) === 'y');
     }
 }
