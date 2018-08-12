@@ -69,6 +69,10 @@ class Linux extends System
      */
     protected function systemHasAnsiSupport()
     {
+        if ('Hyper' === getenv('TERM_PROGRAM')) {
+            return true;
+        }
+        
         $stream = STDOUT;
         
         if (function_exists('stream_isatty')) {
