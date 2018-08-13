@@ -70,8 +70,7 @@ class Windows extends System
     protected function systemHasAnsiSupport()
     {
         return (function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT))
-            || '10.0.10586' === PHP_WINDOWS_VERSION_MAJOR . '.' . PHP_WINDOWS_VERSION_MINOR . '.' . PHP_WINDOWS_VERSION_BUILD
-            || null !== getenv('ANSICON')
+            || false !== getenv('ANSICON')
             || 'ON' === getenv('ConEmuANSI')
             || 'Hyper' === getenv('TERM_PROGRAM') 
             || 'xterm' === getenv('TERM');
