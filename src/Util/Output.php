@@ -2,6 +2,7 @@
 
 namespace League\CLImate\Util;
 
+use League\CLImate\Exceptions\InvalidTypeException;
 use League\CLImate\Util\Writer\WriterInterface;
 
 class Output
@@ -140,7 +141,7 @@ class Output
     public function get($writer)
     {
         if (!array_key_exists($writer, $this->writers)) {
-            throw new \Exception('Unknown writer [' . $writer . ']');
+            throw new InvalidTypeException('Unknown writer [' . $writer . ']');
         }
 
         if (count($this->writers[$writer]) == 1) {
@@ -249,12 +250,12 @@ class Output
         // If we've gotten this far and don't know what it is,
         // let's at least try and give a helpful error message
         if (is_object($writer)) {
-            throw new \Exception('Class [' . get_class($writer) . '] must implement '
+            throw new InvalidTypeException('Class [' . get_class($writer) . '] must implement '
                                     . 'League\CLImate\Util\Writer\WriterInterface.');
         }
 
         // No idea, just tell them we can't resolve it
-        throw new \Exception('Unable to resolve writer [' . $writer . ']');
+        throw new InvalidTypeException('Unable to resolve writer [' . $writer . ']');
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace League\CLImate\Argument;
 
 use function is_array;
+use League\CLImate\Exceptions\InvalidArgumentCastTypeException;
 
 class Argument
 {
@@ -286,7 +287,7 @@ class Argument
     protected function setCastTo($castTo)
     {
         if (!in_array($castTo, ['string', 'int', 'float', 'bool'])) {
-            throw new \Exception(
+            throw new InvalidArgumentCastTypeException(
                 "An argument may only be cast to the data type "
                 . "'string', 'int', 'float', or 'bool'."
             );

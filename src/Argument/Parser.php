@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Argument;
 
+use League\CLImate\Exceptions\MissingRequiredArgumentException;
+
 class Parser
 {
     /**
@@ -62,7 +64,7 @@ class Parser
         $missingArguments = $this->filter->missing();
 
         if (count($missingArguments) > 0) {
-            throw new \Exception(
+            throw new MissingRequiredArgumentException(
                 'The following arguments are required: '
                 . $this->summary->short($missingArguments) . '.'
             );
