@@ -2,9 +2,9 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
+use League\CLImate\Exceptions\SPLUnexpectedValueException;
 use function array_merge;
 use function count;
-use League\CLImate\Exceptions\SPLUnexpectedValueException;
 use function microtime;
 use function range;
 use function str_repeat;

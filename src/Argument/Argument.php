@@ -2,8 +2,8 @@
 
 namespace League\CLImate\Argument;
 
-use function is_array;
 use League\CLImate\Exceptions\InvalidArgumentCastTypeException;
+use function is_array;
 
 class Argument
 {
