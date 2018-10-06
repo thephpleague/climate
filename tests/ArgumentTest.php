@@ -3,16 +3,16 @@
 namespace League\CLImate\Tests;
 
 use League\CLImate\Argument\Argument;
+use League\CLImate\Exceptions\InvalidArgumentException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 
 class ArgumentTest extends TestBase
 {
     /** @test */
     public function it_throws_an_exception_when_setting_an_unknown_cast_type()
     {
-        $this->setExpectedException(
-            'Exception',
-            "An argument may only be cast to the data type 'string', 'int', 'float', or 'bool'."
-        );
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("An argument may only be cast to the data type 'string', 'int', 'float', or 'bool'.");
 
         Argument::createFromArray('invalid-cast-type', [
             'castTo' => 'invalid',
@@ -22,10 +22,8 @@ class ArgumentTest extends TestBase
     /** @test */
     public function it_throws_an_exception_when_building_arguments_from_an_unknown_type()
     {
-        $this->setExpectedException(
-            'Exception',
-            'Please provide an argument name or object.'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Please provide an argument name or object.");
 
         $this->cli->arguments->add(new \stdClass);
     }
@@ -276,10 +274,8 @@ class ArgumentTest extends TestBase
     /** @test */
     public function it_throws_an_exception_when_required_arguments_are_not_defined()
     {
-        $this->setExpectedException(
-            'Exception',
-            'The following arguments are required: [-r required-value] [-r1 required-value-1].'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("The following arguments are required: [-r required-value] [-r1 required-value-1].");
 
         $this->cli->arguments->add([
             'required-value' => [

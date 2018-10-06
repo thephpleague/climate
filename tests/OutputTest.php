@@ -2,8 +2,10 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
 use League\CLImate\Util\Output;
 use Mockery;
+use function get_class;
 
 class OutputTest extends TestBase
 {
@@ -163,10 +165,8 @@ class OutputTest extends TestBase
         $out    = Mockery::mock('League\CLImate\Util\Writer\Wat');
         $output = new Output;
 
-        $this->setExpectedException(
-            'Exception',
-            'Class [' . get_class($out) . '] must implement League\CLImate\Util\Writer\WriterInterface.'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Class [" . get_class($out) . "] must implement League\CLImate\Util\Writer\WriterInterface.");
 
         $output->add('out', $out);
     }
@@ -176,10 +176,8 @@ class OutputTest extends TestBase
     {
         $output = new Output;
 
-        $this->setExpectedException(
-            'Exception',
-            'Unable to resolve writer [nothin]'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Unable to resolve writer [nothin]");
 
         $output->add('out', ['nothin']);
     }

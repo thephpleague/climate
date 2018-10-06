@@ -5,6 +5,7 @@ namespace League\CLImate\Tests;
 require_once __DIR__ . '/../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
 require_once 'FileGlobalMock.php';
 
+use League\CLImate\Exceptions\RuntimeException;
 use League\CLImate\Util\Output;
 use org\bovigo\vfs\vfsStream;
 
@@ -110,7 +111,9 @@ class FileTest extends TestBase
     public function it_will_yell_when_a_non_writable_resource_is_passed()
     {
         $this->file->chmod(0444);
-        $this->setExpectedException('Exception');
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("is not writable");
 
         $file   = $this->getFileMock($this->file->url());
         $output = new Output;
@@ -123,7 +126,8 @@ class FileTest extends TestBase
     /** @test */
     public function it_will_yell_when_a_non_existent_resource_is_passed()
     {
-        $this->setExpectedException('Exception', 'The resource [something-that-doesnt-exist] is not writable');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("The resource [something-that-doesnt-exist] is not writable");
 
         $file   = $this->getFileMock('something-that-doesnt-exist');
         $output = new Output;
@@ -136,7 +140,8 @@ class FileTest extends TestBase
     /** @test */
     public function it_will_yell_when_it_failed_to_open_a_resource()
     {
-        $this->setExpectedException('Exception', 'The resource could not be opened');
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage("The resource could not be opened");
 
         $file = $this->getFileMock($this->file->url());
 

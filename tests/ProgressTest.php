@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Exceptions\UnexpectedValueException;
+
 class ProgressTest extends TestBase
 {
     /**
@@ -189,30 +191,26 @@ class ProgressTest extends TestBase
 
     /**
      * @test
-     * @expectedException        Exception
-     * @expectedExceptionMessage The progress total must be greater than zero.
      */
     public function it_can_throws_an_exception_for_a_zero_total_progress_bar()
     {
-        $progress = $this->cli->progress();
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("The progress total must be greater than zero.");
 
-        for ($i = 0; $i <= 10; $i++) {
-            $progress->current($i);
-        }
+        $progress = $this->cli->progress();
+        $progress->current(0);
     }
 
     /**
      * @test
-     * @expectedException        Exception
-     * @expectedExceptionMessage The current is greater than the total.
      */
     public function it_can_throws_an_exception_when_the_current_is_greater_than_the_total()
     {
-        $progress = $this->cli->progress(1);
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("The current is greater than the total.");
 
-        for ($i = 2; $i <= 10; $i++) {
-            $progress->current($i);
-        }
+        $progress = $this->cli->progress(1);
+        $progress->current(2);
     }
 
     /** @test */

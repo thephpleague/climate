@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 use League\CLImate\Tests\CustomObject\BasicObject;
 use League\CLImate\Tests\CustomObject\BasicObjectArgument;
 
@@ -80,7 +82,8 @@ class CLImateTest extends TestBase
     public function it_will_yell_if_extending_and_class_doesnt_exist()
     {
         $class = 'League\CLImate\Tests\CustomObject\NowhereToBeFound';
-        $this->setExpectedException('Exception', 'Class does not exist: ' . $class);
+        $this->expectException(UnexpectedValueException::class);
+        $this->expectExceptionMessage("Class does not exist: {$class}");
         $this->cli->extend($class);
     }
 
@@ -88,7 +91,8 @@ class CLImateTest extends TestBase
     public function it_will_yell_if_it_doesnt_implement_proper_interfaces()
     {
         $class = 'League\CLImate\Tests\CustomObject\Dummy';
-        $this->setExpectedException('Exception', 'Class must implement either');
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Class must implement either");
         $this->cli->extend($class);
     }
 
