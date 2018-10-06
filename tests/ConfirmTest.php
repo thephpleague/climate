@@ -9,7 +9,7 @@ class ConfirmTest extends TestBase
     {
         $this->shouldReadAndReturn('y');
         $this->shouldReceiveSameLine();
-        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m");
+        $this->shouldWrite("\e[mKeep going? [y/N] \e[0m");
 
         $input = $this->cli->confirm('Keep going?', $this->reader);
 
@@ -23,7 +23,7 @@ class ConfirmTest extends TestBase
     {
         $this->shouldReadAndReturn('n');
         $this->shouldReceiveSameLine();
-        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m");
+        $this->shouldWrite("\e[mKeep going? [y/N] \e[0m");
 
         $input = $this->cli->confirm('Keep going?', $this->reader);
 
