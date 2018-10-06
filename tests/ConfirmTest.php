@@ -31,17 +31,4 @@ class ConfirmTest extends TestBase
 
         $this->assertFalse($response);
     }
-
-    /** @test */
-    public function it_will_only_allow_strict_confirmations()
-    {
-        $this->shouldReadAndReturn('Y');
-        $this->shouldReadAndReturn('y');
-        $this->shouldReceiveSameLine();
-        $this->shouldWrite("\e[mKeep going? [y/n] \e[0m", 2);
-
-        $input = $this->cli->confirm('Keep going?', $this->reader);
-
-        $input->confirmed();
-    }
 }

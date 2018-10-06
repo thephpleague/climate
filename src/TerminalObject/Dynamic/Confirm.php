@@ -11,9 +11,11 @@ class Confirm extends Input
      */
     public function confirmed()
     {
-        $this->accept(['y', 'n'], true);
-        $this->strict();
+        $this->prompt = $this->prompt . ' [y/n]';
 
-        return ($this->prompt() == 'y');
+        $this->accept(['y', 'yes', 'n', 'no'], false);
+
+        $response = \strtolower($this->prompt());
+        return (substr($response, 0, 1) === 'y');
     }
 }
