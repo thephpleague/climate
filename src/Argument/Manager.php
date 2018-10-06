@@ -3,6 +3,7 @@
 namespace League\CLImate\Argument;
 
 use League\CLImate\CLImate;
+use League\CLImate\Exceptions\InvalidTypeException;
 
 class Manager
 {
@@ -67,7 +68,7 @@ class Manager
         }
 
         if (!($argument instanceof Argument)) {
-            throw new \Exception('Please provide an argument name or object.');
+            throw new InvalidTypeException('Please provide an argument name or object.');
         }
 
         $this->arguments[$argument->name()] = $argument;

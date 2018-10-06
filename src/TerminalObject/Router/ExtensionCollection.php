@@ -2,6 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
+use League\CLImate\Exceptions\InvalidTypeException;
+use League\CLImate\Exceptions\MissingClassException;
 use League\CLImate\Util\Helper;
 
 class ExtensionCollection
@@ -85,7 +87,7 @@ class ExtensionCollection
     protected function validateClassExists($class)
     {
         if (is_string($class) && !class_exists($class)) {
-            throw new \Exception('Class does not exist: ' . $class);
+            throw new MissingClassException('Class does not exist: ' . $class);
         }
     }
 
@@ -102,7 +104,7 @@ class ExtensionCollection
                                     || is_a($class, $this->dynamic_interface, $str_class));
 
         if (!$valid_implementation) {
-            throw new \Exception('Class must implement either '
+            throw new InvalidTypeException('Class must implement either '
                                     . $this->basic_interface . ' or ' . $this->dynamic_interface);
         }
     }
