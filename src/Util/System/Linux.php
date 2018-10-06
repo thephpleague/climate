@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Util\System;
 
+use function getenv;
+
 class Linux extends System
 {
     /**
@@ -11,7 +13,7 @@ class Linux extends System
      */
     public function width()
     {
-        return $this->getDimension($this->exec('tput cols'));
+        return $this->getDimension($this->tput("cols"));
     }
 
     /**
@@ -21,7 +23,19 @@ class Linux extends System
      */
     public function height()
     {
-        return $this->getDimension($this->exec('tput lines'));
+        return $this->getDimension($this->tput("lines"));
+    }
+
+    /**
+     * Get a value from the tput command.
+     *
+     * @param string $type
+     *
+     * @return array|null|string
+     */
+    private function tput($type)
+    {
+        return $this->exec("tput {$type} 2>/dev/null");
     }
 
     /**

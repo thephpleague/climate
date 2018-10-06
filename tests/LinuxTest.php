@@ -13,7 +13,7 @@ class LinuxTest extends TestBase
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
-        $system->shouldReceive('exec')->with('tput cols')->andReturn(100);
+        $system->shouldReceive('exec')->with('tput cols 2>/dev/null')->andReturn(100);
 
         $this->assertSame(100, $system->width());
     }
@@ -25,7 +25,7 @@ class LinuxTest extends TestBase
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
-        $system->shouldReceive('exec')->with('tput cols')->andReturn('error');
+        $system->shouldReceive('exec')->with('tput cols 2>/dev/null')->andReturn('error');
 
         $this->assertNull($system->width());
     }
@@ -37,7 +37,7 @@ class LinuxTest extends TestBase
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
-        $system->shouldReceive('exec')->with('tput lines')->andReturn(100);
+        $system->shouldReceive('exec')->with('tput lines 2>/dev/null')->andReturn(100);
 
         $this->assertSame(100, $system->height());
     }
@@ -49,7 +49,7 @@ class LinuxTest extends TestBase
                             ->makePartial()
                             ->shouldAllowMockingProtectedMethods();
 
-        $system->shouldReceive('exec')->with('tput lines')->andReturn('error');
+        $system->shouldReceive('exec')->with('tput lines 2>/dev/null')->andReturn('error');
 
         $this->assertNull($system->height());
     }
