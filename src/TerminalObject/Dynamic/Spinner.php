@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Dynamic;
 
-use League\CLImate\Exceptions\SPLUnexpectedValueException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 use function array_merge;
 use function count;
 use function microtime;
@@ -94,7 +94,7 @@ final class Spinner extends DynamicTerminalObject
     public function characters(...$characters)
     {
         if (count($characters) < 1) {
-            throw new SPLUnexpectedValueException("You must specify the characters to use");
+            throw new UnexpectedValueException("You must specify the characters to use");
         }
 
         $this->characters = $characters;

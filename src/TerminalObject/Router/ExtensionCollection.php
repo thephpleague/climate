@@ -2,8 +2,8 @@
 
 namespace League\CLImate\TerminalObject\Router;
 
-use League\CLImate\Exceptions\InvalidTypeException;
-use League\CLImate\Exceptions\MissingClassException;
+use League\CLImate\Exceptions\InvalidArgumentException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 use League\CLImate\Util\Helper;
 
 class ExtensionCollection
@@ -39,7 +39,7 @@ class ExtensionCollection
      * @param string $original_key
      * @param string|object|array $original_class
      *
-     * @return type
+     * @return void
      */
     protected function createCollection($original_key, $original_class)
     {
@@ -82,19 +82,19 @@ class ExtensionCollection
     /**
      * @param string|object $class
      *
-     * @throws \Exception if extension class does not exist
+     * @throws UnexpectedValueException if extension class does not exist
      */
     protected function validateClassExists($class)
     {
         if (is_string($class) && !class_exists($class)) {
-            throw new MissingClassException('Class does not exist: ' . $class);
+            throw new UnexpectedValueException('Class does not exist: ' . $class);
         }
     }
 
     /**
      * @param string|object $class
      *
-     * @throws \Exception if extension class does not implement either Dynamic or Basic interface
+     * @throws InvalidArgumentException if extension class does not implement either Dynamic or Basic interface
      */
     protected function validateClassImplementation($class)
     {
@@ -104,7 +104,7 @@ class ExtensionCollection
                                     || is_a($class, $this->dynamic_interface, $str_class));
 
         if (!$valid_implementation) {
-            throw new InvalidTypeException('Class must implement either '
+            throw new InvalidArgumentException('Class must implement either '
                                     . $this->basic_interface . ' or ' . $this->dynamic_interface);
         }
     }

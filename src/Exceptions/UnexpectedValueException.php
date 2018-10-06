@@ -2,6 +2,6 @@
 
 namespace League\CLImate\Exceptions;
 
-class UnexpectedValueException extends \Exception implements Exception
+class UnexpectedValueException extends \UnexpectedValueException implements Exception
 {
 }

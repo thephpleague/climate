@@ -57,7 +57,7 @@ class Stdin implements ReaderInterface
      * Lazily re-opens STDIN after hitting an EOF
      *
      * @return resource
-     * @throws \Exception
+     * @throws RuntimeException
      */
     protected function getStdIn()
     {
@@ -77,7 +77,8 @@ class Stdin implements ReaderInterface
     /**
      * Attempt to set the stdin property
      *
-     * @throws \Exception
+     * @return void
+     * @throws RuntimeException
      */
     protected function setStdIn()
     {

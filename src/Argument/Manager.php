@@ -3,7 +3,7 @@
 namespace League\CLImate\Argument;
 
 use League\CLImate\CLImate;
-use League\CLImate\Exceptions\InvalidTypeException;
+use League\CLImate\Exceptions\InvalidArgumentException;
 
 class Manager
 {
@@ -52,9 +52,11 @@ class Manager
     /**
      * Add an argument.
      *
-     * @throws \Exception if $argument isn't an array or Argument object.
      * @param Argument|string|array $argument
      * @param $options
+     *
+     * @return void
+     * @throws InvalidArgumentException if $argument isn't an array or Argument object.
      */
     public function add($argument, array $options = [])
     {
@@ -67,8 +69,8 @@ class Manager
             $argument = Argument::createFromArray($argument, $options);
         }
 
-        if (!($argument instanceof Argument)) {
-            throw new InvalidTypeException('Please provide an argument name or object.');
+        if (!$argument instanceof Argument) {
+            throw new InvalidArgumentException('Please provide an argument name or object.');
         }
 
         $this->arguments[$argument->name()] = $argument;
@@ -228,7 +230,6 @@ class Manager
     /**
      * Parse command line arguments into CLImate arguments.
      *
-     * @throws \Exception if required arguments aren't defined.
      * @param array $argv
      */
     public function parse(array $argv = null)

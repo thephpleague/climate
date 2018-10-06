@@ -2,7 +2,8 @@
 
 namespace League\CLImate\Util;
 
-use League\CLImate\Exceptions\InvalidTypeException;
+use League\CLImate\Exceptions\InvalidArgumentException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 use League\CLImate\Util\Writer\WriterInterface;
 
 class Output
@@ -133,15 +134,15 @@ class Output
     /**
      * Get a specific writer
      *
-     * @throws \Exception if writer key doesn't exist
      * @param string $writer
      *
      * @return WriterInterface|array
+     * @throws UnexpectedValueException if writer key doesn't exist
      */
     public function get($writer)
     {
         if (!array_key_exists($writer, $this->writers)) {
-            throw new InvalidTypeException('Unknown writer [' . $writer . ']');
+            throw new UnexpectedValueException('Unknown writer [' . $writer . ']');
         }
 
         if (count($this->writers[$writer]) == 1) {
@@ -243,19 +244,19 @@ class Output
 
     /**
      * @param mixed $writer
-     * @throws \Exception For non-valid writer
+     * @throws InvalidArgumentException For non-valid writer
      */
     protected function handleUnknownWriter($writer)
     {
         // If we've gotten this far and don't know what it is,
         // let's at least try and give a helpful error message
         if (is_object($writer)) {
-            throw new InvalidTypeException('Class [' . get_class($writer) . '] must implement '
+            throw new InvalidArgumentException('Class [' . get_class($writer) . '] must implement '
                                     . 'League\CLImate\Util\Writer\WriterInterface.');
         }
 
         // No idea, just tell them we can't resolve it
-        throw new InvalidTypeException('Unable to resolve writer [' . $writer . ']');
+        throw new InvalidArgumentException('Unable to resolve writer [' . $writer . ']');
     }
 
     /**

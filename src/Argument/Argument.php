@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Argument;
 
-use League\CLImate\Exceptions\InvalidArgumentCastTypeException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 use function is_array;
 
 class Argument
@@ -281,13 +281,15 @@ class Argument
      *
      * Valid data types are "string", "int", "float", and "bool".
      *
-     * @throws \Exception if $castTo is not a valid data type.
      * @param string $castTo
+     *
+     * @return void
+     * @throws UnexpectedValueException if $castTo is not a valid data type.
      */
     protected function setCastTo($castTo)
     {
         if (!in_array($castTo, ['string', 'int', 'float', 'bool'])) {
-            throw new InvalidArgumentCastTypeException(
+            throw new UnexpectedValueException(
                 "An argument may only be cast to the data type "
                 . "'string', 'int', 'float', or 'bool'."
             );

@@ -93,7 +93,9 @@ class Progress extends DynamicTerminalObject
      *
      * @param integer $current
      * @param mixed   $label
-     * @throws \Exception
+     *
+     * @return void
+     * @throws UnexpectedValueException
      */
     public function current($current, $label = null)
     {

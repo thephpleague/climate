@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Argument;
 
-use League\CLImate\Exceptions\MissingRequiredArgumentException;
+use League\CLImate\Exceptions\InvalidArgumentException;
 
 class Parser
 {
@@ -44,8 +44,10 @@ class Parser
     /**
      * Parse command line arguments into CLImate arguments.
      *
-     * @throws \Exception if required arguments aren't defined.
      * @param array $argv
+     *
+     * @return void
+     * @throws InvalidArgumentException if required arguments aren't defined.
      */
     public function parse(array $argv = null)
     {
@@ -64,7 +66,7 @@ class Parser
         $missingArguments = $this->filter->missing();
 
         if (count($missingArguments) > 0) {
-            throw new MissingRequiredArgumentException(
+            throw new InvalidArgumentException(
                 'The following arguments are required: '
                 . $this->summary->short($missingArguments) . '.'
             );

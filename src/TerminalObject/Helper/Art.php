@@ -2,7 +2,7 @@
 
 namespace League\CLImate\TerminalObject\Helper;
 
-use League\CLImate\Exceptions\SPLUnexpectedValueException;
+use League\CLImate\Exceptions\UnexpectedValueException;
 
 trait Art
 {
@@ -95,7 +95,7 @@ trait Art
         }
 
         if (count($files) === 0) {
-            throw new SPLUnexpectedValueException("Unable to find an art file with the name '{$art}'");
+            throw new UnexpectedValueException("Unable to find an art file with the name '{$art}'");
         }
 
         return reset($files);
