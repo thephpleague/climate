@@ -233,14 +233,28 @@ class Parser
 
             // If the value wasn't previously defined in "key=value"
             // format then define it from the next command argument.
-            $argument->setValue($argv[++$key]);
-            unset($argv[$key]);
-            return $argv;
+            $nextArgvValue = $argv[$key + 1];
+            if ($this->isValidArgumentValue($nextArgvValue)) {
+                $argument->setValue($nextArgvValue);
+                unset($argv[$key + 1]);
+                return $argv;
+            }
         }
 
         $argument->setValue($value);
 
         return $argv;
+    }
+
+    /**
+     * Check if the value is considered a valid input value.
+     *
+     * @param $argumentValue
+     * @return bool
+     */
+    protected function isValidArgumentValue($argumentValue)
+    {
+        return empty($this->findPrefixedArgument($argumentValue));
     }
 
     /**

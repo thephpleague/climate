@@ -46,4 +46,16 @@ class ManagerTest extends TestCase
 
         $this->assertTrue($result);
     }
+
+    public function testItParsesAnOptionalArgument()
+    {
+        $this->manager->add([
+            'foo' => ['prefix' => 'f'],
+            'bar' => ['prefix' => 'b']
+        ]);
+
+        $this->manager->parse(['command', '-f', '-b', 'abc']);
+
+        $this->assertEquals('', $this->manager->get('foo'));
+    }
 }
