@@ -2,7 +2,11 @@
 
 namespace League\CLImate\TerminalObject\Basic;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
 use League\CLImate\TerminalObject\Helper\StringLength;
+use function get_object_vars;
+use function is_array;
+use function is_object;
 
 class Table extends BasicTerminalObject
 {
@@ -58,9 +62,35 @@ class Table extends BasicTerminalObject
 
     public function __construct(array $data, $prefix = "")
     {
-        $this->data = $data;
+        $this->data = $this->getData($data);
         $this->prefix = $prefix;
     }
+
+
+    /**
+     * @param array $input
+     *
+     * @return array
+     */
+    private function getData(array $input)
+    {
+        $output = [];
+
+        foreach ($input as $item) {
+            if (is_object($item)) {
+                $item = get_object_vars($item);
+            }
+
+            if (!is_array($item)) {
+                throw new InvalidArgumentException("Invalid table data, you must pass an array of arrays or objects");
+            }
+
+            $output[] = $item;
+        }
+
+        return $output;
+    }
+
 
     /**
      * Return the built rows
@@ -75,7 +105,7 @@ class Table extends BasicTerminalObject
 
         $this->buildHeaderRow();
 
-        foreach ($this->data as $key => $columns) {
+        foreach ($this->data as $columns) {
             $this->addLine($this->buildRow($columns));
             $this->addLine($this->border);
         }
@@ -174,10 +204,6 @@ class Table extends BasicTerminalObject
     {
         $first_item = reset($this->data);
 
-        if (is_object($first_item)) {
-            $first_item = get_object_vars($first_item);
-        }
-
         $keys       = array_keys($first_item);
         $first_key  = reset($keys);
 
@@ -197,10 +223,6 @@ class Table extends BasicTerminalObject
     protected function getColumnWidths()
     {
         $first_row = reset($this->data);
-
-        if (is_object($first_row)) {
-            $first_row = get_object_vars($first_row);
-        }
 
         // Create an array with the columns as keys and values of zero
         $column_widths = $this->getDefaultColumnWidths($first_row);

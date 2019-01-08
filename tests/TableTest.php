@@ -2,6 +2,8 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Exceptions\InvalidArgumentException;
+
 class TableTest extends TestBase
 {
     /** @test */
@@ -163,5 +165,19 @@ class TableTest extends TestBase
         $this->cli->table([
             ["Field 1"   =>  "Value 1"],
         ], "\t");
+    }
+
+
+    /**
+     * Ensure a sensible error is thrown when invalid items are passed.
+     */
+    public function testInvalidData1()
+    {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage("Invalid table data, you must pass an array of arrays or objects");
+
+        $this->cli->table([
+            "whoops",
+        ]);
     }
 }
