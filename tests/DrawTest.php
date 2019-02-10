@@ -76,4 +76,20 @@ class DrawTest extends TestBase
         $this->drawWorks();
         $this->cli->addArt(__DIR__ . '/art')->draw('works');
     }
+
+
+    /**
+     * Ensure we don't use the path to match the file name.
+     * https://github.com/thephpleague/climate/issues/130
+     */
+    public function testAddArt1()
+    {
+        $this->shouldWrite("\e[mart\e[0m");
+        $this->shouldWrite("\e[m\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->addArt(__DIR__ . "/art/");
+        $this->cli->draw("art");
+    }
+
 }
