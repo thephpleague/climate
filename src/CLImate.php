@@ -80,6 +80,7 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed animation(string $art, TerminalObject\Helper\Sleeper $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
+ * @method CLImate clearLine()
  *
  * @method CLImate addArt(string $dir)
  */
