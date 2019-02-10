@@ -17,6 +17,30 @@ class Cursor
     }
 
     /**
+     * Move the cursor down in the terminal x number of lines.
+     *
+     * @param int $lines
+     *
+     * @return string
+     */
+    public function down($lines = 1)
+    {
+        return "\e[{$lines}B";
+    }
+
+    /**
+     * Move the cursor right in the terminal x number of columns.
+     *
+     * @param int $cols
+     *
+     * @return string
+     */
+    public function right($columns = 1)
+    {
+        return "\e[{$columns}C";
+    }
+
+    /**
      * Move the cursor left in the terminal x number of columns.
      *
      * @param int $cols
