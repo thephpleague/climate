@@ -31,4 +31,41 @@ class ConfirmTest extends TestBase
 
         $this->assertFalse($response);
     }
+
+
+    /**
+     * Ensure that the default (yes) is respected.
+     */
+    public function testDefaultToYes()
+    {
+        $this->shouldReadAndReturn("");
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mKeep going? [Y/n] \e[0m");
+
+        $input = $this->cli->confirm("Keep going?", $this->reader);
+        $input->defaultTo("y");
+
+        $response = $input->confirmed();
+
+        $this->assertTrue($response);
+    }
+
+
+
+    /**
+     * Ensure that the default (no) is respected.
+     */
+    public function testDefaultToNo()
+    {
+        $this->shouldReadAndReturn("");
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[mKeep going? [y/N] \e[0m");
+
+        $input = $this->cli->confirm("Keep going?", $this->reader);
+        $input->defaultTo("n");
+
+        $response = $input->confirmed();
+
+        $this->assertFalse($response);
+    }
 }
