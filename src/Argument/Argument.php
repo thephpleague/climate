@@ -354,6 +354,14 @@ class Argument
     }
 
     /**
+     * @deprecated use values() instead.
+     */
+    public function valueArray()
+    {
+        return $this->values();
+    }
+
+    /**
      * Set an argument's value based on its command line entry.
      *
      * Argument values are type cast based on the value of $castTo.
