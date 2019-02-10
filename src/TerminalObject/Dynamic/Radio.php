@@ -26,20 +26,17 @@ class Radio extends Checkboxes
      */
     protected function handleCharacter($char)
     {
-        switch ($char) {
-            case ' ':
-            case "\n":
-                $this->checkboxes->toggleCurrent();
-                $this->output->sameLine()->write($this->util->cursor->defaultStyle());
-                $this->output->sameLine()->write("\e[0m");
-                return true; // Break the while loop as well
-
-            case "\e":
-                $this->handleAnsi();
-                break;
+        # Ignore space, as we can't select multiple options
+        if ($char === " ") {
+            return false;
         }
 
-        return false;
+        # Use enter to select the current option
+        if ($char === "\n") {
+            $this->checkboxes->toggleCurrent();
+        }
+
+        return parent::handleCharacter($char);
     }
 
     /**
