@@ -215,6 +215,17 @@ class CLImate
     }
 
     /**
+     * @param bool $interactive
+     *
+     * @return self
+     */
+    public function setInteractive(bool $interactive): self
+    {
+        $this->reader->setInteractive($interactive);
+        return $this;
+    }
+
+    /**
      * Extend CLImate with custom methods
      *
      * @param string|object|array $class

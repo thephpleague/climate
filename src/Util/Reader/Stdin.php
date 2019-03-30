@@ -4,8 +4,116 @@ namespace League\CLImate\Util\Reader;
 
 class Stdin extends Stream
 {
-    public function __construct()
+    protected $stdIn = false;
+
+    private $interactive = true;
+
+    /**
+     * Read the line typed in by the user
+     *
+     * @return string
+     */
+    public function line()
     {
-        parent::__construct("php://stdin");
+        if (!$this->interactive) {
+            return "";
+        }
+        return trim(fgets($this->getStdIn()));
+    }
+
+    /**
+     * Read from STDIN until EOF (^D) is reached
+     *
+     * @return string
+     */
+    public function multiLine()
+    {
+        if (!$this->interactive) {
+            return "";
+        }
+        return trim(stream_get_contents($this->getStdIn()));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isIteractive(): bool
+    {
+        return $this->interactive;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setInteractive(bool $interactive): void
+    {
+        $this->interactive = $interactive;
+    }
+
+    /**
+     * Read one character
+     *
+     * @param int $count
+     *
+     * @return string
+     */
+    public function char($count = 1)
+    {
+        if (!$this->interactive) {
+            return "";
+        }
+        return fread($this->getStdIn(), $count);
+    }
+
+    /**
+     * Read the line, but hide what the user is typing
+     *
+     * @return string
+     */
+    public function hidden()
+    {
+        return CliPrompt::hiddenPrompt();
+    }
+
+    /**
+     * Return a valid STDIN, even if it previously EOF'ed
+     *
+     * Lazily re-opens STDIN after hitting an EOF
+     *
+     * @return resource
+     * @throws RuntimeException
+     */
+    protected function getStdIn()
+    {
+        if ($this->stdIn && !feof($this->stdIn)) {
+            return $this->stdIn;
+        }
+
+        try {
+            $this->setStdIn();
+        } catch (\Error $e) {
+            throw new RuntimeException('Unable to read from STDIN', 0, $e);
+        }
+
+        return $this->stdIn;
+    }
+
+    /**
+     * Attempt to set the stdin property
+     *
+     * @return void
+     * @throws RuntimeException
+     */
+    protected function setStdIn()
+    {
+        if ($this->stdIn !== false) {
+            fclose($this->stdIn);
+        }
+
+        $this->stdIn = fopen('php://stdin', 'r');
+
+        if (!$this->stdIn) {
+            throw new RuntimeException('Unable to read from STDIN');
+        }
     }
 }
