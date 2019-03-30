@@ -9,6 +9,8 @@ class Stdin implements ReaderInterface
 {
     protected $stdIn = false;
 
+    private $interactive = true;
+
     /**
      * Read the line typed in by the user
      *
@@ -16,6 +18,9 @@ class Stdin implements ReaderInterface
      */
     public function line()
     {
+        if (!$this->interactive) {
+            return "";
+        }
         return trim(fgets($this->getStdIn(), 1024));
     }
 
@@ -26,7 +31,26 @@ class Stdin implements ReaderInterface
      */
     public function multiLine()
     {
+        if (!$this->interactive) {
+            return "";
+        }
         return trim(stream_get_contents($this->getStdIn()));
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function isIteractive(): bool
+    {
+        return $this->interactive;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setInteractive(bool $interactive): void
+    {
+        $this->interactive = $interactive;
     }
 
     /**
@@ -38,6 +62,9 @@ class Stdin implements ReaderInterface
      */
     public function char($count = 1)
     {
+        if (!$this->interactive) {
+            return "";
+        }
         return fread($this->getStdIn(), $count);
     }
 
