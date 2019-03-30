@@ -42,6 +42,8 @@ abstract class TestBase extends TestCase
         $this->cli = new CLImate();
         $this->cli->setOutput($this->output);
         $this->cli->setUtil($this->util);
+
+        $this->cli->setReader($this->reader);
     }
 
     public function tearDown(): void
