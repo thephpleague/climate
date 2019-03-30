@@ -39,6 +39,7 @@ class TestBase extends TestCase
         $this->cli = new CLImate();
         $this->cli->setOutput($this->output);
         $this->cli->setUtil($this->util);
+        $this->cli->setReader($this->reader);
 
         if (method_exists($this, 'internalSetup')) {
             $this->internalSetup();

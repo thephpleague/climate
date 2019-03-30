@@ -5,10 +5,17 @@ namespace League\CLImate;
 use League\CLImate\Argument\Manager as ArgumentManager;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Settings\Manager as SettingsManager;
+use League\CLImate\TerminalObject\Dynamic\Checkboxes;
+use League\CLImate\TerminalObject\Dynamic\Confirm;
+use League\CLImate\TerminalObject\Dynamic\Input;
+use League\CLImate\TerminalObject\Dynamic\Password;
+use League\CLImate\TerminalObject\Dynamic\Radio;
 use League\CLImate\TerminalObject\Dynamic\Spinner;
 use League\CLImate\TerminalObject\Router\Router;
 use League\CLImate\Util\Helper;
 use League\CLImate\Util\Output;
+use League\CLImate\Util\Reader\ReaderInterface;
+use League\CLImate\Util\Reader\Stdin;
 use League\CLImate\Util\UtilFactory;
 
 /**
@@ -72,11 +79,6 @@ use League\CLImate\Util\UtilFactory;
  * @method mixed progress(integer $total = null)
  * @method Spinner spinner(string $label = null, string ...$characters = null)
  * @method mixed padding(integer $length = 0, string $char = '.')
- * @method mixed input(string $prompt, Util\Reader\ReaderInterface $reader = null)
- * @method mixed confirm(string $prompt, Util\Reader\ReaderInterface $reader = null)
- * @method mixed password(string $prompt, Util\Reader\ReaderInterface $reader = null)
- * @method mixed checkboxes(string $prompt, array $options, Util\Reader\ReaderInterface $reader = null)
- * @method mixed radio(string $prompt, array $options, Util\Reader\ReaderInterface $reader = null)
  * @method mixed animation(string $art, TerminalObject\Helper\Sleeper $sleeper = null)
  * @method mixed columns(array $data, $column_count = null)
  * @method mixed clear()
@@ -128,6 +130,9 @@ class CLImate
      */
     protected $util;
 
+    /** @var ReaderInterface */
+    private $reader;
+
     public function __construct()
     {
         $this->setStyle(new Style());
@@ -136,6 +141,7 @@ class CLImate
         $this->setOutput(new Output());
         $this->setUtil(new UtilFactory());
         $this->setArgumentManager(new ArgumentManager());
+        $this->setReader(new Stdin());
     }
 
     /**
@@ -196,6 +202,16 @@ class CLImate
     public function setUtil(UtilFactory $util)
     {
         $this->util = $util;
+    }
+
+    /**
+     * @param ReaderInterface $reader
+     *
+     * @return void
+     */
+    public function setReader(ReaderInterface $reader): void
+    {
+        $this->reader = $reader;
     }
 
     /**
@@ -441,5 +457,72 @@ class CLImate
         }
 
         return $this;
+    }
+
+
+    /**
+     * Request some input from the user.
+     *
+     * @param string $prompt
+     *
+     * @return Input
+     */
+    public function input(string $prompt): Input
+    {
+        return $this->buildTerminalObject("input", [$prompt, $this->reader]);
+    }
+
+
+    /**
+     * Ask the user to confirm something.
+     *
+     * @param string $prompt
+     *
+     * @return Confirm
+     */
+    public function confirm(string $prompt): Confirm
+    {
+        return $this->buildTerminalObject("confirm", [$prompt, $this->reader]);
+    }
+
+
+    /**
+     * Ask the user to input some sensitive content.
+     *
+     * @param string $prompt
+     *
+     * @return Password
+     */
+    public function password(string $prompt): Password
+    {
+        return $this->buildTerminalObject("password", [$prompt, $this->reader]);
+    }
+
+
+    /**
+     * Ask the user to choose some checkboxes.
+     *
+     * @param string $prompt
+     * @param array $options
+     *
+     * @return Checkboxes
+     */
+    public function checkboxes(string $prompt, array $options): Checkboxes
+    {
+        return $this->buildTerminalObject("checkboxes", [$prompt, $options, $this->reader]);
+    }
+
+
+    /**
+     * Ask the user to choose an option.
+     *
+     * @param string $prompt
+     * @param array $options
+     *
+     * @return Radio
+     */
+    public function radio(string $prompt, array $options): Radio
+    {
+        return $this->buildTerminalObject("radio", [$prompt, $options, $this->reader]);
     }
 }
