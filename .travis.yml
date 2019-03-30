@@ -20,10 +20,15 @@ before_script:
   - travis_retry composer update $COMPOSER_OPTS
 
 script:
-  - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+  - vendor/bin/phpunit
 
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+jobs:
+  include:
+
+    - stage: coverage
+      script:
+        - vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
+        - wget https://scrutinizer-ci.com/ocular.phar
+        - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
 
 group: travis_latest
