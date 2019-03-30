@@ -40,6 +40,9 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": [
+            "vendor/bin/phpunit",
+            "@composer validate --strict"
+        ]
     }
 }
