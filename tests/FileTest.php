@@ -2,7 +2,7 @@
 
 namespace League\CLImate\Tests;
 
-require_once __DIR__ . '/../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
+require_once __DIR__ . '/../vendor/mikey179/vfsstream/src/main/php/org/bovigo/vfs/vfsStream.php';
 require_once 'FileGlobalMock.php';
 
 use League\CLImate\Exceptions\RuntimeException;
