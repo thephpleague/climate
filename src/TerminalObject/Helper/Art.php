@@ -28,6 +28,13 @@ trait Art
     protected $art = '';
 
     /**
+     * The directory separator
+     *
+     * @var string $directory_separator
+     */
+    public $directory_separator = \DIRECTORY_SEPARATOR;
+
+    /**
      * Specify which settings Draw needs to import
      *
      * @return array
@@ -87,7 +94,7 @@ trait Art
      */
     protected function artFile($art)
     {
-        $files = $this->fileSearch($art, '[^' . \DIRECTORY_SEPARATOR . ']*$');
+        $files = $this->fileSearch($art, '[^' . $this->directory_separator . ']*$');
 
         if (count($files) === 0) {
             $this->addDir(__DIR__ . '/../../ASCII');
