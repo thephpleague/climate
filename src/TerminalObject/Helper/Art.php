@@ -94,7 +94,7 @@ trait Art
      */
     protected function artFile($art)
     {
-        $files = $this->fileSearch($art, '[^' . $this->directory_separator . ']*$');
+        $files = $this->fileSearch($art, '[^' . preg_quote($this->directory_separator) . ']*$');
 
         if (count($files) === 0) {
             $this->addDir(__DIR__ . '/../../ASCII');
