@@ -10,7 +10,7 @@ class SpinnerTest extends TestBase
 
     private function wait()
     {
-        usleep(100000);
+        usleep(1000000);
     }
 
 
