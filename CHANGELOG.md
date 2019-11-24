@@ -1,6 +1,17 @@
 Changelog
 =========
 
+--------
+
+## 3.5.1 - 2019-11-24
+
+### Fixed
+
+* [Art] Be stricter about matching filenames when looking for art. [#155](https://github.com/thephpleague/climate/issues/155)
+* [Support] Provide better support for Windows using GitHub actions.
+
+--------
+
 ## 3.5.0 - 2019-02-10
 
 ### Added
