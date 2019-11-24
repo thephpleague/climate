@@ -34,3 +34,14 @@ jobs:
 
       - name: Composer Validate
         run: docker exec ci composer validate --strict
+
+  windows:
+    runs-on: windows-2019
+    steps:
+      - uses: actions/checkout@master
+      - uses: nanasess/setup-php@master
+      - uses: nanasess/composer-installer-action@master
+      - name: Install dependencies
+        run: composer update
+      - name: Run test suite
+        run: vendor/bin/phpunit

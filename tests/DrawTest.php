@@ -64,7 +64,7 @@ class DrawTest extends TestBase
     public function it_can_take_a_custom_art_directory()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . 'art');
         $this->cli->draw('works');
     }
 
@@ -72,7 +72,7 @@ class DrawTest extends TestBase
     public function it_can_take_a_custom_art_directory_with_a_trailing_slash()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art/');
+        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . 'art' . \DIRECTORY_SEPARATOR);
         $this->cli->draw('works');
     }
 
@@ -80,7 +80,7 @@ class DrawTest extends TestBase
     public function it_can_chain_the_art_setting()
     {
         $this->drawWorks();
-        $this->cli->addArt(__DIR__ . '/art')->draw('works');
+        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . 'art')->draw('works');
     }
 
 

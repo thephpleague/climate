@@ -4,6 +4,8 @@ namespace League\CLImate\TerminalObject\Helper;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
 
+use function preg_quote;
+
 trait Art
 {
     /**
@@ -58,7 +60,7 @@ trait Art
     {
         // Add any additional directories to the top of the array
         // so that the user can override art
-        array_unshift($this->art_dirs, rtrim($dir, '/'));
+        array_unshift($this->art_dirs, rtrim($dir, \DIRECTORY_SEPARATOR));
 
         // Keep the array clean
         $this->art_dirs = array_unique($this->art_dirs);
@@ -75,7 +77,7 @@ trait Art
      */
     protected function artDir($art)
     {
-        return $this->fileSearch($art, '/*.*');
+        return $this->fileSearch($art, preg_quote(\DIRECTORY_SEPARATOR) . '*.*');
     }
 
     /**
@@ -87,10 +89,10 @@ trait Art
      */
     protected function artFile($art)
     {
-        $files = $this->fileSearch($art, '(\.[^' . \DIRECTORY_SEPARATOR . ']*)?$');
+        $files = $this->fileSearch($art, '(\.[^' . preg_quote(\DIRECTORY_SEPARATOR) . ']*)?$');
 
         if (count($files) === 0) {
-            $this->addDir(__DIR__ . '/../../ASCII');
+            $this->addDir(__DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'ASCII');
             $files = $this->fileSearch($this->default_art, '.*');
         }
 

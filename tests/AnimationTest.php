@@ -8,6 +8,13 @@ class AnimationTest extends TestBase
 {
     use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames, ExitToRightFrames, RunFrames;
 
+
+    private function addArt(): void
+    {
+        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . 'art');
+    }
+
+
     protected function emptyFrame()
     {
         $this->shouldWrite("\e[m\e[0m")->ordered();
@@ -143,7 +150,7 @@ class AnimationTest extends TestBase
         $this->assertExitedLeft();
         $this->exitLeftFrame9();
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(14))->exitTo('left');
     }
 
@@ -153,7 +160,7 @@ class AnimationTest extends TestBase
         $this->assertEnteredFromLeft();
         $this->fullArtExitLeftPlus(4);
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(14))->enterFrom('left');
     }
 
@@ -165,7 +172,7 @@ class AnimationTest extends TestBase
 
         $this->assertExitedRight();
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(85))->exitTo('right');
     }
 
@@ -176,7 +183,7 @@ class AnimationTest extends TestBase
         $this->assertEnteredFromRight();
         $this->exitRightFrame(0, 4);
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(85))->enterFrom('right');
     }
 
@@ -185,7 +192,7 @@ class AnimationTest extends TestBase
     {
         $this->assertScrolledRight();
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(91))->scroll();
     }
 
@@ -194,7 +201,7 @@ class AnimationTest extends TestBase
     {
         $this->assertScrolledRight();
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(91))->scroll('right');
     }
 
@@ -207,7 +214,7 @@ class AnimationTest extends TestBase
         $this->assertExitedLeft();
         $this->exitRightFrameEnd9();
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('4', $this->getSleeper(91))->scroll('left');
     }
 
@@ -244,7 +251,7 @@ class AnimationTest extends TestBase
     {
         $this->runAsc('runFrames', 5);
 
-        $this->cli->addArt(__DIR__ . '/art');
+        $this->addArt();
         $this->cli->animation('work-it', $this->getSleeper(5))->run();
     }
 
