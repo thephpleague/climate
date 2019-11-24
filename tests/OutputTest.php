@@ -13,7 +13,7 @@ class OutputTest extends TestBase
     public function it_can_output_content()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
-        $out->shouldReceive('write')->once()->with("Oh, hey there.\n");
+        $out->shouldReceive('write')->once()->with("Oh, hey there." . \PHP_EOL);
 
         $output = new Output;
         $output->add('out', $out);

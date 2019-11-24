@@ -40,7 +40,7 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
@@ -54,7 +54,7 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
@@ -79,7 +79,7 @@ class FileTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */
@@ -104,7 +104,7 @@ class FileTest extends TestBase
 
         // $output->write("Oh, you're still here.");
 
-        // $this->assertSame("Oh, you're still here.\n", $this->file->getContent());
+        // $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
     /** @test */

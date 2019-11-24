@@ -17,7 +17,7 @@ class BufferTest extends TestBase
 
         $output->write("Oh, you're still here.");
 
-        $this->assertSame("Oh, you're still here.\n", $buffer->get());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL, $buffer->get());
     }
 
     /** @test */
@@ -44,7 +44,7 @@ class BufferTest extends TestBase
         $output->write("Oh, you're still here.");
         $output->write("Also am I.");
 
-        $this->assertSame("Oh, you're still here.\nAlso am I.\n", $buffer->get());
+        $this->assertSame("Oh, you're still here." . \PHP_EOL . "Also am I." . \PHP_EOL, $buffer->get());
     }
 
     /** @test */
@@ -59,6 +59,6 @@ class BufferTest extends TestBase
         $buffer->clean();
         $output->write("I am on my own.");
 
-        $this->assertSame("I am on my own.\n", $buffer->get());
+        $this->assertSame("I am on my own." . \PHP_EOL, $buffer->get());
     }
 }
