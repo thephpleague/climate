@@ -100,6 +100,23 @@ class DrawTest extends TestBase
 
 
     /**
+     * Ensure we can draw files without extensions.
+     */
+    public function testDraw1()
+    {
+        $this->shouldWrite("\e[m           __\e[0m");
+        $this->shouldWrite("\e[m    ____  / /_  ____\e[0m");
+        $this->shouldWrite("\e[m   / __ \\/ __ \\/ __ \\\e[0m");
+        $this->shouldWrite("\e[m  / /_/ / / / / /_/ /\e[0m");
+        $this->shouldWrite("\e[m / .___/_/ /_/ .___/\e[0m");
+        $this->shouldWrite("\e[m/_/         /_/\e[0m");
+        $this->shouldHavePersisted();
+
+        $this->cli->draw("php");
+    }
+
+
+    /**
      * Ensure we don't draw an image unless the filename matches exactly.
      * https://github.com/thephpleague/climate/issues/155
      */
