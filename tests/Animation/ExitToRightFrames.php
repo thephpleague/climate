@@ -1,6 +1,6 @@
 <?php
 
-namespace League\CLImate\Tests;
+namespace League\CLImate\Tests\Animation;
 
 trait ExitToRightFrames
 {

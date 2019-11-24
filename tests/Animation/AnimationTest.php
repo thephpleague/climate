@@ -1,7 +1,8 @@
 <?php
 
-namespace League\CLImate\Tests;
+namespace League\CLImate\Tests\Animation;
 
+use League\CLImate\Tests\TestBase;
 use Mockery;
 
 class AnimationTest extends TestBase
@@ -11,7 +12,7 @@ class AnimationTest extends TestBase
 
     private function addArt(): void
     {
-        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . 'art');
+        $this->cli->addArt(__DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'art');
     }
 
 
