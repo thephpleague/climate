@@ -15,6 +15,19 @@ class DrawTest extends TestBase
         $this->shouldHavePersisted();
     }
 
+
+    private function draw404(): void
+    {
+        $this->shouldWrite("\e[m  _  _    ___  _  _\e[0m");
+        $this->shouldWrite("\e[m | || |  / _ \| || |\e[0m");
+        $this->shouldWrite("\e[m | || |_| | | | || |_\e[0m");
+        $this->shouldWrite("\e[m |__   _| | | |__   _|\e[0m");
+        $this->shouldWrite("\e[m    | | | |_| |  | |\e[0m");
+        $this->shouldWrite("\e[m    |_|  \___/   |_|\e[0m");
+        $this->shouldHavePersisted();
+    }
+
+
     /** @test */
     public function it_can_draw_something()
     {
@@ -43,14 +56,7 @@ class DrawTest extends TestBase
     /** @test */
     public function it_404s_when_it_gets_invalid_art()
     {
-        $this->shouldWrite("\e[m  _  _    ___  _  _\e[0m");
-        $this->shouldWrite("\e[m | || |  / _ \| || |\e[0m");
-        $this->shouldWrite("\e[m | || |_| | | | || |_\e[0m");
-        $this->shouldWrite("\e[m |__   _| | | |__   _|\e[0m");
-        $this->shouldWrite("\e[m    | | | |_| |  | |\e[0m");
-        $this->shouldWrite("\e[m    |_|  \___/   |_|\e[0m");
-        $this->shouldHavePersisted();
-
+        $this->draw404();
         $this->cli->draw('something-that-doesnt-exist');
     }
 
@@ -92,4 +98,14 @@ class DrawTest extends TestBase
         $this->cli->draw("art");
     }
 
+
+    /**
+     * Ensure we don't draw an image unless the filename matches exactly.
+     * https://github.com/thephpleague/climate/issues/155
+     */
+    public function testDraw2()
+    {
+        $this->draw404();
+        $this->cli->draw("the-leag");
+    }
 }
