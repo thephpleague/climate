@@ -173,7 +173,7 @@ class Checkbox
      */
     protected function getPaddingString($line)
     {
-        $length = $this->util->system->width() - $this->lengthWithoutTags($line);
+        $length = $this->util->width() - $this->lengthWithoutTags($line);
 
         return str_repeat(' ', $length);
     }

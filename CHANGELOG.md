@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.5.2 - 2019-12-01
+
+### Fixed
+
+* [Checkbox] Ensure we can output when the terminal width is unknown. [#156](https://github.com/thephpleague/climate/pull/156)
+
+--------
+
 ## 3.5.1 - 2019-11-24
 
 ### Fixed

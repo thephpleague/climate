@@ -2,6 +2,12 @@
 
 namespace League\CLImate\Tests;
 
+use League\CLImate\Util\System\Linux;
+use League\CLImate\Util\UtilFactory;
+use Mockery;
+
+use function str_repeat;
+
 class CheckboxesTest extends TestBase
 {
     protected function shouldHideCursor()
@@ -148,5 +154,23 @@ class CheckboxesTest extends TestBase
         $response = $input->prompt();
 
         $this->assertSame([], $response);
+    }
+
+
+    /**
+     * Ensure we can output checkboxes when the terminal width is unknown
+     */
+    public function test1(): void
+    {
+        $system = Mockery::mock(Linux::class);
+        $system->shouldReceive("hasAnsiSupport")->andReturn(true);
+
+        # When the width is unknown then a default of 80 should be used
+        $system->shouldReceive("width")->andReturn(null);
+
+        $this->util = new UtilFactory($system);
+        $this->cli->setUtil($this->util);
+
+        $this->it_can_select_a_checkbox();
     }
 }
