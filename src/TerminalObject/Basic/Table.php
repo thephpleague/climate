@@ -104,7 +104,7 @@ class Table extends BasicTerminalObject
 
     /**
      * Split each row in $data into an array of arrays
-     * Where each value represents a line in the column
+     * Where each value represents a line in a cell
      *
      * @param array $data
      *
