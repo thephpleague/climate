@@ -93,7 +93,7 @@ class Table extends BasicTerminalObject
     }
 
     /**
-     * @param array $input
+     * @param string $string
      *
      * @return array
      */
@@ -103,7 +103,10 @@ class Table extends BasicTerminalObject
     }
 
     /**
-     * @param array $input
+     * Split each row in $data into an array of arrays
+     * Where each value represents a line in the column
+     *
+     * @param array $data
      *
      * @return array
      */
