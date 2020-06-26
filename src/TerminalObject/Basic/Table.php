@@ -14,7 +14,7 @@ class Table extends BasicTerminalObject
 
     /**
      * The data for the table, an array of (arrays|objects)
-     * Where each row is an array of arrays, with one value per line in the column.
+     * Where each row is an array of arrays, with one value per line in a cell
      *
      * @var array $data
      */
