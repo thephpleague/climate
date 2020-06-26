@@ -180,4 +180,65 @@ class TableTest extends TestBase
             "whoops",
         ]);
     }
+
+    public function testTableWithNewline()
+    {
+        $this->shouldWrite("\e[m-----------------------------------\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m|        | 2    |        |        |\e[0m");
+        $this->shouldWrite("\e[m-----------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+                [
+                    'Cell 1',
+                    "Cell\n2",
+                    'Cell 3',
+                    'Cell 4',
+                ],
+        ]);
+    }
+
+    public function testTableWithNewlineAndObjects()
+    {
+        $this->shouldWrite("\e[m------------------------------------\e[0m");
+        $this->shouldWrite("\e[m| cell1  | cell2 | cell3  | cell4  |\e[0m");
+        $this->shouldWrite("\e[m====================================\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell  | Cell 3 | Cell 4 |\e[0m");
+        $this->shouldWrite("\e[m|        | 2     |        |        |\e[0m");
+        $this->shouldWrite("\e[m------------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+                (object) [
+                    'cell1' => 'Cell 1',
+                    'cell2' => "Cell\n2",
+                    'cell3' => 'Cell 3',
+                    'cell4' => 'Cell 4',
+                ],
+            ]);
+    }
+
+    public function testTableWithMultipleNewlines()
+    {
+        $this->shouldWrite("\e[m---------------------------------\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 | Cell | Cell   | Cell |\e[0m");
+        $this->shouldWrite("\e[m|        | 2    | 3      | 4    |\e[0m");
+        $this->shouldWrite("\e[m|        |      | Cell 3 | Cell |\e[0m");
+        $this->shouldWrite("\e[m|        |      |        | 4    |\e[0m");
+        $this->shouldWrite("\e[m---------------------------------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+                [
+                    'Cell 1',
+                    "Cell\n2",
+                    "Cell\n3\nCell 3",
+                    "Cell\n4\nCell\n4",
+                ],
+        ]);
+    }
 }

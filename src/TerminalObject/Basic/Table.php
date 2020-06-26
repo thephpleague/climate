@@ -14,6 +14,7 @@ class Table extends BasicTerminalObject
 
     /**
      * The data for the table, an array of (arrays|objects)
+     * Where each row is an array of arrays, with one value per line in the column.
      *
      * @var array $data
      */
@@ -88,7 +89,45 @@ class Table extends BasicTerminalObject
             $output[] = $item;
         }
 
-        return $output;
+        return $this->splitRows($output);
+    }
+
+    /**
+     * @param array $input
+     *
+     * @return array
+     */
+    private function stringToLines(string $string)
+    {
+        return preg_split('/(\r\n|\r|\n)/u', $string);
+    }
+
+    /**
+     * @param array $input
+     *
+     * @return array
+     */
+    private function splitRows($data)
+    {
+        foreach ($data as $row_key => $row) {
+            $height = 1;
+            $lines = [];
+            foreach ($row as $key => $column) {
+                $lines[$key] = $this->stringToLines($column);
+                $height = max($height, count($lines[$key]));
+            }
+            $keys = array_keys($row);
+            $new_rows = [];
+            for ($i = 0; $i < $height; $i++) {
+                $new_row = [];
+                foreach ($keys as $key) {
+                    $new_row[$key] = $lines[$key][$i] ?? '';
+                }
+                $new_rows[] = $new_row;
+            }
+            $data[$row_key] = $new_rows;
+        }
+        return $data;
     }
 
 
@@ -105,8 +144,10 @@ class Table extends BasicTerminalObject
 
         $this->buildHeaderRow();
 
-        foreach ($this->data as $columns) {
-            $this->addLine($this->buildRow($columns));
+        foreach ($this->data as $row_columns) {
+            foreach ($row_columns as $columns) {
+                $this->addLine($this->buildRow($columns));
+            }
             $this->addLine($this->border);
         }
 
@@ -134,6 +175,7 @@ class Table extends BasicTerminalObject
     protected function getWidth()
     {
         $first_row = reset($this->data);
+        $first_row = reset($first_row);
         $first_row = $this->buildRow($first_row);
 
         return $this->lengthWithoutTags($first_row);
@@ -203,6 +245,7 @@ class Table extends BasicTerminalObject
     protected function getHeaderRow()
     {
         $first_item = reset($this->data);
+        $first_item = reset($first_item);
 
         $keys       = array_keys($first_item);
         $first_key  = reset($keys);
@@ -223,13 +266,16 @@ class Table extends BasicTerminalObject
     protected function getColumnWidths()
     {
         $first_row = reset($this->data);
+        $first_row = reset($first_row);
 
         // Create an array with the columns as keys and values of zero
         $column_widths = $this->getDefaultColumnWidths($first_row);
 
-        foreach ($this->data as $columns) {
-            foreach ($columns as $key => $column) {
-                $column_widths[$key] = $this->getCellWidth($column_widths[$key], $column);
+        foreach ($this->data as $row_columns) {
+            foreach ($row_columns as $columns) {
+                foreach ($columns as $key => $column) {
+                    $column_widths[$key] = $this->getCellWidth($column_widths[$key], $column);
+                }
             }
         }
 
