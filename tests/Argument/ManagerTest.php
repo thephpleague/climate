@@ -58,4 +58,16 @@ class ManagerTest extends TestCase
 
         $this->assertEquals('', $this->manager->get('foo'));
     }
+
+    public function testItStoresTrailingInArray()
+    {
+        $this->manager->add([
+            'foo' => ['prefix' => 'f']
+        ]);
+
+        $this->manager->parse(['command', '-f', '--', 'test', 'trailing with spaces']);
+
+        $this->assertEquals('test trailing with spaces', $this->manager->trailing());
+        $this->assertEquals(['test', 'trailing with spaces'], $this->manager->trailingArray());
+    }
 }

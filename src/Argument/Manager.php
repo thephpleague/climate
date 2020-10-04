@@ -248,4 +248,14 @@ class Manager
     {
         return $this->parser->trailing();
     }
+
+    /**
+     * Get the trailing arguments as an array
+     *
+     * @return array|null
+     */
+    public function trailingArray()
+    {
+        return $this->parser->trailingArray();
+    }
 }
