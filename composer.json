@@ -18,7 +18,7 @@
     ],
     "require": {
         "psr/log": "^1.0",
-        "php": "^7.1",
+        "php": "^7.2",
         "seld/cli-prompt": "^1.0"
     },
     "require-dev": {
