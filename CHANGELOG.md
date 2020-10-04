@@ -3,6 +3,23 @@ Changelog
 
 --------
 
+## 3.6.0 - 2020-10-04
+
+### Added
+
+* [Arguments] Add a method to access trailing args as array. [#158](https://github.com/thephpleague/climate/pull/158)
+
+### Fixed
+
+* [Table] Add support for newlines in table data. [#160](https://github.com/thephpleague/climate/pull/160)
+* [Checkbox] Don't try to add padding if the there's no spare space. [#161](https://github.com/thephpleague/climate/issues/161)
+
+### Changed
+
+* [Support] Dropped support for PHP 7.1.
+
+--------
+
 ## 3.5.2 - 2019-12-01
 
 ### Fixed
