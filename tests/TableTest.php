@@ -6,7 +6,10 @@ use League\CLImate\Exceptions\InvalidArgumentException;
 
 class TableTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_basic_table()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -25,7 +28,10 @@ class TableTest extends TestBase
         ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_array_of_objects_table()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -46,7 +52,10 @@ class TableTest extends TestBase
             ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_array_of_associative_arrays_table()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -67,7 +76,10 @@ class TableTest extends TestBase
             ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_persist_a_style_on_the_table()
     {
         $this->shouldWrite("\e[31m-------------------------------------\e[0m");
@@ -88,7 +100,10 @@ class TableTest extends TestBase
             ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_handle_tags_within_the_data()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -109,7 +124,10 @@ class TableTest extends TestBase
             ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_handle_multi_byte_characters()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -130,7 +148,10 @@ class TableTest extends TestBase
             ]);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_handle_the_same_value_more_than_once()
     {
         $this->shouldWrite("\e[m-------------------------------------\e[0m");
@@ -151,7 +172,9 @@ class TableTest extends TestBase
             ]);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithPrefix1()
     {
         $this->shouldWrite("\e[m\t-----------\e[0m");

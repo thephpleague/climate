@@ -82,7 +82,8 @@ class ArgumentTest extends TestBase
     }
 
     /**
-     * @test
+     * @deprecated -- assertInternalType()
+     * @link https://github.com/sebastianbergmann/phpunit/issues/3369
      * @dataProvider provide_cast_types_and_values
      * @param string $castTo
      * @param string $value
@@ -107,7 +108,10 @@ class ArgumentTest extends TestBase
         $this->assertEquals('bool', $argument->castTo());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_builds_arguments_from_a_single_array()
     {
         // Test Description

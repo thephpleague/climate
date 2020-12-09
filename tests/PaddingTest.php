@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class PaddingTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_wrap_a_line()
     {
         $max_width = $this->util->width();
@@ -21,7 +24,10 @@ class PaddingTest extends TestBase
         $padding->label($content)->result('result');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_chain()
     {
         $padding = $this->cli->padding(10);
@@ -33,7 +39,10 @@ class PaddingTest extends TestBase
         $padding->label('Pad me')->result('extra');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_pad_with_multiple_characters()
     {
         $padding = $this->cli->padding(10)->char('.-');
@@ -45,7 +54,10 @@ class PaddingTest extends TestBase
         $padding->label('Pad me')->result('extra');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_pad_with_multiple_characters_odd()
     {
         $padding = $this->cli->padding(10)->char('.-');
@@ -58,7 +70,10 @@ class PaddingTest extends TestBase
     }
 
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_pad_with_multibyte_characters()
     {
         $padding = $this->cli->padding(10);
@@ -70,8 +85,10 @@ class PaddingTest extends TestBase
         $padding->label("Лорем")->result("END");
     }
 
-
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_wrap_a_multibyte_line()
     {
         $max_width = $this->util->width();

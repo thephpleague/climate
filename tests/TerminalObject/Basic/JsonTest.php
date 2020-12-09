@@ -8,7 +8,10 @@ use function str_replace;
 
 class JsonTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_object_as_json()
     {
         $json = json_encode((object) [
@@ -33,7 +36,9 @@ class JsonTest extends TestBase
      * We do this test specifically because json escapes the tags,
      * we want to make sure we"re taking care of that
      *
-     * @test */
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_json_with_tags()
     {
         $json = json_encode((object) [
@@ -56,6 +61,9 @@ class JsonTest extends TestBase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function test_we_dont_escape_slashes()
     {
         $this->shouldWrite("\e[m{\n    \"package\": \"league/climate\"\n}\e[0m");

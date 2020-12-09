@@ -13,7 +13,9 @@ class SpinnerTest extends TestBase
         usleep(1000000);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testBasic()
     {
         $this->shouldWrite("\e[m[-=---]\e[0m");
@@ -31,7 +33,9 @@ class SpinnerTest extends TestBase
         $spinner->advance();
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testQuick()
     {
         $this->shouldWrite("\e[m[-=---]\e[0m");
@@ -42,7 +46,9 @@ class SpinnerTest extends TestBase
         $spinner->advance();
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testWithLabels()
     {
         $this->shouldWrite("\e[m[-=---] one\e[0m");
@@ -60,7 +66,9 @@ class SpinnerTest extends TestBase
         $spinner->advance("three");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testWithOptionalLabels()
     {
         $this->shouldWrite("\e[m[-=---] one\e[0m");

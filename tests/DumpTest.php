@@ -6,7 +6,10 @@ require_once 'VarDumpMock.php';
 
 class DumpTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_dump_a_variable()
     {
         $this->shouldWrite("\e[mDUMPED: This thing\e[0m");

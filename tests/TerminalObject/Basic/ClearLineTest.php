@@ -7,7 +7,9 @@ use League\CLImate\Tests\TestBase;
 class ClearLineTest extends TestBase
 {
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testClearOneLine()
     {
         $this->output->shouldReceive("sameLine")->andReturn(true);
@@ -16,7 +18,9 @@ class ClearLineTest extends TestBase
         $this->cli->clearLine();
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testClearTwoLines()
     {
         $this->output->shouldReceive("sameLine")->andReturn(true);

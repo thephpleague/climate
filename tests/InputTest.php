@@ -187,7 +187,10 @@ class InputTest extends TestBase
         $this->assertSame('Not much.', $response);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_accept_multiple_lines()
     {
         $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\x04");
@@ -198,7 +201,10 @@ class InputTest extends TestBase
         $response = $input->prompt();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_read_after_eof()
     {
         $this->shouldReadMultipleLinesAndReturn("Multiple\nLines\x04");

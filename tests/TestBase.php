@@ -24,7 +24,7 @@ class TestBase extends TestCase
 
     protected $record_it = false;
 
-    public function setUp()
+    public function setUp(): void
     {
         self::$functions = Mockery::mock();
 
@@ -45,7 +45,7 @@ class TestBase extends TestCase
         }
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -119,7 +119,10 @@ class TestBase extends TestCase
         $this->output->shouldReceive('persist')->with(false)->times($times)->andReturn($this->output);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_does_nothing()
     {
         // nada

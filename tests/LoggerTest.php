@@ -25,7 +25,7 @@ class LoggerTest extends TestCase
     private $cli;
 
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->cli = Mockery::mock(CLImate::class);
 
@@ -37,7 +37,7 @@ class LoggerTest extends TestCase
     }
 
 
-    public function tearDown()
+    public function tearDown(): void
     {
         Mockery::close();
     }
@@ -62,91 +62,117 @@ class LoggerTest extends TestCase
         new Logger(15);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmergency()
     {
         $this->cli->shouldReceive("emergency")->once()->with("Testing emergency");
         $this->logger->emergency("Testing emergency");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testAlert()
     {
         $this->cli->shouldReceive("alert")->once()->with("Testing alert");
         $this->logger->alert("Testing alert");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testCritical()
     {
         $this->cli->shouldReceive("critical")->once()->with("Testing critical");
         $this->logger->critical("Testing critical");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testError()
     {
         $this->cli->shouldReceive("error")->once()->with("Testing error");
         $this->logger->error("Testing error");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testWarning()
     {
         $this->cli->shouldReceive("warning")->once()->with("Testing warning");
         $this->logger->warning("Testing warning");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testNotice()
     {
         $this->cli->shouldReceive("notice")->once()->with("Testing notice");
         $this->logger->notice("Testing notice");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testInfo()
     {
         $this->cli->shouldReceive("info")->once()->with("Testing info");
         $this->logger->info("Testing info");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testDebug()
     {
         $this->cli->shouldReceive("debug")->once()->with("Testing debug");
         $this->logger->debug("Testing debug");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLog()
     {
         $this->cli->shouldReceive("critical")->once()->with("Testing log");
         $this->logger->log(LogLevel::CRITICAL, "Testing log");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLevelEmergency()
     {
         $this->cli->shouldReceive(LogLevel::EMERGENCY)->once()->with("Testing log");
         $this->logger->withLogLevel(LogLevel::EMERGENCY)->emergency("Testing log");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLevelAlert()
     {
         $this->cli->shouldReceive("alert")->never();
         $this->logger->withLogLevel(LogLevel::EMERGENCY)->alert("Testing log");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLevelNotice()
     {
         $this->cli->shouldReceive(LogLevel::NOTICE)->once()->with("Notice");
         $this->logger->withLogLevel(LogLevel::NOTICE)->notice("Notice");
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testLevelDebug()
     {
         $this->cli->shouldReceive(LogLevel::DEBUG)->once()->with("Debug");
@@ -167,7 +193,9 @@ class LoggerTest extends TestCase
         $this->logger->withLogLevel(0);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testContext()
     {
         $this->cli->shouldReceive("info")->once()->with("With context");
@@ -182,14 +210,18 @@ class LoggerTest extends TestCase
         ]);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEmptyContext()
     {
         $this->cli->shouldReceive("info")->once()->with("No context");
         $this->logger->info("No context", []);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testPlaceholders()
     {
         $this->cli->shouldReceive("info")->once()->with("I am Spartacus!");
@@ -198,7 +230,9 @@ class LoggerTest extends TestCase
         ]);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testPlaceholdersAndContext()
     {
         $this->cli->shouldReceive("info")->once()->with("I am Spartacus!");
@@ -214,7 +248,9 @@ class LoggerTest extends TestCase
         ]);
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testRecursiveContext()
     {
         $this->cli->shouldReceive("info")->once()->with("INFO");

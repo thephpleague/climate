@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class BorderTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_basic_border()
     {
         $this->shouldWrite("\e[m" . str_repeat('-', $this->util->width() ?: 100) . "\e[0m");
@@ -12,7 +15,10 @@ class BorderTest extends TestBase
         $this->cli->border();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_border_with_a_different_character()
     {
         $this->shouldWrite("\e[m" . str_repeat('@', $this->util->width() ?: 100) . "\e[0m");
@@ -20,7 +26,10 @@ class BorderTest extends TestBase
         $this->cli->border('@');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_border_with_a_different_length()
     {
         $this->shouldWrite("\e[m" . str_repeat('-', 60) . "\e[0m");
@@ -28,7 +37,10 @@ class BorderTest extends TestBase
         $this->cli->border('-', 60);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_border_with_an_odd_length_character_and_still_be_the_correct_length()
     {
         $this->shouldWrite("\e[m-*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*\e[0m");

@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class InlineTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_inline()
     {
         $should_be = [
