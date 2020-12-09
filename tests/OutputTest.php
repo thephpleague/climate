@@ -9,7 +9,10 @@ use function get_class;
 
 class OutputTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_content()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -22,7 +25,10 @@ class OutputTest extends TestBase
         $output->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_content_without_a_new_line()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -35,7 +41,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_default_to_a_writer()
     {
         $error = Mockery::mock('League\CLImate\Util\Writer\StdErr');
@@ -49,7 +58,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_default_to_multiple_writers()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -67,7 +79,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_add_a_default()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -86,7 +101,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_handle_multiple_writers_for_one_key()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -103,7 +121,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Oh, hey there.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_take_existing_writer_keys_and_resolve_them()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -182,7 +203,10 @@ class OutputTest extends TestBase
         $output->add('out', ['nothin']);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_write_to_a_non_default_writer_once()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');
@@ -202,7 +226,10 @@ class OutputTest extends TestBase
         $output->sameLine()->write('Second time.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_persist_writer_if_told_to()
     {
         $out = Mockery::mock('League\CLImate\Util\Writer\StdOut');

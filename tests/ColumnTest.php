@@ -48,7 +48,10 @@ class ColumnTest extends TestBase
         ];
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_columns()
     {
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
@@ -59,7 +62,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getStandardColumns());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_single_item_in_one_column()
     {
         $this->shouldWrite("\e[mthis\e[0m");
@@ -68,7 +74,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getSingleColumn(), 1);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_less_items_than_columns()
     {
         $this->shouldWrite("\e[mthis\e[0m");
@@ -77,7 +86,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getSingleColumn(), 2);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_specific_number_of_columns()
     {
         $this->shouldWrite("\e[mthis      too\e[0m");
@@ -101,7 +113,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getStandardColumns(), 1);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_handle_multibyte_strings()
     {
         $this->shouldWrite("\e[mthis      thing     and\e[0m");
@@ -115,7 +130,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($columns);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_associative_array_as_columns()
     {
         $this->shouldWrite("\e[mone       first one\e[0m");
@@ -128,7 +146,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getAssociativeColumns());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_array_of_arrays_as_columns()
     {
         $this->shouldWrite("\e[mone       first one      first third column\e[0m");
@@ -141,7 +162,10 @@ class ColumnTest extends TestBase
         $this->cli->columns($this->getArrayOfArrayColumns());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_an_uneven_array_of_arrays_as_columns()
     {
         $this->shouldWrite("\e[mone       first one      first third column\e[0m");

@@ -28,16 +28,6 @@ class ArgumentTest extends TestBase
         $this->cli->arguments->add(new \stdClass);
     }
 
-    public function provide_cast_types_and_values()
-    {
-        return [
-            'to string'  => ['string', 'a string',],
-            'to int'     => ['int', '1234',],
-            'to float'   => ['float', '12.34',],
-            'to boolean' => ['bool', '1'],
-        ];
-    }
-
     protected function getFullArguments()
     {
         return [
@@ -81,21 +71,50 @@ class ArgumentTest extends TestBase
         ];
     }
 
-    /**
-     * @test
-     * @dataProvider provide_cast_types_and_values
-     * @param string $castTo
-     * @param string $value
-     */
-    public function it_can_cast_different_value_data_types($castTo, $value)
+
+    public function testCanCastToString(): void
     {
         $argument = Argument::createFromArray('test', [
-            'castTo' => $castTo,
+            'castTo' => 'string',
         ]);
 
-        $argument->setValue($value);
-        $this->assertInternalType($castTo, $argument->value());
+        $argument->setValue('a string');
+        self::assertSame('a string', $argument->value());
     }
+
+
+    public function testCanCastToInteger(): void
+    {
+        $argument = Argument::createFromArray('test', [
+            'castTo' => 'int',
+        ]);
+
+        $argument->setValue('1234');
+        self::assertSame(1234, $argument->value());
+    }
+
+
+    public function testCanCastToFloat(): void
+    {
+        $argument = Argument::createFromArray('test', [
+            'castTo' => 'float',
+        ]);
+
+        $argument->setValue('12.34');
+        self::assertSame(12.34, $argument->value());
+    }
+
+
+    public function testCanCastToBool(): void
+    {
+        $argument = Argument::createFromArray('test', [
+            'castTo' => 'bool',
+        ]);
+
+        $argument->setValue('1');
+        self::assertSame(true, $argument->value());
+    }
+
 
     /** @test */
     public function it_casts_to_bool_when_defined_only()

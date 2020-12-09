@@ -93,7 +93,10 @@ class AnimationTest extends TestBase
         $this->runAsc('exitRightFrameEnd', 9);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_exit_to_top()
     {
         $this->fullArtExitTop();
@@ -106,7 +109,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(11))->exitTo('top');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_enter_from_top()
     {
         $this->emptyFrame();
@@ -118,7 +124,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(11))->enterFrom('top');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_exit_to_bottom()
     {
         $this->fullArtExitBottom();
@@ -131,7 +140,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(11))->exitTo('bottom');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_enter_from_bottom()
     {
         $this->emptyFrame();
@@ -143,7 +155,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(11))->enterFrom('bottom');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_exit_to_left()
     {
         $this->fullArtExitLeft();
@@ -155,7 +170,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(14))->exitTo('left');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_enter_from_left()
     {
         $this->assertEnteredFromLeft();
@@ -165,7 +183,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(14))->enterFrom('left');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_exit_to_right()
     {
         $this->fullArtExitRight();
@@ -177,7 +198,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(85))->exitTo('right');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_enter_from_right()
     {
         $this->enterRightFrame1();
@@ -188,7 +212,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(85))->enterFrom('right');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_scroll_to_the_right_by_default()
     {
         $this->assertScrolledRight();
@@ -197,7 +224,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(91))->scroll();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_scroll_to_the_right()
     {
         $this->assertScrolledRight();
@@ -206,7 +236,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(91))->scroll('right');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_scroll_to_the_left()
     {
         $this->emptyFrame();
@@ -219,7 +252,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('4', $this->getSleeper(91))->scroll('left');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_scroll_up()
     {
         $this->emptyFrame();
@@ -233,7 +269,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(13))->scroll('up');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_scroll_down()
     {
         $this->emptyFrame();
@@ -247,7 +286,10 @@ class AnimationTest extends TestBase
         $this->cli->animation('404', $this->getSleeper(13))->scroll('down');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_run_a_directory_animation()
     {
         $this->runAsc('runFrames', 5);
@@ -257,7 +299,10 @@ class AnimationTest extends TestBase
     }
 
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_404s_when_it_gets_invalid_art()
     {
         $this->emptyFrame();

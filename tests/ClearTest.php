@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class ClearTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_clear_the_terminal()
     {
         $this->output->shouldReceive("sameLine")->andReturn(true);

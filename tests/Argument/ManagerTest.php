@@ -10,7 +10,7 @@ class ManagerTest extends TestCase
 {
     private $manager;
 
-    public function setUp()
+    public function setUp(): void
     {
         $this->manager = new Manager;
     }
@@ -57,5 +57,17 @@ class ManagerTest extends TestCase
         $this->manager->parse(['command', '-f', '-b', 'abc']);
 
         $this->assertEquals('', $this->manager->get('foo'));
+    }
+
+    public function testItStoresTrailingInArray()
+    {
+        $this->manager->add([
+            'foo' => ['prefix' => 'f']
+        ]);
+
+        $this->manager->parse(['command', '-f', '--', 'test', 'trailing with spaces']);
+
+        $this->assertEquals('test trailing with spaces', $this->manager->trailing());
+        $this->assertEquals(['test', 'trailing with spaces'], $this->manager->trailingArray());
     }
 }

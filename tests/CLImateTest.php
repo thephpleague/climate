@@ -9,7 +9,10 @@ use League\CLImate\Tests\CustomObject\BasicObjectArgument;
 
 class CLImateTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_echo_out_a_string()
     {
         $this->shouldWrite("\e[mThis would go out to the console.\e[0m");
@@ -17,7 +20,10 @@ class CLImateTest extends TestBase
         $this->cli->out('This would go out to the console.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_chain_the_out_method()
     {
         $this->shouldWrite("\e[mThis is a line.\e[0m");
@@ -26,7 +32,10 @@ class CLImateTest extends TestBase
         $this->cli->out('This is a line.')->out('This is another line.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_write_content_to_a_different_output()
     {
         $this->shouldWrite("\e[mThis is to the buffer.\e[0m");
@@ -39,7 +48,10 @@ class CLImateTest extends TestBase
         $this->cli->to('buffer')->out('This is to the buffer.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_be_extended_using_a_basic_object_as_string()
     {
         $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
@@ -49,7 +61,10 @@ class CLImateTest extends TestBase
         $this->cli->basic('This is something my custom object is handling.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_be_extended_using_a_basic_object()
     {
         $this->shouldWrite("\e[mThis just outputs this.\e[0m");
@@ -59,7 +74,10 @@ class CLImateTest extends TestBase
         $this->cli->basicObject();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_be_extended_using_a_basic_object_with_argument_setter()
     {
         $this->shouldWrite("\e[mHey: This is the thing that will print to the console.\e[0m");
@@ -96,7 +114,10 @@ class CLImateTest extends TestBase
         $this->cli->extend($class);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_accept_a_custom_key_for_an_extension()
     {
         $this->shouldWrite("\e[mBy Custom Object: This is something my custom object is handling.\e[0m");
