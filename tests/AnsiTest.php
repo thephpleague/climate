@@ -63,9 +63,7 @@ class AnsiTest extends TestBase
         $router->execute($obj);
     }
 
-    /**
-     * @test
-     */
+    /** @test */
     public function it_will_recognize_non_ansi_systems()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows');
