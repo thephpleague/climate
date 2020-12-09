@@ -81,23 +81,6 @@ class ArgumentTest extends TestBase
         ];
     }
 
-    /**
-     * @deprecated -- assertInternalType()
-     * @link https://github.com/sebastianbergmann/phpunit/issues/3369
-     * @dataProvider provide_cast_types_and_values
-     * @param string $castTo
-     * @param string $value
-     */
-    public function it_can_cast_different_value_data_types($castTo, $value)
-    {
-        $argument = Argument::createFromArray('test', [
-            'castTo' => $castTo,
-        ]);
-
-        $argument->setValue($value);
-        $this->assertInternalType($castTo, $argument->value());
-    }
-
     /** @test */
     public function it_casts_to_bool_when_defined_only()
     {

@@ -106,7 +106,7 @@ class AnimationTest extends TestBase
 
         $this->exitTopFrame6();
 
-        $x = $this->cli->animation('404', $this->getSleeper(11))->exitTo('top');
+        $this->cli->animation('404', $this->getSleeper(11))->exitTo('top');
     }
 
     /**
