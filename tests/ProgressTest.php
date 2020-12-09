@@ -32,7 +32,10 @@ class ProgressTest extends TestBase
         return $bar;
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar()
     {
         $this->shouldWrite('');
@@ -55,7 +58,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_via_constructor()
     {
         $this->shouldWrite('');
@@ -78,7 +84,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_with_current_labels()
     {
         $this->shouldWrite('');
@@ -115,7 +124,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_with_current_optional_labels()
     {
         $this->shouldWrite('');
@@ -138,7 +150,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_styled_progress_bar()
     {
         $this->shouldWrite('');
@@ -161,7 +176,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_styled_progress_bar_and_resets_the_style()
     {
         $this->shouldWrite('');
@@ -213,7 +231,10 @@ class ProgressTest extends TestBase
         $progress->current(2);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_using_increments()
     {
         $this->shouldWrite('');
@@ -232,7 +253,10 @@ class ProgressTest extends TestBase
     }
 
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_using_increments_with_label()
     {
         $this->shouldWrite('');
@@ -246,7 +270,10 @@ class ProgressTest extends TestBase
         $progress->advance(8, 'final');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_force_a_redraw_if_specified()
     {
         $this->shouldWrite('');
@@ -268,7 +295,10 @@ class ProgressTest extends TestBase
         }
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_not_force_a_redraw_if_disabled()
     {
         $this->shouldWrite('');
@@ -289,7 +319,9 @@ class ProgressTest extends TestBase
         }
     }
 
-
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEach1()
     {
         $this->shouldWrite('');
@@ -326,6 +358,10 @@ class ProgressTest extends TestBase
 
         $this->assertSame(["key2" => "two", "key1" => "one"], $items);
     }
+
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testEach4()
     {
         $this->shouldWrite('');

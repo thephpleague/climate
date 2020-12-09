@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class BrTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_line_break()
     {
         $this->shouldWrite("\e[m\e[0m");
@@ -13,7 +16,10 @@ class BrTest extends TestBase
         $this->cli->br();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_is_chainable()
     {
         $this->shouldWrite("\e[m\e[0m");
@@ -23,7 +29,10 @@ class BrTest extends TestBase
         $this->cli->br()->out('This is a line further down.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_accept_the_number_of_breaks_as_an_argument()
     {
         $this->shouldWrite("\e[m\e[0m", 3);
@@ -33,7 +42,10 @@ class BrTest extends TestBase
         $this->cli->br(3)->out('This is a line further down.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_ignore_a_negative_number_of_breaks()
     {
         $this->shouldWrite("\e[m\e[0m");
@@ -43,7 +55,10 @@ class BrTest extends TestBase
         $this->cli->br(-3)->out('This is a line further down.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_ignore_a_partial_number_of_breaks()
     {
         $this->shouldWrite("\e[m\e[0m", 4);

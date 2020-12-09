@@ -4,7 +4,10 @@ namespace League\CLImate\Tests;
 
 class TabTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_tab()
     {
         $this->output->shouldReceive("sameLine");
@@ -15,7 +18,10 @@ class TabTest extends TestBase
         $this->cli->tab();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_is_chainable()
     {
         $this->output->shouldReceive("sameLine");
@@ -27,7 +33,10 @@ class TabTest extends TestBase
         $this->cli->tab()->out('This is indented.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_accept_the_number_of_tabs_as_an_argument()
     {
         $this->output->shouldReceive("sameLine");
@@ -39,7 +48,10 @@ class TabTest extends TestBase
         $this->cli->tab(3)->out('This is really indented.');
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_ignore_a_negative_number_of_tabs()
     {
         $this->output->shouldReceive("sameLine");
@@ -50,7 +62,10 @@ class TabTest extends TestBase
         $this->cli->tab(-3);
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_ignore_a_partial_number_of_tabs()
     {
         $this->output->shouldReceive("sameLine");

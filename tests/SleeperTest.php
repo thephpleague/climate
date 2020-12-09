@@ -8,7 +8,10 @@ require_once 'SleeperGlobalMock.php';
 
 class SleeperTest extends TestBase
 {
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_slow_down_the_sleeper_speed()
     {
         $sleeper = new Sleeper;
@@ -22,7 +25,10 @@ class SleeperTest extends TestBase
         $sleeper->sleep();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_speed_up_the_sleeper_speed()
     {
         $sleeper = new Sleeper;
@@ -36,7 +42,10 @@ class SleeperTest extends TestBase
         $sleeper->sleep();
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_ignore_zero_percentages()
     {
         $sleeper = new Sleeper;
