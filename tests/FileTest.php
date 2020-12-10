@@ -13,7 +13,7 @@ class FileTest extends TestBase
 {
     protected $file;
 
-    public function setUp()
+    public function setUp(): void
     {
         $root       = vfsStream::setup();
         $this->file = vfsStream::newFile('log')->at($root);
@@ -82,7 +82,10 @@ class FileTest extends TestBase
         $this->assertSame("Oh, you're still here." . \PHP_EOL, $this->file->getContent());
     }
 
-    /** @test */
+    /**
+     * @codeCoverageIgnore
+     * @doesNotPerformAssertions
+     */
     public function it_can_write_to_a_gzipped_file()
     {
         // $file = $this->getFileMock($this->file->url());

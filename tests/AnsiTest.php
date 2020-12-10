@@ -7,6 +7,7 @@ use League\CLImate\Decorator\Parser\NonAnsi;
 use League\CLImate\Decorator\Parser\ParserFactory;
 use League\CLImate\Decorator\Style;
 use League\CLImate\Decorator\Tags;
+use League\CLImate\TerminalObject;
 use League\CLImate\TerminalObject\Router\BasicRouter;
 use League\CLImate\Util\System\Linux;
 use League\CLImate\Util\System\Windows;
@@ -15,8 +16,10 @@ use Mockery;
 
 class AnsiTest extends TestBase
 {
-    /** @test */
-
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_with_ansi()
     {
         $router = new BasicRouter();
@@ -24,7 +27,6 @@ class AnsiTest extends TestBase
 
         $style  = new Style();
         $parser = new Ansi($style->current(), new Tags($style->all()));
-
         $obj = Mockery::mock('League\CLImate\TerminalObject');
         $obj->shouldReceive('result')->once()->andReturn("<green>I am green</green>");
         $obj->shouldReceive('sameLine')->once()->andReturn(false);
@@ -37,8 +39,10 @@ class AnsiTest extends TestBase
         $router->execute($obj);
     }
 
-    /** @test */
-
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_without_ansi()
     {
         $router = new BasicRouter();
@@ -60,7 +64,6 @@ class AnsiTest extends TestBase
     }
 
     /** @test */
-
     public function it_will_recognize_non_ansi_systems()
     {
         $system = Mockery::mock('League\CLImate\Util\System\Windows');
@@ -71,8 +74,10 @@ class AnsiTest extends TestBase
         $this->assertInstanceOf('League\CLImate\Decorator\Parser\NonAnsi', $parser);
     }
 
-    /** @test */
-
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_force_ansi_on_a_non_ansi_system()
     {
         $system = new Windows();
@@ -86,8 +91,10 @@ class AnsiTest extends TestBase
         $this->cli->out("<green>I am green</green>");
     }
 
-    /** @test */
-
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_will_force_ansi_off_on_an_ansi_system()
     {
         $system = new Linux();
