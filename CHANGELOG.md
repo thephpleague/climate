@@ -3,6 +3,15 @@ Changelog
 
 --------
 
+## 3.7.0 - 2021-01-10
+
+### Changed
+
+* [Support] Added support for PHP 8.0.
+* [Support] Dropped support for PHP 7.2.
+
+--------
+
 ## 3.6.0 - 2020-10-04
 
 ### Added
