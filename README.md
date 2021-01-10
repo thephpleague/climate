@@ -2,7 +2,7 @@
 
 [![Latest Version](https://img.shields.io/github/tag/thephpleague/climate.svg?style=flat&label=release)](https://github.com/thephpleague/climate/tags)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](LICENSE.md)
-[![Build Status](https://img.shields.io/travis/thephpleague/climate/master.svg?style=flat)](https://travis-ci.org/thephpleague/climate)
+[![Build Status](https://github.com/thephpleague/climate/workflows/.github/workflows/buildcheck.yml/badge.svg?branch=master)](https://github.com/thephpleague/climate/actions?query=branch%3Amaster+workflow%3Abuildcheck)
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/thephpleague/climate.svg?style=flat)](https://scrutinizer-ci.com/g/thephpleague/climate/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/thephpleague/climate.svg?style=flat)](https://scrutinizer-ci.com/g/thephpleague/climate)
 [![Total Downloads](https://img.shields.io/packagist/dt/league/climate.svg?style=flat)](https://packagist.org/packages/league/climate)

@@ -1,3 +1,5 @@
+name: buildcheck
+
 on:
   push:
   pull_request:
