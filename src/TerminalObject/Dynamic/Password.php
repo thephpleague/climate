@@ -8,6 +8,12 @@ class Password extends Input
     {
         $this->writePrompt();
 
-        return $this->reader->hidden();
+        $response = $this->valueOrDefault($this->reader->hidden());
+
+        if ($this->isValidResponse($response)) {
+            return $response;
+        }
+
+        return $this->prompt();
     }
 }
