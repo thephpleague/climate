@@ -130,6 +130,19 @@ class ArgumentTest extends TestBase
      * @test
      * @doesNotPerformAssertions
      */
+    public function it_casts_to_bool_when_defined_only_true()
+    {
+        $argument = Argument::createFromArray('invalid-cast-type', [
+            'noValue' => false,
+        ]);
+
+        $this->assertNotEquals('bool', $argument->castTo());
+    }
+
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_builds_arguments_from_a_single_array()
     {
         // Test Description

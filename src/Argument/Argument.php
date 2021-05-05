@@ -263,8 +263,11 @@ class Argument
      */
     protected function setNoValue($noValue)
     {
-        $this->setCastTo('bool');
         $this->noValue = (bool) $noValue;
+
+        if ($this->noValue === true) {
+            $this->setCastTo('bool');
+        }
     }
 
     /**
