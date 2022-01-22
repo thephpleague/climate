@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.8.0 - 2022-01-22
+
+### Fixed
+
+* [Linux] Added a workaround for executed some parts of the code in a non-cli context. [#175](https://github.com/thephpleague/climate/pull/175)
+
+--------
+
 ## 3.7.0 - 2021-01-10
 
 ### Changed
