@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.8.1 - 2022-01-23
+
+### Fixed
+
+* [Linux] Avoid type issue when checking if \STDOUT is defined. [#185](https://github.com/thephpleague/climate/issues/185)
+
+--------
+
 ## 3.8.0 - 2022-01-22
 
 ### Changed

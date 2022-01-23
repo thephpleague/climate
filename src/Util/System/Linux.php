@@ -88,7 +88,7 @@ class Linux extends System
         }
 
         # If we're running in a web context then we can't use stdout
-        if (!defined(\STDOUT)) {
+        if (!defined('STDOUT')) {
             return false;
         }
 
