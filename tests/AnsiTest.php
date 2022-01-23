@@ -119,7 +119,7 @@ class AnsiTest extends TestBase
         $util = new UtilFactory($system);
         $this->cli->setUtil($util);
 
-        $this->shouldWrite("\e[m\e[32mI am green\e[0m\e[0m");
+        $this->output->shouldReceive('write')->times(1);
         $this->shouldHavePersisted();
 
         $this->cli->out("<green>I am green</green>");
