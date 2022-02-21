@@ -108,7 +108,7 @@ class Progress extends DynamicTerminalObject
             throw new UnexpectedValueException('The current is greater than the total.');
         }
 
-        $this->drawProgressBar($current, $label ?? '');
+        $this->drawProgressBar($current, $label);
 
         $this->current = $current;
         $this->label   = $label;
@@ -213,7 +213,7 @@ class Progress extends DynamicTerminalObject
         $progress_bar .= $this->getProgressBarStr($current, $label);
 
         // If this line has a label then set that this progress bar has a label line
-        if ($label !== '') {
+        if ($label !== '' && $label !== null) {
             $this->has_label_line = true;
         }
 
