@@ -47,7 +47,7 @@ trait StringLength
     {
         $this->setIgnoreTags();
 
-        return str_replace($this->ignore_tags, '', $str);
+        return str_replace($this->ignore_tags, '', (string)$str);
     }
 
     /**

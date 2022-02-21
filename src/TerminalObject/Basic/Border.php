@@ -59,7 +59,7 @@ class Border extends BasicTerminalObject
     public function result()
     {
         $length = $this->length ?: $this->util->width() ?: 100;
-        $str    = str_repeat($this->char, $length);
+        $str    = str_repeat($this->char ?? '', $length);
         $str    = substr($str, 0, $length);
 
         return $str;

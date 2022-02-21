@@ -67,7 +67,7 @@ class Flank extends BasicTerminalObject
      */
     public function result()
     {
-        $flank = str_repeat($this->char, $this->repeat);
+        $flank = str_repeat($this->char ?? '', $this->repeat ?? 0);
 
         return "{$flank} {$this->str} {$flank}";
     }
