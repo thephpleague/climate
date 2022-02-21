@@ -274,4 +274,25 @@ class TableTest extends TestBase
                 ],
         ]);
     }
+
+
+    /**
+     * @doesNotPerformAssertions
+     */
+    public function testTableWithNullAndEmptyValues()
+    {
+        $this->shouldWrite("\e[m------------------\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 |   |   |\e[0m");
+        $this->shouldWrite("\e[m------------------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+            [
+                'Cell 1',
+                null,
+                ''
+            ],
+        ]);
+    }
 }

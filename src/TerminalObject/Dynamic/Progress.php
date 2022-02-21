@@ -4,6 +4,9 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
 
+use function is_string;
+use function strlen;
+
 class Progress extends DynamicTerminalObject
 {
     /**
@@ -234,7 +237,7 @@ class Progress extends DynamicTerminalObject
         $progress_bar .= $this->getProgressBarStr($current, $label);
 
         // If this line has a label then set that this progress bar has a label line
-        if (strlen($label) > 0) {
+        if (is_string($label) && strlen($label) > 0) {
             $this->has_label_line = true;
         }
 
