@@ -213,7 +213,7 @@ class Progress extends DynamicTerminalObject
         $progress_bar .= $this->getProgressBarStr($current, $label);
 
         // If this line has a label then set that this progress bar has a label line
-        if (strlen($label) > 0) {
+        if ($label !== '' && $label !== null) {
             $this->has_label_line = true;
         }
 

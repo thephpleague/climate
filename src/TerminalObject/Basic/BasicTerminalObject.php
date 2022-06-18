@@ -20,7 +20,7 @@ abstract class BasicTerminalObject implements BasicTerminalObjectInterface
      */
     protected function set($key, $value)
     {
-        if (strlen((string) $value)) {
+        if ($value !== '' && $value !== null) {
             $this->$key = $value;
         }
     }
