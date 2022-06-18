@@ -13,18 +13,13 @@ jobs:
       fail-fast: false
       matrix:
         php:
-          - 7.3
-          - 7.4
-          - 8.0
-          - 8.1
+          - "7.3"
+          - "7.4"
+          - "8.0"
+          - "8.1"
         composer:
           - ""
           - "--prefer-lowest"
-        exclude:
-          - php: 8.0
-            composer: "--prefer-lowest"
-          - php: 8.1
-            composer: "--prefer-lowest"
 
     steps:
       - uses: actions/checkout@v1
