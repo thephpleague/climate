@@ -3,6 +3,15 @@ Changelog
 
 --------
 
+## 3.8.2 - 2022-01-23
+
+### Fixed
+
+* Avoid passing null to strlen(). [#186](https://github.com/thephpleague/climate/issues/186)
+* [Support] Added compatibility for psr/log 2 & 3. [#191](https://github.com/thephpleague/climate/issues/191)
+
+--------
+
 ## 3.8.1 - 2022-01-23
 
 ### Fixed
