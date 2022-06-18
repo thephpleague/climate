@@ -117,7 +117,7 @@ class Logger extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         if ($this->convertLevel($level) > $this->level) {
             return;
