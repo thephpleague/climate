@@ -255,10 +255,11 @@ class CLImate
      * Output the program's usage statement
      *
      * @param array $argv
+     * @return void
      */
     public function usage(array $argv = null)
     {
-        return $this->arguments->usage($this, $argv);
+        $this->arguments->usage($this, $argv);
     }
 
     /**
