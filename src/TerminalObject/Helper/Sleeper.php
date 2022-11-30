@@ -32,6 +32,6 @@ class Sleeper implements SleeperInterface
      */
     public function sleep()
     {
-        usleep($this->speed);
+        usleep((int)$this->speed);
     }
 }
