@@ -58,4 +58,16 @@ class SleeperTest extends TestBase
 
         $sleeper->sleep();
     }
+
+
+    /**
+     * @test
+     */
+    public function it_uses_whole_integers_only()
+    {
+        $sleeper = new Sleeper();
+
+        $result = $sleeper->speed(33);
+        self::assertSame(151515, $result);
+    }
 }
