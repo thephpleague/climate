@@ -295,7 +295,8 @@ class Progress extends DynamicTerminalObject
     /**
      * Format the percentage so it looks pretty
      *
-     * @param integer $percentage
+     * @param integer $percentage The percentage (0-1) to format
+     *
      * @return float
      */
     protected function percentageFormatted($percentage)
