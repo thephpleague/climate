@@ -95,6 +95,13 @@ class Progress extends DynamicTerminalObject
         return $this;
     }
 
+    /**
+     * Set the completed percentage precision
+     *
+     * @param integer $precision The number of decimal places to display
+     *
+     * @return Progress
+     */
     public function precision($precision)
     {
         $this->precision = $precision;
