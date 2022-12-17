@@ -88,6 +88,27 @@ class ProgressTest extends TestBase
      * @test
      * @doesNotPerformAssertions
      */
+    public function it_can_output_a_progress_bar_with_precision()
+    {
+        $this->shouldWrite('');
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(0)} 0%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(10)} 33.3%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(20)} 66.67%\e[0m");
+        $this->shouldWrite("\e[m\e[1A\r\e[K{$this->repeat(30)} 100.000%\e[0m");
+
+        $size = 3;
+        $progress = $this->cli->progress($size);
+
+        for ($i = 0; $i <= $size; $i++) {
+            $progress->precision($i);
+            $progress->current($i);
+        }
+    }
+
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_can_output_a_progress_bar_with_current_labels()
     {
         $this->shouldWrite('');

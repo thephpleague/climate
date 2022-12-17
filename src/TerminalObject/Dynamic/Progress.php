@@ -28,6 +28,13 @@ class Progress extends DynamicTerminalObject
     protected $current_percentage = '';
 
     /**
+     * The number of decimal points to display
+     *
+     * @var integer $precision
+     */
+    protected $precision = 0;
+
+    /**
      * The string length of the bar when at 100%
      *
      * @var integer $bar_str_len
@@ -84,6 +91,13 @@ class Progress extends DynamicTerminalObject
     public function total($total)
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    public function precision($precision)
+    {
+        $this->precision = $precision;
 
         return $this;
     }
@@ -286,7 +300,8 @@ class Progress extends DynamicTerminalObject
      */
     protected function percentageFormatted($percentage)
     {
-        return round($percentage * 100) . '%';
+        $factor = pow(10, $this->precision);
+        return round($percentage * 100 * $factor) / $factor . '%';
     }
 
     /**
