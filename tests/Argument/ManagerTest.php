@@ -70,4 +70,36 @@ class ManagerTest extends TestCase
         $this->assertEquals('test trailing with spaces', $this->manager->trailing());
         $this->assertEquals(['test', 'trailing with spaces'], $this->manager->trailingArray());
     }
+    
+    public function testItSuggestAlternativesToUnknowArguments()
+    {
+        $this->manager->add([
+            'user' => [
+                'longPrefix' => 'user',
+            ],
+            'password' => [
+                'longPrefix' => 'password',
+            ],
+            'flag' => [
+                'longPrefix' => 'flag',
+                'noValue'    => true,
+            ],
+        ]);
+
+        $argv = [
+            'test-script',
+            '--user=baz',
+            '--pass=123',
+            '--fag',
+            '--xyz',
+        ];
+
+        $this->manager->parse($argv);
+        $processed = $this->manager->getUnknowPrefixedArgumentsAndSuggestions();
+
+        $this->assertCount(3, $processed);
+        $this->assertEquals('password', $processed['pass']);
+        $this->assertEquals('flag', $processed['fag']);
+        $this->assertEquals('', $processed['xyz']);
+    }
 }

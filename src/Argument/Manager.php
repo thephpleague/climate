@@ -258,4 +258,24 @@ class Manager
     {
         return $this->parser->trailingArray();
     }
+    
+    /**
+     * Returns the list of unknown prefixed arguments and their suggestions.
+     *
+     * @return array The list of unknown prefixed arguments and their suggestions.
+     */
+    public function getUnknowPrefixedArgumentsAndSuggestions()
+    {
+        return $this->parser->getUnknowPrefixedArgumentsAndSuggestions();
+    }
+    
+    /**
+     * Sets the minimum similarity percentage for finding suggestions.
+     *
+     * @param float $percentage The minimum similarity percentage to set.
+     */
+    public function setMinimumSimilarityPercentage(float $percentage)
+    {
+        $this->parser->setMinimumSimilarityPercentage($percentage);
+    }
 }
