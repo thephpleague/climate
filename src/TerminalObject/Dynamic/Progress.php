@@ -1,11 +1,11 @@
 <?php
-
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
 
 class Progress extends DynamicTerminalObject
 {
+
     /**
      * The total number of items involved
      *
@@ -111,7 +111,7 @@ class Progress extends DynamicTerminalObject
         $this->drawProgressBar($current, $label);
 
         $this->current = $current;
-        $this->label   = $label;
+        $this->label = $label;
     }
 
     /**
@@ -137,7 +137,6 @@ class Progress extends DynamicTerminalObject
 
         return $this;
     }
-
 
     /**
      * Update a progress bar using an iterable.
@@ -167,7 +166,6 @@ class Progress extends DynamicTerminalObject
             $this->advance(1, $label);
         }
     }
-
 
     /**
      * Draw the progress bar, if necessary
@@ -207,7 +205,7 @@ class Progress extends DynamicTerminalObject
         // Move the cursor up and clear it to the end
         $line_count = $this->has_label_line ? 2 : 1;
 
-        $progress_bar  = $this->util->cursor->up($line_count);
+        $progress_bar = $this->util->cursor->up($line_count);
         $progress_bar .= $this->util->cursor->startOfCurrentLine();
         $progress_bar .= $this->util->cursor->deleteCurrentLine();
         $progress_bar .= $this->getProgressBarStr($current, $label);
@@ -234,13 +232,13 @@ class Progress extends DynamicTerminalObject
         $percentage = $current / $this->total;
         $bar_length = round($this->getBarStrLen() * $percentage);
 
-        $bar        = $this->getBar($bar_length);
-        $number     = $this->percentageFormatted($percentage);
+        $bar = $this->getBar($bar_length);
+        $number = $this->percentageFormatted($percentage);
 
         if ($label) {
             $label = $this->labelFormatted($label);
-        // If this line doesn't have a label, but we've had one before,
-        // then ensure the label line is cleared
+            // If this line doesn't have a label, but we've had one before,
+            // then ensure the label line is cleared
         } elseif ($this->has_label_line) {
             $label = $this->labelFormatted('');
         }
@@ -257,7 +255,7 @@ class Progress extends DynamicTerminalObject
      */
     protected function getBar($length)
     {
-        $bar     = str_repeat('=', $length);
+        $bar = str_repeat('=', $length);
         $padding = str_repeat(' ', $this->getBarStrLen() - $length);
 
         return "{$bar}>{$padding}";
@@ -311,5 +309,25 @@ class Progress extends DynamicTerminalObject
     protected function shouldRedraw($percentage, $label)
     {
         return ($this->force_redraw || $percentage != $this->current_percentage || $label != $this->label);
+    }
+
+    /**
+     * Gets the current progress value.
+     * 
+     * @return int The current progress value.
+     */
+    public function getCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Gets de total value for the progress.
+     * 
+     * @return int The total progress value.
+     */
+    public function getTotal()
+    {
+        return $this->total;
     }
 }
