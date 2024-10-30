@@ -402,4 +402,14 @@ class ProgressTest extends TestBase
             return $item;
         });
     }
+
+    public function testGetCurrent()
+    {
+        $this->assertEquals(0, $this->cli->progress(100)->getCurrent());
+    }
+
+    public function testGetTotal()
+    {
+        $this->assertEquals(100, $this->cli->progress(100)->getTotal());
+    }
 }
