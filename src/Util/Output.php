@@ -47,9 +47,9 @@ class Output
 
     public function __construct()
     {
-        $this->add('out', new Writer\StdOut);
-        $this->add('error', new Writer\StdErr);
-        $this->add('buffer', new Writer\Buffer);
+        $this->add('out', new Writer\StdOut());
+        $this->add('error', new Writer\StdErr());
+        $this->add('buffer', new Writer\Buffer());
 
         $this->defaultTo('out');
     }

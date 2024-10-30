@@ -3,6 +3,7 @@
 namespace League\CLImate\Argument;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
+
 use function is_array;
 
 class Argument

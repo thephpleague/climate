@@ -3,6 +3,7 @@
 namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
+
 use function array_merge;
 use function count;
 use function microtime;

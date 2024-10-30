@@ -102,15 +102,15 @@ class Checkboxes extends InputAbstract
             case "\n":
                 $this->output->sameLine()->write($this->util->cursor->defaultStyle());
                 $this->output->sameLine()->write("\e[0m");
-            return true; // Break the while loop as well
+                return true; // Break the while loop as well
 
             case "\e":
                 $this->handleAnsi();
-            break;
+                break;
 
             case ' ':
                 $this->checkboxes->toggleCurrent();
-            break;
+                break;
         }
 
         return false;
@@ -136,12 +136,12 @@ class Checkboxes extends InputAbstract
             // Up arrow
             case '[A':
                 $this->checkboxes->setCurrent('previous');
-            break;
+                break;
 
             // Down arrow
             case '[B':
                 $this->checkboxes->setCurrent('next');
-            break;
+                break;
         }
     }
 

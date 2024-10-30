@@ -70,7 +70,7 @@ class CLImateTest extends TestBase
         $this->shouldWrite("\e[mThis just outputs this.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->extend(new BasicObject);
+        $this->cli->extend(new BasicObject());
         $this->cli->basicObject();
     }
 
@@ -83,7 +83,7 @@ class CLImateTest extends TestBase
         $this->shouldWrite("\e[mHey: This is the thing that will print to the console.\e[0m");
         $this->shouldHavePersisted();
 
-        $this->cli->extend(new BasicObjectArgument);
+        $this->cli->extend(new BasicObjectArgument());
         $this->cli->basicObjectArgument('This is the thing that will print to the console.');
     }
 

@@ -3,11 +3,11 @@
 namespace League\CLImate\Tests\TerminalObject\Dynamic;
 
 use League\CLImate\Tests\TestBase;
+
 use function usleep;
 
 class SpinnerTest extends TestBase
 {
-
     private function wait()
     {
         usleep(1000000);

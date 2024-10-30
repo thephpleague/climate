@@ -6,7 +6,6 @@ use League\CLImate\Tests\TestBase;
 
 class ClearLineTest extends TestBase
 {
-
     /**
      * @doesNotPerformAssertions
      */

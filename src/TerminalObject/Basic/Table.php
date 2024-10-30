@@ -197,7 +197,7 @@ class Table extends BasicTerminalObject
         $header_row = $this->getHeaderRow();
         if ($header_row) {
             $this->addLine($this->buildRow($header_row));
-            $this->addLine((new Border)->char('=')->length($this->table_width)->result());
+            $this->addLine((new Border())->char('=')->length($this->table_width)->result());
         }
     }
 

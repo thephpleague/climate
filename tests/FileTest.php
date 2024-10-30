@@ -35,7 +35,7 @@ class FileTest extends TestBase
                         ->with($this->file->url(), 'a')
                         ->andReturn(fopen($this->file->url(), 'a'));
 
-        $output = new Output;
+        $output = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -49,7 +49,7 @@ class FileTest extends TestBase
     {
         $resource = fopen($this->file->url(), 'a');
         $file     = $this->getFileMock($resource);
-        $output   = new Output;
+        $output   = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -74,7 +74,7 @@ class FileTest extends TestBase
 
         $file->lock();
 
-        $output = new Output;
+        $output = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -120,7 +120,7 @@ class FileTest extends TestBase
         $this->expectExceptionMessage("is not writable");
 
         $file   = $this->getFileMock($this->file->url());
-        $output = new Output;
+        $output = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -134,7 +134,7 @@ class FileTest extends TestBase
         $this->expectExceptionMessage("The resource [something-that-doesnt-exist] is not writable");
 
         $file   = $this->getFileMock('something-that-doesnt-exist');
-        $output = new Output;
+        $output = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 
@@ -154,7 +154,7 @@ class FileTest extends TestBase
                         ->with($this->file->url(), 'a')
                         ->andReturn(false);
 
-        $output = new Output;
+        $output = new Output();
         $output->add('file', $file);
         $output->defaultTo('file');
 

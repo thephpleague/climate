@@ -72,7 +72,7 @@ class Windows extends System
         return (function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT))
             || false !== getenv('ANSICON')
             || 'ON' === getenv('ConEmuANSI')
-            || 'Hyper' === getenv('TERM_PROGRAM') 
+            || 'Hyper' === getenv('TERM_PROGRAM')
             || 'xterm' === getenv('TERM');
     }
 }

@@ -14,5 +14,8 @@ use League\CLImate\Util\UtilImporter;
 
 abstract class DynamicTerminalObject implements DynamicTerminalObjectInterface
 {
-    use SettingsImporter, ParserImporter, OutputImporter, UtilImporter;
+    use SettingsImporter;
+    use ParserImporter;
+    use OutputImporter;
+    use UtilImporter;
 }

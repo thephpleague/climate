@@ -12,7 +12,7 @@ class ManagerTest extends TestCase
 
     public function setUp(): void
     {
-        $this->manager = new Manager;
+        $this->manager = new Manager();
     }
 
 

@@ -10,7 +10,9 @@ use function strlen;
 
 abstract class BasicTerminalObject implements BasicTerminalObjectInterface
 {
-    use SettingsImporter, ParserImporter, UtilImporter;
+    use SettingsImporter;
+    use ParserImporter;
+    use UtilImporter;
 
     /**
      * Set the property if there is a valid value

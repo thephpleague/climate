@@ -138,7 +138,7 @@ class Animation extends DynamicTerminalObject
      */
     protected function setKeyFrames($keyframes)
     {
-        $this->keyframes = $keyframes ?: new Keyframe;
+        $this->keyframes = $keyframes ?: new Keyframe();
     }
 
     /**

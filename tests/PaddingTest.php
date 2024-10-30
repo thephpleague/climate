@@ -104,5 +104,4 @@ class PaddingTest extends TestBase
 
         $padding->label($content)->result('result');
     }
-
 }

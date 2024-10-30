@@ -25,7 +25,7 @@ class ArgumentTest extends TestBase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Please provide an argument name or object.");
 
-        $this->cli->arguments->add(new \stdClass);
+        $this->cli->arguments->add(new \stdClass());
     }
 
     protected function getFullArguments()
