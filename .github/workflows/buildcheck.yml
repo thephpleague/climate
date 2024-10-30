@@ -35,6 +35,9 @@ jobs:
       - name: PHPUnit
         run: docker exec ci vendor/bin/phpunit
 
+      - name: Coding Standards
+        run: docker exec ci vendor/bin/phpcs
+
       - name: Composer Validate
         run: docker exec ci composer validate --strict
 
