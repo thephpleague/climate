@@ -24,6 +24,7 @@
     "require-dev": {
         "mockery/mockery": "^1.6.12",
         "mikey179/vfsstream": "^1.6.12",
+        "phpstan/phpstan": "^1.12",
         "squizlabs/php_codesniffer": "^3.10",
         "phpunit/phpunit": "^9.5.10"
     },
@@ -43,6 +44,7 @@
     "scripts": {
         "test": [
             "vendor/bin/phpunit",
+            "vendor/bin/phpstan analyse --level=9 src tests",
             "vendor/bin/phpcs",
             "@composer validate --strict"
         ]

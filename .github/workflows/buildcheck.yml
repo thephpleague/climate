@@ -37,6 +37,9 @@ jobs:
       - name: PHPUnit
         run: docker exec ci vendor/bin/phpunit
 
+      - name: Static Analysis
+        run: docker exec ci vendor/bin/phpstan analyse --level=9 src tests
+
       - name: Coding Standards
         run: docker exec ci vendor/bin/phpcs
 
