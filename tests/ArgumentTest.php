@@ -126,7 +126,10 @@ class ArgumentTest extends TestBase
         $this->assertEquals('bool', $argument->castTo());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_builds_arguments_from_a_single_array()
     {
         // Test Description

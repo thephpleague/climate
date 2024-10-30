@@ -15,6 +15,7 @@ class FileTest extends TestBase
 
     public function setUp(): void
     {
+        parent::setUp();
         $root       = vfsStream::setup();
         $this->file = vfsStream::newFile('log')->at($root);
     }

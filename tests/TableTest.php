@@ -204,6 +204,9 @@ class TableTest extends TestBase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithNewline()
     {
         $this->shouldWrite("\e[m-----------------------------------\e[0m");
@@ -223,6 +226,9 @@ class TableTest extends TestBase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithNewlineAndObjects()
     {
         $this->shouldWrite("\e[m------------------------------------\e[0m");
@@ -244,6 +250,10 @@ class TableTest extends TestBase
             ]);
     }
 
+
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithMultipleNewlines()
     {
         $this->shouldWrite("\e[m---------------------------------\e[0m");
