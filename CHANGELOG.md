@@ -3,6 +3,25 @@ Changelog
 
 --------
 
+## 3.9.0 - 2024-10-30
+
+### Added
+
+* [Arguments] Adds argument suggestion support for unknown arguments. [#204](https://github.com/thephpleague/climate/pull/204)
+* [Progress] Allow the precision to be specified. [#198](https://github.com/thephpleague/climate/pull/198)
+* [Password] Allow accept() and other additional features. [#171](https://github.com/thephpleague/climate/pull/171)
+
+### Fixed
+
+* Ensure usleep() always received an integer. [#197](https://github.com/thephpleague/climate/pull/197)
+* Prevent deprecation errors from type juggling. [#190](https://github.com/thephpleague/climate/pull/190)
+
+### Changed
+
+* [Support] Added support for PHP 8.2 & 8.3.
+
+--------
+
 ## 3.8.2 - 2022-01-23
 
 ### Fixed
