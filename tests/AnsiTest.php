@@ -107,4 +107,22 @@ class AnsiTest extends TestBase
 
         $this->cli->out("<green>I am green</green>");
     }
+
+
+    /**
+     * Ensure we can check if stdout is defined safely.
+     * https://github.com/thephpleague/climate/issues/185
+     */
+    public function test6()
+    {
+        $system = new Linux();
+        $util = new UtilFactory($system);
+        $this->cli->setUtil($util);
+
+        $this->output->shouldReceive('write')->times(1);
+        $this->shouldHavePersisted();
+
+        $this->cli->out("<green>I am green</green>");
+        self::assertTrue(true);
+    }
 }

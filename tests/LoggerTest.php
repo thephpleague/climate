@@ -45,7 +45,7 @@ class LoggerTest extends TestCase
 
     public function testConstructor1()
     {
-        $logger = new Logger;
+        $logger = new Logger();
         $this->assertInstanceOf(LoggerInterface::class, $logger);
         $this->assertInstanceOf(Logger::class, $logger);
     }

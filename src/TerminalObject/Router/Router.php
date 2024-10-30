@@ -10,7 +10,10 @@ use League\CLImate\Util\UtilImporter;
 
 class Router
 {
-    use ParserImporter, SettingsImporter, OutputImporter, UtilImporter;
+    use ParserImporter;
+    use SettingsImporter;
+    use OutputImporter;
+    use UtilImporter;
 
     /**
      * An instance of the Settings Manager class

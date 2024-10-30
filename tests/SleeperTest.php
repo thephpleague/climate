@@ -14,7 +14,7 @@ class SleeperTest extends TestBase
      */
     public function it_can_slow_down_the_sleeper_speed()
     {
-        $sleeper = new Sleeper;
+        $sleeper = new Sleeper();
 
         $sleeper->speed(50);
 
@@ -31,7 +31,7 @@ class SleeperTest extends TestBase
      */
     public function it_can_speed_up_the_sleeper_speed()
     {
-        $sleeper = new Sleeper;
+        $sleeper = new Sleeper();
 
         $sleeper->speed(200);
 
@@ -48,7 +48,7 @@ class SleeperTest extends TestBase
      */
     public function it_will_ignore_zero_percentages()
     {
-        $sleeper = new Sleeper;
+        $sleeper = new Sleeper();
 
         $sleeper->speed(0);
 
@@ -57,5 +57,17 @@ class SleeperTest extends TestBase
                         ->with(50000);
 
         $sleeper->sleep();
+    }
+
+
+    /**
+     * @test
+     */
+    public function it_uses_whole_integers_only()
+    {
+        $sleeper = new Sleeper();
+
+        $result = $sleeper->speed(33);
+        self::assertSame(151515, $result);
     }
 }

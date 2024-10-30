@@ -25,7 +25,7 @@ class ArgumentTest extends TestBase
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage("Please provide an argument name or object.");
 
-        $this->cli->arguments->add(new \stdClass);
+        $this->cli->arguments->add(new \stdClass());
     }
 
     protected function getFullArguments()
@@ -126,7 +126,23 @@ class ArgumentTest extends TestBase
         $this->assertEquals('bool', $argument->castTo());
     }
 
-    /** @test */
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
+    public function it_casts_to_bool_when_defined_only_true()
+    {
+        $argument = Argument::createFromArray('invalid-cast-type', [
+            'noValue' => false,
+        ]);
+
+        $this->assertNotEquals('bool', $argument->castTo());
+    }
+
+    /**
+     * @test
+     * @doesNotPerformAssertions
+     */
     public function it_builds_arguments_from_a_single_array()
     {
         // Test Description

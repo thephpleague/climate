@@ -4,6 +4,9 @@ namespace League\CLImate\TerminalObject\Dynamic;
 
 use League\CLImate\Exceptions\UnexpectedValueException;
 
+use function is_string;
+use function strlen;
+
 class Progress extends DynamicTerminalObject
 {
     /**
@@ -26,6 +29,13 @@ class Progress extends DynamicTerminalObject
      * @var string $current_percentage
      */
     protected $current_percentage = '';
+
+    /**
+     * The number of decimal points to display
+     *
+     * @var integer $precision
+     */
+    protected $precision = 0;
 
     /**
      * The string length of the bar when at 100%
@@ -84,6 +94,20 @@ class Progress extends DynamicTerminalObject
     public function total($total)
     {
         $this->total = $total;
+
+        return $this;
+    }
+
+    /**
+     * Set the completed percentage precision
+     *
+     * @param integer $precision The number of decimal places to display
+     *
+     * @return Progress
+     */
+    public function precision($precision)
+    {
+        $this->precision = $precision;
 
         return $this;
     }
@@ -213,7 +237,7 @@ class Progress extends DynamicTerminalObject
         $progress_bar .= $this->getProgressBarStr($current, $label);
 
         // If this line has a label then set that this progress bar has a label line
-        if (strlen($label) > 0) {
+        if (is_string($label) && strlen($label) > 0) {
             $this->has_label_line = true;
         }
 
@@ -281,12 +305,14 @@ class Progress extends DynamicTerminalObject
     /**
      * Format the percentage so it looks pretty
      *
-     * @param integer $percentage
+     * @param integer $percentage The percentage (0-1) to format
+     *
      * @return float
      */
     protected function percentageFormatted($percentage)
     {
-        return round($percentage * 100) . '%';
+        $factor = pow(10, $this->precision);
+        return round($percentage * 100 * $factor) / $factor . '%';
     }
 
     /**

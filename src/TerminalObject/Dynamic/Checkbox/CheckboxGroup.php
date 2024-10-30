@@ -8,7 +8,9 @@ use League\CLImate\Util\UtilImporter;
 
 class CheckboxGroup
 {
-    use OutputImporter, ParserImporter, UtilImporter;
+    use OutputImporter;
+    use ParserImporter;
+    use UtilImporter;
 
     protected $checkboxes = [];
 
@@ -136,7 +138,7 @@ class CheckboxGroup
      */
     protected function getCurrentKey($direction, $option, $key)
     {
-        $method = 'get' . ucwords($direction). 'Key';
+        $method = 'get' . ucwords($direction) . 'Key';
 
         return $this->{$method}($option, $key);
     }

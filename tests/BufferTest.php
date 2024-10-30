@@ -10,8 +10,8 @@ class BufferTest extends TestBase
     /** @test */
     public function it_can_buffer_content()
     {
-        $buffer = new Buffer;
-        $output = new Output;
+        $buffer = new Buffer();
+        $output = new Output();
         $output->add('buffer', $buffer);
         $output->defaultTo('buffer');
 
@@ -23,8 +23,8 @@ class BufferTest extends TestBase
     /** @test */
     public function it_can_buffer_content_without_a_new_line()
     {
-        $buffer = new Buffer;
-        $output = new Output;
+        $buffer = new Buffer();
+        $output = new Output();
         $output->add('buffer', $buffer);
         $output->defaultTo('buffer');
 
@@ -36,8 +36,8 @@ class BufferTest extends TestBase
     /** @test */
     public function it_can_buffer_multiple_lines()
     {
-        $buffer = new Buffer;
-        $output = new Output;
+        $buffer = new Buffer();
+        $output = new Output();
         $output->add('buffer', $buffer);
         $output->defaultTo('buffer');
 
@@ -50,8 +50,8 @@ class BufferTest extends TestBase
     /** @test */
     public function it_can_clean_buffered_content()
     {
-        $buffer = new Buffer;
-        $output = new Output;
+        $buffer = new Buffer();
+        $output = new Output();
         $output->add('buffer', $buffer);
         $output->defaultTo('buffer');
 

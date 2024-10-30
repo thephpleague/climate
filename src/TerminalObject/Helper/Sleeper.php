@@ -7,7 +7,7 @@ class Sleeper implements SleeperInterface
     /**
      * The default length of the sleep
      *
-     * @var int|float $speed
+     * @var int $speed
      */
     protected $speed = 50000;
 
@@ -16,12 +16,12 @@ class Sleeper implements SleeperInterface
      *
      * @param int|float $percentage
      *
-     * @return float
+     * @return int
      */
     public function speed($percentage)
     {
         if (is_numeric($percentage) && $percentage > 0) {
-            $this->speed *= (100 / $percentage);
+            $this->speed = (int) round($this->speed * (100 / $percentage));
         }
 
         return $this->speed;

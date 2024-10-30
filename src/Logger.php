@@ -5,6 +5,7 @@ namespace League\CLImate;
 use Psr\Log\AbstractLogger;
 use Psr\Log\InvalidArgumentException;
 use Psr\Log\LogLevel;
+
 use function array_key_exists;
 use function is_array;
 use function str_replace;
@@ -50,7 +51,7 @@ class Logger extends AbstractLogger
         $this->level = $this->convertLevel($level);
 
         if ($climate === null) {
-            $climate = new CLImate;
+            $climate = new CLImate();
         }
         $this->climate = $climate;
 
@@ -117,7 +118,7 @@ class Logger extends AbstractLogger
      *
      * @return void
      */
-    public function log($level, $message, array $context = [])
+    public function log($level, $message, array $context = []): void
     {
         if ($this->convertLevel($level) > $this->level) {
             return;

@@ -7,7 +7,11 @@ use Mockery;
 
 class AnimationTest extends TestBase
 {
-    use ExitToTopFrames, ExitToBottomFrames, ExitToLeftFrames, ExitToRightFrames, RunFrames;
+    use ExitToTopFrames;
+    use ExitToBottomFrames;
+    use ExitToLeftFrames;
+    use ExitToRightFrames;
+    use RunFrames;
 
 
     private function addArt(): void

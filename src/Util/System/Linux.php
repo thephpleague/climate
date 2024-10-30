@@ -86,9 +86,14 @@ class Linux extends System
         if ('Hyper' === getenv('TERM_PROGRAM')) {
             return true;
         }
-        
-        $stream = STDOUT;
-        
+
+        # If we're running in a web context then we can't use stdout
+        if (!defined('STDOUT')) {
+            return false;
+        }
+
+        $stream = \STDOUT;
+
         if (function_exists('stream_isatty')) {
             return @stream_isatty($stream);
         }

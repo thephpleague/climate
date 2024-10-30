@@ -8,7 +8,9 @@ use League\CLImate\Util\UtilImporter;
 
 class Keyframe
 {
-    use StringLength, ParserImporter, UtilImporter;
+    use StringLength;
+    use ParserImporter;
+    use UtilImporter;
 
     /**
      * Get the enter keyframes for the desired direction

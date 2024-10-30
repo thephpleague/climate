@@ -3,6 +3,7 @@
 namespace League\CLImate\Tests\TerminalObject\Basic;
 
 use League\CLImate\Tests\TestBase;
+
 use function json_encode;
 use function str_replace;
 

@@ -110,7 +110,7 @@ class Table extends BasicTerminalObject
             $height = 1;
             $lines = [];
             foreach ($row as $key => $column) {
-                $lines[$key] = preg_split('/(\r\n|\r|\n)/u', $column);
+                $lines[$key] = preg_split('/(\r\n|\r|\n)/u', (string) $column);
                 $height = max($height, count($lines[$key]));
             }
             $keys = array_keys($row);
@@ -197,7 +197,7 @@ class Table extends BasicTerminalObject
         $header_row = $this->getHeaderRow();
         if ($header_row) {
             $this->addLine($this->buildRow($header_row));
-            $this->addLine((new Border)->char('=')->length($this->table_width)->result());
+            $this->addLine((new Border())->char('=')->length($this->table_width)->result());
         }
     }
 

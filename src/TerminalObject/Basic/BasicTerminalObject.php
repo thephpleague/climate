@@ -6,9 +6,13 @@ use League\CLImate\Decorator\Parser\ParserImporter;
 use League\CLImate\Settings\SettingsImporter;
 use League\CLImate\Util\UtilImporter;
 
+use function strlen;
+
 abstract class BasicTerminalObject implements BasicTerminalObjectInterface
 {
-    use SettingsImporter, ParserImporter, UtilImporter;
+    use SettingsImporter;
+    use ParserImporter;
+    use UtilImporter;
 
     /**
      * Set the property if there is a valid value
@@ -18,7 +22,7 @@ abstract class BasicTerminalObject implements BasicTerminalObjectInterface
      */
     protected function set($key, $value)
     {
-        if (strlen($value)) {
+        if (strlen((string) $value)) {
             $this->$key = $value;
         }
     }

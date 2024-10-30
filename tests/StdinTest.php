@@ -11,7 +11,7 @@ class StdinTest extends TestBase
     /** @test */
     public function it_can_read_a_line_from_stdin()
     {
-        $stdin = new Stdin;
+        $stdin = new Stdin();
 
         self::$functions->shouldReceive('fopen')
                         ->once()
@@ -31,7 +31,7 @@ class StdinTest extends TestBase
     /** @test */
     public function it_can_read_multiple_lines_from_stdin()
     {
-        $stdin = new Stdin;
+        $stdin = new Stdin();
 
         self::$functions->shouldReceive('fopen')
                         ->once()
@@ -51,7 +51,7 @@ class StdinTest extends TestBase
     /** @test */
     public function it_can_several_characters_from_stdin()
     {
-        $stdin = new Stdin;
+        $stdin = new Stdin();
 
         self::$functions->shouldReceive('fopen')
                         ->once()

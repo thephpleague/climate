@@ -10,7 +10,7 @@ class BackgroundColor extends Color
      *
      * @const integer ADD
      */
-    const ADD = 10;
+    public const ADD = 10;
 
     /**
      * Get the code for the requested color

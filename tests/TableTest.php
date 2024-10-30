@@ -204,6 +204,9 @@ class TableTest extends TestBase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithNewline()
     {
         $this->shouldWrite("\e[m-----------------------------------\e[0m");
@@ -223,6 +226,9 @@ class TableTest extends TestBase
         ]);
     }
 
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithNewlineAndObjects()
     {
         $this->shouldWrite("\e[m------------------------------------\e[0m");
@@ -244,6 +250,10 @@ class TableTest extends TestBase
             ]);
     }
 
+
+    /**
+     * @doesNotPerformAssertions
+     */
     public function testTableWithMultipleNewlines()
     {
         $this->shouldWrite("\e[m---------------------------------\e[0m");
@@ -262,6 +272,27 @@ class TableTest extends TestBase
                     "Cell\n3\nCell 3",
                     "Cell\n4\nCell\n4",
                 ],
+        ]);
+    }
+
+
+    /**
+     * @doesNotPerformAssertions
+     */
+    public function testTableWithNullAndEmptyValues()
+    {
+        $this->shouldWrite("\e[m------------------\e[0m");
+        $this->shouldWrite("\e[m| Cell 1 |   |   |\e[0m");
+        $this->shouldWrite("\e[m------------------\e[0m");
+
+        $this->shouldHavePersisted();
+
+        $this->cli->table([
+            [
+                'Cell 1',
+                null,
+                ''
+            ],
         ]);
     }
 }
