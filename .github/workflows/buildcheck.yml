@@ -44,14 +44,11 @@ jobs:
         run: docker exec ci composer validate --strict
 
   windows:
-    runs-on: windows-2019
+    runs-on: windows-latest
     env:
         ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
-      - uses: actions/checkout@master
-      - uses: nanasess/setup-php@master
-      - uses: nanasess/composer-installer-action@master
-      - name: Install dependencies
-        run: composer update
-      - name: Run test suite
-        run: vendor/bin/phpunit
+      - uses: actions/checkout@v4
+      - uses: nanasess/setup-php@v4
+      - run: composer update
+      - run: vendor/bin/phpunit
