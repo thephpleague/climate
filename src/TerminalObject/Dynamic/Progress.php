@@ -338,4 +338,24 @@ class Progress extends DynamicTerminalObject
     {
         return ($this->force_redraw || $percentage != $this->current_percentage || $label != $this->label);
     }
+
+    /**
+     * Gets de current progress value.
+     *
+     * @return integer The current progress value.
+     */
+    public function getCurrent()
+    {
+        return $this->current;
+    }
+
+    /**
+     * Gets the total value for the progress.
+     *
+     * @return integer The total progress value.
+     */
+    public function getTotal()
+    {
+        return $this->total;
+    }
 }
