@@ -22,8 +22,8 @@
         "php": "^7.3 || ^8.0"
     },
     "require-dev": {
-        "mockery/mockery": "^1.4.2",
-        "mikey179/vfsstream": "^1.6.10",
+        "mockery/mockery": "^1.6.12",
+        "mikey179/vfsstream": "^1.6.12",
         "squizlabs/php_codesniffer": "^3.10",
         "phpunit/phpunit": "^9.5.10"
     },
