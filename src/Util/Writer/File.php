@@ -9,9 +9,6 @@ class File implements WriterInterface
     /** @var resource|string */
     protected $resource;
 
-    /** @var boolean $close_locally */
-    protected $close_locally = false;
-
     /** @var boolean $use_locking */
     protected $use_locking = false;
 
@@ -70,8 +67,6 @@ class File implements WriterInterface
             return $this->resource;
         }
 
-        $this->close_locally = true;
-
         if (!is_writable($this->resource)) {
             throw new RuntimeException("The resource [{$this->resource}] is not writable");
         }
@@ -90,12 +85,5 @@ class File implements WriterInterface
         }
 
         return fopen($this->resource, 'a');
-    }
-
-    public function _destruct()
-    {
-        if ($this->close_locally) {
-            gzclose($this->getResource());
-        }
     }
 }
