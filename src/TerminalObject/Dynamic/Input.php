@@ -45,7 +45,7 @@ class Input extends InputAbstract
      */
     protected $default = '';
 
-    public function __construct($prompt, ReaderInterface $reader = null)
+    public function __construct($prompt, ?ReaderInterface $reader = null)
     {
         $this->prompt = $prompt;
         $this->reader = $reader ?: new Stdin();

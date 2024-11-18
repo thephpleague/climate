@@ -13,7 +13,7 @@ class Confirm extends Input
     /**
      * @inheritdoc
      */
-    public function __construct($prompt, ReaderInterface $reader = null)
+    public function __construct($prompt, ?ReaderInterface $reader = null)
     {
         parent::__construct($prompt, $reader);
 

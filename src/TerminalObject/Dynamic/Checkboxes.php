@@ -14,7 +14,7 @@ class Checkboxes extends InputAbstract
      */
     protected $checkboxes;
 
-    public function __construct($prompt, array $options, ReaderInterface $reader = null)
+    public function __construct($prompt, array $options, ?ReaderInterface $reader = null)
     {
         $this->prompt  = $prompt;
         $this->reader  = $reader ?: new Stdin();

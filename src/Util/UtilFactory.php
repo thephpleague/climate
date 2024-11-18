@@ -22,7 +22,7 @@ class UtilFactory
      */
     public $cursor;
 
-    public function __construct(System $system = null, Cursor $cursor = null)
+    public function __construct(?System $system = null, ?Cursor $cursor = null)
     {
         $this->system = $system ?: SystemFactory::getInstance();
         $this->cursor = $cursor ?: new Cursor();

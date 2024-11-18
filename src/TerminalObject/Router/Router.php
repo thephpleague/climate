@@ -36,7 +36,7 @@ class Router
      */
     protected $basic;
 
-    public function __construct(DynamicRouter $dynamic = null, BasicRouter $basic = null)
+    public function __construct(?DynamicRouter $dynamic = null, ?BasicRouter $basic = null)
     {
         $this->dynamic = $dynamic ?: new DynamicRouter();
         $this->basic   = $basic ?: new BasicRouter();

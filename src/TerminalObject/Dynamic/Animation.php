@@ -20,7 +20,7 @@ class Animation extends DynamicTerminalObject
      */
     protected $keyframes;
 
-    public function __construct($art, Sleeper $sleeper = null, Keyframe $keyframes = null)
+    public function __construct($art, ?Sleeper $sleeper = null, ?Keyframe $keyframes = null)
     {
         // Add the default art directory
         $this->addDir(__DIR__ . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . '..' . \DIRECTORY_SEPARATOR . 'ASCII');

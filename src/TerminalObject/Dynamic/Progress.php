@@ -169,7 +169,7 @@ class Progress extends DynamicTerminalObject
      * @param iterable $items Array or any other iterable object
      * @param callable $callback A handler to run on each item
      */
-    public function each($items, callable $callback = null)
+    public function each($items, ?callable $callback = null)
     {
         if ($items instanceof \Traversable) {
             $items = iterator_to_array($items);

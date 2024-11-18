@@ -257,7 +257,7 @@ class CLImate
      * @param array $argv
      * @return void
      */
-    public function usage(array $argv = null)
+    public function usage(?array $argv = null)
     {
         $this->arguments->usage($this, $argv);
     }

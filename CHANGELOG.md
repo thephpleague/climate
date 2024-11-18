@@ -1,6 +1,19 @@
 Changelog
 =========
 
+Adds methods in Progress to return the current value and total value of the progress bar. (#206)
+--------
+
+## 3.10.0 - 2024-11-18
+
+### Added
+
+* [Progress] Added methods to get the current and total values. [#206](https://github.com/thephpleague/climate/pull/206)
+
+### Changed
+
+* [Support] Added support for PHP 8.4.
+
 --------
 
 ## 3.9.0 - 2024-10-30

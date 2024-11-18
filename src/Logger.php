@@ -46,7 +46,7 @@ class Logger extends AbstractLogger
      * @param string $level One of the LogLevel constants
      * @param CLImate $climate An existing CLImate instance to use for output
      */
-    public function __construct($level = LogLevel::INFO, CLImate $climate = null)
+    public function __construct($level = LogLevel::INFO, ?CLImate $climate = null)
     {
         $this->level = $this->convertLevel($level);
 

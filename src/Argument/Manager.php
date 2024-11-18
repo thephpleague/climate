@@ -142,7 +142,7 @@ class Manager
      *
      * @return bool
      */
-    public function defined($name, array $argv = null)
+    public function defined($name, ?array $argv = null)
     {
         // The argument isn't defined if it's not defined by the calling code.
         if (!$this->exists($name)) {
@@ -217,7 +217,7 @@ class Manager
      * @param CLImate $climate
      * @param array $argv
      */
-    public function usage(CLImate $climate, array $argv = null)
+    public function usage(CLImate $climate, ?array $argv = null)
     {
         $this->summary
                 ->setClimate($climate)
@@ -232,7 +232,7 @@ class Manager
      *
      * @param array $argv
      */
-    public function parse(array $argv = null)
+    public function parse(?array $argv = null)
     {
         $this->parser->setFilter($this->filter, $this->all());
 

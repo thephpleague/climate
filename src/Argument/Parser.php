@@ -68,7 +68,7 @@ class Parser
      * @return void
      * @throws InvalidArgumentException if required arguments aren't defined.
      */
-    public function parse(array $argv = null)
+    public function parse(?array $argv = null)
     {
         $cliArguments = $this->arguments($argv);
 
@@ -103,7 +103,7 @@ class Parser
      *
      * @return string
      */
-    public function command(array $argv = null)
+    public function command(?array $argv = null)
     {
         return $this->getCommandAndArguments($argv)['command'];
     }
@@ -115,7 +115,7 @@ class Parser
      *
      * @return array
      */
-    public function arguments(array $argv = null)
+    public function arguments(?array $argv = null)
     {
         return $this->getCommandAndArguments($argv)['arguments'];
     }
@@ -315,7 +315,7 @@ class Parser
      * @param array $argv
      * @return array
      */
-    protected function getCommandAndArguments(array $argv = null)
+    protected function getCommandAndArguments(?array $argv = null)
     {
         // If no $argv is provided then use the global PHP defined $argv.
         if (is_null($argv)) {
