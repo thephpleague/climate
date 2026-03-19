@@ -1,7 +1,14 @@
 Changelog
 =========
 
-Adds methods in Progress to return the current value and total value of the progress bar. (#206)
+--------
+
+## 3.10.1 - 2026-03-19
+
+### Fixed
+
+* [Input] Support input values longer than 1024 characters. [#209](https://github.com/thephpleague/climate/issues/209)
+
 --------
 
 ## 3.10.0 - 2024-11-18

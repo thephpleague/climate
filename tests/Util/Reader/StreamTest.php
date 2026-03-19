@@ -5,6 +5,8 @@ namespace League\CLImate\Tests\Util\Reader;
 use League\CLImate\Tests\TestBase;
 use League\CLImate\Util\Reader\Stream;
 
+use function str_repeat;
+
 class StreamTest extends TestBase
 {
     private $filename;
@@ -37,6 +39,17 @@ class StreamTest extends TestBase
 
         $response = $this->stream->line();
         $this->assertSame("Line B", $response);
+    }
+
+
+    public function testLongLine1()
+    {
+        $value = str_repeat("x", 2000);
+
+        $this->file->fwrite($value . "\n");
+
+        $response = $this->stream->line();
+        $this->assertSame($value, $response);
     }
 
 

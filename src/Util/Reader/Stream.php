@@ -36,7 +36,7 @@ class Stream implements ReaderInterface
      */
     public function line()
     {
-        return trim(fgets($this->getResource(), 1024));
+        return trim(fgets($this->getResource()));
     }
 
 
