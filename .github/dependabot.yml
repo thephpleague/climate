@@ -1,0 +1,18 @@
+version: 2
+
+updates:
+  - package-ecosystem: "composer"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      - update-types: ["version-update:semver-major"]
+    labels: []
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    allow:
+      - update-types: ["version-update:semver-major"]
+    labels: []
