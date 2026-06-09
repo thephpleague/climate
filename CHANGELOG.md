@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.11.0 - 2026-06-09
+
+### Changed
+
+* [Support] Added support for PHP 8.5.
+
+--------
+
 ## 3.10.1 - 2026-03-19
 
 ### Fixed
