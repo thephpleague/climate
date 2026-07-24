@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.11.1 - 2026-07-25
+
+### Fixed
+
+* [Arguments] Fix Manager::isArgument() with empty value. [#215](https://github.com/thephpleague/climate/issues/215)
+
+--------
+
 ## 3.11.0 - 2026-06-09
 
 ### Changed
