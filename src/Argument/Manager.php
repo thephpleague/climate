@@ -174,11 +174,19 @@ class Manager
         $prefix = $argument->prefix();
         $longPrefix = $argument->longPrefix();
 
-        if ($prefix !== null && strpos($command_argument, "-{$prefix}") === 0) {
+        if (
+            $prefix !== null && 
+            trim((string) $prefix) !== '' && 
+            strpos($command_argument, "-{$prefix}") === 0
+        ) {
             return true;
         }
 
-        if ($longPrefix !== null && strpos($command_argument, "--{$longPrefix}") === 0) {
+        if (
+            $longPrefix !== null && 
+            trim((string) $longPrefix) !== '' && 
+            strpos($command_argument, "--{$longPrefix}") === 0
+        ) {
             return true;
         }
 
