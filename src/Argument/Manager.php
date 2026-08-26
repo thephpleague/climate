@@ -162,6 +162,22 @@ class Manager
     }
 
     /**
+     * Determine whether a value for an argument was provided on the command
+     * line, as opposed to falling back to its default value.
+     *
+     * Unlike defined(), this relies on the already parsed arguments rather than
+     * re-parsing $argv.
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function provided($name)
+    {
+        return $this->exists($name) && $this->arguments[$name]->provided();
+    }
+
+    /**
      * Check if the defined argument matches the command argument.
      *
      * @param Argument $argument
