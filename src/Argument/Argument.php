@@ -366,6 +366,18 @@ class Argument
     }
 
     /**
+     * Determine whether a value was provided on the command line.
+     *
+     * This returns false when the argument falls back to its default value.
+     *
+     * @return bool
+     */
+    public function provided()
+    {
+        return count($this->values) > 0;
+    }
+
+    /**
      * Set an argument's value based on its command line entry.
      *
      * Argument values are type cast based on the value of $castTo.

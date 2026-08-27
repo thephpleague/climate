@@ -47,6 +47,34 @@ class ManagerTest extends TestCase
         $this->assertTrue($result);
     }
 
+    public function testProvidedReturnsTrueWhenValueGivenOnCommandLine()
+    {
+        $this->manager->add([
+            'foo' => ['prefix' => 'f', 'defaultValue' => 'bar'],
+        ]);
+
+        $this->manager->parse(['command', '-f', 'baz']);
+
+        $this->assertTrue($this->manager->provided('foo'));
+    }
+
+    public function testProvidedReturnsFalseWhenFallingBackToDefault()
+    {
+        $this->manager->add([
+            'foo' => ['prefix' => 'f', 'defaultValue' => 'bar'],
+        ]);
+
+        $this->manager->parse(['command']);
+
+        $this->assertFalse($this->manager->provided('foo'));
+        $this->assertEquals('bar', $this->manager->get('foo'));
+    }
+
+    public function testProvidedReturnsFalseForUnknownArgument()
+    {
+        $this->assertFalse($this->manager->provided('missing'));
+    }
+
     public function testItParsesAnOptionalArgument()
     {
         $this->manager->add([
