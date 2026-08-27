@@ -3,6 +3,14 @@ Changelog
 
 --------
 
+## 3.12.0 - 2026-08-27
+
+### Added
+
+* [Arguments] A new method `$climate->arguments->provided("name")` replaces the deprecated `defined()` method. [#216](https://github.com/thephpleague/climate/pull/216)
+
+--------
+
 ## 3.11.1 - 2026-07-25
 
 ### Fixed

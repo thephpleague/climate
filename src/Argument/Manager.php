@@ -132,15 +132,7 @@ class Manager
     }
 
     /**
-     * Determine if an argument has been defined on the command line.
-     *
-     * This can be useful for making sure an argument is present on the command
-     * line before parse()'ing them into argument objects.
-     *
-     * @param string $name
-     * @param array $argv
-     *
-     * @return bool
+     * @deprecated use provided() instead.
      */
     public function defined($name, ?array $argv = null)
     {
@@ -172,7 +164,7 @@ class Manager
      *
      * @return bool
      */
-    public function provided($name)
+    public function provided(string $name): bool
     {
         return $this->exists($name) && $this->arguments[$name]->provided();
     }

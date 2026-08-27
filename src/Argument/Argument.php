@@ -369,10 +369,8 @@ class Argument
      * Determine whether a value was provided on the command line.
      *
      * This returns false when the argument falls back to its default value.
-     *
-     * @return bool
      */
-    public function provided()
+    public function provided(): bool
     {
         return count($this->values) > 0;
     }
