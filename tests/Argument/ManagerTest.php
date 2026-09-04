@@ -87,6 +87,29 @@ class ManagerTest extends TestCase
         $this->assertEquals('', $this->manager->get('foo'));
     }
 
+    public function testItParsesAValueTakingArgumentThatIsLastWithoutAWarning()
+    {
+        $this->manager->add([
+            'name' => ['prefix' => 'n', 'longPrefix' => 'name', 'defaultValue' => 'default-name'],
+        ]);
+
+        set_error_handler(static function (int $errno, string $errstr): bool {
+            throw new \ErrorException($errstr, 0, $errno);
+        });
+
+        try {
+            // "-n" is the last element but not at a reindexed offset, so reading the
+            // next offset must not raise "Undefined array key".
+            $this->manager->parse(['command', 'somefile', '-n']);
+        } finally {
+            restore_error_handler();
+        }
+
+        // No value was supplied for -n, so it must fall back to its default.
+        $this->assertFalse($this->manager->provided('name'));
+        $this->assertEquals('default-name', $this->manager->get('name'));
+    }
+
     public function testItStoresTrailingInArray()
     {
         $this->manager->add([
