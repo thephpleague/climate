@@ -25,7 +25,7 @@
         "mockery/mockery": "^1.6.12",
         "mikey179/vfsstream": "^1.6.12",
         "squizlabs/php_codesniffer": "^4.0",
-        "phpunit/phpunit": "^9.6.21"
+        "phpunit/phpunit": "^13.4.6"
     },
     "suggest": {
         "ext-mbstring": "If ext-mbstring is not available you MUST install symfony/polyfill-mbstring"
