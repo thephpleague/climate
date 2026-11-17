@@ -153,7 +153,7 @@ class Style
      */
     protected function validateCode($code)
     {
-        if (is_integer($code)) {
+        if (is_int($code)) {
             return true;
         }
 
