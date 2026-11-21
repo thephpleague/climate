@@ -3,8 +3,9 @@ FROM php:${PHP_VERSION}-cli-alpine
 
 RUN apk add --no-cache git zip $PHPIZE_DEPS
 
-ARG COVERAGE
-RUN if [ "$COVERAGE" = "pcov" ]; then pecl install pcov && docker-php-ext-enable pcov; fi
+RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/pie /pie install \
+    pecl/pcov \
+    --no-interaction
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
