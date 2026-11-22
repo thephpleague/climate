@@ -1,10 +1,12 @@
-ARG PHP_VERSION=7.3
-FROM php:${PHP_VERSION}-cli
+ARG PHP_VERSION=8.1
+FROM php:${PHP_VERSION}-cli-alpine
 
-ARG COVERAGE
-RUN if [ "$COVERAGE" = "pcov" ]; then pecl install pcov && docker-php-ext-enable pcov; fi
+RUN apk add --no-cache git zip $PHPIZE_DEPS
 
-RUN apt update && apt install -y git zip
+RUN --mount=type=bind,from=ghcr.io/php/pie:bin,source=/pie,target=/pie /pie install \
+    pecl/pcov \
+    --no-interaction
+
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
 WORKDIR /app
