@@ -3,6 +3,18 @@ Changelog
 
 --------
 
+## 3.12.1 - 2026-11-22
+
+### Fixed
+
+* Replace deprecated is_integer() with is_int(). [#221](https://github.com/thephpleague/climate/pull/221)
+
+### Changed
+
+* [Support] Dropped support for PHP 7.3, 7.4, and 8.0
+
+--------
+
 ## 3.12.0 - 2026-08-27
 
 ### Added
