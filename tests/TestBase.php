@@ -34,6 +34,7 @@ abstract class TestBase extends TestCase
         $system = Mockery::mock(Linux::class);
         $system->shouldReceive('hasAnsiSupport')->andReturn(true);
         $system->shouldReceive('width')->andReturn(80);
+        $system->shouldReceive('height')->andReturn(25);
 
         $this->util   = new UtilFactory($system);
         $this->output = Mockery::mock(Output::class);

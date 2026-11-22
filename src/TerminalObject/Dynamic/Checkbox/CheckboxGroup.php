@@ -16,6 +16,20 @@ class CheckboxGroup
 
     protected $count;
 
+    /**
+     * The index of the first option currently drawn
+     *
+     * @var int
+     */
+    protected $offset = 0;
+
+    /**
+     * The number of options drawn the last time the group was written
+     *
+     * @var int
+     */
+    protected $visibleCount = 0;
+
     public function __construct(array $options)
     {
         foreach ($options as $key => $option) {
@@ -30,7 +44,13 @@ class CheckboxGroup
 
     public function write()
     {
-        array_map([$this, 'writeCheckbox'], $this->checkboxes);
+        $visible = $this->getVisibleCheckboxes();
+
+        $this->visibleCount = count($visible);
+
+        foreach ($visible as $line => $checkbox) {
+            $this->writeCheckbox($checkbox, $line === $this->visibleCount - 1);
+        }
     }
 
     /**
@@ -77,6 +97,16 @@ class CheckboxGroup
     public function count()
     {
         return $this->count;
+    }
+
+    /**
+     * Get the number of options drawn the last time the group was written
+     *
+     * @return int
+     */
+    public function visibleCount()
+    {
+        return $this->visibleCount;
     }
 
     /**
@@ -174,16 +204,51 @@ class CheckboxGroup
     }
 
     /**
-     * @param Checkbox $checkbox
+     * Get the options that fit in the terminal, scrolled so the current one is visible
+     *
+     * @return Checkbox[]
      */
-    protected function writeCheckbox($checkbox)
+    protected function getVisibleCheckboxes()
+    {
+        // Leave a line for the prompt, the cursor can't move above the top of the terminal
+        $height = max(1, $this->util->height() - 1);
+
+        if ($this->count <= $height) {
+            return $this->checkboxes;
+        }
+
+        list(, $key) = $this->getCurrent();
+
+        if ($key < $this->offset) {
+            $this->offset = $key;
+        } elseif ($key >= $this->offset + $height) {
+            $this->offset = $key - $height + 1;
+        }
+
+        $this->offset = min($this->offset, $this->count - $height);
+
+        return array_slice($this->checkboxes, $this->offset, $height);
+    }
+
+    /**
+     * @param Checkbox $checkbox
+     * @param bool $isLastLine
+     */
+    protected function writeCheckbox($checkbox, $isLastLine)
     {
         $checkbox->util($this->util);
         $checkbox->parser($this->parser);
 
-        $parsed = $this->parser->apply((string) $checkbox);
+        $line = (string) $checkbox;
 
-        if ($checkbox->isLast()) {
+        // The last option already ends with this, the last line drawn needs it too
+        if ($isLastLine && !$checkbox->isLast()) {
+            $line .= $this->util->cursor->left(10) . '<hidden>';
+        }
+
+        $parsed = $this->parser->apply($line);
+
+        if ($isLastLine) {
             $this->output->sameLine()->write($parsed);
             return;
         }

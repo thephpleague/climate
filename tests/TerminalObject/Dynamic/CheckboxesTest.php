@@ -168,10 +168,68 @@ class CheckboxesTest extends TestBase
 
         # When the width is unknown then a default of 80 should be used
         $system->shouldReceive("width")->andReturn(null);
+        $system->shouldReceive("height")->andReturn(null);
 
         $this->util = new UtilFactory($system);
         $this->cli->setUtil($this->util);
 
         $this->it_can_select_a_checkbox();
+    }
+
+
+    /**
+     * Ensure only the options that fit in the terminal are drawn, and the list scrolls with the cursor
+     */
+    public function test_it_scrolls_options_that_do_not_fit_in_the_terminal(): void
+    {
+        $system = Mockery::mock(Linux::class);
+        $system->shouldReceive("hasAnsiSupport")->andReturn(true);
+        $system->shouldReceive("width")->andReturn(80);
+
+        # One line is left for the prompt, so only 3 options fit
+        $system->shouldReceive("height")->andReturn(4);
+
+        $this->util = new UtilFactory($system);
+        $this->cli->setUtil($this->util);
+
+        // Go down to the fourth option
+        $this->shouldReadCharAndReturn("\e");
+        $this->shouldReadCharAndReturn("[B", 2);
+        $this->shouldReadCharAndReturn("\e");
+        $this->shouldReadCharAndReturn("[B", 2);
+        $this->shouldReadCharAndReturn("\e");
+        $this->shouldReadCharAndReturn("[B", 2);
+        // Confirm entry
+        $this->shouldReadCharAndReturn("\n");
+
+        $this->shouldWrite("\e[mCurrent mood: (use <space> to select)\e[0m");
+
+        $this->util->system->shouldReceive('exec')->with('stty -icanon');
+        $this->util->system->shouldReceive('exec')->with('stty sane');
+        $this->shouldHideCursor();
+
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[2A\r", 3);
+
+        $this->shouldWrite("\e[m❯ ○ Happy" . str_repeat(' ', 71) . "\e[0m");
+        $this->shouldWrite("\e[m  ○ Happy" . str_repeat(' ', 71) . "\e[0m", 2);
+        $this->shouldWrite("\e[m❯ ○ Sad" . str_repeat(' ', 73) . "\e[0m");
+        $this->shouldWrite("\e[m  ○ Sad" . str_repeat(' ', 73) . "\e[0m", 3);
+        $this->shouldWrite("\e[m  ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m", 2);
+        $this->shouldWrite("\e[m❯ ○ Thrilled" . str_repeat(' ', 68) . "\e[10D\e[8m\e[0m");
+        $this->shouldWrite("\e[m  ○ Thrilled" . str_repeat(' ', 68) . "\e[0m");
+        $this->shouldWrite("\e[m❯ ○ Bored" . str_repeat(' ', 71) . "\e[10D\e[8m\e[0m");
+
+        $this->shouldShowCursor();
+
+        $this->shouldReceiveSameLine();
+        $this->shouldWrite("\e[0m");
+
+        $options = ['Happy', 'Sad', 'Thrilled', 'Bored', 'Angry'];
+
+        $input    = $this->cli->checkboxes('Current mood:', $options, $this->reader);
+        $response = $input->prompt();
+
+        $this->assertSame([], $response);
     }
 }
