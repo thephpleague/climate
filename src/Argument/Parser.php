@@ -261,7 +261,9 @@ class Parser
         }
 
         if (is_null($value)) {
-            if (count($argv) === 0) {
+            // The array is not reindexed as arguments are removed, so check the next
+            // offset itself rather than the overall count.
+            if (!isset($argv[$key + 1])) {
                 return $argv;
             }
 
