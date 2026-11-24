@@ -121,7 +121,7 @@ class Checkboxes extends InputAbstract
      */
     protected function moveCursorToTop()
     {
-        $output = $this->util->cursor->up($this->checkboxes->count() - 1);
+        $output = $this->util->cursor->up($this->checkboxes->visibleCount() - 1);
         $output .= $this->util->cursor->startOfCurrentLine();
 
         $this->output->sameLine()->write($output);
